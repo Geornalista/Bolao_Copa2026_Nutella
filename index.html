@@ -3,343 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bolão da Copa</title>
-    <!-- Tailwind CSS para o design moderno -->
+    <title>Ranking - Bolão da Copa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Pequenas animações customizadas */
-        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Ocultar as setinhas chatas dos campos numéricos */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .podium-1 { height: 160px; }
+        .podium-2 { height: 120px; }
+        .podium-3 { height: 90px; }
     </style>
 </head>
-<body class="bg-slate-100 font-sans relative text-slate-800 antialiased min-h-screen">
+<body class="bg-slate-100 font-sans relative text-slate-800 antialiased min-h-screen pb-12">
 
-    <!-- ========================================== -->
-    <!-- TELA 1: FORMULÁRIO PRINCIPAL               -->
-    <!-- ========================================== -->
-    <div id="main-view" class="pb-12">
-        <!-- Cabeçalho -->
-        <div class="bg-blue-700 text-white py-6 px-4 shadow-md mb-8">
-            <div class="max-w-4xl mx-auto flex items-center justify-center gap-3">
-                <!-- Ícone Troféu -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-400"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-                <h1 class="text-3xl font-bold tracking-tight">Bolão da Copa - 72 Jogos</h1>
-            </div>
-        </div>
-
-        <div class="max-w-4xl mx-auto px-4">
-            <form id="predictions-form" class="space-y-6">
-                
-                <!-- Nome do Participante -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sticky top-4 z-10">
-                    <label class="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
-                        <!-- Ícone Usuário -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                        Nome da sua Aba na Planilha
-                    </label>
-                    <input
-                        type="text"
-                        id="participant-name"
-                        placeholder="Ex: JOÃO SILVA"
-                        class="w-full text-lg p-3 border-2 border-slate-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition uppercase"
-                        required
-                    />
-                    <p class="text-xs text-slate-500 mt-1">Deve ser exatamente o mesmo nome da aba que criou para si na folha de cálculo.</p>
-                </div>
-
-                <!-- Lista de Jogos (Gerada via JavaScript) -->
-                <div id="matches-container" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <!-- Os jogos entrarão aqui -->
-                </div>
-
-                <!-- Mensagem de Erro -->
-                <div id="error-message" class="hidden bg-red-50 text-red-700 p-4 rounded-xl flex items-center gap-3 border border-red-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    <p id="error-text" class="font-medium">Erro ao enviar.</p>
-                </div>
-
-                <!-- Botão Enviar -->
-                <button
-                    type="submit"
-                    id="submit-btn"
-                    class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg transition-all active:scale-95 disabled:bg-blue-400"
-                >
-                    <span id="submit-text" class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                        Salvar Palpites na Planilha
-                    </span>
-                    <span id="loading-text" class="hidden animate-pulse">A Guardar Palpites...</span>
-                </button>
-            </form>
+    <!-- Cabeçalho -->
+    <div class="bg-blue-800 text-white py-8 px-4 shadow-xl mb-10 rounded-b-3xl">
+        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-400"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            <h1 class="text-3xl font-extrabold tracking-tight uppercase">Classificação Geral</h1>
+            <p class="text-blue-200 font-medium text-sm mt-1">Ranking atualizado em tempo real</p>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- TELA 2: SUCESSO                            -->
-    <!-- ========================================== -->
-    <div id="success-view" class="hidden min-h-screen bg-green-50 flex items-center justify-center p-4">
-        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center space-y-4 animate-fade-in">
-            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mx-auto"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h2 class="text-3xl font-bold text-gray-800">Palpites Guardados!</h2>
-            <p class="text-gray-600">
-                Os palpites foram inseridos na aba <b id="success-name"></b> com sucesso.
-            </p>
-            <button 
-                onclick="resetForm()"
-                class="mt-6 w-full bg-green-600 text-white font-bold py-3 px-4 rounded-xl hover:bg-green-700 transition"
-            >
-                Voltar
-            </button>
+    <div class="max-w-3xl mx-auto px-4">
+        
+        <!-- Carregamento -->
+        <div id="loading-state" class="flex flex-col items-center justify-center py-20">
+            <svg class="animate-spin h-10 w-10 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <p class="text-slate-500 font-bold text-lg animate-pulse">A carregar o ranking...</p>
         </div>
-    </div>
 
-    <!-- ========================================== -->
-    <!-- MODAL DE CONFIRMAÇÃO                       -->
-    <!-- ========================================== -->
-    <div id="confirm-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl transform transition-all animate-fade-in">
-            <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                Atenção
-            </h3>
-            <p class="text-slate-600 mb-6 font-medium">
-                Preencheu apenas <span id="filled-count" class="font-bold text-blue-600">0</span> de <span id="total-count" class="font-bold text-slate-800">72</span> jogos. Deseja enviar os palpites mesmo assim?
-            </p>
-            <div class="flex gap-3 justify-end">
-                <button type="button" onclick="closeModal()" class="px-4 py-2.5 text-slate-600 font-bold hover:bg-slate-100 rounded-xl transition">
-                    Cancelar
-                </button>
-                <button type="button" onclick="executeSubmit()" class="px-4 py-2.5 bg-blue-600 text-white font-bold hover:bg-blue-700 rounded-xl transition">
-                    Sim, enviar
-                </button>
-            </div>
+        <!-- Erro -->
+        <div id="error-state" class="hidden bg-red-50 text-red-700 p-6 rounded-2xl flex flex-col items-center text-center border border-red-200 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <h3 class="font-bold text-lg">Erro ao carregar dados</h3>
+            <p id="error-message" class="text-sm mt-1 mb-4">Não foi possível ligar à folha de cálculo.</p>
+            <button onclick="fetchRanking()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition">Tentar Novamente</button>
         </div>
-    </div>
 
-    <!-- ========================================== -->
-    <!-- JAVASCRIPT PRINCIPAL                       -->
-    <!-- ========================================== -->
-    <script>
-        // --- CONFIGURAÇÃO DOS 72 JOGOS REAIS ---
-        const INITIAL_MATCHES = [
-            // GRUPO A
-            { id: 1, team1: 'MÉXICO', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 2, team1: 'CORÉIA DO SUL', team2: 'REPÚB. CHECA', group: 'A' },
-            { id: 25, team1: 'REPÚB. CHECA', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 28, team1: 'MÉXICO', team2: 'CORÉIA DO SUL', group: 'A' },
-            { id: 53, team1: 'REPÚB. CHECA', team2: 'MÉXICO', group: 'A' }, { id: 54, team1: 'ÁFRICA DO SUL', team2: 'CORÉIA DO SUL', group: 'A' },
-            // GRUPO B
-            { id: 3, team1: 'CANADÁ', team2: 'BÓSNIA', group: 'B' }, { id: 8, team1: 'CATAR', team2: 'SUÍÇA', group: 'B' },
-            { id: 26, team1: 'SUÍÇA', team2: 'BÓSNIA', group: 'B' }, { id: 27, team1: 'CANADÁ', team2: 'CATAR', group: 'B' },
-            { id: 51, team1: 'SUÍÇA', team2: 'CANADÁ', group: 'B' }, { id: 52, team1: 'BÓSNIA', team2: 'CATAR', group: 'B' },
-            // GRUPO C
-            { id: 7, team1: 'BRASIL', team2: 'MARROCOS', group: 'C' }, { id: 5, team1: 'HAITI', team2: 'ESCÓCIA', group: 'C' },
-            { id: 30, team1: 'ESCÓCIA', team2: 'MARROCOS', group: 'C' }, { id: 29, team1: 'BRASIL', team2: 'HAITI', group: 'C' },
-            { id: 49, team1: 'ESCÓCIA', team2: 'BRASIL', group: 'C' }, { id: 50, team1: 'MARROCOS', team2: 'HAITI', group: 'C' },
-            // GRUPO D
-            { id: 4, team1: 'EUA', team2: 'PARAGUAI', group: 'D' }, { id: 6, team1: 'AUSTRÁLIA', team2: 'TURQUIA', group: 'D' },
-            { id: 32, team1: 'EUA', team2: 'AUSTRÁLIA', group: 'D' }, { id: 31, team1: 'TURQUIA', team2: 'PARAGUAI', group: 'D' },
-            { id: 59, team1: 'TURQUIA', team2: 'EUA', group: 'D' }, { id: 60, team1: 'PARAGUAI', team2: 'AUSTRÁLIA', group: 'D' },
-            // GRUPO E
-            { id: 10, team1: 'ALEMANHA', team2: 'CURAÇAO', group: 'E' }, { id: 9, team1: 'COSTA DO MARFIM', team2: 'EQUADOR', group: 'E' },
-            { id: 33, team1: 'ALEMANHA', team2: 'COSTA DO MARFIM', group: 'E' }, { id: 34, team1: 'EQUADOR', team2: 'CURAÇAO', group: 'E' },
-            { id: 55, team1: 'CURAÇAO', team2: 'COSTA DO MARFIM', group: 'E' }, { id: 56, team1: 'EQUADOR', team2: 'ALEMANHA', group: 'E' },
-            // GRUPO F
-            { id: 11, team1: 'HOLANDA', team2: 'JAPÃO', group: 'F' }, { id: 12, team1: 'SUÉCIA', team2: 'TUNÍSIA', group: 'F' },
-            { id: 35, team1: 'HOLANDA', team2: 'SUÉCIA', group: 'F' }, { id: 36, team1: 'TUNÍSIA', team2: 'JAPÃO', group: 'F' },
-            { id: 57, team1: 'JAPÃO', team2: 'SUÉCIA', group: 'F' }, { id: 58, team1: 'TUNÍSIA', team2: 'HOLANDA', group: 'F' },
-            // GRUPO G
-            { id: 16, team1: 'BÉLGICA', team2: 'EGITO', group: 'G' }, { id: 15, team1: 'IRÃ', team2: 'NOVA ZELÂNDIA', group: 'G' },
-            { id: 39, team1: 'BÉLGICA', team2: 'IRÃ', group: 'G' }, { id: 40, team1: 'NOVA ZELÂNDIA', team2: 'EGITO', group: 'G' },
-            { id: 63, team1: 'EGITO', team2: 'IRÃ', group: 'G' }, { id: 64, team1: 'NOVA ZELÂNDIA', team2: 'BÉLGICA', group: 'G' },
-            // GRUPO H
-            { id: 14, team1: 'ESPANHA', team2: 'CABO VERDE', group: 'H' }, { id: 13, team1: 'ARÁBIA SAUDITA', team2: 'URUGUAI', group: 'H' },
-            { id: 38, team1: 'ESPANHA', team2: 'ARÁBIA SAUDITA', group: 'H' }, { id: 37, team1: 'URUGUAI', team2: 'CABO VERDE', group: 'H' },
-            { id: 65, team1: 'CABO VERDE', team2: 'ARÁBIA SAUDITA', group: 'H' }, { id: 66, team1: 'URUGUAI', team2: 'ESPANHA', group: 'H' },
-            // GRUPO I
-            { id: 17, team1: 'FRANÇA', team2: 'SENEGAL', group: 'I' }, { id: 18, team1: 'IRAQUE', team2: 'NORUEGA', group: 'I' },
-            { id: 42, team1: 'FRANÇA', team2: 'IRAQUE', group: 'I' }, { id: 41, team1: 'NORUEGA', team2: 'SENEGAL', group: 'I' },
-            { id: 61, team1: 'NORUEGA', team2: 'FRANÇA', group: 'I' }, { id: 62, team1: 'SENEGAL', team2: 'IRAQUE', group: 'I' },
-            // GRUPO J
-            { id: 19, team1: 'ARGENTINA', team2: 'ARGÉLIA', group: 'J' }, { id: 20, team1: 'ÁUSTRIA', team2: 'JORDÂNIA', group: 'J' },
-            { id: 43, team1: 'ARGENTINA', team2: 'ÁUSTRIA', group: 'J' }, { id: 44, team1: 'JORDÂNIA', team2: 'ARGÉLIA', group: 'J' },
-            { id: 69, team1: 'ARGÉLIA', team2: 'ÁUSTRIA', group: 'J' }, { id: 70, team1: 'JORDÂNIA', team2: 'ARGENTINA', group: 'J' },
-            // GRUPO K
-            { id: 23, team1: 'PORTUGAL', team2: 'CONGO', group: 'K' }, { id: 24, team1: 'UZBEQUISTÃO', team2: 'COLÔMBIA', group: 'K' },
-            { id: 47, team1: 'PORTUGAL', team2: 'UZBEQUISTÃO', group: 'K' }, { id: 48, team1: 'COLÔMBIA', team2: 'CONGO', group: 'K' },
-            { id: 71, team1: 'COLÔMBIA', team2: 'PORTUGAL', group: 'K' }, { id: 72, team1: 'CONGO', team2: 'UZBEQUISTÃO', group: 'K' },
-            // GRUPO L
-            { id: 22, team1: 'INGLATERRA', team2: 'CROÁCIA', group: 'L' }, { id: 21, team1: 'GANA', team2: 'PANAMÁ', group: 'L' },
-            { id: 45, team1: 'INGLATERRA', team2: 'GANA', group: 'L' }, { id: 46, team1: 'PANAMÁ', team2: 'CROÁCIA', group: 'L' },
-            { id: 67, team1: 'PANAMÁ', team2: 'INGLATERRA', group: 'L' }, { id: 68, team1: 'CROÁCIA', team2: 'GANA', group: 'L' }
-        ];
-
-        // Estado da aplicação
-        let predictions = {};
-
-        // DOM Elements
-        const form = document.getElementById('predictions-form');
-        const container = document.getElementById('matches-container');
-        const nameInput = document.getElementById('participant-name');
-        const errorBox = document.getElementById('error-message');
-        const errorText = document.getElementById('error-text');
-        const confirmModal = document.getElementById('confirm-modal');
-        const mainView = document.getElementById('main-view');
-        const successView = document.getElementById('success-view');
-        const submitBtn = document.getElementById('submit-btn');
-
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('total-count').textContent = INITIAL_MATCHES.length;
-            renderMatches();
+        <!-- Conteúdo do Ranking -->
+        <div id="ranking-content" class="hidden opacity-0 animate-fade-in">
             
-            // Forçar letras maiúsculas no input
-            nameInput.addEventListener('input', function() {
-                this.value = this.value.toUpperCase();
-            });
-        });
+            <!-- Pódio (Top 3) -->
+            <div id="podium" class="flex items-end justify-center gap-2 sm:gap-4 mb-12 mt-8">
+                <!-- Preenchido via JS -->
+            </div>
 
-        // Função para agrupar e renderizar o HTML dos jogos
-        function renderMatches() {
-            // Agrupar jogos
-            const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
-                (acc[match.group] = acc[match.group] || []).push(match);
-                return acc;
-            }, {});
+            <!-- Tabela dos Restantes (4º em diante) -->
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
+                <div class="bg-slate-800 px-6 py-4 flex justify-between text-white font-bold text-sm uppercase tracking-wider">
+                    <span class="w-16">Pos</span>
+                    <span class="flex-1">Participante</span>
+                    <span class="w-20 text-right">Pontos</span>
+                </div>
+                <div id="ranking-list" class="divide-y divide-slate-100">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
 
-            let html = '';
-            for (const group in groupedMatches) {
-                html += `<div class="bg-slate-200 px-4 py-2 font-bold text-slate-700 border-b border-t border-slate-300 first:border-t-0">GRUPO ${group}</div>`;
-                html += `<div class="divide-y divide-slate-100">`;
-                
-                groupedMatches[group].forEach(match => {
-                    html += `
-                        <div class="flex items-center p-3 hover:bg-slate-50 transition">
-                            <div class="w-12 text-center text-sm font-mono text-slate-500 font-bold">#${match.id}</div>
-                            <div class="flex-1 text-right pr-4 font-medium text-slate-800 truncate">${match.team1}</div>
-                            <div class="flex items-center gap-2">
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-12 h-10 text-center text-xl font-bold border border-slate-300 rounded focus:border-blue-500 focus:outline-none bg-slate-50 focus:bg-white transition" />
-                                <span class="text-slate-400 font-bold">X</span>
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-12 h-10 text-center text-xl font-bold border border-slate-300 rounded focus:border-blue-500 focus:outline-none bg-slate-50 focus:bg-white transition" />
-                            </div>
-                            <div class="flex-1 text-left pl-4 font-medium text-slate-800 truncate">${match.team2}</div>
-                        </div>
-                    `;
-                });
-                html += `</div>`;
-            }
-            container.innerHTML = html;
+            <!-- Botão Atualizar -->
+            <div class="mt-8 text-center">
+                <button onclick="fetchRanking()" class="inline-flex items-center gap-2 bg-white text-blue-700 font-bold py-3 px-6 rounded-xl shadow border border-slate-200 hover:bg-slate-50 transition active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                    Atualizar Ranking
+                </button>
+            </div>
+        </div>
 
-            // Adicionar eventos aos inputs de placar
-            document.querySelectorAll('.score-input').forEach(input => {
-                input.addEventListener('input', function(e) {
-                    // Permitir apenas números
-                    this.value = this.value.replace(/[^0-9]/g, '');
-                    
-                    const matchId = this.getAttribute('data-match-id');
-                    const team = this.getAttribute('data-team');
-                    const val = this.value;
+    </div>
 
-                    if (!predictions[matchId]) predictions[matchId] = {};
-                    predictions[matchId][team] = val;
-                });
-            });
-        }
+    <script>
+        // =====================================================================
+        // ATENÇÃO: COLE AQUI A SUA NOVA URL GERADA NO APPS SCRIPT
+        // =====================================================================
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHDD_Rq3w5yHOL3d4Pc1hCutUg16-JUaWvQ6jd3FCKxv4s3iML4l67Jd_dNogn3iDi/exec';
 
-        // Lidar com a tentativa de envio
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            errorBox.classList.add('hidden');
+        document.addEventListener('DOMContentLoaded', fetchRanking);
 
-            const name = nameInput.value.trim();
-            if (!name) {
-                showError('Por favor, preencha o nome da sua aba na folha de cálculo!');
-                return;
-            }
+        async function fetchRanking() {
+            document.getElementById('loading-state').classList.remove('hidden');
+            document.getElementById('error-state').classList.add('hidden');
+            document.getElementById('ranking-content').classList.add('hidden');
 
-            // Contar quantos jogos completos existem
-            let filledMatchesCount = 0;
-            for (const id in predictions) {
-                if (predictions[id].team1 !== undefined && predictions[id].team1 !== '' &&
-                    predictions[id].team2 !== undefined && predictions[id].team2 !== '') {
-                    filledMatchesCount++;
+            try {
+                // Ao contrário do doPost (gravação), o doGet (leitura) permite uma chamada padrão sem "no-cors"
+                const response = await fetch(SCRIPT_URL);
+                const json = await response.json();
+
+                if (json.result === 'success') {
+                    renderData(json.data);
+                } else {
+                    showError(json.message);
+                }
+            } catch (error) {
+                console.error("Erro na ligação:", error);
+                // Se ainda for a string padrão de espaço reservado, mostramos um aviso claro
+                if (SCRIPT_URL === 'COLE_AQUI_A_NOVA_URL') {
+                    showError("Falta colar a URL do Google Apps Script no código HTML (linha 78).");
+                } else {
+                    showError("Falha na ligação. Verifique se o link do Apps Script está correto e implantado como 'Qualquer Pessoa'.");
                 }
             }
-
-            if (filledMatchesCount < INITIAL_MATCHES.length) {
-                document.getElementById('filled-count').textContent = filledMatchesCount;
-                confirmModal.classList.remove('hidden');
-            } else {
-                executeSubmit();
-            }
-        });
-
-        function closeModal() {
-            confirmModal.classList.add('hidden');
         }
 
         function showError(msg) {
-            errorText.textContent = msg;
-            errorBox.classList.remove('hidden');
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('error-state').classList.remove('hidden');
+            document.getElementById('error-message').textContent = msg;
         }
 
-        function setLoading(isLoading) {
-            submitBtn.disabled = isLoading;
-            if (isLoading) {
-                document.getElementById('submit-text').classList.add('hidden');
-                document.getElementById('loading-text').classList.remove('hidden');
-            } else {
-                document.getElementById('submit-text').classList.remove('hidden');
-                document.getElementById('loading-text').classList.add('hidden');
+        function renderData(data) {
+            // Ordenar do maior para o menor garantidamente
+            data.sort((a, b) => b.score - a.score);
+
+            const podiumContainer = document.getElementById('podium');
+            const listContainer = document.getElementById('ranking-list');
+            podiumContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+
+            if (data.length === 0) {
+                listContainer.innerHTML = '<div class="p-8 text-center text-slate-500 font-medium">Nenhum participante encontrado na aba CLASSIFICAÇÃO.</div>';
             }
-        }
 
-        // Envio Real dos Dados
-        async function executeSubmit() {
-            closeModal();
-            setLoading(true);
-            errorBox.classList.add('hidden');
-
-            const payload = {
-                name: nameInput.value.trim(),
-                predictions: predictions
-            };
-
-            try {
-                // A URL DO GOOGLE APPS SCRIPT
-                const GOOGLE_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwEFuZq7PK49dnxNpBK_ZlHbIPy2cCzrVolkXA2gRNkyWP9skWW9l4xcxGAeozv-VjT/exec'; 
-
-                await fetch(GOOGLE_WEB_APP_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(payload)
-                });
+            // Construir o Pódio (Top 3)
+            if (data.length >= 1) {
+                let p2 = data[1] ? buildPodiumPlace(data[1].name, data[1].score, 2, 'bg-slate-300', 'text-slate-600', 'podium-2') : '<div class="w-24 sm:w-32"></div>';
+                let p1 = data[0] ? buildPodiumPlace(data[0].name, data[0].score, 1, 'bg-yellow-400', 'text-yellow-800', 'podium-1') : '<div class="w-24 sm:w-32"></div>';
+                let p3 = data[2] ? buildPodiumPlace(data[2].name, data[2].score, 3, 'bg-amber-600', 'text-white', 'podium-3') : '<div class="w-24 sm:w-32"></div>';
                 
-                // Sucesso
-                document.getElementById('success-name').textContent = payload.name;
-                mainView.classList.add('hidden');
-                successView.classList.remove('hidden');
-
-            } catch (error) {
-                console.error('Erro ao enviar:', error);
-                showError('Falha na ligação. Verifique a sua internet e tente novamente.');
-            } finally {
-                setLoading(false);
+                podiumContainer.innerHTML = p2 + p1 + p3;
             }
+
+            // Construir a Tabela (4º em diante)
+            let listHtml = '';
+            for (let i = 3; i < data.length; i++) {
+                listHtml += `
+                    <div class="flex items-center px-6 py-4 hover:bg-slate-50 transition">
+                        <div class="w-16 font-black text-slate-400 text-lg">#${i + 1}</div>
+                        <div class="flex-1 font-bold text-slate-700 truncate pr-4">${data[i].name}</div>
+                        <div class="w-20 text-right font-black text-blue-600 text-xl">${data[i].score}</div>
+                    </div>
+                `;
+            }
+            listContainer.innerHTML = listHtml;
+
+            // Mostrar
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('ranking-content').classList.remove('hidden');
         }
 
-        // Voltar para fazer novo preenchimento
-        function resetForm() {
-            predictions = {};
-            document.querySelectorAll('.score-input').forEach(i => i.value = '');
-            nameInput.value = '';
-            successView.classList.add('hidden');
-            mainView.classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function buildPodiumPlace(name, score, position, colorClass, textColorClass, heightClass) {
+            let emoji = position === 1 ? '🥇' : position === 2 ? '🥈' : '🥉';
+            return `
+                <div class="flex flex-col items-center w-24 sm:w-32 relative">
+                    <div class="font-bold text-slate-700 text-center text-sm sm:text-base truncate w-full mb-1">${name}</div>
+                    <div class="font-black text-blue-700 text-lg mb-2">${score} pts</div>
+                    <div class="${colorClass} w-full rounded-t-xl ${heightClass} flex flex-col justify-start pt-4 shadow-lg border-x border-t border-black/5 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-white/20"></div>
+                        <span class="text-3xl sm:text-4xl relative z-10 text-center drop-shadow-md">${emoji}</span>
+                        <span class="${textColorClass} font-black text-xl sm:text-3xl relative z-10 mt-auto pb-4 text-center">#${position}</span>
+                    </div>
+                </div>
+            `;
         }
     </script>
 </body>
