@@ -102,6 +102,18 @@
                 <!-- Os jogos entrarão aqui -->
             </div>
 
+            <!-- NOVA SEÇÃO: FASES ELIMINATÓRIAS -->
+            <div class="mt-12 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden relative">
+                <div class="bg-amber-500 text-white px-6 py-5 flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="drop-shadow"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                    <h2 class="text-2xl font-black tracking-tight drop-shadow-sm uppercase">Fases Eliminatórias</h2>
+                </div>
+                
+                <div class="p-6 space-y-10" id="knockout-container">
+                    <!-- Gerado via JavaScript para garantir a lista de times atualizada -->
+                </div>
+            </div>
+
             <!-- Mensagem de Erro Form -->
             <div id="error-message" class="hidden bg-red-50 text-red-700 p-4 rounded-xl flex items-center gap-3 border border-red-200">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -180,7 +192,7 @@
                 Atenção
             </h3>
             <p class="text-slate-600 mb-6 font-medium leading-relaxed">
-                Preencheu apenas <span id="filled-count" class="font-black text-blue-600 text-lg">0</span> de <span id="total-count" class="font-black text-slate-800 text-lg">72</span> jogos.<br>Deseja enviar os palpites assim mesmo?
+                Você preencheu <span id="filled-count" class="font-black text-blue-600 text-lg">0</span> de <span id="total-count" class="font-black text-slate-800 text-lg">72</span> jogos e <span id="filled-knockout" class="font-black text-amber-600 text-lg">0</span> de <span id="total-knockout" class="font-black text-slate-800 text-lg">64</span> seleções.<br>Deseja enviar os palpites assim mesmo?
             </p>
             <div class="flex gap-3 justify-end">
                 <button type="button" onclick="closeModal()" class="px-5 py-3 text-slate-600 font-bold hover:bg-slate-100 rounded-xl transition">
@@ -200,7 +212,7 @@
         // =====================================================================
         // ATENÇÃO: COLE AQUI A SUA NOVA URL GERADA NO APPS SCRIPT
         // =====================================================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHDD_Rq3w5yHOL3d4Pc1hCutUg16-JUaWvQ6jd3FCKxv4s3iML4l67Jd_dNogn3iDi/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzm5nNNzzg3WnsRePglFoASVpaqhxItyu5Yp2q00wrXSxkzm276ZUnrxPKDKnMivFug/exec';
 
         // --- CONFIGURAÇÃO DOS 72 JOGOS ---
         const INITIAL_MATCHES = [
@@ -242,7 +254,23 @@
             { id: 67, team1: 'PANAMÁ', team2: 'INGLATERRA', group: 'L' }, { id: 68, team1: 'CROÁCIA', team2: 'GANA', group: 'L' }
         ];
 
+        // Obter uma lista única de todos os times para os dropdowns
+        const TEAMS = [...new Set(INITIAL_MATCHES.flatMap(m => [m.team1, m.team2]))].sort();
+
         let predictions = {};
+        
+        // Estrutura de estado para as Fases Eliminatórias
+        let knockout = {
+            round32: Array(32).fill(''),
+            round16: Array(16).fill(''),
+            quarters: Array(8).fill(''),
+            semis: Array(4).fill(''),
+            final: Array(2).fill(''),
+            thirdPlace: '',
+            champion: ''
+        };
+        const TOTAL_KNOCKOUT_FIELDS = 32 + 16 + 8 + 4 + 2 + 1 + 1; // 64
+
         let isRankingLoaded = false;
 
         // TABS LOGIC
@@ -277,7 +305,9 @@
         // --- PALPITES LOGIC ---
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('total-count').textContent = INITIAL_MATCHES.length;
+            document.getElementById('total-knockout').textContent = TOTAL_KNOCKOUT_FIELDS;
             renderMatches();
+            renderKnockout();
             
             document.getElementById('participant-name').addEventListener('input', function() {
                 this.value = this.value.toUpperCase();
@@ -328,6 +358,93 @@
             });
         }
 
+        // --- RENDERIZAÇÃO DAS FASES ELIMINATÓRIAS ---
+        function buildSelects(count, stageKey, labelPrefix) {
+            let html = '';
+            for(let i = 0; i < count; i++) {
+                let options = `<option value="">Selecione...</option>`;
+                TEAMS.forEach(t => options += `<option value="${t}">${t}</option>`);
+                
+                html += `
+                <div class="flex flex-col gap-1">
+                    <label class="text-[10px] sm:text-xs font-bold text-slate-400 ml-1 uppercase tracking-wider">${labelPrefix} ${i+1}</label>
+                    <select class="knockout-input w-full p-2.5 border-2 border-slate-200 rounded-xl focus:border-amber-500 focus:ring-2 focus:ring-amber-100 outline-none transition bg-slate-50 focus:bg-white text-sm sm:text-base font-bold text-slate-700 truncate"
+                            data-stage="${stageKey}" data-index="${i}">
+                        ${options}
+                    </select>
+                </div>`;
+            }
+            return html;
+        }
+
+        function renderKnockout() {
+            const container = document.getElementById('knockout-container');
+            let html = '';
+
+            // 16 Avos
+            html += `<div class="space-y-3">
+                <h3 class="font-black text-lg text-slate-800 border-b pb-2">16 Avos de Final (32 Seleções)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">${buildSelects(32, 'round32', 'Selec.')}</div>
+            </div>`;
+
+            // Oitavas
+            html += `<div class="space-y-3">
+                <h3 class="font-black text-lg text-slate-800 border-b pb-2">Oitavas de Final (16 Seleções)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">${buildSelects(16, 'round16', 'Selec.')}</div>
+            </div>`;
+
+            // Quartas
+            html += `<div class="space-y-3">
+                <h3 class="font-black text-lg text-slate-800 border-b pb-2">Quartas de Final (8 Seleções)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">${buildSelects(8, 'quarters', 'Selec.')}</div>
+            </div>`;
+
+            // Semis
+            html += `<div class="space-y-3">
+                <h3 class="font-black text-lg text-slate-800 border-b pb-2">Semifinais (4 Seleções)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">${buildSelects(4, 'semis', 'Selec.')}</div>
+            </div>`;
+
+            // Final e 3º
+            html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-3">
+                    <h3 class="font-black text-lg text-slate-800 border-b pb-2">Final (2 Seleções)</h3>
+                    <div class="grid grid-cols-2 gap-3">${buildSelects(2, 'final', 'Finalista')}</div>
+                </div>
+                <div class="space-y-3">
+                    <h3 class="font-black text-lg text-slate-800 border-b pb-2">3º Colocado</h3>
+                    <div class="grid grid-cols-1 gap-3">${buildSelects(1, 'thirdPlace', '3º Lugar')}</div>
+                </div>
+            </div>`;
+
+            // Campeão
+            html += `<div class="mt-6 bg-gradient-to-br from-amber-100 to-yellow-50 p-6 rounded-2xl border-2 border-yellow-300">
+                <h3 class="font-black text-xl text-center text-yellow-800 mb-4 flex items-center justify-center gap-2">
+                    🏆 O Grande Campeão!
+                </h3>
+                <div class="max-w-xs mx-auto">
+                    ${buildSelects(1, 'champion', 'Campeão Mundial')}
+                </div>
+            </div>`;
+
+            container.innerHTML = html;
+
+            // Adicionar event listeners aos selects gerados
+            document.querySelectorAll('.knockout-input').forEach(select => {
+                select.addEventListener('change', function() {
+                    const stage = this.getAttribute('data-stage');
+                    const index = this.getAttribute('data-index');
+                    const value = this.value;
+
+                    if (stage === 'thirdPlace' || stage === 'champion') {
+                        knockout[stage] = value;
+                    } else {
+                        knockout[stage][index] = value;
+                    }
+                });
+            });
+        }
+
         document.getElementById('predictions-form').addEventListener('submit', (e) => {
             e.preventDefault();
             document.getElementById('error-message').classList.add('hidden');
@@ -338,6 +455,7 @@
                 return;
             }
 
+            // Validar Preenchimento dos Jogos
             let filledCount = 0;
             for (const id in predictions) {
                 if (predictions[id].team1 !== undefined && predictions[id].team1 !== '' &&
@@ -346,8 +464,17 @@
                 }
             }
 
-            if (filledCount < INITIAL_MATCHES.length) {
+            // Validar Preenchimento do Knockout
+            let knockoutCount = 0;
+            if (knockout.champion !== '') knockoutCount++;
+            if (knockout.thirdPlace !== '') knockoutCount++;
+            ['round32', 'round16', 'quarters', 'semis', 'final'].forEach(stage => {
+                knockout[stage].forEach(val => { if (val !== '') knockoutCount++; });
+            });
+
+            if (filledCount < INITIAL_MATCHES.length || knockoutCount < TOTAL_KNOCKOUT_FIELDS) {
                 document.getElementById('filled-count').textContent = filledCount;
+                document.getElementById('filled-knockout').textContent = knockoutCount;
                 document.getElementById('confirm-modal').classList.remove('hidden');
             } else {
                 executeSubmit();
@@ -379,7 +506,8 @@
 
             const payload = {
                 name: document.getElementById('participant-name').value.trim(),
-                predictions: predictions
+                predictions: predictions,
+                knockout: knockout // <- Novo: Enviando as fases eliminatórias no pacote
             };
 
             try {
@@ -404,10 +532,16 @@
 
         function resetForm() {
             predictions = {};
+            knockout = {
+                round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''),
+                semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: ''
+            };
             document.querySelectorAll('.score-input').forEach(i => i.value = '');
+            document.querySelectorAll('.knockout-input').forEach(i => i.value = '');
             document.getElementById('participant-name').value = '';
             document.getElementById('success-view').classList.add('hidden');
             document.getElementById('predictions-form').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // --- RANKING LOGIC ---
