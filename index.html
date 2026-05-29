@@ -28,6 +28,10 @@
             color: #475569; 
         }
         .tab-inactive:hover { background-color: #e2e8f0; }
+
+        /* Oculta scrollbar da navegação */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-slate-50 font-sans relative text-slate-800 antialiased min-h-screen pb-20">
@@ -45,15 +49,19 @@
     </div>
 
     <!-- Navegação / Tabs (Fica oculto se a data passar) -->
-    <div id="tabs-container" class="max-w-md mx-auto px-4 -mt-8 relative z-20 mb-8">
-        <div class="bg-white/80 backdrop-blur-md p-1.5 rounded-2xl shadow-lg border border-white flex justify-between gap-1">
-            <button onclick="switchTab('palpites')" id="tab-btn-palpites" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-active flex items-center justify-center gap-2">
+    <div id="tabs-container" class="max-w-xl mx-auto px-4 -mt-8 relative z-20 mb-8">
+        <div class="bg-white/90 backdrop-blur-md p-1.5 rounded-2xl shadow-lg border border-white flex gap-1 overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-active flex items-center justify-center gap-2 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 Z"/></svg>
-                Meus Palpites
+                Grupos
             </button>
-            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2">
+            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Mata-Mata
+            </button>
+            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                Ranking Geral
+                Ranking
             </button>
         </div>
     </div>
@@ -70,10 +78,11 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- SEÇÃO 1: MEUS PALPITES                     -->
+    <!-- CONTAINER PRINCIPAL: FORMULÁRIO DE PALPITES-->
     <!-- ========================================== -->
-    <section id="sec-palpites" class="max-w-4xl mx-auto px-4 animate-fade-in block">
+    <section id="main-palpites-container" class="max-w-4xl mx-auto px-4 animate-fade-in block">
         
+        <!-- Tela de Sucesso -->
         <div id="success-view" class="hidden bg-white p-8 rounded-3xl shadow-xl border border-green-100 text-center space-y-4 animate-fade-in mb-8">
             <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mx-auto drop-shadow-sm"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <h2 class="text-3xl font-bold text-gray-800">Palpites Guardados!</h2>
@@ -81,30 +90,51 @@
             <button onclick="resetForm()" class="mt-6 w-full sm:w-auto mx-auto bg-green-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-green-700 transition shadow-lg">Fazer novo palpite</button>
         </div>
 
+        <!-- Formulário Único para Grupos e Mata-Mata -->
         <form id="predictions-form" class="space-y-6">
-            <div id="name-container" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 sticky top-4 z-30 animate-fade-in">
+            
+            <!-- Nome (Sempre visível) -->
+            <div id="name-container" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 sticky top-4 z-30">
                 <label class="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     Nome da sua Aba na Planilha
                 </label>
                 <input type="text" id="participant-name" placeholder="Ex: JOÃO SILVA" class="w-full text-lg p-3 sm:p-4 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-50 outline-none transition uppercase bg-slate-50 focus:bg-white" required />
-                <p class="text-sm text-slate-500 mt-3 font-medium bg-blue-50 p-2 rounded-lg border border-blue-100">✨ <b class="text-blue-700">Dica:</b> Se for a sua primeira vez, uma nova aba será criada automaticamente com o seu nome!</p>
+                <p class="text-sm text-slate-500 mt-3 font-medium bg-blue-50 p-2 rounded-lg border border-blue-100">✨ <b class="text-blue-700">Dica:</b> Se for a sua primeira vez, uma nova aba será criada automaticamente!</p>
             </div>
 
+            <!-- SEÇÃO A: JOGOS DOS GRUPOS -->
             <section id="sec-grupos" class="animate-fade-in block space-y-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-slate-800">Placares da Fase de Grupos</h2>
+                    <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">72 Jogos</span>
+                </div>
                 <!-- Jogos entram aqui via JS -->
                 <div id="matches-container" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"></div>
             </section>
 
+            <!-- SEÇÃO B: SELEÇÕES DO MATA-MATA -->
+            <section id="sec-knockout" class="hidden animate-fade-in space-y-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-slate-800">Fases Eliminatórias</h2>
+                    <span class="text-sm font-bold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">64 Opções</span>
+                </div>
+                <!-- Fases Eliminatórias entram aqui via JS -->
+                <div id="knockout-container" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 overflow-hidden">
+                </div>
+            </section>
+
+            <!-- Área de Erro -->
             <div id="error-message" class="hidden bg-red-50 text-red-700 p-4 rounded-xl flex items-center gap-3 border border-red-200">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <p id="error-text" class="font-medium">Erro ao enviar.</p>
             </div>
 
-            <button type="submit" id="submit-btn" class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 px-8 rounded-2xl shadow-xl transition-all active:scale-95 disabled:bg-blue-400 group">
+            <!-- Botão Enviar -->
+            <button type="submit" id="submit-btn" class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 px-8 rounded-2xl shadow-xl transition-all active:scale-95 disabled:bg-blue-400 group mt-8">
                 <span id="submit-text" class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                    Salvar Palpites na Planilha
+                    Salvar Todos os Palpites
                 </span>
                 <span id="loading-text" class="hidden animate-pulse flex items-center gap-2">
                     <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -150,14 +180,14 @@
     </section>
 
     <!-- Modal de Confirmação -->
-    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
         <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl transform transition-all animate-fade-in border border-slate-100">
             <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500 bg-amber-50 p-1 rounded-full"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 Atenção
             </h3>
             <p class="text-slate-600 mb-6 font-medium leading-relaxed">
-                Preencheu apenas <span id="filled-count" class="font-black text-blue-600 text-lg">0</span> de <span id="total-count" class="font-black text-slate-800 text-lg">72</span> jogos.<br>Deseja enviar os palpites assim mesmo?
+                Preencheu apenas <span id="filled-count" class="font-black text-blue-600 text-lg">0</span> de <span id="total-count" class="font-black text-slate-800 text-lg">136</span> campos.<br>Deseja enviar os palpites assim mesmo?
             </p>
             <div class="flex gap-3 justify-end">
                 <button type="button" onclick="closeModal()" class="px-5 py-3 text-slate-600 font-bold hover:bg-slate-100 rounded-xl transition">Cancelar</button>
@@ -173,8 +203,7 @@
         // =====================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxERr-Gwl3-nSac-cG2A7v--wwgt9ANUZ-GZDn5Xy4RAOJ9ynWjawBBywfaBi8I3tfu/exec';
         
-        // Defina aqui a DATA e HORA em que o envio de palpites deve ser BLOQUEADO.
-        // Formato: AAAA-MM-DDTHH:MM:SS-03:00 (O "-03:00" representa o fuso horário de Brasília/RJ)
+        // Bloqueio de envio a 11 de Junho de 2026 às 16:00
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
 
         const INITIAL_MATCHES = [
@@ -217,19 +246,29 @@
         ];
 
         let predictions = {};
+        let knockoutPredictions = {
+            round32: Array(32).fill(''),
+            round16: Array(16).fill(''),
+            quarters: Array(8).fill(''),
+            semis: Array(4).fill(''),
+            final: Array(2).fill(''),
+            thirdPlace: '',
+            champion: ''
+        };
         let isRankingLoaded = false;
         let bolaoEncerrado = false;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // VERIFICA O BLOQUEIO POR DATA
+            // Conta = 72 jogos + 64 escolhas de equipas = 136 campos totais
+            document.getElementById('total-count').textContent = 136;
+            
             const agora = new Date();
             if (agora > DATA_LIMITE) {
                 bolaoEncerrado = true;
                 bloquearPalpites();
             } else {
-                // Inicia normalmente se a data ainda não passou
-                document.getElementById('total-count').textContent = INITIAL_MATCHES.length;
                 renderMatches();
+                renderKnockout();
                 document.getElementById('participant-name').addEventListener('input', function() {
                     this.value = this.value.toUpperCase();
                 });
@@ -237,15 +276,10 @@
         });
 
         function bloquearPalpites() {
-            // Ocultar tabs de navegação e seção de palpites
             document.getElementById('tabs-container').classList.add('hidden');
-            document.getElementById('sec-palpites').classList.add('hidden');
-            
-            // Mostrar aviso de encerramento
+            document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
             document.getElementById('header-subtitle').textContent = "Ranking oficial do torneio";
-            
-            // Mostrar diretamente o Ranking
             document.getElementById('sec-ranking').classList.remove('hidden');
             document.getElementById('sec-ranking').classList.add('block');
             fetchRanking();
@@ -253,32 +287,33 @@
 
         // TABS LOGIC
         function switchTab(tabId) {
-            if (bolaoEncerrado) return; // Se estiver encerrado, as tabs nem funcionam
+            if (bolaoEncerrado) return;
 
-            const secPalpites = document.getElementById('sec-palpites');
-            const secRanking = document.getElementById('sec-ranking');
-            const btnPalpites = document.getElementById('tab-btn-palpites');
-            const btnRanking = document.getElementById('tab-btn-ranking');
+            // Reset visual de botões
+            ['grupos', 'knockout', 'ranking'].forEach(id => {
+                document.getElementById('tab-btn-' + id).className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap";
+            });
+            document.getElementById('tab-btn-' + tabId).classList.replace('tab-inactive', 'tab-active');
 
-            if (tabId === 'palpites') {
-                secRanking.classList.add('hidden');
-                secPalpites.classList.remove('hidden');
-                secPalpites.classList.add('animate-fade-in');
-                
-                btnPalpites.classList.replace('tab-inactive', 'tab-active');
-                btnRanking.classList.replace('tab-active', 'tab-inactive');
-            } else {
-                secPalpites.classList.add('hidden');
-                secRanking.classList.remove('hidden');
-                secRanking.classList.add('animate-fade-in');
-                
-                btnRanking.classList.replace('tab-inactive', 'tab-active');
-                btnPalpites.classList.replace('tab-active', 'tab-inactive');
-
+            if (tabId === 'ranking') {
+                document.getElementById('main-palpites-container').classList.add('hidden');
+                document.getElementById('sec-ranking').classList.remove('hidden');
                 if (!isRankingLoaded) fetchRanking();
+            } else {
+                document.getElementById('sec-ranking').classList.add('hidden');
+                document.getElementById('main-palpites-container').classList.remove('hidden');
+                
+                if (tabId === 'grupos') {
+                    document.getElementById('sec-grupos').classList.remove('hidden');
+                    document.getElementById('sec-knockout').classList.add('hidden');
+                } else {
+                    document.getElementById('sec-grupos').classList.add('hidden');
+                    document.getElementById('sec-knockout').classList.remove('hidden');
+                }
             }
         }
 
+        // RENDERIZAÇÃO DA FASE DE GRUPOS
         function renderMatches() {
             const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
                 (acc[match.group] = acc[match.group] || []).push(match);
@@ -287,13 +322,8 @@
 
             let html = '';
             for (const group in groupedMatches) {
-                html += `
-                <div class="bg-slate-100 px-5 py-3 font-extrabold text-slate-700 border-b border-t border-slate-200 first:border-t-0 text-sm tracking-widest flex items-center gap-2">
-                    <div class="w-2 h-4 bg-blue-500 rounded-full"></div>
-                    GRUPO ${group}
-                </div>`;
+                html += `<div class="bg-slate-100 px-5 py-3 font-extrabold text-slate-700 border-b border-t border-slate-200 first:border-t-0 text-sm tracking-widest flex items-center gap-2"><div class="w-2 h-4 bg-blue-500 rounded-full"></div>GRUPO ${group}</div>`;
                 html += `<div class="divide-y divide-slate-50">`;
-                
                 groupedMatches[group].forEach(match => {
                     html += `
                         <div class="flex items-center p-3 sm:p-4 hover:bg-blue-50/30 transition group">
@@ -305,8 +335,7 @@
                                 <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-black border-2 border-slate-200 rounded-lg focus:border-blue-500 focus:outline-none bg-slate-50 focus:bg-white transition" />
                             </div>
                             <div class="flex-1 text-left pl-2 sm:pl-4 font-bold text-slate-800 text-sm sm:text-base leading-tight">${match.team2}</div>
-                        </div>
-                    `;
+                        </div>`;
                 });
                 html += `</div>`;
             }
@@ -323,9 +352,112 @@
             });
         }
 
+        // RENDERIZAÇÃO DAS FASES ELIMINATÓRIAS
+        function renderKnockout() {
+            // Extrair seleções exclusivas por grupo e lista geral
+            const teamsByGroup = {};
+            const allTeamsSet = new Set();
+            
+            INITIAL_MATCHES.forEach(m => {
+                if (!teamsByGroup[m.group]) teamsByGroup[m.group] = new Set();
+                teamsByGroup[m.group].add(m.team1);
+                teamsByGroup[m.group].add(m.team2);
+                allTeamsSet.add(m.team1);
+                allTeamsSet.add(m.team2);
+            });
+            
+            const allTeams = Array.from(allTeamsSet).sort();
+            for(let g in teamsByGroup) teamsByGroup[g] = Array.from(teamsByGroup[g]).sort();
+
+            let html = '';
+
+            // --- 16 AVOS ---
+            html += `<h3 class="font-bold text-lg mb-4 text-slate-700 bg-slate-100 p-3 rounded-lg flex items-center gap-2"><div class="w-1.5 h-4 bg-indigo-500 rounded-full"></div> 16 Avos de Final (32 Seleções)</h3>`;
+            html += `<h4 class="font-semibold text-slate-600 mb-3 ml-1 text-sm uppercase">1º e 2º Colocados por Grupo</h4>`;
+            html += `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">`;
+            
+            let r32Idx = 0;
+            Object.keys(teamsByGroup).sort().forEach(group => {
+                html += `
+                <div class="bg-indigo-50/50 p-3 rounded-xl border border-indigo-100">
+                    <div class="font-bold text-sm text-indigo-800 mb-2">Grupo ${group}</div>
+                    <select class="w-full mb-2 p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="round32" data-index="${r32Idx++}">
+                        <option value="">1º Colocado...</option>
+                        ${teamsByGroup[group].map(t => `<option value="${t}">${t}</option>`).join('')}
+                    </select>
+                    <select class="w-full p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="round32" data-index="${r32Idx++}">
+                        <option value="">2º Colocado...</option>
+                        ${teamsByGroup[group].map(t => `<option value="${t}">${t}</option>`).join('')}
+                    </select>
+                </div>`;
+            });
+            html += `</div>`;
+
+            html += `<h4 class="font-semibold text-slate-600 mb-3 ml-1 text-sm uppercase">Melhores 3º Colocados (8 Seleções)</h4>`;
+            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">`;
+            for(let i=0; i<8; i++) {
+                html += `<select class="w-full p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="round32" data-index="${r32Idx++}">
+                    <option value="">Selecione...</option>
+                    ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                </select>`;
+            }
+            html += `</div>`;
+
+            // --- OUTRAS FASES ---
+            const generatePhase = (title, count, phaseKey) => {
+                let pHTML = `<h3 class="font-bold text-lg mb-4 text-slate-700 bg-slate-100 p-3 rounded-lg flex items-center gap-2 mt-8"><div class="w-1.5 h-4 bg-indigo-500 rounded-full"></div> ${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-3">`;
+                for(let i=0; i<count; i++) {
+                    pHTML += `<select class="w-full p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="${phaseKey}" data-index="${i}">
+                        <option value="">Selecione...</option>
+                        ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                    </select>`;
+                }
+                pHTML += `</div>`;
+                return pHTML;
+            }
+
+            html += generatePhase('Oitavas de Final (16 Seleções)', 16, 'round16');
+            html += generatePhase('Quartas de Final (8 Seleções)', 8, 'quarters');
+            html += generatePhase('Semifinais (4 Seleções)', 4, 'semis');
+            html += generatePhase('Final (2 Seleções)', 2, 'final');
+
+            html += `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+                    <h3 class="font-bold text-lg mb-3 text-amber-800 flex items-center gap-2">🥉 3º Colocado</h3>
+                    <select class="w-full p-3 rounded-lg border-2 border-amber-300 text-base font-bold text-slate-700 bg-white outline-none focus:border-amber-500" data-phase="thirdPlace" data-index="0">
+                        <option value="">Selecione...</option>
+                        ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="bg-green-50 p-4 rounded-2xl border border-green-200 shadow-sm">
+                    <h3 class="font-bold text-lg mb-3 text-green-800 flex items-center gap-2">🏆 Campeão</h3>
+                    <select class="w-full p-3 rounded-lg border-2 border-green-400 text-base font-bold text-slate-700 bg-white outline-none focus:border-green-600 shadow-inner" data-phase="champion" data-index="0">
+                        <option value="">Selecione o Campeão...</option>
+                        ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                    </select>
+                </div>
+            </div>`;
+
+            document.getElementById('knockout-container').innerHTML = html;
+
+            // Adicionar eventos às <select>
+            document.getElementById('knockout-container').addEventListener('change', function(e) {
+                if(e.target.tagName === 'SELECT') {
+                    const phase = e.target.getAttribute('data-phase');
+                    const index = e.target.getAttribute('data-index');
+                    if (phase === 'thirdPlace' || phase === 'champion') {
+                        knockoutPredictions[phase] = e.target.value;
+                    } else {
+                        knockoutPredictions[phase][index] = e.target.value;
+                    }
+                }
+            });
+        }
+
         document.getElementById('predictions-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            if (bolaoEncerrado) return; // Bloqueio extra
+            if (bolaoEncerrado) return;
 
             document.getElementById('error-message').classList.add('hidden');
             const name = document.getElementById('participant-name').value.trim();
@@ -335,14 +467,21 @@
             }
 
             let filledCount = 0;
+            // Contagem dos Grupos
             for (const id in predictions) {
                 if (predictions[id].team1 !== undefined && predictions[id].team1 !== '' &&
                     predictions[id].team2 !== undefined && predictions[id].team2 !== '') {
                     filledCount++;
                 }
             }
+            // Contagem do Mata-Mata
+            ['round32', 'round16', 'quarters', 'semis', 'final'].forEach(phase => {
+                knockoutPredictions[phase].forEach(val => { if (val !== '') filledCount++; });
+            });
+            if (knockoutPredictions.thirdPlace !== '') filledCount++;
+            if (knockoutPredictions.champion !== '') filledCount++;
 
-            if (filledCount < INITIAL_MATCHES.length) {
+            if (filledCount < 136) {
                 document.getElementById('filled-count').textContent = filledCount;
                 document.getElementById('confirm-modal').classList.remove('hidden');
             } else {
@@ -375,7 +514,8 @@
 
             const payload = {
                 name: document.getElementById('participant-name').value.trim(),
-                predictions: predictions
+                predictions: predictions,
+                knockout: knockoutPredictions // <- O objeto do Mata-Mata volta a ser enviado!
             };
 
             try {
@@ -400,10 +540,15 @@
 
         function resetForm() {
             predictions = {};
+            knockoutPredictions = { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: '' };
+            
             document.querySelectorAll('.score-input').forEach(i => i.value = '');
+            document.querySelectorAll('#knockout-container select').forEach(s => s.value = '');
             document.getElementById('participant-name').value = '';
+            
             document.getElementById('success-view').classList.add('hidden');
             document.getElementById('predictions-form').classList.remove('hidden');
+            switchTab('grupos'); // Volta para a primeira aba automaticamente
         }
 
         // --- RANKING LOGIC ---
@@ -424,7 +569,7 @@
                 }
             } catch (error) {
                 if (SCRIPT_URL === 'COLE_AQUI_A_NOVA_URL') {
-                    showRankingError("Falta colar a URL do Google Apps Script no código HTML (linha 166).");
+                    showRankingError("Falta colar a URL do Google Apps Script no código HTML (linha 175).");
                 } else {
                     showRankingError("Falha na ligação. Verifique a sua internet ou a URL do script.");
                 }
