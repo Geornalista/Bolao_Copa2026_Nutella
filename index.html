@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bolão da Copa 2026</title>
+    <title>Bolão NUTELLA - Copa 2026</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -18,62 +18,82 @@
         .podium-2 { height: 120px; }
         .podium-3 { height: 90px; }
 
+        /* Estilo moderno para as tabs */
         .tab-active {
-            background-color: #1d4ed8; 
+            background-color: #1e3a8a; /* blue-900 */
             color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
         }
         .tab-inactive {
-            background-color: transparent;
-            color: #475569; 
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #334155; 
         }
-        .tab-inactive:hover { background-color: #e2e8f0; }
+        .tab-inactive:hover { background-color: rgba(255, 255, 255, 0.8); }
 
         /* Oculta scrollbar da navegação */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Efeito vidro (Glassmorphism) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
     </style>
 </head>
-<body class="bg-slate-50 font-sans relative text-slate-800 antialiased min-h-screen pb-20">
+<body class="font-sans relative text-slate-800 antialiased min-h-screen pb-20 bg-fixed bg-center bg-cover" style="background-image: url('./imagem_copa.jpg');">
+    
+    <!-- Camada de sobreposição para não prejudicar a leitura -->
+    <div class="fixed inset-0 bg-slate-100/80 backdrop-blur-sm z-[-1]"></div>
 
     <!-- Cabeçalho Principal -->
-    <div class="bg-blue-800 text-white pt-8 pb-16 px-4 shadow-xl rounded-b-[2.5rem] relative overflow-hidden">
-        <div class="absolute -top-24 -right-24 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-400 opacity-20 rounded-full blur-2xl"></div>
+    <div class="relative pt-12 pb-20 px-4 shadow-2xl rounded-b-[3rem] overflow-hidden mb-8">
+        <!-- Fundo escuro para contrastar com a logo -->
+        <div class="absolute inset-0 bg-slate-900/90 z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent z-0"></div>
         
-        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center gap-2 relative z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-400 drop-shadow-md"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight uppercase text-center drop-shadow-sm">Bolão NUTELLA - Copa 2026</h1>
-            <p id="header-subtitle" class="text-blue-200 font-medium text-sm sm:text-base mt-1 text-center">Deixe os seus palpites e acompanhe o ranking</p>
+        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center gap-4 relative z-10">
+            <!-- Logo oficial inserida aqui -->
+            <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-32 sm:h-40 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500">
+            
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tighter uppercase text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-100 drop-shadow-sm mt-2">
+                Bolão NUTELLA
+            </h1>
+            <p id="header-subtitle" class="text-slate-300 font-medium text-sm sm:text-lg mt-1 text-center tracking-wide">
+                Deixe os seus palpites e acompanhe o ranking oficial
+            </p>
         </div>
     </div>
 
-    <!-- Navegação / Tabs (Fica oculto se a data passar) -->
-    <div id="tabs-container" class="max-w-xl mx-auto px-4 -mt-8 relative z-20 mb-8">
-        <div class="bg-white/90 backdrop-blur-md p-1.5 rounded-2xl shadow-lg border border-white flex gap-1 overflow-x-auto no-scrollbar">
-            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-active flex items-center justify-center gap-2 whitespace-nowrap">
+    <!-- Navegação / Tabs -->
+    <div id="tabs-container" class="max-w-2xl mx-auto px-4 -mt-14 relative z-20 mb-10">
+        <div class="glass-panel p-2 rounded-2xl shadow-xl flex gap-2 overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-active flex items-center justify-center gap-2 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 Z"/></svg>
-                Grupos
+                Fase de Grupos
             </button>
-            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
+            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 Mata-Mata
             </button>
-            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
+            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                Ranking
+                Ranking Oficial
             </button>
         </div>
     </div>
 
-    <!-- Aviso de Palpites Encerrados (Oculto por padrão) -->
+    <!-- Aviso de Palpites Encerrados -->
     <div id="closed-warning" class="hidden max-w-3xl mx-auto px-4 -mt-8 relative z-20 mb-8">
-        <div class="bg-amber-100 p-4 rounded-2xl shadow-lg border border-amber-200 flex flex-col items-center text-center">
-            <h2 class="text-amber-800 font-bold text-lg flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <div class="glass-panel p-6 rounded-2xl shadow-lg border-l-4 border-l-amber-500 flex flex-col items-center text-center">
+            <h2 class="text-amber-800 font-bold text-xl flex items-center gap-2 mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 Inscrições Encerradas!
             </h2>
-            <p class="text-amber-700 text-sm mt-1">A Copa já começou. Acompanhe a classificação oficial abaixo.</p>
+            <p class="text-slate-600 font-medium">A Copa já começou. Acompanhe a classificação oficial em tempo real abaixo.</p>
         </div>
     </div>
 
@@ -83,62 +103,69 @@
     <section id="main-palpites-container" class="max-w-4xl mx-auto px-4 animate-fade-in block">
         
         <!-- Tela de Sucesso -->
-        <div id="success-view" class="hidden bg-white p-8 rounded-3xl shadow-xl border border-green-100 text-center space-y-4 animate-fade-in mb-8">
-            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mx-auto drop-shadow-sm"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h2 class="text-3xl font-bold text-gray-800">Palpites Guardados!</h2>
-            <p class="text-gray-600">Os palpites foram inseridos na aba <b id="success-name" class="text-blue-600"></b> com sucesso.</p>
-            <button onclick="resetForm()" class="mt-6 w-full sm:w-auto mx-auto bg-green-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-green-700 transition shadow-lg">Fazer novo palpite</button>
+        <div id="success-view" class="hidden glass-panel p-10 rounded-3xl shadow-2xl text-center space-y-4 animate-fade-in mb-8 border-t-4 border-t-green-500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mx-auto drop-shadow-sm mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h2 class="text-4xl font-black text-slate-800">Golaço!</h2>
+            <p class="text-slate-600 text-lg">Os seus palpites foram guardados na aba <b id="success-name" class="text-blue-700 bg-blue-50 px-2 py-1 rounded"></b> com sucesso.</p>
+            <button onclick="resetForm()" class="mt-8 w-full sm:w-auto mx-auto bg-slate-800 text-white font-bold py-3 px-10 rounded-xl hover:bg-slate-900 transition shadow-xl hover:shadow-2xl hover:-translate-y-1">Fazer novo palpite</button>
         </div>
 
-        <!-- Formulário Único para Grupos e Mata-Mata -->
-        <form id="predictions-form" class="space-y-6">
+        <form id="predictions-form" class="space-y-8">
             
-            <!-- Nome (Sempre visível) -->
-            <div id="name-container" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 sticky top-4 z-30">
-                <label class="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    Nome da sua Aba na Planilha
-                </label>
-                <input type="text" id="participant-name" placeholder="Ex: JOÃO SILVA" class="w-full text-lg p-3 sm:p-4 border-2 border-slate-200 rounded-xl focus:border-blue-500 focus:ring-4 focus:ring-blue-50 outline-none transition uppercase bg-slate-50 focus:bg-white" required />
-                <p class="text-sm text-slate-500 mt-3 font-medium bg-blue-50 p-2 rounded-lg border border-blue-100">✨ <b class="text-blue-700">Dica:</b> Se for a sua primeira vez, uma nova aba será criada automaticamente!</p>
+            <!-- Nome e Progresso -->
+            <div id="name-container" class="glass-panel rounded-3xl shadow-xl p-6 sm:p-8 sticky top-4 z-30">
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-2">
+                    <div class="flex-1">
+                        <label class="block text-sm font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            Nome na Planilha
+                        </label>
+                        <input type="text" id="participant-name" placeholder="Ex: JOÃO SILVA" class="w-full text-xl p-4 border-2 border-slate-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition uppercase bg-white/80 focus:bg-white shadow-inner font-bold text-slate-700" required />
+                    </div>
+                    <div class="w-full sm:w-64 bg-slate-100 p-4 rounded-2xl border border-slate-200">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Progresso</span>
+                            <span class="text-sm font-black text-blue-700"><span id="progress-text">0</span> / 136</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden shadow-inner">
+                            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full rounded-full transition-all duration-500 w-0"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- SEÇÃO A: JOGOS DOS GRUPOS -->
             <section id="sec-grupos" class="animate-fade-in block space-y-6">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-bold text-slate-800">Placares da Fase de Grupos</h2>
-                    <span class="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">72 Jogos</span>
+                <div class="flex items-center justify-between ml-2">
+                    <h2 class="text-2xl font-black text-slate-800 drop-shadow-sm">Fase de Grupos</h2>
+                    <span class="text-sm font-black text-white bg-blue-600 px-4 py-1.5 rounded-full shadow-md">72 Jogos</span>
                 </div>
-                <!-- Jogos entram aqui via JS -->
-                <div id="matches-container" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"></div>
+                <div id="matches-container" class="space-y-6"></div>
             </section>
 
             <!-- SEÇÃO B: SELEÇÕES DO MATA-MATA -->
             <section id="sec-knockout" class="hidden animate-fade-in space-y-6">
-                <div class="flex items-center justify-between">
-                    <h2 class="text-xl font-bold text-slate-800">Fases Eliminatórias</h2>
-                    <span class="text-sm font-bold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-full">64 Opções</span>
+                <div class="flex items-center justify-between ml-2">
+                    <h2 class="text-2xl font-black text-slate-800 drop-shadow-sm">Fases Eliminatórias</h2>
+                    <span class="text-sm font-black text-white bg-indigo-600 px-4 py-1.5 rounded-full shadow-md">64 Opções</span>
                 </div>
-                <!-- Fases Eliminatórias entram aqui via JS -->
-                <div id="knockout-container" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 overflow-hidden">
-                </div>
+                <div id="knockout-container" class="glass-panel rounded-3xl shadow-xl p-5 sm:p-8 overflow-hidden"></div>
             </section>
 
-            <!-- Área de Erro -->
-            <div id="error-message" class="hidden bg-red-50 text-red-700 p-4 rounded-xl flex items-center gap-3 border border-red-200">
+            <div id="error-message" class="hidden bg-red-50 text-red-700 p-5 rounded-2xl flex items-center gap-3 border border-red-200 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <p id="error-text" class="font-medium">Erro ao enviar.</p>
             </div>
 
             <!-- Botão Enviar -->
-            <button type="submit" id="submit-btn" class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg py-4 px-8 rounded-2xl shadow-xl transition-all active:scale-95 disabled:bg-blue-400 group mt-8">
-                <span id="submit-text" class="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                    Salvar Todos os Palpites
+            <button type="submit" id="submit-btn" class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white font-black text-xl py-5 px-8 rounded-3xl shadow-[0_10px_20px_rgba(29,78,216,0.3)] transition-all hover:-translate-y-1 active:translate-y-1 disabled:opacity-70 group mt-10">
+                <span id="submit-text" class="flex items-center gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    ENVIAR TODOS OS PALPITES
                 </span>
-                <span id="loading-text" class="hidden animate-pulse flex items-center gap-2">
-                    <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    A Guardar Palpites...
+                <span id="loading-text" class="hidden animate-pulse flex items-center gap-3">
+                    <svg class="animate-spin -ml-1 mr-2 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    A PROCESSAR...
                 </span>
             </button>
         </form>
@@ -148,50 +175,52 @@
     <!-- SEÇÃO 2: RANKING GERAL                     -->
     <!-- ========================================== -->
     <section id="sec-ranking" class="max-w-3xl mx-auto px-4 hidden">
-        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-20">
-            <svg class="animate-spin h-10 w-10 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-            <p class="text-slate-500 font-bold text-lg animate-pulse">A carregar o ranking da folha de cálculo...</p>
+        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-32 glass-panel rounded-3xl shadow-xl">
+            <svg class="animate-spin h-12 w-12 text-blue-600 mb-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <p class="text-slate-600 font-bold text-xl animate-pulse">A atualizar o ranking ao vivo...</p>
         </div>
 
-        <div id="ranking-error-state" class="hidden bg-red-50 text-red-700 p-6 rounded-2xl flex flex-col items-center text-center border border-red-200 shadow-sm mt-8">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <h3 class="font-bold text-lg">Erro ao carregar dados</h3>
-            <p id="ranking-error-message" class="text-sm mt-1 mb-4">Não foi possível ligar.</p>
-            <button onclick="fetchRanking()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition shadow">Tentar Novamente</button>
+        <div id="ranking-error-state" class="hidden glass-panel text-red-700 p-8 rounded-3xl flex flex-col items-center text-center border-t-4 border-t-red-500 shadow-xl mt-8">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4 text-red-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <h3 class="font-black text-2xl mb-2 text-slate-800">Ops! Falha na ligação</h3>
+            <p id="ranking-error-message" class="text-slate-500 mb-6">Não foi possível ligar à folha de cálculo no momento.</p>
+            <button onclick="fetchRanking()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg hover:-translate-y-1">Tentar Novamente</button>
         </div>
 
         <div id="ranking-content" class="hidden opacity-0 animate-fade-in">
-            <div class="flex justify-end mb-2">
-                <button onclick="fetchRanking()" class="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 transition p-2 rounded-lg hover:bg-blue-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+            <div class="flex justify-end mb-4">
+                <button onclick="fetchRanking()" class="text-sm font-black text-blue-700 bg-white/80 hover:bg-white px-4 py-2 rounded-xl shadow border border-slate-200 flex items-center gap-2 transition-all hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
                     Atualizar Agora
                 </button>
             </div>
-            <div id="podium" class="flex items-end justify-center gap-3 sm:gap-6 mb-12 mt-4"></div>
-            <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden mb-8">
-                <div class="bg-slate-800 px-6 py-4 flex justify-between text-white font-bold text-sm uppercase tracking-wider">
+            
+            <div id="podium" class="flex items-end justify-center gap-2 sm:gap-6 mb-12 mt-6 drop-shadow-xl"></div>
+            
+            <div class="glass-panel rounded-3xl shadow-2xl overflow-hidden mb-8">
+                <div class="bg-slate-900/95 px-6 py-5 flex justify-between text-white font-black text-sm uppercase tracking-widest">
                     <span class="w-16">Pos</span>
                     <span class="flex-1">Participante</span>
                     <span class="w-20 text-right">Pts</span>
                 </div>
-                <div id="ranking-list" class="divide-y divide-slate-100"></div>
+                <div id="ranking-list" class="divide-y divide-slate-200/60 bg-white/50"></div>
             </div>
         </div>
     </section>
 
     <!-- Modal de Confirmação -->
-    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl transform transition-all animate-fade-in border border-slate-100">
-            <h3 class="text-xl font-bold text-slate-800 mb-3 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500 bg-amber-50 p-1 rounded-full"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                Atenção
-            </h3>
-            <p class="text-slate-600 mb-6 font-medium leading-relaxed">
-                Preencheu apenas <span id="filled-count" class="font-black text-blue-600 text-lg">0</span> de <span id="total-count" class="font-black text-slate-800 text-lg">136</span> campos.<br>Deseja enviar os palpites assim mesmo?
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl transform transition-all animate-fade-in border border-slate-100 text-center">
+            <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <h3 class="text-2xl font-black text-slate-800 mb-3">Atenção!</h3>
+            <p class="text-slate-600 mb-8 font-medium text-lg leading-relaxed">
+                Preencheu apenas <span id="filled-count" class="font-black text-blue-600 text-xl bg-blue-50 px-2 py-1 rounded-md">0</span> de <span id="total-count" class="font-black text-slate-800 text-xl">136</span> campos.<br>Deseja enviar assim mesmo?
             </p>
-            <div class="flex gap-3 justify-end">
-                <button type="button" onclick="closeModal()" class="px-5 py-3 text-slate-600 font-bold hover:bg-slate-100 rounded-xl transition">Cancelar</button>
-                <button type="button" onclick="executeSubmit()" class="px-5 py-3 bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-md rounded-xl transition">Sim, enviar</button>
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button type="button" onclick="closeModal()" class="flex-1 py-4 text-slate-600 font-bold bg-slate-100 hover:bg-slate-200 rounded-2xl transition text-lg">Voltar e Preencher</button>
+                <button type="button" onclick="executeSubmit()" class="flex-1 py-4 bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-lg rounded-2xl transition text-lg">Sim, Enviar</button>
             </div>
         </div>
     </div>
@@ -259,7 +288,6 @@
         let bolaoEncerrado = false;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Conta = 72 jogos + 64 escolhas de equipas = 136 campos totais
             document.getElementById('total-count').textContent = 136;
             
             const agora = new Date();
@@ -275,11 +303,42 @@
             }
         });
 
+        // Função Gamificada de Progresso
+        function updateProgress() {
+            let filledCount = 0;
+            // Grupos
+            for (const id in predictions) {
+                if (predictions[id].team1 !== undefined && predictions[id].team1 !== '' &&
+                    predictions[id].team2 !== undefined && predictions[id].team2 !== '') {
+                    filledCount++;
+                }
+            }
+            // Mata-Mata
+            ['round32', 'round16', 'quarters', 'semis', 'final'].forEach(phase => {
+                knockoutPredictions[phase].forEach(val => { if (val !== '') filledCount++; });
+            });
+            if (knockoutPredictions.thirdPlace !== '') filledCount++;
+            if (knockoutPredictions.champion !== '') filledCount++;
+
+            const percent = Math.round((filledCount / 136) * 100);
+            const bar = document.getElementById('progress-bar');
+            document.getElementById('progress-text').textContent = filledCount;
+            bar.style.width = percent + '%';
+            
+            if(filledCount === 136) {
+                bar.classList.replace('from-blue-500', 'from-green-400');
+                bar.classList.replace('to-indigo-600', 'to-green-600');
+            } else {
+                bar.classList.replace('from-green-400', 'from-blue-500');
+                bar.classList.replace('to-green-600', 'to-indigo-600');
+            }
+        }
+
         function bloquearPalpites() {
             document.getElementById('tabs-container').classList.add('hidden');
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
-            document.getElementById('header-subtitle').textContent = "Ranking oficial do torneio";
+            document.getElementById('header-subtitle').textContent = "Acompanhe o ranking oficial atualizado";
             document.getElementById('sec-ranking').classList.remove('hidden');
             document.getElementById('sec-ranking').classList.add('block');
             fetchRanking();
@@ -289,9 +348,8 @@
         function switchTab(tabId) {
             if (bolaoEncerrado) return;
 
-            // Reset visual de botões
             ['grupos', 'knockout', 'ranking'].forEach(id => {
-                document.getElementById('tab-btn-' + id).className = "flex-1 py-3 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap";
+                document.getElementById('tab-btn-' + id).className = "flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap";
             });
             document.getElementById('tab-btn-' + tabId).classList.replace('tab-inactive', 'tab-active');
 
@@ -313,7 +371,7 @@
             }
         }
 
-        // RENDERIZAÇÃO DA FASE DE GRUPOS
+        // RENDERIZAÇÃO DA FASE DE GRUPOS COM GRID
         function renderMatches() {
             const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
                 (acc[match.group] = acc[match.group] || []).push(match);
@@ -322,22 +380,29 @@
 
             let html = '';
             for (const group in groupedMatches) {
-                html += `<div class="bg-slate-100 px-5 py-3 font-extrabold text-slate-700 border-b border-t border-slate-200 first:border-t-0 text-sm tracking-widest flex items-center gap-2"><div class="w-2 h-4 bg-blue-500 rounded-full"></div>GRUPO ${group}</div>`;
-                html += `<div class="divide-y divide-slate-50">`;
+                html += `
+                <div class="glass-panel rounded-3xl shadow-lg overflow-hidden border border-slate-200/50">
+                    <div class="bg-slate-800 px-6 py-4 font-black text-white text-base tracking-[0.2em] flex items-center gap-3">
+                        <div class="w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
+                        GRUPO ${group}
+                    </div>
+                    <div class="p-4 sm:p-6 bg-white/60">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                `;
                 groupedMatches[group].forEach(match => {
                     html += `
-                        <div class="flex items-center p-3 sm:p-4 hover:bg-blue-50/30 transition group">
-                            <div class="w-10 text-center text-xs font-mono text-slate-400 font-bold group-hover:text-blue-500 transition">#${match.id}</div>
-                            <div class="flex-1 text-right pr-2 sm:pr-4 font-bold text-slate-800 text-sm sm:text-base leading-tight">${match.team1}</div>
-                            <div class="flex items-center gap-1 sm:gap-2">
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-black border-2 border-slate-200 rounded-lg focus:border-blue-500 focus:outline-none bg-slate-50 focus:bg-white transition" />
-                                <span class="text-slate-300 font-black text-sm">X</span>
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-black border-2 border-slate-200 rounded-lg focus:border-blue-500 focus:outline-none bg-slate-50 focus:bg-white transition" />
+                        <div class="flex items-center justify-between p-3 sm:p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-blue-300 hover:-translate-y-0.5 transition-all group">
+                            <div class="w-8 text-left text-xs font-black text-slate-300 group-hover:text-blue-400 transition">#${match.id}</div>
+                            <div class="flex-1 text-right pr-3 font-bold text-slate-700 text-sm sm:text-base leading-tight truncate">${match.team1}</div>
+                            <div class="flex items-center gap-1 sm:gap-2 shrink-0 bg-slate-50 p-1.5 sm:p-2 rounded-xl border border-slate-100 shadow-inner">
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition" />
+                                <span class="text-slate-300 font-black text-xs sm:text-sm">X</span>
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition" />
                             </div>
-                            <div class="flex-1 text-left pl-2 sm:pl-4 font-bold text-slate-800 text-sm sm:text-base leading-tight">${match.team2}</div>
+                            <div class="flex-1 text-left pl-3 font-bold text-slate-700 text-sm sm:text-base leading-tight truncate">${match.team2}</div>
                         </div>`;
                 });
-                html += `</div>`;
+                html += `</div></div></div>`;
             }
             document.getElementById('matches-container').innerHTML = html;
 
@@ -348,13 +413,13 @@
                     const team = this.getAttribute('data-team');
                     if (!predictions[matchId]) predictions[matchId] = {};
                     predictions[matchId][team] = this.value;
+                    updateProgress();
                 });
             });
         }
 
         // RENDERIZAÇÃO DAS FASES ELIMINATÓRIAS
         function renderKnockout() {
-            // Extrair seleções exclusivas por grupo e lista geral
             const teamsByGroup = {};
             const allTeamsSet = new Set();
             
@@ -372,20 +437,20 @@
             let html = '';
 
             // --- 16 AVOS ---
-            html += `<h3 class="font-bold text-lg mb-4 text-slate-700 bg-slate-100 p-3 rounded-lg flex items-center gap-2"><div class="w-1.5 h-4 bg-indigo-500 rounded-full"></div> 16 Avos de Final (32 Seleções)</h3>`;
-            html += `<h4 class="font-semibold text-slate-600 mb-3 ml-1 text-sm uppercase">1º e 2º Colocados por Grupo</h4>`;
-            html += `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">`;
+            html += `<h3 class="font-black text-xl mb-4 text-slate-800 flex items-center gap-3"><div class="w-1.5 h-6 bg-indigo-500 rounded-full"></div> 16 Avos de Final <span class="text-sm font-bold text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded ml-2">32 Seleções</span></h3>`;
+            html += `<h4 class="font-bold text-slate-500 mb-3 ml-1 text-sm uppercase tracking-wide">1º e 2º Colocados por Grupo</h4>`;
+            html += `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">`;
             
             let r32Idx = 0;
             Object.keys(teamsByGroup).sort().forEach(group => {
                 html += `
-                <div class="bg-indigo-50/50 p-3 rounded-xl border border-indigo-100">
-                    <div class="font-bold text-sm text-indigo-800 mb-2">Grupo ${group}</div>
-                    <select class="w-full mb-2 p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="round32" data-index="${r32Idx++}">
+                <div class="bg-white/80 p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-md transition">
+                    <div class="font-black text-sm text-indigo-800 mb-3 uppercase tracking-wider flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-indigo-400"></div>Grupo ${group}</div>
+                    <select class="w-full mb-3 p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 bg-white" data-phase="round32" data-index="${r32Idx++}">
                         <option value="">1º Colocado...</option>
                         ${teamsByGroup[group].map(t => `<option value="${t}">${t}</option>`).join('')}
                     </select>
-                    <select class="w-full p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="round32" data-index="${r32Idx++}">
+                    <select class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 bg-white" data-phase="round32" data-index="${r32Idx++}">
                         <option value="">2º Colocado...</option>
                         ${teamsByGroup[group].map(t => `<option value="${t}">${t}</option>`).join('')}
                     </select>
@@ -393,10 +458,10 @@
             });
             html += `</div>`;
 
-            html += `<h4 class="font-semibold text-slate-600 mb-3 ml-1 text-sm uppercase">Melhores 3º Colocados (8 Seleções)</h4>`;
-            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">`;
+            html += `<h4 class="font-bold text-slate-500 mb-3 ml-1 text-sm uppercase tracking-wide">Melhores 3º Colocados <span class="lowercase normal-case font-medium">(8 Seleções)</span></h4>`;
+            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 p-4 bg-indigo-50/50 rounded-2xl border border-indigo-50">`;
             for(let i=0; i<8; i++) {
-                html += `<select class="w-full p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="round32" data-index="${r32Idx++}">
+                html += `<select class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 bg-white" data-phase="round32" data-index="${r32Idx++}">
                     <option value="">Selecione...</option>
                     ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
                 </select>`;
@@ -404,36 +469,36 @@
             html += `</div>`;
 
             // --- OUTRAS FASES ---
-            const generatePhase = (title, count, phaseKey) => {
-                let pHTML = `<h3 class="font-bold text-lg mb-4 text-slate-700 bg-slate-100 p-3 rounded-lg flex items-center gap-2 mt-8"><div class="w-1.5 h-4 bg-indigo-500 rounded-full"></div> ${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-3">`;
+            const generatePhase = (title, count, phaseKey, color) => {
+                let pHTML = `<div class="border-t border-slate-200 pt-8 mb-8"><h3 class="font-black text-xl mb-6 text-slate-800 flex items-center gap-3"><div class="w-1.5 h-6 bg-${color}-500 rounded-full"></div> ${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-4">`;
                 for(let i=0; i<count; i++) {
-                    pHTML += `<select class="w-full p-2 rounded-lg border border-slate-300 text-sm font-medium text-slate-700 outline-none focus:border-indigo-500" data-phase="${phaseKey}" data-index="${i}">
+                    pHTML += `<select class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-${color}-500 focus:ring-2 focus:ring-${color}-100 bg-white shadow-sm hover:border-${color}-300 transition" data-phase="${phaseKey}" data-index="${i}">
                         <option value="">Selecione...</option>
                         ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
                     </select>`;
                 }
-                pHTML += `</div>`;
+                pHTML += `</div></div>`;
                 return pHTML;
             }
 
-            html += generatePhase('Oitavas de Final (16 Seleções)', 16, 'round16');
-            html += generatePhase('Quartas de Final (8 Seleções)', 8, 'quarters');
-            html += generatePhase('Semifinais (4 Seleções)', 4, 'semis');
-            html += generatePhase('Final (2 Seleções)', 2, 'final');
+            html += generatePhase('Oitavas de Final (16)', 16, 'round16', 'blue');
+            html += generatePhase('Quartas de Final (8)', 8, 'quarters', 'cyan');
+            html += generatePhase('Semifinais (4)', 4, 'semis', 'violet');
+            html += generatePhase('Final (2)', 2, 'final', 'fuchsia');
 
             html += `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
-                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
-                    <h3 class="font-bold text-lg mb-3 text-amber-800 flex items-center gap-2">🥉 3º Colocado</h3>
-                    <select class="w-full p-3 rounded-lg border-2 border-amber-300 text-base font-bold text-slate-700 bg-white outline-none focus:border-amber-500" data-phase="thirdPlace" data-index="0">
-                        <option value="">Selecione...</option>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 pt-8 border-t border-slate-200">
+                <div class="bg-gradient-to-br from-amber-50 to-white p-6 rounded-3xl border border-amber-200 shadow-md transform hover:-translate-y-1 transition">
+                    <h3 class="font-black text-2xl mb-4 text-amber-800 flex items-center gap-2">🥉 3º Colocado</h3>
+                    <select class="w-full p-4 rounded-xl border-2 border-amber-300 text-lg font-black text-slate-700 bg-white outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-100" data-phase="thirdPlace" data-index="0">
+                        <option value="">Quem fica em 3º?</option>
                         ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
                     </select>
                 </div>
-                <div class="bg-green-50 p-4 rounded-2xl border border-green-200 shadow-sm">
-                    <h3 class="font-bold text-lg mb-3 text-green-800 flex items-center gap-2">🏆 Campeão</h3>
-                    <select class="w-full p-3 rounded-lg border-2 border-green-400 text-base font-bold text-slate-700 bg-white outline-none focus:border-green-600 shadow-inner" data-phase="champion" data-index="0">
-                        <option value="">Selecione o Campeão...</option>
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-3xl border border-green-300 shadow-xl transform hover:-translate-y-1 transition ring-4 ring-green-100 ring-offset-2">
+                    <h3 class="font-black text-2xl mb-4 text-green-800 flex items-center gap-2">🏆 Campeão</h3>
+                    <select class="w-full p-4 rounded-xl border-2 border-green-500 text-lg font-black text-slate-800 bg-white outline-none focus:border-green-600 focus:ring-4 focus:ring-green-200 shadow-inner" data-phase="champion" data-index="0">
+                        <option value="">Quem leva a Taça?</option>
                         ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
                     </select>
                 </div>
@@ -441,7 +506,6 @@
 
             document.getElementById('knockout-container').innerHTML = html;
 
-            // Adicionar eventos às <select>
             document.getElementById('knockout-container').addEventListener('change', function(e) {
                 if(e.target.tagName === 'SELECT') {
                     const phase = e.target.getAttribute('data-phase');
@@ -451,6 +515,7 @@
                     } else {
                         knockoutPredictions[phase][index] = e.target.value;
                     }
+                    updateProgress();
                 }
             });
         }
@@ -462,24 +527,12 @@
             document.getElementById('error-message').classList.add('hidden');
             const name = document.getElementById('participant-name').value.trim();
             if (!name) {
-                showFormError('Por favor, preencha o nome da sua aba!');
+                showFormError('Por favor, preencha o seu nome!');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
             }
 
-            let filledCount = 0;
-            // Contagem dos Grupos
-            for (const id in predictions) {
-                if (predictions[id].team1 !== undefined && predictions[id].team1 !== '' &&
-                    predictions[id].team2 !== undefined && predictions[id].team2 !== '') {
-                    filledCount++;
-                }
-            }
-            // Contagem do Mata-Mata
-            ['round32', 'round16', 'quarters', 'semis', 'final'].forEach(phase => {
-                knockoutPredictions[phase].forEach(val => { if (val !== '') filledCount++; });
-            });
-            if (knockoutPredictions.thirdPlace !== '') filledCount++;
-            if (knockoutPredictions.champion !== '') filledCount++;
+            const filledCount = parseInt(document.getElementById('progress-text').textContent);
 
             if (filledCount < 136) {
                 document.getElementById('filled-count').textContent = filledCount;
@@ -515,7 +568,7 @@
             const payload = {
                 name: document.getElementById('participant-name').value.trim(),
                 predictions: predictions,
-                knockout: knockoutPredictions // <- O objeto do Mata-Mata volta a ser enviado!
+                knockout: knockoutPredictions
             };
 
             try {
@@ -532,7 +585,7 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
             } catch (error) {
-                showFormError('Falha na ligação. Verifique a internet.');
+                showFormError('Falha na ligação. Verifique a internet e tente novamente.');
             } finally {
                 setLoading(false);
             }
@@ -546,9 +599,10 @@
             document.querySelectorAll('#knockout-container select').forEach(s => s.value = '');
             document.getElementById('participant-name').value = '';
             
+            updateProgress();
             document.getElementById('success-view').classList.add('hidden');
             document.getElementById('predictions-form').classList.remove('hidden');
-            switchTab('grupos'); // Volta para a primeira aba automaticamente
+            switchTab('grupos');
         }
 
         // --- RANKING LOGIC ---
@@ -568,11 +622,7 @@
                     showRankingError(json.message);
                 }
             } catch (error) {
-                if (SCRIPT_URL === 'COLE_AQUI_A_NOVA_URL') {
-                    showRankingError("Falta colar a URL do Google Apps Script no código HTML (linha 175).");
-                } else {
-                    showRankingError("Falha na ligação. Verifique a sua internet ou a URL do script.");
-                }
+                showRankingError("Falha na ligação ao carregar os dados. Verifique a sua internet.");
             }
         }
 
@@ -591,12 +641,12 @@
             listContainer.innerHTML = '';
 
             if (data.length === 0) {
-                listContainer.innerHTML = '<div class="p-8 text-center text-slate-500 font-medium">Nenhum participante encontrado na aba CLASSIFICAÇÃO.</div>';
+                listContainer.innerHTML = '<div class="p-10 text-center text-slate-500 font-medium">Nenhum participante encontrado na classificação oficial.</div>';
             }
 
             if (data.length >= 1) {
                 let p2 = data[1] ? buildPodium(data[1].name, data[1].score, 2, 'bg-slate-300', 'text-slate-700', 'podium-2') : '<div class="w-24 sm:w-28"></div>';
-                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-yellow-400', 'text-yellow-900', 'podium-1') : '<div class="w-24 sm:w-28"></div>';
+                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-gradient-to-t from-yellow-500 to-yellow-300', 'text-yellow-900', 'podium-1 scale-105 z-10') : '<div class="w-24 sm:w-28"></div>';
                 let p3 = data[2] ? buildPodium(data[2].name, data[2].score, 3, 'bg-amber-700', 'text-white', 'podium-3') : '<div class="w-24 sm:w-28"></div>';
                 
                 podiumContainer.innerHTML = p2 + p1 + p3;
@@ -605,10 +655,10 @@
             let listHtml = '';
             for (let i = 3; i < data.length; i++) {
                 listHtml += `
-                    <div class="flex items-center px-6 py-4 hover:bg-slate-50 transition">
-                        <div class="w-12 sm:w-16 font-black text-slate-300 text-lg sm:text-xl">#${i + 1}</div>
-                        <div class="flex-1 font-bold text-slate-700 truncate pr-4">${data[i].name}</div>
-                        <div class="w-16 sm:w-20 text-right font-black text-blue-600 text-xl">${data[i].score}</div>
+                    <div class="flex items-center px-6 py-4 hover:bg-slate-50 transition group">
+                        <div class="w-12 sm:w-16 font-black text-slate-300 text-lg sm:text-2xl group-hover:text-blue-400 transition">#${i + 1}</div>
+                        <div class="flex-1 font-black text-slate-700 truncate pr-4 text-base sm:text-lg">${data[i].name}</div>
+                        <div class="w-16 sm:w-24 text-right font-black text-blue-600 text-xl sm:text-2xl bg-blue-50 py-1 rounded-lg border border-blue-100 shadow-sm">${data[i].score}</div>
                     </div>
                 `;
             }
@@ -621,13 +671,13 @@
         function buildPodium(name, score, pos, color, textColor, height) {
             let emoji = pos === 1 ? '🥇' : pos === 2 ? '🥈' : '🥉';
             return `
-                <div class="flex flex-col items-center w-24 sm:w-28 relative">
-                    <div class="font-bold text-slate-700 text-center text-xs sm:text-sm truncate w-full mb-1 px-1">${name}</div>
-                    <div class="font-black text-blue-700 text-base sm:text-lg mb-2 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-100 shadow-sm">${score}</div>
-                    <div class="${color} w-full rounded-t-2xl ${height} flex flex-col justify-start pt-3 sm:pt-4 shadow-xl border-x border-t border-black/5 relative overflow-hidden transition-all hover:-translate-y-1">
-                        <div class="absolute inset-0 bg-gradient-to-b from-white/30 to-transparent"></div>
-                        <span class="text-3xl sm:text-4xl relative z-10 text-center drop-shadow-md filter hover:brightness-110">${emoji}</span>
-                        <span class="${textColor} font-black text-xl sm:text-3xl relative z-10 mt-auto pb-3 sm:pb-4 text-center opacity-90">#${pos}</span>
+                <div class="flex flex-col items-center w-24 sm:w-32 relative">
+                    <div class="font-black text-slate-800 text-center text-xs sm:text-sm truncate w-full mb-1 px-1 bg-white/80 rounded backdrop-blur-sm shadow-sm py-0.5">${name}</div>
+                    <div class="font-black text-blue-800 text-base sm:text-xl mb-2 bg-white px-3 py-1 rounded-xl border border-blue-200 shadow-md">${score} pts</div>
+                    <div class="${color} w-full rounded-t-3xl ${height} flex flex-col justify-start pt-3 sm:pt-5 shadow-2xl border-x border-t border-white/20 relative overflow-hidden transition-all hover:-translate-y-2">
+                        <div class="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent"></div>
+                        <span class="text-3xl sm:text-5xl relative z-10 text-center drop-shadow-xl filter hover:brightness-125 hover:scale-110 transition-transform">${emoji}</span>
+                        <span class="${textColor} font-black text-2xl sm:text-4xl relative z-10 mt-auto pb-4 sm:pb-5 text-center opacity-90 drop-shadow-sm">#${pos}</span>
                     </div>
                 </div>
             `;
