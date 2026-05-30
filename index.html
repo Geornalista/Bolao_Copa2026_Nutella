@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bolão NUTELLA - Copa 2026</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
@@ -18,82 +17,72 @@
         .podium-2 { height: 120px; }
         .podium-3 { height: 90px; }
 
-        /* Estilo moderno para as tabs */
+        /* Estilo iOS Segmented Control para as Tabs */
         .tab-active {
-            background-color: #1e3a8a; /* blue-900 */
-            color: white;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transform: translateY(-2px);
+            background-color: #ffffff;
+            color: #1e293b; /* slate-800 */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
         }
         .tab-inactive {
-            background-color: rgba(255, 255, 255, 0.5);
-            color: #334155; 
+            background-color: transparent;
+            color: #64748b; /* slate-500 */
         }
-        .tab-inactive:hover { background-color: rgba(255, 255, 255, 0.8); }
+        .tab-inactive:hover { color: #334155; }
 
-        /* Oculta scrollbar da navegação */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Efeito vidro (Glassmorphism) */
+        /* Vidro Refinado (Soft Glassmorphism) */
         .glass-panel {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Sombras mais suaves e modernas */
+        .soft-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
         }
     </style>
 </head>
-<body class="font-sans relative text-slate-800 antialiased min-h-screen pb-20 bg-fixed bg-center bg-cover" style="background-image: url('./imagem_copa.jpg');">
+<body class="font-sans relative text-slate-800 antialiased min-h-screen pb-24 bg-fixed bg-center bg-cover selection:bg-blue-100 selection:text-blue-900" style="background-image: url('./imagem_copa.jpg');">
     
-    <!-- Camada de sobreposição para não prejudicar a leitura -->
-    <div class="fixed inset-0 bg-slate-100/80 backdrop-blur-sm z-[-1]"></div>
+    <!-- Fundo Translúcido Mais Claro e Limpo -->
+    <div class="fixed inset-0 bg-slate-50/85 backdrop-blur-[8px] z-[-1]"></div>
 
-    <!-- Cabeçalho Principal -->
-    <div class="relative pt-12 pb-20 px-4 shadow-2xl rounded-b-[3rem] overflow-hidden mb-8">
-        <!-- Fundo escuro para contrastar com a logo -->
-        <div class="absolute inset-0 bg-slate-900/90 z-0"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent z-0"></div>
-        
-        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center gap-4 relative z-10">
-            <!-- Logo oficial inserida aqui -->
-            <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-32 sm:h-40 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500">
+    <!-- Header Compacto -->
+    <header class="pt-8 pb-6 px-4 relative z-10">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4 sm:gap-5 text-center sm:text-left">
+                <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-16 sm:h-20 object-contain drop-shadow-md">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-black tracking-tighter text-slate-900 uppercase">Bolão Nutella</h1>
+                    <p id="header-subtitle" class="text-slate-500 font-medium text-xs sm:text-sm tracking-wide uppercase mt-0.5">Copa do Mundo FIFA 2026™</p>
+                </div>
+            </div>
             
-            <h1 class="text-3xl sm:text-5xl font-black tracking-tighter uppercase text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-100 drop-shadow-sm mt-2">
-                Bolão NUTELLA
-            </h1>
-            <p id="header-subtitle" class="text-slate-300 font-medium text-sm sm:text-lg mt-1 text-center tracking-wide">
-                Deixe os seus palpites e acompanhe o ranking oficial
-            </p>
+            <!-- Aviso de Encerrado realocado para o header -->
+            <div id="closed-warning" class="hidden bg-amber-50 text-amber-700 px-4 py-2 rounded-xl border border-amber-200 text-sm font-bold shadow-sm flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Inscrições Encerradas
+            </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Navegação / Tabs -->
-    <div id="tabs-container" class="max-w-2xl mx-auto px-4 -mt-14 relative z-20 mb-10">
-        <div class="glass-panel p-2 rounded-2xl shadow-xl flex gap-2 overflow-x-auto no-scrollbar">
-            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-active flex items-center justify-center gap-2 whitespace-nowrap">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 Z"/></svg>
+    <!-- Navegação / Tabs (Estilo Pílula Moderno) -->
+    <div id="tabs-container" class="max-w-4xl mx-auto px-4 relative z-20 mb-8 flex justify-center sm:justify-start">
+        <div class="bg-slate-200/60 backdrop-blur-md p-1.5 rounded-[1.25rem] inline-flex w-full sm:w-auto shadow-inner border border-white/40 overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-active whitespace-nowrap">
                 Fase de Grupos
             </button>
-            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap">
                 Mata-Mata
             </button>
-            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                Ranking Oficial
+            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap flex items-center justify-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                Ranking
             </button>
-        </div>
-    </div>
-
-    <!-- Aviso de Palpites Encerrados -->
-    <div id="closed-warning" class="hidden max-w-3xl mx-auto px-4 -mt-8 relative z-20 mb-8">
-        <div class="glass-panel p-6 rounded-2xl shadow-lg border-l-4 border-l-amber-500 flex flex-col items-center text-center">
-            <h2 class="text-amber-800 font-bold text-xl flex items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                Inscrições Encerradas!
-            </h2>
-            <p class="text-slate-600 font-medium">A Copa já começou. Acompanhe a classificação oficial em tempo real abaixo.</p>
         </div>
     </div>
 
@@ -102,70 +91,67 @@
     <!-- ========================================== -->
     <section id="main-palpites-container" class="max-w-4xl mx-auto px-4 animate-fade-in block">
         
-        <!-- Tela de Sucesso -->
-        <div id="success-view" class="hidden glass-panel p-10 rounded-3xl shadow-2xl text-center space-y-4 animate-fade-in mb-8 border-t-4 border-t-green-500">
-            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 mx-auto drop-shadow-sm mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h2 class="text-4xl font-black text-slate-800">Golaço!</h2>
-            <p class="text-slate-600 text-lg">Os seus palpites foram guardados na aba <b id="success-name" class="text-blue-700 bg-blue-50 px-2 py-1 rounded"></b> com sucesso.</p>
-            <button onclick="resetForm()" class="mt-8 w-full sm:w-auto mx-auto bg-slate-800 text-white font-bold py-3 px-10 rounded-xl hover:bg-slate-900 transition shadow-xl hover:shadow-2xl hover:-translate-y-1">Fazer novo palpite</button>
+        <!-- Tela de Sucesso Limpa -->
+        <div id="success-view" class="hidden glass-panel p-8 sm:p-12 rounded-[2rem] soft-shadow text-center space-y-4 animate-fade-in mb-8">
+            <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-800">Golaço!</h2>
+            <p class="text-slate-500 font-medium">Os seus palpites foram guardados na aba <b id="success-name" class="text-slate-800"></b>.</p>
+            <button onclick="resetForm()" class="mt-8 bg-slate-900 text-white font-bold py-3.5 px-8 rounded-xl hover:bg-slate-800 transition active:scale-95">Preencher outra aba</button>
         </div>
 
         <form id="predictions-form" class="space-y-8">
             
-            <!-- Nome e Progresso -->
-            <div id="name-container" class="glass-panel rounded-3xl shadow-xl p-6 sm:p-8 sticky top-4 z-30">
-                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-2">
-                    <div class="flex-1">
-                        <label class="block text-sm font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            Nome na Planilha
-                        </label>
-                        <input type="text" id="participant-name" placeholder="Ex: JOÃO SILVA" class="w-full text-xl p-4 border-2 border-slate-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition uppercase bg-white/80 focus:bg-white shadow-inner font-bold text-slate-700" required />
+            <!-- Nome e Progresso (Cartão Minimalista) -->
+            <div id="name-container" class="glass-panel rounded-3xl soft-shadow p-5 sm:p-6 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between border-b border-white/50">
+                <div class="w-full sm:flex-1">
+                    <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1 ml-1">Nome na Planilha</label>
+                    <input type="text" id="participant-name" placeholder="Digite seu nome..." class="w-full text-lg sm:text-xl p-0 bg-transparent border-0 border-b-2 border-slate-200 focus:border-blue-600 focus:ring-0 outline-none transition uppercase font-bold text-slate-800 placeholder-slate-300" required />
+                </div>
+                <div class="w-full sm:w-48 shrink-0">
+                    <div class="flex justify-between items-end mb-1.5 ml-1">
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Progresso</span>
+                        <span class="text-xs font-black text-slate-700"><span id="progress-text">0</span>/136</span>
                     </div>
-                    <div class="w-full sm:w-64 bg-slate-100 p-4 rounded-2xl border border-slate-200">
-                        <div class="flex justify-between items-end mb-2">
-                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">Progresso</span>
-                            <span class="text-sm font-black text-blue-700"><span id="progress-text">0</span> / 136</span>
-                        </div>
-                        <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden shadow-inner">
-                            <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-full rounded-full transition-all duration-500 w-0"></div>
-                        </div>
+                    <div class="w-full bg-slate-200/70 rounded-full h-1.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-300 ease-out w-0"></div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Já Entraram em Campo -->
+            <div id="participants-container" class="hidden">
+                <div class="flex flex-wrap gap-2 items-center pl-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">Confirmados (<span id="participants-count">0</span>):</span>
+                    <div id="participants-list" class="flex flex-wrap gap-1.5"></div>
                 </div>
             </div>
 
             <!-- SEÇÃO A: JOGOS DOS GRUPOS -->
-            <section id="sec-grupos" class="animate-fade-in block space-y-6">
-                <div class="flex items-center justify-between ml-2">
-                    <h2 class="text-2xl font-black text-slate-800 drop-shadow-sm">Fase de Grupos</h2>
-                    <span class="text-sm font-black text-white bg-blue-600 px-4 py-1.5 rounded-full shadow-md">72 Jogos</span>
-                </div>
-                <div id="matches-container" class="space-y-6"></div>
+            <section id="sec-grupos" class="animate-fade-in block">
+                <div id="matches-container"></div>
             </section>
 
             <!-- SEÇÃO B: SELEÇÕES DO MATA-MATA -->
-            <section id="sec-knockout" class="hidden animate-fade-in space-y-6">
-                <div class="flex items-center justify-between ml-2">
-                    <h2 class="text-2xl font-black text-slate-800 drop-shadow-sm">Fases Eliminatórias</h2>
-                    <span class="text-sm font-black text-white bg-indigo-600 px-4 py-1.5 rounded-full shadow-md">64 Opções</span>
-                </div>
-                <div id="knockout-container" class="glass-panel rounded-3xl shadow-xl p-5 sm:p-8 overflow-hidden"></div>
+            <section id="sec-knockout" class="hidden animate-fade-in">
+                <div id="knockout-container"></div>
             </section>
 
-            <div id="error-message" class="hidden bg-red-50 text-red-700 p-5 rounded-2xl flex items-center gap-3 border border-red-200 shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <p id="error-text" class="font-medium">Erro ao enviar.</p>
+            <div id="error-message" class="hidden bg-red-50 text-red-600 p-4 rounded-xl flex items-center gap-3 text-sm font-bold border border-red-100">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <p id="error-text">Erro ao enviar.</p>
             </div>
 
-            <!-- Botão Enviar -->
-            <button type="submit" id="submit-btn" class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white font-black text-xl py-5 px-8 rounded-3xl shadow-[0_10px_20px_rgba(29,78,216,0.3)] transition-all hover:-translate-y-1 active:translate-y-1 disabled:opacity-70 group mt-10">
-                <span id="submit-text" class="flex items-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                    ENVIAR TODOS OS PALPITES
+            <!-- Botão Enviar Flutuante (Minimalista) -->
+            <button type="submit" id="submit-btn" class="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base py-4 px-8 rounded-2xl transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none soft-shadow group">
+                <span id="submit-text" class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    Salvar Todos os Palpites
                 </span>
-                <span id="loading-text" class="hidden animate-pulse flex items-center gap-3">
-                    <svg class="animate-spin -ml-1 mr-2 h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    A PROCESSAR...
+                <span id="loading-text" class="hidden flex items-center gap-2">
+                    <svg class="animate-spin -ml-1 h-5 w-5 text-white/70" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    Processando...
                 </span>
             </button>
         </form>
@@ -175,51 +161,50 @@
     <!-- SEÇÃO 2: RANKING GERAL                     -->
     <!-- ========================================== -->
     <section id="sec-ranking" class="max-w-3xl mx-auto px-4 hidden">
-        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-32 glass-panel rounded-3xl shadow-xl">
-            <svg class="animate-spin h-12 w-12 text-blue-600 mb-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-            <p class="text-slate-600 font-bold text-xl animate-pulse">A atualizar o ranking ao vivo...</p>
+        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-20">
+            <svg class="animate-spin h-8 w-8 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <p class="text-slate-400 font-bold text-sm animate-pulse uppercase tracking-widest">Atualizando ao vivo</p>
         </div>
 
-        <div id="ranking-error-state" class="hidden glass-panel text-red-700 p-8 rounded-3xl flex flex-col items-center text-center border-t-4 border-t-red-500 shadow-xl mt-8">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4 text-red-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <h3 class="font-black text-2xl mb-2 text-slate-800">Ops! Falha na ligação</h3>
-            <p id="ranking-error-message" class="text-slate-500 mb-6">Não foi possível ligar à folha de cálculo no momento.</p>
-            <button onclick="fetchRanking()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg hover:-translate-y-1">Tentar Novamente</button>
+        <div id="ranking-error-state" class="hidden glass-panel text-red-600 p-6 rounded-2xl flex flex-col items-center text-center mt-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p id="ranking-error-message" class="text-sm font-medium mb-4">Falha de conexão.</p>
+            <button onclick="fetchRanking()" class="text-xs font-bold uppercase tracking-wider border border-red-200 bg-red-50 hover:bg-red-100 py-2 px-4 rounded-lg transition">Tentar Novamente</button>
         </div>
 
         <div id="ranking-content" class="hidden opacity-0 animate-fade-in">
-            <div class="flex justify-end mb-4">
-                <button onclick="fetchRanking()" class="text-sm font-black text-blue-700 bg-white/80 hover:bg-white px-4 py-2 rounded-xl shadow border border-slate-200 flex items-center gap-2 transition-all hover:scale-105">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
-                    Atualizar Agora
+            <div class="flex justify-end mb-2">
+                <button onclick="fetchRanking()" class="text-xs font-bold text-slate-500 hover:text-blue-600 uppercase tracking-widest flex items-center gap-1.5 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                    Atualizar
                 </button>
             </div>
             
-            <div id="podium" class="flex items-end justify-center gap-2 sm:gap-6 mb-12 mt-6 drop-shadow-xl"></div>
+            <div id="podium" class="flex items-end justify-center gap-3 sm:gap-6 mb-10 mt-4"></div>
             
-            <div class="glass-panel rounded-3xl shadow-2xl overflow-hidden mb-8">
-                <div class="bg-slate-900/95 px-6 py-5 flex text-white font-black text-sm uppercase tracking-widest">
-                    <span class="w-10 sm:w-16 text-center">Pos</span>
-                    <span class="flex-1 ml-3 sm:ml-5">Participante e Pontuação</span>
+            <div class="glass-panel rounded-3xl soft-shadow overflow-hidden mb-8 border-t-0">
+                <div class="bg-slate-50/50 px-6 py-4 flex text-slate-400 font-black text-[10px] sm:text-xs uppercase tracking-widest border-b border-slate-200/60">
+                    <span class="w-8 sm:w-12 text-center">Pos</span>
+                    <span class="flex-1 ml-4 sm:ml-5">Participante / Pontos</span>
                 </div>
-                <div id="ranking-list" class="divide-y divide-slate-200/60 bg-white/50"></div>
+                <div id="ranking-list" class="divide-y divide-slate-100/80"></div>
             </div>
         </div>
     </section>
 
-    <!-- Modal de Confirmação -->
-    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl transform transition-all animate-fade-in border border-slate-100 text-center">
-            <div class="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <!-- Modal de Confirmação Minimalista -->
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full soft-shadow transform transition-all animate-fade-in">
+            <div class="flex items-center gap-3 mb-4 text-amber-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                <h3 class="text-xl font-black text-slate-800">Atenção</h3>
             </div>
-            <h3 class="text-2xl font-black text-slate-800 mb-3">Atenção!</h3>
-            <p class="text-slate-600 mb-8 font-medium text-lg leading-relaxed">
-                Preencheu apenas <span id="filled-count" class="font-black text-blue-600 text-xl bg-blue-50 px-2 py-1 rounded-md">0</span> de <span id="total-count" class="font-black text-slate-800 text-xl">136</span> campos.<br>Deseja enviar assim mesmo?
+            <p class="text-slate-500 mb-8 font-medium text-sm sm:text-base">
+                Você preencheu apenas <span id="filled-count" class="font-bold text-slate-800">0</span> de <span id="total-count" class="font-bold text-slate-800">136</span> palpites. Deseja enviar de forma incompleta?
             </p>
-            <div class="flex flex-col sm:flex-row gap-3">
-                <button type="button" onclick="closeModal()" class="flex-1 py-4 text-slate-600 font-bold bg-slate-100 hover:bg-slate-200 rounded-2xl transition text-lg">Voltar e Preencher</button>
-                <button type="button" onclick="executeSubmit()" class="flex-1 py-4 bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-lg rounded-2xl transition text-lg">Sim, Enviar</button>
+            <div class="flex gap-2">
+                <button type="button" onclick="closeModal()" class="flex-1 py-3 text-slate-500 font-bold bg-slate-100 hover:bg-slate-200 rounded-xl transition text-sm">Completar</button>
+                <button type="button" onclick="executeSubmit()" class="flex-1 py-3 bg-blue-600 text-white font-bold hover:bg-blue-700 rounded-xl transition text-sm">Sim, enviar</button>
             </div>
         </div>
     </div>
@@ -230,8 +215,6 @@
         // CONFIGURAÇÕES GERAIS
         // =====================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxERr-Gwl3-nSac-cG2A7v--wwgt9ANUZ-GZDn5Xy4RAOJ9ynWjawBBywfaBi8I3tfu/exec';
-        
-        // Bloqueio de envio a 11 de Junho de 2026 às 16:00
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
 
         const INITIAL_MATCHES = [
@@ -273,15 +256,37 @@
             { id: 67, team1: 'PANAMÁ', team2: 'INGLATERRA', group: 'L' }, { id: 68, team1: 'CROÁCIA', team2: 'GANA', group: 'L' }
         ];
 
+        const TEAM_INFO = {
+            'MÉXICO': { iso: 'mx', emoji: '🇲🇽' }, 'ÁFRICA DO SUL': { iso: 'za', emoji: '🇿🇦' },
+            'CORÉIA DO SUL': { iso: 'kr', emoji: '🇰🇷' }, 'REPÚB. CHECA': { iso: 'cz', emoji: '🇨🇿' },
+            'CANADÁ': { iso: 'ca', emoji: '🇨🇦' }, 'BÓSNIA': { iso: 'ba', emoji: '🇧🇦' },
+            'CATAR': { iso: 'qa', emoji: '🇶🇦' }, 'SUÍÇA': { iso: 'ch', emoji: '🇨🇭' },
+            'BRASIL': { iso: 'br', emoji: '🇧🇷' }, 'MARROCOS': { iso: 'ma', emoji: '🇲🇦' },
+            'HAITI': { iso: 'ht', emoji: '🇭🇹' }, 'ESCÓCIA': { iso: 'gb-sct', emoji: '🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
+            'EUA': { iso: 'us', emoji: '🇺🇸' }, 'PARAGUAI': { iso: 'py', emoji: '🇵🇾' },
+            'AUSTRÁLIA': { iso: 'au', emoji: '🇦🇺' }, 'TURQUIA': { iso: 'tr', emoji: '🇹🇷' },
+            'ALEMANHA': { iso: 'de', emoji: '🇩🇪' }, 'CURAÇAO': { iso: 'cw', emoji: '🇨🇼' },
+            'COSTA DO MARFIM': { iso: 'ci', emoji: '🇨🇮' }, 'EQUADOR': { iso: 'ec', emoji: '🇪🇨' },
+            'HOLANDA': { iso: 'nl', emoji: '🇳🇱' }, 'JAPÃO': { iso: 'jp', emoji: '🇯🇵' },
+            'SUÉCIA': { iso: 'se', emoji: '🇸🇪' }, 'TUNÍSIA': { iso: 'tn', emoji: '🇹🇳' },
+            'BÉLGICA': { iso: 'be', emoji: '🇧🇪' }, 'EGITO': { iso: 'eg', emoji: '🇪🇬' },
+            'IRÃ': { iso: 'ir', emoji: '🇮🇷' }, 'NOVA ZELÂNDIA': { iso: 'nz', emoji: '🇳🇿' },
+            'ESPANHA': { iso: 'es', emoji: '🇪🇸' }, 'CABO VERDE': { iso: 'cv', emoji: '🇨🇻' },
+            'ARÁBIA SAUDITA': { iso: 'sa', emoji: '🇸🇦' }, 'URUGUAI': { iso: 'uy', emoji: '🇺🇾' },
+            'FRANÇA': { iso: 'fr', emoji: '🇫🇷' }, 'SENEGAL': { iso: 'sn', emoji: '🇸🇳' },
+            'IRAQUE': { iso: 'iq', emoji: '🇮🇶' }, 'NORUEGA': { iso: 'no', emoji: '🇳🇴' },
+            'ARGENTINA': { iso: 'ar', emoji: '🇦🇷' }, 'ÁUSTRIA': { iso: 'at', emoji: '🇦🇹' },
+            'JORDÂNIA': { iso: 'jo', emoji: '🇯🇴' }, 'ARGÉLIA': { iso: 'dz', emoji: '🇩🇿' },
+            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'CONGO': { iso: 'cg', emoji: '🇨🇬' },
+            'UZBEQUISTÃO': { iso: 'uz', emoji: '🇺🇿' }, 'COLÔMBIA': { iso: 'co', emoji: '🇨🇴' },
+            'INGLATERRA': { iso: 'gb-eng', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' }, 'CROÁCIA': { iso: 'hr', emoji: '🇭🇷' },
+            'GANA': { iso: 'gh', emoji: '🇬🇭' }, 'PANAMÁ': { iso: 'pa', emoji: '🇵🇦' }
+        };
+
         let predictions = {};
         let knockoutPredictions = {
-            round32: Array(32).fill(''),
-            round16: Array(16).fill(''),
-            quarters: Array(8).fill(''),
-            semis: Array(4).fill(''),
-            final: Array(2).fill(''),
-            thirdPlace: '',
-            champion: ''
+            round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''),
+            semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: ''
         };
         let isRankingLoaded = false;
         let bolaoEncerrado = false;
@@ -296,23 +301,44 @@
             } else {
                 renderMatches();
                 renderKnockout();
+                loadParticipants();
                 document.getElementById('participant-name').addEventListener('input', function() {
                     this.value = this.value.toUpperCase();
                 });
             }
         });
 
-        // Função Gamificada de Progresso
+        async function loadParticipants() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const json = await response.json();
+                
+                if (json.result === 'success' && json.data.length > 0) {
+                    const listContainer = document.getElementById('participants-list');
+                    document.getElementById('participants-count').textContent = json.data.length;
+                    const sortedNames = [...json.data].sort((a, b) => a.name.localeCompare(b.name));
+                    
+                    let html = '';
+                    sortedNames.forEach(p => {
+                        html += `
+                        <span class="bg-white text-slate-600 font-bold px-3 py-1 rounded border border-slate-200/60 shadow-sm text-[10px] sm:text-xs flex items-center gap-1.5 cursor-default">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                            ${p.name}
+                        </span>`;
+                    });
+                    
+                    listContainer.innerHTML = html;
+                    document.getElementById('participants-container').classList.remove('hidden');
+                }
+            } catch (error) {}
+        }
+
         function updateProgress() {
             let filledCount = 0;
-            // Grupos
             for (const id in predictions) {
                 if (predictions[id].team1 !== undefined && predictions[id].team1 !== '' &&
-                    predictions[id].team2 !== undefined && predictions[id].team2 !== '') {
-                    filledCount++;
-                }
+                    predictions[id].team2 !== undefined && predictions[id].team2 !== '') filledCount++;
             }
-            // Mata-Mata
             ['round32', 'round16', 'quarters', 'semis', 'final'].forEach(phase => {
                 knockoutPredictions[phase].forEach(val => { if (val !== '') filledCount++; });
             });
@@ -325,11 +351,9 @@
             bar.style.width = percent + '%';
             
             if(filledCount === 136) {
-                bar.classList.replace('from-blue-500', 'from-green-400');
-                bar.classList.replace('to-indigo-600', 'to-green-600');
+                bar.classList.add('bg-green-500'); bar.classList.remove('bg-blue-600');
             } else {
-                bar.classList.replace('from-green-400', 'from-blue-500');
-                bar.classList.replace('to-green-600', 'to-indigo-600');
+                bar.classList.add('bg-blue-600'); bar.classList.remove('bg-green-500');
             }
         }
 
@@ -337,18 +361,17 @@
             document.getElementById('tabs-container').classList.add('hidden');
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
-            document.getElementById('header-subtitle').textContent = "Acompanhe o ranking oficial atualizado";
+            document.getElementById('header-subtitle').textContent = "Ranking Oficial Atualizado";
             document.getElementById('sec-ranking').classList.remove('hidden');
             document.getElementById('sec-ranking').classList.add('block');
             fetchRanking();
         }
 
-        // TABS LOGIC
         function switchTab(tabId) {
             if (bolaoEncerrado) return;
 
             ['grupos', 'knockout', 'ranking'].forEach(id => {
-                document.getElementById('tab-btn-' + id).className = "flex-1 py-3.5 px-4 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 tab-inactive flex items-center justify-center gap-2 whitespace-nowrap";
+                document.getElementById('tab-btn-' + id).className = "flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap";
             });
             document.getElementById('tab-btn-' + tabId).classList.replace('tab-inactive', 'tab-active');
 
@@ -370,7 +393,9 @@
             }
         }
 
-        // RENDERIZAÇÃO DA FASE DE GRUPOS COM GRID
+        // =====================================================================
+        // RENDERIZAÇÃO ESTILO "BETTING APP" (O GRANDE UPGRADE MOBILE-FIRST)
+        // =====================================================================
         function renderMatches() {
             const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
                 (acc[match.group] = acc[match.group] || []).push(match);
@@ -380,28 +405,44 @@
             let html = '';
             for (const group in groupedMatches) {
                 html += `
-                <div class="glass-panel rounded-3xl shadow-lg overflow-hidden border border-slate-200/50">
-                    <div class="bg-slate-800 px-6 py-4 font-black text-white text-base tracking-[0.2em] flex items-center gap-3">
-                        <div class="w-3 h-3 bg-blue-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
-                        GRUPO ${group}
+                <div class="mb-10">
+                    <div class="flex items-center gap-3 mb-4 pl-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100/80 text-blue-700 flex items-center justify-center font-black text-sm border border-blue-200 shadow-sm">${group}</div>
+                        <h3 class="font-bold text-slate-700 text-lg sm:text-xl uppercase tracking-widest">Grupo ${group}</h3>
                     </div>
-                    <div class="p-4 sm:p-6 bg-white/60">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 `;
+                
                 groupedMatches[group].forEach(match => {
+                    const t1 = TEAM_INFO[match.team1] || { iso: 'xx' };
+                    const t2 = TEAM_INFO[match.team2] || { iso: 'xx' };
+                    
                     html += `
-                        <div class="flex items-center justify-between p-3 sm:p-4 bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-blue-300 hover:-translate-y-0.5 transition-all group">
-                            <div class="w-8 text-left text-xs font-black text-slate-300 group-hover:text-blue-400 transition">#${match.id}</div>
-                            <div class="flex-1 text-right pr-3 font-bold text-slate-700 text-sm sm:text-base leading-tight truncate">${match.team1}</div>
-                            <div class="flex items-center gap-1 sm:gap-2 shrink-0 bg-slate-50 p-1.5 sm:p-2 rounded-xl border border-slate-100 shadow-inner">
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition" />
-                                <span class="text-slate-300 font-black text-xs sm:text-sm">X</span>
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition" />
+                        <div class="glass-panel rounded-2xl p-4 soft-shadow hover:shadow-md transition-shadow duration-300">
+                            <div class="text-[10px] font-bold text-slate-400 mb-3 uppercase tracking-widest flex justify-between items-center border-b border-slate-100 pb-2">
+                                <span>Jogo #${match.id}</span>
                             </div>
-                            <div class="flex-1 text-left pl-3 font-bold text-slate-700 text-sm sm:text-base leading-tight truncate">${match.team2}</div>
+                            <div class="space-y-3">
+                                <!-- Equipa 1 -->
+                                <div class="flex items-center justify-between group">
+                                    <div class="flex items-center gap-3 w-[70%]">
+                                        <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-7 h-5 sm:w-8 sm:h-6 object-cover rounded shadow-sm border border-slate-200" alt="${match.team1}">
+                                        <span class="font-bold text-slate-700 text-sm sm:text-base truncate group-hover:text-blue-600 transition-colors">${match.team1}</span>
+                                    </div>
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-12 h-10 sm:w-14 sm:h-12 bg-slate-100/80 border border-slate-200 rounded-xl text-center font-black text-lg text-slate-800 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
+                                </div>
+                                <!-- Equipa 2 -->
+                                <div class="flex items-center justify-between group">
+                                    <div class="flex items-center gap-3 w-[70%]">
+                                        <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-7 h-5 sm:w-8 sm:h-6 object-cover rounded shadow-sm border border-slate-200" alt="${match.team2}">
+                                        <span class="font-bold text-slate-700 text-sm sm:text-base truncate group-hover:text-blue-600 transition-colors">${match.team2}</span>
+                                    </div>
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-12 h-10 sm:w-14 sm:h-12 bg-slate-100/80 border border-slate-200 rounded-xl text-center font-black text-lg text-slate-800 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
+                                </div>
+                            </div>
                         </div>`;
                 });
-                html += `</div></div></div>`;
+                html += `</div></div>`;
             }
             document.getElementById('matches-container').innerHTML = html;
 
@@ -417,88 +458,93 @@
             });
         }
 
-        // RENDERIZAÇÃO DAS FASES ELIMINATÓRIAS
+        // =====================================================================
+        // RENDERIZAÇÃO DO MATA-MATA (Design mais limpo e solto)
+        // =====================================================================
         function renderKnockout() {
             const teamsByGroup = {};
             const allTeamsSet = new Set();
-            
             INITIAL_MATCHES.forEach(m => {
                 if (!teamsByGroup[m.group]) teamsByGroup[m.group] = new Set();
-                teamsByGroup[m.group].add(m.team1);
-                teamsByGroup[m.group].add(m.team2);
-                allTeamsSet.add(m.team1);
-                allTeamsSet.add(m.team2);
+                teamsByGroup[m.group].add(m.team1); teamsByGroup[m.group].add(m.team2);
+                allTeamsSet.add(m.team1); allTeamsSet.add(m.team2);
             });
-            
             const allTeams = Array.from(allTeamsSet).sort();
             for(let g in teamsByGroup) teamsByGroup[g] = Array.from(teamsByGroup[g]).sort();
 
+            const getEmoji = (team) => TEAM_INFO[team] ? TEAM_INFO[team].emoji + ' ' : '';
             let html = '';
 
             // --- 16 AVOS ---
-            html += `<h3 class="font-black text-xl mb-4 text-slate-800 flex items-center gap-3"><div class="w-1.5 h-6 bg-indigo-500 rounded-full"></div> 16 Avos de Final <span class="text-sm font-bold text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded ml-2">32 Seleções</span></h3>`;
-            html += `<h4 class="font-bold text-slate-500 mb-3 ml-1 text-sm uppercase tracking-wide">1º e 2º Colocados por Grupo</h4>`;
-            html += `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">`;
+            html += `
+            <div class="mb-12">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pl-2">
+                    <h3 class="font-black text-xl sm:text-2xl text-slate-800 tracking-tight">16 Avos de Final</h3>
+                    <span class="text-[10px] font-bold text-slate-400 bg-white border border-slate-200 px-3 py-1 rounded-full uppercase tracking-widest w-max">32 Seleções</span>
+                </div>
+                
+                <h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">1º e 2º Colocados</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">`;
             
             let r32Idx = 0;
             Object.keys(teamsByGroup).sort().forEach(group => {
                 html += `
-                <div class="bg-white/80 p-4 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-md transition">
-                    <div class="font-black text-sm text-indigo-800 mb-3 uppercase tracking-wider flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-indigo-400"></div>Grupo ${group}</div>
-                    <select class="w-full mb-3 p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 bg-white" data-phase="round32" data-index="${r32Idx++}">
+                <div class="glass-panel p-4 rounded-2xl soft-shadow border-t-2 border-t-indigo-400">
+                    <div class="font-bold text-xs text-slate-400 mb-3 uppercase tracking-widest">Grupo ${group}</div>
+                    <select class="w-full mb-3 p-2.5 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 bg-slate-50/50 hover:bg-white transition" data-phase="round32" data-index="${r32Idx++}">
                         <option value="">1º Colocado...</option>
-                        ${teamsByGroup[group].map(t => `<option value="${t}">${t}</option>`).join('')}
+                        ${teamsByGroup[group].map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
-                    <select class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 bg-white" data-phase="round32" data-index="${r32Idx++}">
+                    <select class="w-full p-2.5 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 bg-slate-50/50 hover:bg-white transition" data-phase="round32" data-index="${r32Idx++}">
                         <option value="">2º Colocado...</option>
-                        ${teamsByGroup[group].map(t => `<option value="${t}">${t}</option>`).join('')}
+                        ${teamsByGroup[group].map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>`;
             });
             html += `</div>`;
 
-            html += `<h4 class="font-bold text-slate-500 mb-3 ml-1 text-sm uppercase tracking-wide">Melhores 3º Colocados <span class="lowercase normal-case font-medium">(8 Seleções)</span></h4>`;
-            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10 p-4 bg-indigo-50/50 rounded-2xl border border-indigo-50">`;
+            html += `<h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">Melhores 3º Colocados</h4>`;
+            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">`;
             for(let i=0; i<8; i++) {
-                html += `<select class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 bg-white" data-phase="round32" data-index="${r32Idx++}">
-                    <option value="">Selecione...</option>
-                    ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                html += `<select class="glass-panel p-3 rounded-xl border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 bg-white/50 hover:bg-white transition soft-shadow" data-phase="round32" data-index="${r32Idx++}">
+                    <option value="">Selecionar...</option>
+                    ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
                 </select>`;
             }
-            html += `</div>`;
+            html += `</div></div>`;
 
             // --- OUTRAS FASES ---
-            const generatePhase = (title, count, phaseKey, color) => {
-                let pHTML = `<div class="border-t border-slate-200 pt-8 mb-8"><h3 class="font-black text-xl mb-6 text-slate-800 flex items-center gap-3"><div class="w-1.5 h-6 bg-${color}-500 rounded-full"></div> ${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-4">`;
+            const generatePhase = (title, count, phaseKey) => {
+                let pHTML = `<div class="mb-10"><h3 class="font-black text-xl text-slate-800 tracking-tight mb-5 pl-2">${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-3">`;
                 for(let i=0; i<count; i++) {
-                    pHTML += `<select class="w-full p-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-${color}-500 focus:ring-2 focus:ring-${color}-100 bg-white shadow-sm hover:border-${color}-300 transition" data-phase="${phaseKey}" data-index="${i}">
-                        <option value="">Selecione...</option>
-                        ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                    pHTML += `<select class="glass-panel p-3 rounded-xl border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-blue-500 bg-white/50 hover:bg-white transition soft-shadow" data-phase="${phaseKey}" data-index="${i}">
+                        <option value="">Selecionar...</option>
+                        ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
                     </select>`;
                 }
                 pHTML += `</div></div>`;
                 return pHTML;
             }
 
-            html += generatePhase('Oitavas de Final (16)', 16, 'round16', 'blue');
-            html += generatePhase('Quartas de Final (8)', 8, 'quarters', 'cyan');
-            html += generatePhase('Semifinais (4)', 4, 'semis', 'violet');
-            html += generatePhase('Final (2)', 2, 'final', 'fuchsia');
+            html += generatePhase('Oitavas de Final', 16, 'round16');
+            html += generatePhase('Quartas de Final', 8, 'quarters');
+            html += generatePhase('Semifinais', 4, 'semis');
+            html += generatePhase('A Grande Final', 2, 'final');
 
             html += `
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12 pt-8 border-t border-slate-200">
-                <div class="bg-gradient-to-br from-amber-50 to-white p-6 rounded-3xl border border-amber-200 shadow-md transform hover:-translate-y-1 transition">
-                    <h3 class="font-black text-2xl mb-4 text-amber-800 flex items-center gap-2">🥉 3º Colocado</h3>
-                    <select class="w-full p-4 rounded-xl border-2 border-amber-300 text-lg font-black text-slate-700 bg-white outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-100" data-phase="thirdPlace" data-index="0">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
+                <div class="glass-panel p-6 rounded-[2rem] border-l-4 border-l-amber-400 soft-shadow">
+                    <h3 class="font-black text-lg mb-4 text-slate-700 flex items-center gap-2">🥉 Terceiro Lugar</h3>
+                    <select class="w-full p-3.5 rounded-xl border border-slate-200 text-base font-bold text-slate-700 bg-white outline-none focus:border-amber-400" data-phase="thirdPlace" data-index="0">
                         <option value="">Quem fica em 3º?</option>
-                        ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                        ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>
-                <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-3xl border border-green-300 shadow-xl transform hover:-translate-y-1 transition ring-4 ring-green-100 ring-offset-2">
-                    <h3 class="font-black text-2xl mb-4 text-green-800 flex items-center gap-2">🏆 Campeão</h3>
-                    <select class="w-full p-4 rounded-xl border-2 border-green-500 text-lg font-black text-slate-800 bg-white outline-none focus:border-green-600 focus:ring-4 focus:ring-green-200 shadow-inner" data-phase="champion" data-index="0">
-                        <option value="">Quem leva a Taça?</option>
-                        ${allTeams.map(t => `<option value="${t}">${t}</option>`).join('')}
+                <div class="bg-gradient-to-br from-white to-blue-50/50 p-6 rounded-[2rem] border border-blue-200/50 shadow-lg ring-1 ring-white">
+                    <h3 class="font-black text-xl mb-4 text-blue-900 flex items-center gap-2">🏆 Campeão do Mundo</h3>
+                    <select class="w-full p-4 rounded-xl border-2 border-blue-300 text-lg font-black text-blue-900 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 shadow-inner" data-phase="champion" data-index="0">
+                        <option value="">Quem levanta a Taça?</option>
+                        ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>
             </div>`;
@@ -509,16 +555,16 @@
                 if(e.target.tagName === 'SELECT') {
                     const phase = e.target.getAttribute('data-phase');
                     const index = e.target.getAttribute('data-index');
-                    if (phase === 'thirdPlace' || phase === 'champion') {
-                        knockoutPredictions[phase] = e.target.value;
-                    } else {
-                        knockoutPredictions[phase][index] = e.target.value;
-                    }
+                    if (phase === 'thirdPlace' || phase === 'champion') knockoutPredictions[phase] = e.target.value;
+                    else knockoutPredictions[phase][index] = e.target.value;
                     updateProgress();
                 }
             });
         }
 
+        // =====================================================================
+        // SUBMIT & RANKING LOGIC
+        // =====================================================================
         document.getElementById('predictions-form').addEventListener('submit', (e) => {
             e.preventDefault();
             if (bolaoEncerrado) return;
@@ -526,13 +572,13 @@
             document.getElementById('error-message').classList.add('hidden');
             const name = document.getElementById('participant-name').value.trim();
             if (!name) {
-                showFormError('Por favor, preencha o seu nome!');
+                document.getElementById('error-text').textContent = 'Preencha o Nome na Planilha!';
+                document.getElementById('error-message').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 return;
             }
 
             const filledCount = parseInt(document.getElementById('progress-text').textContent);
-
             if (filledCount < 136) {
                 document.getElementById('filled-count').textContent = filledCount;
                 document.getElementById('confirm-modal').classList.remove('hidden');
@@ -542,11 +588,7 @@
         });
 
         function closeModal() { document.getElementById('confirm-modal').classList.add('hidden'); }
-        function showFormError(msg) {
-            document.getElementById('error-text').textContent = msg;
-            document.getElementById('error-message').classList.remove('hidden');
-        }
-
+        
         function setLoading(isLoading) {
             const btn = document.getElementById('submit-btn');
             btn.disabled = isLoading;
@@ -566,15 +608,12 @@
 
             const payload = {
                 name: document.getElementById('participant-name').value.trim(),
-                predictions: predictions,
-                knockout: knockoutPredictions
+                predictions: predictions, knockout: knockoutPredictions
             };
 
             try {
                 await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
+                    method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(payload)
                 });
                 
@@ -582,9 +621,11 @@
                 document.getElementById('predictions-form').classList.add('hidden');
                 document.getElementById('success-view').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                loadParticipants();
 
             } catch (error) {
-                showFormError('Falha na ligação. Verifique a internet e tente novamente.');
+                document.getElementById('error-text').textContent = 'Falha na ligação. Verifique a internet.';
+                document.getElementById('error-message').classList.remove('hidden');
             } finally {
                 setLoading(false);
             }
@@ -593,7 +634,6 @@
         function resetForm() {
             predictions = {};
             knockoutPredictions = { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: '' };
-            
             document.querySelectorAll('.score-input').forEach(i => i.value = '');
             document.querySelectorAll('#knockout-container select').forEach(s => s.value = '');
             document.getElementById('participant-name').value = '';
@@ -604,7 +644,7 @@
             switchTab('grupos');
         }
 
-        // --- RANKING LOGIC ---
+        // --- RANKING ---
         async function fetchRanking() {
             isRankingLoaded = true;
             document.getElementById('ranking-loading-state').classList.remove('hidden');
@@ -615,75 +655,67 @@
                 const response = await fetch(SCRIPT_URL);
                 const json = await response.json();
 
-                if (json.result === 'success') {
-                    renderRankingData(json.data);
-                } else {
-                    showRankingError(json.message);
+                if (json.result === 'success') renderRankingData(json.data);
+                else {
+                    document.getElementById('ranking-error-message').textContent = json.message;
+                    document.getElementById('ranking-error-state').classList.remove('hidden');
+                    document.getElementById('ranking-loading-state').classList.add('hidden');
                 }
             } catch (error) {
-                showRankingError("Falha na ligação ao carregar os dados. Verifique a sua internet.");
+                document.getElementById('ranking-error-message').textContent = "Sem ligação à planilha.";
+                document.getElementById('ranking-error-state').classList.remove('hidden');
+                document.getElementById('ranking-loading-state').classList.add('hidden');
             }
-        }
-
-        function showRankingError(msg) {
-            document.getElementById('ranking-loading-state').classList.add('hidden');
-            document.getElementById('ranking-error-state').classList.remove('hidden');
-            document.getElementById('ranking-error-message').textContent = msg;
         }
 
         function renderRankingData(data) {
             data.sort((a, b) => b.score - a.score);
-
             const podiumContainer = document.getElementById('podium');
             const listContainer = document.getElementById('ranking-list');
-            podiumContainer.innerHTML = '';
-            listContainer.innerHTML = '';
+            podiumContainer.innerHTML = ''; listContainer.innerHTML = '';
 
             if (data.length === 0) {
-                listContainer.innerHTML = '<div class="p-10 text-center text-slate-500 font-medium">Nenhum participante encontrado na classificação oficial.</div>';
+                listContainer.innerHTML = '<div class="p-8 text-center text-slate-400 font-bold text-sm uppercase tracking-widest">Nenhum participante.</div>';
+                document.getElementById('ranking-loading-state').classList.add('hidden');
+                document.getElementById('ranking-content').classList.remove('hidden');
+                return;
             }
 
             if (data.length >= 1) {
-                let p2 = data[1] ? buildPodium(data[1].name, data[1].score, 2, 'bg-slate-300', 'text-slate-700', 'podium-2') : '<div class="w-24 sm:w-28"></div>';
-                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-gradient-to-t from-yellow-500 to-yellow-300', 'text-yellow-900', 'podium-1 scale-105 z-10') : '<div class="w-24 sm:w-28"></div>';
-                let p3 = data[2] ? buildPodium(data[2].name, data[2].score, 3, 'bg-amber-700', 'text-white', 'podium-3') : '<div class="w-24 sm:w-28"></div>';
-                
+                let p2 = data[1] ? buildPodium(data[1].name, data[1].score, 2, 'bg-slate-200/80', 'text-slate-500', 'podium-2') : '<div class="w-20 sm:w-28"></div>';
+                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-gradient-to-t from-yellow-400 to-yellow-200', 'text-yellow-800', 'podium-1 scale-105 z-10 shadow-xl') : '<div class="w-20 sm:w-28"></div>';
+                let p3 = data[2] ? buildPodium(data[2].name, data[2].score, 3, 'bg-amber-700/80', 'text-amber-100', 'podium-3') : '<div class="w-20 sm:w-28"></div>';
                 podiumContainer.innerHTML = p2 + p1 + p3;
             }
 
-            // Pega a maior pontuação para calcular a porcentagem da barra
             const maxScore = data.length > 0 && data[0].score > 0 ? data[0].score : 1;
-
             let listHtml = '';
-            // Agora o loop começa do 0 para mostrar todos na lista abaixo do pódio
+            
             for (let i = 0; i < data.length; i++) {
                 const percent = Math.round((data[i].score / maxScore) * 100);
+                let rankColor = 'text-slate-300';
+                let barColor = 'bg-slate-300';
                 
-                // Cores diferentes para destacar quem está no top 3
-                let rankColor = 'text-slate-400';
-                let barColor = 'from-blue-500 to-indigo-600';
-                
-                if (i === 0) { rankColor = 'text-yellow-500'; barColor = 'from-yellow-400 to-amber-500'; }
-                else if (i === 1) { rankColor = 'text-slate-400'; barColor = 'from-slate-400 to-slate-500'; }
-                else if (i === 2) { rankColor = 'text-amber-600'; barColor = 'from-amber-500 to-orange-600'; }
+                if (i === 0) { rankColor = 'text-yellow-400'; barColor = 'bg-yellow-400'; }
+                else if (i === 1) { rankColor = 'text-slate-400'; barColor = 'bg-slate-400'; }
+                else if (i === 2) { rankColor = 'text-amber-600'; barColor = 'bg-amber-500'; }
 
                 listHtml += `
-                    <div class="flex items-center px-4 sm:px-6 py-5 hover:bg-white/60 transition group gap-3 sm:gap-5">
-                        <div class="w-10 sm:w-16 text-center font-black ${rankColor} text-xl sm:text-3xl group-hover:scale-110 transition-transform">#${i + 1}</div>
+                    <div class="flex items-center px-4 sm:px-6 py-4 hover:bg-slate-50/50 transition group gap-3 sm:gap-4">
+                        <div class="w-8 sm:w-12 text-center font-black ${rankColor} text-lg sm:text-2xl group-hover:scale-110 transition-transform">${i + 1}</div>
                         <div class="flex-1 flex flex-col justify-center">
-                            <div class="flex justify-between items-end mb-1.5">
-                                <span class="font-black text-slate-700 truncate text-base sm:text-lg">${data[i].name}</span>
-                                <span class="font-black text-slate-800 text-lg sm:text-xl">${data[i].score} <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">pts</span></span>
+                            <div class="flex justify-between items-baseline mb-1">
+                                <span class="font-black text-slate-700 truncate text-sm sm:text-base">${data[i].name}</span>
+                                <span class="font-black text-slate-800 text-base sm:text-lg">${data[i].score}</span>
                             </div>
-                            <div class="w-full bg-slate-200/80 rounded-full h-2.5 sm:h-3 overflow-hidden shadow-inner">
-                                <div class="bg-gradient-to-r ${barColor} h-full rounded-full transition-all duration-1000 ease-out" style="width: ${percent}%;"></div>
+                            <div class="w-full bg-slate-200/50 rounded-full h-1.5 overflow-hidden">
+                                <div class="${barColor} h-full rounded-full transition-all duration-1000 ease-out" style="width: ${percent}%;"></div>
                             </div>
                         </div>
                     </div>
                 `;
             }
             listContainer.innerHTML = listHtml;
-
             document.getElementById('ranking-loading-state').classList.add('hidden');
             document.getElementById('ranking-content').classList.remove('hidden');
         }
@@ -691,13 +723,11 @@
         function buildPodium(name, score, pos, color, textColor, height) {
             let emoji = pos === 1 ? '🥇' : pos === 2 ? '🥈' : '🥉';
             return `
-                <div class="flex flex-col items-center w-24 sm:w-32 relative">
-                    <div class="font-black text-slate-800 text-center text-xs sm:text-sm truncate w-full mb-1 px-1 bg-white/80 rounded backdrop-blur-sm shadow-sm py-0.5">${name}</div>
-                    <div class="font-black text-blue-800 text-base sm:text-xl mb-2 bg-white px-3 py-1 rounded-xl border border-blue-200 shadow-md">${score} pts</div>
-                    <div class="${color} w-full rounded-t-3xl ${height} flex flex-col justify-start pt-3 sm:pt-5 shadow-2xl border-x border-t border-white/20 relative overflow-hidden transition-all hover:-translate-y-2">
-                        <div class="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent"></div>
-                        <span class="text-3xl sm:text-5xl relative z-10 text-center drop-shadow-xl filter hover:brightness-125 hover:scale-110 transition-transform">${emoji}</span>
-                        <span class="${textColor} font-black text-2xl sm:text-4xl relative z-10 mt-auto pb-4 sm:pb-5 text-center opacity-90 drop-shadow-sm">#${pos}</span>
+                <div class="flex flex-col items-center w-20 sm:w-28 relative">
+                    <div class="font-black text-slate-700 text-center text-[10px] sm:text-xs truncate w-full mb-1 uppercase tracking-wider">${name}</div>
+                    <div class="font-black text-slate-800 text-sm sm:text-base mb-1.5">${score}</div>
+                    <div class="${color} w-full rounded-t-2xl sm:rounded-t-[2rem] ${height} flex flex-col justify-start pt-3 sm:pt-4 border-x border-t border-white/40 relative overflow-hidden backdrop-blur-sm">
+                        <span class="text-2xl sm:text-4xl relative z-10 text-center drop-shadow-md filter hover:scale-110 transition-transform">${emoji}</span>
                     </div>
                 </div>
             `;
