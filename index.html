@@ -589,26 +589,26 @@
                                 Jogo #${match.id}
                             </div>
                             
-                            <!-- Estrutura Grid Robust para evitar sobreposição -->
-                            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-3 w-full">
+                            <!-- Estrutura Horizontal Simples e Robusta -->
+                            <div class="flex items-center justify-between gap-1 sm:gap-2 w-full">
                                 
                                 <!-- Equipa 1 -->
-                                <div class="flex flex-col sm:flex-row items-center sm:justify-end gap-1.5 sm:gap-2 min-w-0">
-                                    <span class="font-bold text-slate-700 text-[11px] sm:text-[13px] text-center sm:text-right leading-tight break-words min-w-0 order-2 sm:order-1 w-full">${match.team1}</span>
-                                    <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-6 h-4 sm:w-7 sm:h-5 object-cover rounded-sm shadow-sm border border-slate-200 shrink-0 order-1 sm:order-2" alt="${match.team1}">
+                                <div class="flex-1 flex items-center justify-end gap-1.5 sm:gap-2">
+                                    <span class="font-bold text-slate-700 text-[10px] sm:text-xs md:text-sm text-right leading-tight">${match.team1}</span>
+                                    <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-5 h-3.5 sm:w-7 sm:h-5 object-cover rounded-[2px] shadow-sm border border-slate-200 shrink-0" alt="${match.team1}">
                                 </div>
 
                                 <!-- Inputs Centrais -->
-                                <div class="flex items-center justify-center gap-1 sm:gap-1.5 shrink-0 bg-slate-50 p-1.5 rounded-xl border border-slate-100 shadow-inner">
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
+                                <div class="flex items-center justify-center gap-1 sm:gap-1.5 shrink-0 bg-slate-50 p-1 sm:p-1.5 rounded-xl border border-slate-100 shadow-inner">
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-9 h-9 sm:w-12 sm:h-12 text-center text-base sm:text-xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
                                     <span class="text-slate-300 font-black text-xs">X</span>
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-9 h-9 sm:w-12 sm:h-12 text-center text-base sm:text-xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
                                 </div>
 
                                 <!-- Equipa 2 -->
-                                <div class="flex flex-col sm:flex-row items-center sm:justify-start gap-1.5 sm:gap-2 min-w-0">
-                                    <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-6 h-4 sm:w-7 sm:h-5 object-cover rounded-sm shadow-sm border border-slate-200 shrink-0" alt="${match.team2}">
-                                    <span class="font-bold text-slate-700 text-[11px] sm:text-[13px] text-center sm:text-left leading-tight break-words min-w-0 w-full">${match.team2}</span>
+                                <div class="flex-1 flex items-center justify-start gap-1.5 sm:gap-2">
+                                    <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-5 h-3.5 sm:w-7 sm:h-5 object-cover rounded-[2px] shadow-sm border border-slate-200 shrink-0" alt="${match.team2}">
+                                    <span class="font-bold text-slate-700 text-[10px] sm:text-xs md:text-sm text-left leading-tight">${match.team2}</span>
                                 </div>
                                 
                             </div>
