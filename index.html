@@ -20,12 +20,12 @@
         /* Estilo iOS Segmented Control para as Tabs */
         .tab-active {
             background-color: #ffffff;
-            color: #1e293b; /* slate-800 */
+            color: #1e293b;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
         }
         .tab-inactive {
             background-color: transparent;
-            color: #64748b; /* slate-500 */
+            color: #64748b;
         }
         .tab-inactive:hover { color: #334155; }
 
@@ -55,14 +55,13 @@
     <header class="pt-8 pb-6 px-4 relative z-10">
         <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4 sm:gap-5 text-center sm:text-left">
-                <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-16 sm:h-20 object-contain drop-shadow-md">
+                <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-16 sm:h-20 object-contain drop-shadow-md" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png'">
                 <div>
                     <h1 class="text-2xl sm:text-3xl font-black tracking-tighter text-slate-900 uppercase">Bolão Nutella</h1>
                     <p id="header-subtitle" class="text-slate-500 font-medium text-xs sm:text-sm tracking-wide uppercase mt-0.5">Copa do Mundo FIFA 2026™</p>
                 </div>
             </div>
             
-            <!-- Aviso de Encerrado realocado para o header -->
             <div id="closed-warning" class="hidden bg-amber-50 text-amber-700 px-4 py-2 rounded-xl border border-amber-200 text-sm font-bold shadow-sm flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 Inscrições Encerradas
@@ -70,7 +69,7 @@
         </div>
     </header>
 
-    <!-- Navegação / Tabs (Estilo Pílula Moderno) -->
+    <!-- Navegação / Tabs -->
     <div id="tabs-container" class="max-w-4xl mx-auto px-4 relative z-20 mb-8 flex justify-center sm:justify-start">
         <div class="bg-slate-200/60 backdrop-blur-md p-1.5 rounded-[1.25rem] inline-flex w-full sm:w-auto shadow-inner border border-white/40 overflow-x-auto no-scrollbar">
             <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-active whitespace-nowrap flex items-center justify-center gap-1.5">
@@ -222,13 +221,14 @@
 
         <form id="predictions-form" class="space-y-8">
             
-            <!-- Nome e Progresso (Cartão Minimalista) -->
+            <!-- Nome e Progresso -->
             <div id="name-container" class="glass-panel rounded-3xl soft-shadow p-5 sm:p-6 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between border-b border-white/50">
                 <div class="w-full sm:flex-1 relative">
                     <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1 ml-1">Nome na Planilha</label>
                     <div class="flex gap-2">
                         <input type="text" id="participant-name" placeholder="Digite seu nome..." class="w-full text-lg sm:text-xl p-2 bg-transparent border-0 border-b-2 border-slate-200 focus:border-blue-600 focus:ring-0 outline-none transition uppercase font-bold text-slate-800 placeholder-slate-300" required />
-                        <!-- NOVO BOTÃO DE BUSCA -->
+                        
+                        <!-- BOTÃO DE BUSCA -->
                         <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-2 rounded-xl transition flex items-center gap-2 border border-slate-200 text-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                             <span class="hidden sm:inline">Recuperar</span>
@@ -269,7 +269,7 @@
                 <p id="error-text">Erro ao enviar.</p>
             </div>
 
-            <!-- Botão Enviar Flutuante (Minimalista) -->
+            <!-- Botão Enviar Flutuante -->
             <button type="submit" id="submit-btn" class="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base py-4 px-8 rounded-2xl transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none soft-shadow group">
                 <span id="submit-text" class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -433,7 +433,7 @@
                 });
             }
         });
-        // Função para carregar a lista de inscritos
+
         async function loadParticipants() {
             try {
                 const response = await fetch(SCRIPT_URL);
@@ -484,7 +484,6 @@
         }
 
         function bloquearPalpites() {
-            // Esconde apenas as abas de edição do bolão. As abas de Ranking e Regras permanecem funcionais.
             document.getElementById('tab-btn-grupos').classList.add('hidden');
             document.getElementById('tab-btn-knockout').classList.add('hidden');
             
@@ -496,10 +495,8 @@
         }
 
         function switchTab(tabId) {
-            // Previne a navegação para os palpites se o bolão estiver encerrado
             if (bolaoEncerrado && (tabId === 'grupos' || tabId === 'knockout')) return;
 
-            // Update da UI das abas
             ['grupos', 'knockout', 'ranking', 'regras'].forEach(id => {
                 const btn = document.getElementById('tab-btn-' + id);
                 if (btn) btn.className = "flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap flex items-center justify-center gap-1.5";
@@ -508,21 +505,17 @@
             const activeBtn = document.getElementById('tab-btn-' + tabId);
             if (activeBtn) activeBtn.classList.replace('tab-inactive', 'tab-active');
 
-            // Esconder todas as seções principais
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('sec-ranking').classList.add('hidden');
             document.getElementById('sec-regras').classList.add('hidden');
 
-            // Lógica de exibição das seções
             if (tabId === 'ranking') {
                 document.getElementById('sec-ranking').classList.remove('hidden');
                 if (!isRankingLoaded) fetchRanking();
             } else if (tabId === 'regras') {
                 document.getElementById('sec-regras').classList.remove('hidden');
             } else {
-                // Secções de Formulário (Grupos e Knockout)
                 document.getElementById('main-palpites-container').classList.remove('hidden');
-                
                 if (tabId === 'grupos') {
                     document.getElementById('sec-grupos').classList.remove('hidden');
                     document.getElementById('sec-knockout').classList.add('hidden');
@@ -534,87 +527,53 @@
         }
 
         // =====================================================================
-        // NOVA FUNÇÃO: RECUPERAR PALPITES
+        // RENDERIZAÇÃO ESTILO "BETTING APP" COM BANDEIRAS
         // =====================================================================
-        async function loadUserPredictions() {
-            const nameInput = document.getElementById('participant-name');
-            const name = nameInput.value.trim();
-            const btnLoad = document.getElementById('btn-load-predictions');
+        function renderMatches() {
+            const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
+                (acc[match.group] = acc[match.group] || []).push(match);
+                return acc;
+            }, {});
 
-            if (!name) {
-                alert("Digite o nome da sua aba primeiro para recuperar os palpites!");
-                nameInput.focus();
-                return;
-            }
-
-            // UI Feedback
-            btnLoad.disabled = true;
-            btnLoad.innerHTML = `<svg class="animate-spin h-4 w-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
-
-            try {
-                // O Fetch para o GET com o parâmetro 'action' e 'name'
-                const url = `${SCRIPT_URL}?action=load_predictions&name=${encodeURIComponent(name)}`;
-                const response = await fetch(url);
-                const json = await response.json();
-
-                if (json.result === 'success') {
-                    // Preencher a variável global
-                    predictions = json.predictions || {};
+            let html = '';
+            for (const group in groupedMatches) {
+                html += `
+                <div class="mb-10">
+                    <div class="flex items-center gap-3 mb-4 pl-2">
+                        <div class="w-8 h-8 rounded-full bg-blue-100/80 text-blue-700 flex items-center justify-center font-black text-sm border border-blue-200 shadow-sm">${group}</div>
+                        <h3 class="font-bold text-slate-700 text-lg sm:text-xl uppercase tracking-widest">Grupo ${group}</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                `;
+                
+                groupedMatches[group].forEach(match => {
+                    const t1 = TEAM_INFO[match.team1] || { iso: 'xx' };
+                    const t2 = TEAM_INFO[match.team2] || { iso: 'xx' };
                     
-                    // Se houver dados do mata-mata, preenche; senão, mantém vazio
-                    if (json.knockout) {
-                        knockoutPredictions = json.knockout;
-                    }
-
-                    // Forçar atualização visual dos inputs dos placares
-                    document.querySelectorAll('.score-input').forEach(input => {
-                        const matchId = input.getAttribute('data-match-id');
-                        const team = input.getAttribute('data-team');
-                        if (predictions[matchId] && predictions[matchId][team] !== undefined) {
-                            input.value = predictions[matchId][team];
-                        } else {
-                            input.value = ''; // Limpa se não houver
-                        }
-                    });
-
-                    // Forçar atualização visual dos Selects do Mata-Mata
-                    document.querySelectorAll('#knockout-container select').forEach(select => {
-                        const phase = select.getAttribute('data-phase');
-                        const index = select.getAttribute('data-index');
-                        
-                        let savedVal = '';
-                        if (phase === 'thirdPlace' || phase === 'champion') {
-                            savedVal = knockoutPredictions[phase];
-                        } else if (knockoutPredictions[phase] && knockoutPredictions[phase][index]) {
-                            savedVal = knockoutPredictions[phase][index];
-                        }
-                        
-                        select.value = savedVal || '';
-                    });
-
-                    updateProgress();
-                    
-                    // Aviso discreto de sucesso temporário no botão
-                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-                    setTimeout(() => {
-                        btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
-                        btnLoad.disabled = false;
-                    }, 2000);
-
-                } else {
-                    alert("Não encontrámos palpites com esse nome. Verifique se digitou corretamente.");
-                    resetBtnLoad(btnLoad);
-                }
-            } catch (error) {
-                alert("Erro de conexão ao recuperar os palpites.");
-                resetBtnLoad(btnLoad);
+                    html += `
+                        <div class="glass-panel rounded-2xl p-2 sm:p-4 soft-shadow hover:shadow-md transition-shadow duration-300">
+                            <div class="text-[10px] font-bold text-slate-400 mb-2 sm:mb-3 uppercase tracking-widest flex justify-between items-center border-b border-slate-100 pb-1.5 sm:pb-2">
+                                <span class="ml-1">Jogo #${match.id}</span>
+                            </div>
+                            <div class="flex items-center justify-between group">
+                                <div class="flex-1 flex flex-col sm:flex-row items-center sm:justify-end gap-1 sm:gap-2 pr-2 sm:pr-3 text-center sm:text-right">
+                                    <span class="font-bold text-slate-700 text-[10px] sm:text-xs md:text-sm leading-tight order-2 sm:order-1 break-words">${match.team1}</span>
+                                    <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-5 h-3.5 sm:w-6 sm:h-4 object-cover shadow-sm rounded-sm border border-slate-200 order-1 sm:order-2" alt="${match.team1}">
+                                </div>
+                                <div class="flex items-center gap-1 sm:gap-2 shrink-0 bg-slate-50 p-1 sm:p-2 rounded-xl border border-slate-100 shadow-inner">
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-9 h-9 sm:w-12 sm:h-12 text-center text-base sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
+                                    <span class="text-slate-300 font-black text-xs sm:text-sm">X</span>
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-9 h-9 sm:w-12 sm:h-12 text-center text-base sm:text-2xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
+                                </div>
+                                <div class="flex-1 flex flex-col sm:flex-row items-center sm:justify-start gap-1 sm:gap-2 pl-2 sm:pl-3 text-center sm:text-left">
+                                    <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-5 h-3.5 sm:w-6 sm:h-4 object-cover shadow-sm rounded-sm border border-slate-200" alt="${match.team2}">
+                                    <span class="font-bold text-slate-700 text-[10px] sm:text-xs md:text-sm leading-tight break-words">${match.team2}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+                html += `</div></div>`;
             }
-        }
-
-        function resetBtnLoad(btnLoad) {
-            btnLoad.disabled = false;
-            btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
-        }
             document.getElementById('matches-container').innerHTML = html;
 
             document.querySelectorAll('.score-input').forEach(input => {
@@ -731,6 +690,89 @@
                     updateProgress();
                 }
             });
+        }
+
+        // =====================================================================
+        // NOVA FUNÇÃO: RECUPERAR PALPITES
+        // =====================================================================
+        async function loadUserPredictions() {
+            const nameInput = document.getElementById('participant-name');
+            const name = nameInput.value.trim();
+            const btnLoad = document.getElementById('btn-load-predictions');
+
+            if (!name) {
+                alert("Digite o nome da sua aba primeiro para recuperar os palpites!");
+                nameInput.focus();
+                return;
+            }
+
+            // UI Feedback
+            btnLoad.disabled = true;
+            btnLoad.innerHTML = `<svg class="animate-spin h-4 w-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+
+            try {
+                // O Fetch para o GET com o parâmetro 'action' e 'name'
+                const url = `${SCRIPT_URL}?action=load_predictions&name=${encodeURIComponent(name)}`;
+                const response = await fetch(url);
+                const json = await response.json();
+
+                if (json.result === 'success') {
+                    // Preencher a variável global
+                    predictions = json.predictions || {};
+                    
+                    // Se houver dados do mata-mata, preenche; senão, mantém vazio
+                    if (json.knockout) {
+                        knockoutPredictions = json.knockout;
+                    }
+
+                    // Forçar atualização visual dos inputs dos placares
+                    document.querySelectorAll('.score-input').forEach(input => {
+                        const matchId = input.getAttribute('data-match-id');
+                        const team = input.getAttribute('data-team');
+                        if (predictions[matchId] && predictions[matchId][team] !== undefined) {
+                            input.value = predictions[matchId][team];
+                        } else {
+                            input.value = ''; // Limpa se não houver
+                        }
+                    });
+
+                    // Forçar atualização visual dos Selects do Mata-Mata
+                    document.querySelectorAll('#knockout-container select').forEach(select => {
+                        const phase = select.getAttribute('data-phase');
+                        const index = select.getAttribute('data-index');
+                        
+                        let savedVal = '';
+                        if (phase === 'thirdPlace' || phase === 'champion') {
+                            savedVal = knockoutPredictions[phase];
+                        } else if (knockoutPredictions[phase] && knockoutPredictions[phase][index]) {
+                            savedVal = knockoutPredictions[phase][index];
+                        }
+                        
+                        select.value = savedVal || '';
+                    });
+
+                    updateProgress();
+                    
+                    // Aviso discreto de sucesso temporário no botão
+                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+                    setTimeout(() => {
+                        btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
+                        btnLoad.disabled = false;
+                    }, 2000);
+
+                } else {
+                    alert("Não encontrámos palpites com esse nome. Verifique se digitou corretamente.");
+                    resetBtnLoad(btnLoad);
+                }
+            } catch (error) {
+                alert("Erro de conexão ao recuperar os palpites.");
+                resetBtnLoad(btnLoad);
+            }
+        }
+
+        function resetBtnLoad(btnLoad) {
+            btnLoad.disabled = false;
+            btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
         }
 
         // =====================================================================
