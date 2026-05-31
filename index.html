@@ -337,9 +337,9 @@
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
 
         const INITIAL_MATCHES = [
-            { id: 1, team1: 'MÉXICO', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 2, team1: 'CORÉIA DO SUL', team2: 'REPÚB. CHECA', group: 'A' },
-            { id: 25, team1: 'REPÚB. CHECA', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 28, team1: 'MÉXICO', team2: 'CORÉIA DO SUL', group: 'A' },
-            { id: 53, team1: 'REPÚB. CHECA', team2: 'MÉXICO', group: 'A' }, { id: 54, team1: 'ÁFRICA DO SUL', team2: 'CORÉIA DO SUL', group: 'A' },
+            { id: 1, team1: 'MÉXICO', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 2, team1: 'CORÉIA DO SUL', team2: 'REPÚB. TCHECA', group: 'A' },
+            { id: 25, team1: 'REPÚB. TCHECA', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 28, team1: 'MÉXICO', team2: 'CORÉIA DO SUL', group: 'A' },
+            { id: 53, team1: 'REPÚB. TCHECA', team2: 'MÉXICO', group: 'A' }, { id: 54, team1: 'ÁFRICA DO SUL', team2: 'CORÉIA DO SUL', group: 'A' },
             { id: 3, team1: 'CANADÁ', team2: 'BÓSNIA', group: 'B' }, { id: 8, team1: 'CATAR', team2: 'SUÍÇA', group: 'B' },
             { id: 26, team1: 'SUÍÇA', team2: 'BÓSNIA', group: 'B' }, { id: 27, team1: 'CANADÁ', team2: 'CATAR', group: 'B' },
             { id: 51, team1: 'SUÍÇA', team2: 'CANADÁ', group: 'B' }, { id: 52, team1: 'BÓSNIA', team2: 'CATAR', group: 'B' },
@@ -367,9 +367,9 @@
             { id: 19, team1: 'ARGENTINA', team2: 'ARGÉLIA', group: 'J' }, { id: 20, team1: 'ÁUSTRIA', team2: 'JORDÂNIA', group: 'J' },
             { id: 43, team1: 'ARGENTINA', team2: 'ÁUSTRIA', group: 'J' }, { id: 44, team1: 'JORDÂNIA', team2: 'ARGÉLIA', group: 'J' },
             { id: 69, team1: 'ARGÉLIA', team2: 'ÁUSTRIA', group: 'J' }, { id: 70, team1: 'JORDÂNIA', team2: 'ARGENTINA', group: 'J' },
-            { id: 23, team1: 'PORTUGAL', team2: 'CONGO', group: 'K' }, { id: 24, team1: 'UZBEQUISTÃO', team2: 'COLÔMBIA', group: 'K' },
-            { id: 47, team1: 'PORTUGAL', team2: 'UZBEQUISTÃO', group: 'K' }, { id: 48, team1: 'COLÔMBIA', team2: 'CONGO', group: 'K' },
-            { id: 71, team1: 'COLÔMBIA', team2: 'PORTUGAL', group: 'K' }, { id: 72, team1: 'CONGO', team2: 'UZBEQUISTÃO', group: 'K' },
+            { id: 23, team1: 'PORTUGAL', team2: 'R.D.CONGO', group: 'K' }, { id: 24, team1: 'UZBEQUISTÃO', team2: 'COLÔMBIA', group: 'K' },
+            { id: 47, team1: 'PORTUGAL', team2: 'UZBEQUISTÃO', group: 'K' }, { id: 48, team1: 'COLÔMBIA', team2: 'R.D.CONGO', group: 'K' },
+            { id: 71, team1: 'COLÔMBIA', team2: 'PORTUGAL', group: 'K' }, { id: 72, team1: 'R.D.CONGO', team2: 'UZBEQUISTÃO', group: 'K' },
             { id: 22, team1: 'INGLATERRA', team2: 'CROÁCIA', group: 'L' }, { id: 21, team1: 'GANA', team2: 'PANAMÁ', group: 'L' },
             { id: 45, team1: 'INGLATERRA', team2: 'GANA', group: 'L' }, { id: 46, team1: 'PANAMÁ', team2: 'CROÁCIA', group: 'L' },
             { id: 67, team1: 'PANAMÁ', team2: 'INGLATERRA', group: 'L' }, { id: 68, team1: 'CROÁCIA', team2: 'GANA', group: 'L' }
@@ -377,7 +377,7 @@
 
         const TEAM_INFO = {
             'MÉXICO': { iso: 'mx', emoji: '🇲🇽' }, 'ÁFRICA DO SUL': { iso: 'za', emoji: '🇿🇦' },
-            'CORÉIA DO SUL': { iso: 'kr', emoji: '🇰🇷' }, 'REPÚB. CHECA': { iso: 'cz', emoji: '🇨🇿' },
+            'CORÉIA DO SUL': { iso: 'kr', emoji: '🇰🇷' }, 'REPÚB. TCHECA': { iso: 'cz', emoji: '🇨🇿' },
             'CANADÁ': { iso: 'ca', emoji: '🇨🇦' }, 'BÓSNIA': { iso: 'ba', emoji: '🇧🇦' },
             'CATAR': { iso: 'qa', emoji: '🇶🇦' }, 'SUÍÇA': { iso: 'ch', emoji: '🇨🇭' },
             'BRASIL': { iso: 'br', emoji: '🇧🇷' }, 'MARROCOS': { iso: 'ma', emoji: '🇲🇦' },
@@ -396,7 +396,7 @@
             'IRAQUE': { iso: 'iq', emoji: '🇮🇶' }, 'NORUEGA': { iso: 'no', emoji: '🇳🇴' },
             'ARGENTINA': { iso: 'ar', emoji: '🇦🇷' }, 'ÁUSTRIA': { iso: 'at', emoji: '🇦🇹' },
             'JORDÂNIA': { iso: 'jo', emoji: '🇯🇴' }, 'ARGÉLIA': { iso: 'dz', emoji: '🇩🇿' },
-            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'CONGO': { iso: 'cd', emoji: '🇨🇩' },
+            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'R.D.CONGO': { iso: 'cd', emoji: '🇨🇩' },
             'UZBEQUISTÃO': { iso: 'uz', emoji: '🇺🇿' }, 'COLÔMBIA': { iso: 'co', emoji: '🇨🇴' },
             'INGLATERRA': { iso: 'gb-eng', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' }, 'CROÁCIA': { iso: 'hr', emoji: '🇭🇷' },
             'GANA': { iso: 'gh', emoji: '🇬🇭' }, 'PANAMÁ': { iso: 'pa', emoji: '🇵🇦' }
