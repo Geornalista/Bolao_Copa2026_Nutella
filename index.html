@@ -2,13 +2,46 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Bolão NUTELLA - Copa 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
-        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #f59e0b;
+            --bg-main: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --bg-card-solid: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --border: rgba(148, 163, 184, 0.15);
+        }
         
+        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Ocultar as setinhas dos inputs numéricos */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
         input[type=number] { -moz-appearance: textfield; }
@@ -17,52 +50,97 @@
         .podium-2 { height: 120px; }
         .podium-3 { height: 90px; }
 
-        /* Estilo iOS Segmented Control para as Tabs */
-        .tab-active {
-            background-color: #ffffff;
-            color: #1e293b;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+        /* Vidro Refinado (Glassmorphism) */
+        .glass {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
         }
-        .tab-inactive {
-            background-color: transparent;
-            color: #64748b;
+        
+        .glass-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-hover:hover {
+            background: rgba(30, 41, 59, 0.85);
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(16, 185, 129, 0.1);
         }
-        .tab-inactive:hover { color: #334155; }
 
+        .input-modern {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1.5px solid var(--border);
+            color: white;
+            transition: all 0.2s;
+        }
+        .input-modern:focus {
+            background: rgba(15, 23, 42, 0.9);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            color: #fff;
+        }
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        .btn-primary:active:not(:disabled) { transform: translateY(0); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(50%); box-shadow: none; }
+
+        .tab-modern {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            color: var(--text-secondary);
+        }
+        .tab-active {
+            background: var(--primary);
+            color: #0f172a !important;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            border-color: transparent;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Oculta scrollbar da navegação mas mantém scroll */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Vidro Refinado (Soft Glassmorphism) */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-        
-        /* Sombras mais suaves e modernas */
-        .soft-shadow {
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03);
-        }
+        /* Custom Scrollbar geral */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.4); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.7); }
+
+        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="font-sans relative text-slate-800 antialiased min-h-screen pb-24 bg-fixed bg-center bg-cover selection:bg-blue-100 selection:text-blue-900" style="background-image: url('./imagem_copa.jpg');">
+<body class="relative antialiased min-h-screen pb-24">
     
-    <!-- Fundo Translúcido Mais Claro e Limpo -->
-    <div class="fixed inset-0 bg-slate-50/85 backdrop-blur-[8px] z-[-1]"></div>
-
     <!-- Header Compacto -->
     <header class="pt-8 pb-6 px-4 relative z-10">
         <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4 sm:gap-5 text-center sm:text-left">
-                <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-16 sm:h-20 object-contain drop-shadow-md" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/2026_FIFA_World_Cup_logo.svg/512px-2026_FIFA_World_Cup_logo.svg.png'">
+                <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-14 sm:h-16 object-contain drop-shadow-md">
                 <div>
-                    <h1 class="text-2xl sm:text-3xl font-black tracking-tighter text-slate-900 uppercase">Bolão Nutella</h1>
-                    <p id="header-subtitle" class="text-slate-500 font-medium text-xs sm:text-sm tracking-wide uppercase mt-0.5">Copa do Mundo FIFA 2026™</p>
+                    <h1 class="text-2xl sm:text-3xl font-display font-bold tracking-tighter text-white uppercase">Bolão Nutella</h1>
+                    <p id="header-subtitle" class="text-emerald-400 font-medium text-xs sm:text-sm tracking-wide uppercase mt-0.5">Copa do Mundo FIFA 2026™</p>
                 </div>
             </div>
             
-            <div id="closed-warning" class="hidden bg-amber-50 text-amber-700 px-4 py-2 rounded-xl border border-amber-200 text-sm font-bold shadow-sm flex items-center gap-2">
+            <div id="closed-warning" class="hidden bg-amber-500/20 text-amber-300 px-4 py-2 rounded-xl border border-amber-500/30 text-sm font-bold shadow-sm flex items-center gap-2 backdrop-blur-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                 Inscrições Encerradas
             </div>
@@ -71,21 +149,21 @@
 
     <!-- Navegação / Tabs -->
     <div id="tabs-container" class="max-w-4xl mx-auto px-4 relative z-20 mb-8 flex justify-center sm:justify-start">
-        <div class="bg-slate-200/60 backdrop-blur-md p-1.5 rounded-[1.25rem] inline-flex w-full sm:w-auto shadow-inner border border-white/40 overflow-x-auto no-scrollbar">
-            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-active whitespace-nowrap flex items-center justify-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 Z"/></svg>
+        <div class="glass p-1.5 rounded-[1.25rem] inline-flex w-full sm:w-auto overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-active whitespace-nowrap flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 Z"/></svg>
                 Grupos
             </button>
-            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap flex items-center justify-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 Mata-Mata
             </button>
-            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap flex items-center justify-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
                 Ranking
             </button>
-            <button onclick="switchTab('regras')" id="tab-btn-regras" class="flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap flex items-center justify-center gap-1.5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <button onclick="switchTab('regras')" id="tab-btn-regras" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                 Regras
             </button>
         </div>
@@ -95,44 +173,44 @@
     <!-- REGRAS E PONTUAÇÕES                        -->
     <!-- ========================================== -->
     <section id="sec-regras" class="max-w-4xl mx-auto px-4 hidden animate-fade-in pb-8">
-        <div class="glass-panel p-6 sm:p-10 rounded-[2rem] soft-shadow">
-            <h2 class="text-3xl font-black text-slate-800 mb-8 flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+        <div class="glass p-6 sm:p-10 rounded-[2rem]">
+            <h2 class="text-2xl sm:text-3xl font-display font-bold text-white mb-8 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
                 Regras e Pontuações
             </h2>
 
             <div class="space-y-12">
                 <!-- Regra 1: Fase de Grupos -->
                 <div>
-                    <h3 class="text-xl font-black text-blue-800 mb-4 flex items-center gap-3">
-                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-md">1</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-emerald-400 mb-4 flex items-center gap-3">
+                        <span class="bg-emerald-500/20 text-emerald-400 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-emerald-500/30">1</span>
                         Placares da Fase de Grupos
                     </h3>
-                    <p class="text-slate-600 mb-4 font-medium leading-relaxed">Durante os 72 jogos da fase de grupos, a pontuação é calculada de acordo com o grau de exatidão do seu palpite em relação ao resultado oficial da partida.</p>
+                    <p class="text-slate-300 mb-4 text-sm sm:text-base leading-relaxed">Durante os 72 jogos da fase de grupos, a pontuação é calculada de acordo com o grau de exatidão do seu palpite em relação ao resultado oficial.</p>
                     
-                    <ul class="list-none space-y-3">
-                        <li class="flex items-start gap-3 bg-white/70 p-4 rounded-2xl border border-slate-200 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-green-500 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
+                    <ul class="list-none space-y-4">
+                        <li class="flex items-start gap-3 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
                             <div>
-                                <strong class="text-slate-800 text-base">Acerto em cheio (Placar Exato): <span class="text-green-600">6 pts + número de gols</span></strong><br>
-                                <span class="text-sm text-slate-600 block mt-1.5 leading-relaxed">
-                                    Ex: O jogo foi 2x1 e o placar apostado foi 2x1 = <strong class="text-slate-800">9 pts</strong> <span class="text-slate-500">(6 pts pelo acerto + 3 pts pelo número de gols da partida)</span>.<br>
-                                    <div class="mt-2 bg-amber-50 text-amber-900 px-3 py-2 rounded-xl border border-amber-200 text-xs sm:text-sm font-medium">
+                                <strong class="text-white text-base">Acerto em cheio (Placar Exato): <span class="text-emerald-400">6 pts + número de gols</span></strong><br>
+                                <span class="text-sm text-slate-400 block mt-1.5 leading-relaxed">
+                                    Ex: O jogo foi 2x1 e o placar apostado foi 2x1 = <strong class="text-white">9 pts</strong> (6 pts pelo acerto + 3 pts pelo número de gols).<br>
+                                    <div class="mt-3 bg-amber-500/10 text-amber-200 px-4 py-3 rounded-xl border border-amber-500/20 text-xs sm:text-sm font-medium">
                                         💡 <strong>Dica do "Zero":</strong> O zero gols conta com 1 pt também!<br>
-                                        • Exemplo de 3x0 exato = <strong>10 pts</strong> (6 pts do acerto + 4 pts dos gols: 3 + 1 pelo zero).<br>
-                                        • Exemplo de 0x0 exato = <strong>8 pts</strong> (6 pts do acerto + 2 pts pelos dois zeros).
+                                        • Exemplo de 3x0 exato = <strong>10 pts</strong> (6 pts acerto + 4 pts gols: 3 + 1 pelo zero).<br>
+                                        • Exemplo de 0x0 exato = <strong>8 pts</strong> (6 pts acerto + 2 pts pelos dois zeros).
                                     </div>
                                 </span>
                             </div>
                         </li>
-                        <li class="flex items-start gap-3 bg-white/70 p-4 rounded-2xl border border-slate-200 shadow-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-500 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        <li class="flex items-start gap-3 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
                             <div>
-                                <strong class="text-slate-800 text-base">Acerto do Vencedor ou Empate: <span class="text-blue-600">3 pts + gols acertados de uma equipe</span></strong><br>
-                                <span class="text-sm text-slate-600 block mt-1.5 leading-relaxed">
-                                    Sem acertar o placar exato, você ganha 3 pts pelo resultado mais o número de gols acertados de alguma equipe (a regra de 1 pt para o zero também vale aqui).<br><br>
-                                    • <strong>Exemplo 1:</strong> O jogo foi 2x1 e o palpite foi 2x0 = <strong class="text-slate-800">5 pts</strong> <span class="text-slate-500">(3 pts pelo acerto no vencedor + 2 pts pelo acerto nos gols do primeiro time)</span>.<br>
-                                    • <strong>Exemplo 2:</strong> O jogo foi 2x0 e o palpite foi 3x1 = <strong class="text-slate-800">3 pts</strong> <span class="text-slate-500">(3 pts pelo resultado, sem acertar os gols exatos de nenhuma das equipes)</span>.
+                                <strong class="text-white text-base">Acerto do Vencedor ou Empate: <span class="text-blue-400">3 pts + gols acertados</span></strong><br>
+                                <span class="text-sm text-slate-400 block mt-1.5 leading-relaxed">
+                                    Sem acertar o placar exato, você ganha 3 pts pelo resultado mais os gols acertados de alguma equipe (o zero vale 1 pt).<br><br>
+                                    • <strong>Exemplo 1:</strong> Jogo 2x1, palpite 2x0 = <strong class="text-white">5 pts</strong> (3 pts vencedor + 2 pts gols do primeiro time).<br>
+                                    • <strong>Exemplo 2:</strong> Jogo 2x0, palpite 3x1 = <strong class="text-white">3 pts</strong> (3 pts resultado, sem acertar gols exatos).
                                 </span>
                             </div>
                         </li>
@@ -140,64 +218,63 @@
                 </div>
 
                 <!-- Regra 2: Mata Mata e Pesos -->
-                <div>
-                    <h3 class="text-xl font-black text-indigo-800 mb-4 flex items-center gap-3">
-                        <span class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm shadow-md">2</span>
+                <div class="pt-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-indigo-400 mb-4 flex items-center gap-3">
+                        <span class="bg-indigo-500/20 text-indigo-400 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-indigo-500/30">2</span>
                         Mata-Mata: A Regra das Zebras (Pesos)
                     </h3>
-                    <p class="text-slate-600 mb-4 font-medium leading-relaxed">
-                        No mata-mata, a divisão das seleções por pesos respeitou a seguinte regra para valorizar as apostas mais ousadas ("zebras"):
+                    <p class="text-slate-300 mb-5 text-sm sm:text-base leading-relaxed">
+                        No mata-mata, a divisão das seleções por pesos respeita a seguinte regra para valorizar apostas mais ousadas:
                     </p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                        <div class="bg-slate-700 p-4 rounded-2xl border border-slate-600 text-white shadow-sm flex flex-col justify-center">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-300 block mb-1">Peso 1</span>
-                            <span class="text-sm font-bold leading-tight">Seleções cabeças-de-chave</span>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 text-white flex flex-col justify-center">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Peso 1</span>
+                            <span class="text-sm font-semibold leading-tight text-white">Seleções cabeças-de-chave</span>
                         </div>
-                        <div class="bg-slate-600 p-4 rounded-2xl border border-slate-500 text-white shadow-sm flex flex-col justify-center">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-300 block mb-1">Peso 2</span>
-                            <span class="text-sm font-bold leading-tight">América do Sul, Europa e África <br><span class="font-normal text-xs text-slate-200">(Não cabeças-de-chave)</span></span>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 text-white flex flex-col justify-center">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Peso 2</span>
+                            <span class="text-sm font-semibold leading-tight text-white">América do Sul, Europa e África <br><span class="font-normal text-xs text-slate-400">(Não cabeças-de-chave)</span></span>
                         </div>
-                        <div class="bg-slate-500 p-4 rounded-2xl border border-slate-400 text-white shadow-sm flex flex-col justify-center">
-                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-200 block mb-1">Peso 3</span>
-                            <span class="text-sm font-bold leading-tight">América do Norte e Central, Ásia e Oceania</span>
+                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 text-white flex flex-col justify-center">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Peso 3</span>
+                            <span class="text-sm font-semibold leading-tight text-white">América do Norte/Central, Ásia e Oceania</span>
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto rounded-2xl border border-slate-200 soft-shadow">
-                        <table class="w-full text-sm text-left">
-                            <thead class="bg-slate-800 text-white font-bold uppercase tracking-wider text-[11px] sm:text-xs">
+                    <div class="overflow-x-auto rounded-xl border border-slate-700 bg-slate-800/50">
+                        <table class="w-full text-sm text-left whitespace-nowrap">
+                            <thead class="bg-slate-900/80 text-slate-300 font-semibold uppercase tracking-wider text-xs border-b border-slate-700">
                                 <tr>
-                                    <th class="px-3 sm:px-4 py-4 rounded-tl-xl">Fase do Torneio</th>
-                                    <th class="px-3 sm:px-4 py-4 text-center bg-slate-700">Peso 1</th>
-                                    <th class="px-3 sm:px-4 py-4 text-center bg-slate-600">Peso 2</th>
-                                    <th class="px-3 sm:px-4 py-4 text-center bg-slate-500 rounded-tr-xl">Peso 3</th>
+                                    <th class="px-4 py-4">Fase do Torneio</th>
+                                    <th class="px-4 py-4 text-center">Peso 1</th>
+                                    <th class="px-4 py-4 text-center">Peso 2</th>
+                                    <th class="px-4 py-4 text-center text-indigo-400">Peso 3</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-200 bg-white/60 text-slate-700 font-medium">
-                                <tr class="hover:bg-white transition"><td class="px-3 sm:px-4 py-3 font-bold text-slate-800">16 Avos de Final</td><td class="px-3 sm:px-4 py-3 text-center">2 pts</td><td class="px-3 sm:px-4 py-3 text-center">3 pts</td><td class="px-3 sm:px-4 py-3 text-center text-indigo-600 font-bold bg-indigo-50/50">5 pts</td></tr>
-                                <tr class="hover:bg-white transition"><td class="px-3 sm:px-4 py-3 font-bold text-slate-800">Oitavas de Final</td><td class="px-3 sm:px-4 py-3 text-center">4 pts</td><td class="px-3 sm:px-4 py-3 text-center">6 pts</td><td class="px-3 sm:px-4 py-3 text-center text-indigo-600 font-bold bg-indigo-50/50">10 pts</td></tr>
-                                <tr class="hover:bg-white transition"><td class="px-3 sm:px-4 py-3 font-bold text-slate-800">Quartas de Final</td><td class="px-3 sm:px-4 py-3 text-center">4 pts</td><td class="px-3 sm:px-4 py-3 text-center">6 pts</td><td class="px-3 sm:px-4 py-3 text-center text-indigo-600 font-bold bg-indigo-50/50">10 pts</td></tr>
-                                <tr class="hover:bg-white transition"><td class="px-3 sm:px-4 py-3 font-bold text-slate-800">Semifinais</td><td class="px-3 sm:px-4 py-3 text-center">8 pts</td><td class="px-3 sm:px-4 py-3 text-center">12 pts</td><td class="px-3 sm:px-4 py-3 text-center text-indigo-600 font-bold bg-indigo-50/50">20 pts</td></tr>
-                                <tr class="hover:bg-white transition"><td class="px-3 sm:px-4 py-3 font-bold text-slate-800">A Grande Final</td><td class="px-3 sm:px-4 py-3 text-center">12 pts</td><td class="px-3 sm:px-4 py-3 text-center">24 pts</td><td class="px-3 sm:px-4 py-3 text-center text-indigo-600 font-bold bg-indigo-50/50">30 pts</td></tr>
-                                <tr class="hover:bg-white transition"><td class="px-3 sm:px-4 py-3 font-bold text-slate-800">Acertar 3º Colocado</td><td class="px-3 sm:px-4 py-3 text-center">18 pts</td><td class="px-3 sm:px-4 py-3 text-center">30 pts</td><td class="px-3 sm:px-4 py-3 text-center text-indigo-600 font-bold bg-indigo-50/50">45 pts</td></tr>
-                                <tr class="hover:bg-white transition"><td class="px-3 sm:px-4 py-3 font-black text-blue-900 uppercase">Acertar Campeão</td><td class="px-3 sm:px-4 py-3 text-center font-black">24 pts</td><td class="px-3 sm:px-4 py-3 text-center font-black">36 pts</td><td class="px-3 sm:px-4 py-3 text-center text-green-600 font-black bg-green-50/50">60 pts</td></tr>
+                            <tbody class="divide-y divide-slate-700 text-slate-300 font-medium">
+                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">16 Avos de Final</td><td class="px-4 py-3 text-center">2 pts</td><td class="px-4 py-3 text-center">3 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">5 pts</td></tr>
+                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Oitavas de Final</td><td class="px-4 py-3 text-center">4 pts</td><td class="px-4 py-3 text-center">6 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">10 pts</td></tr>
+                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Quartas de Final</td><td class="px-4 py-3 text-center">4 pts</td><td class="px-4 py-3 text-center">6 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">10 pts</td></tr>
+                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Semifinais</td><td class="px-4 py-3 text-center">8 pts</td><td class="px-4 py-3 text-center">12 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">20 pts</td></tr>
+                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">A Grande Final</td><td class="px-4 py-3 text-center">12 pts</td><td class="px-4 py-3 text-center">24 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">30 pts</td></tr>
+                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Acertar 3º Colocado</td><td class="px-4 py-3 text-center">18 pts</td><td class="px-4 py-3 text-center">30 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">45 pts</td></tr>
+                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-emerald-400 font-bold uppercase">Acertar Campeão</td><td class="px-4 py-3 text-center font-bold text-white">24 pts</td><td class="px-4 py-3 text-center font-bold text-white">36 pts</td><td class="px-4 py-3 text-center text-emerald-400 font-bold">60 pts</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Regra 3: Dicas Gerais -->
-                <div class="bg-amber-50 p-6 sm:p-8 rounded-3xl border border-amber-200">
-                    <h3 class="text-lg font-black text-amber-800 mb-4 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                <!-- Lembretes -->
+                <div class="bg-amber-500/10 p-6 rounded-2xl border border-amber-500/20">
+                    <h3 class="text-lg font-bold text-amber-400 mb-3 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                         Lembretes Importantes
                     </h3>
-                    <ul class="list-none text-amber-900 text-sm space-y-3 font-medium">
-                        <li class="flex gap-2 items-start"><span class="text-amber-500">▶</span> Preencha todos os <strong>136 campos</strong> (Grupos e Mata-Mata) para maximizar suas chances!</li>
-                        <li class="flex gap-2 items-start"><span class="text-amber-500">▶</span> O botão "Salvar Todos os Palpites" envia as duas abas de uma única vez. Não precisa salvar separado.</li>
-                        <li class="flex gap-2 items-start"><span class="text-amber-500">▶</span> As inscrições encerram-se automaticamente no dia <strong class="border-b border-amber-300">11 de Junho de 2026</strong>.</li>
-                        <li class="flex gap-2 items-start"><span class="text-amber-500">▶</span> O Ranking Oficial será atualizado de forma automática em tempo real.</li>
+                    <ul class="list-none text-slate-300 text-sm sm:text-base space-y-2 font-medium">
+                        <li class="flex gap-2 items-start"><span class="text-amber-500 mt-0.5">▶</span> <div>Preencha todos os <strong class="text-white">136 campos</strong> (Grupos e Mata-Mata) para maximizar as chances.</div></li>
+                        <li class="flex gap-2 items-start"><span class="text-amber-500 mt-0.5">▶</span> <div>O botão "Salvar" envia tudo de uma vez.</div></li>
+                        <li class="flex gap-2 items-start"><span class="text-amber-500 mt-0.5">▶</span> <div>Inscrições encerram a <strong class="text-amber-400 border-b border-amber-400/50">11 de Junho de 2026</strong>.</div></li>
                     </ul>
                 </div>
             </div>
@@ -209,59 +286,56 @@
     <!-- ========================================== -->
     <section id="main-palpites-container" class="max-w-4xl mx-auto px-4 animate-fade-in block">
         
-        <!-- Tela de Sucesso Limpa -->
-        <div id="success-view" class="hidden glass-panel p-8 sm:p-12 rounded-[2rem] soft-shadow text-center space-y-4 animate-fade-in mb-8">
-            <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-2">
+        <!-- Tela de Sucesso -->
+        <div id="success-view" class="hidden glass p-8 sm:p-12 rounded-[2rem] text-center space-y-4 animate-fade-in mb-8">
+            <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-2 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
-            <h2 class="text-3xl sm:text-4xl font-black text-slate-800">Golaço!</h2>
-            <p class="text-slate-500 font-medium">Os seus palpites foram guardados na aba <b id="success-name" class="text-slate-800"></b>.</p>
-            <button onclick="resetForm()" class="mt-8 bg-slate-900 text-white font-bold py-3.5 px-8 rounded-xl hover:bg-slate-800 transition active:scale-95">Preencher outra aba</button>
+            <h2 class="text-3xl sm:text-4xl font-display font-bold text-white">Golaço!</h2>
+            <p class="text-slate-300 font-medium">Os seus palpites foram guardados na aba <b id="success-name" class="text-emerald-400"></b>.</p>
+            <button onclick="resetForm()" class="mt-8 btn-primary font-bold py-3.5 px-8 rounded-xl w-full sm:w-auto mx-auto">Preencher outra aba</button>
         </div>
 
         <form id="predictions-form" class="space-y-8">
             
-            <!-- Nome e Progresso com NOVA LÓGICA DE RECUPERAÇÃO -->
-            <div id="name-container" class="glass-panel rounded-3xl soft-shadow p-5 sm:p-6 sticky top-4 z-30 flex flex-col gap-4 border-b border-white/50">
-                
-                <!-- Toggle: Novo vs Recuperar -->
-                <div class="flex p-1 bg-slate-200/50 rounded-xl w-full sm:w-max mx-auto sm:mx-0">
-                    <button type="button" id="btn-mode-new" onclick="setMode('new')" class="flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-black transition-all bg-white text-blue-700 shadow-sm">Novo Participante</button>
-                    <button type="button" id="btn-mode-recover" onclick="setMode('recover')" class="flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-black transition-all bg-transparent text-slate-500 hover:text-slate-700">Já Tenho Palpites</button>
-                </div>
+            <!-- Controle: Novo Participante / Já Tenho Palpites -->
+            <div class="flex p-1 bg-slate-800/80 rounded-xl w-full sm:w-max mx-auto sm:mx-0 mb-4 border border-slate-700 shadow-inner">
+                <button type="button" id="btn-mode-new" onclick="setMode('new')" class="flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-emerald-500 text-slate-900 shadow-sm">Novo Participante</button>
+                <button type="button" id="btn-mode-recover" onclick="setMode('recover')" class="flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-transparent text-slate-400 hover:text-slate-200">Já Tenho Palpites</button>
+            </div>
 
-                <div class="flex flex-col sm:flex-row gap-6 items-end">
-                    <div class="w-full sm:flex-1 relative">
-                        <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1 ml-1">Nome na Planilha</label>
-                        <div class="flex gap-2">
-                            <input type="text" id="participant-name" placeholder="Digite seu nome..." class="w-full text-lg sm:text-xl p-3 bg-white/50 border-2 border-slate-200 rounded-xl focus:border-blue-600 focus:ring-0 outline-none transition uppercase font-bold text-slate-800 placeholder-slate-300" required />
-                            
-                            <!-- BOTÃO DE BUSCA (Apenas no Modo Recuperar) -->
-                            <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="hidden shrink-0 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold px-4 py-2 rounded-xl transition items-center gap-2 border border-blue-200 text-sm shadow-sm">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                <span class="hidden sm:inline">Recuperar</span>
-                            </button>
-                        </div>
-                        <p id="mode-hint" class="text-xs text-slate-500 mt-2 ml-1">✨ <b class="text-blue-700">Dica:</b> Como é novo, uma aba será criada automaticamente!</p>
+            <!-- Nome e Progresso -->
+            <div id="name-container" class="glass rounded-3xl p-5 sm:p-6 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between shadow-2xl">
+                <div class="w-full sm:flex-1 relative">
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Nome na Planilha</label>
+                    <div class="flex gap-2">
+                        <input type="text" id="participant-name" placeholder="Digite seu nome..." class="w-full text-lg sm:text-xl px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition uppercase font-bold text-white placeholder-slate-600 shadow-inner" required />
+                        
+                        <!-- BOTÃO DE BUSCA (Apenas no Modo Recuperar) -->
+                        <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="hidden shrink-0 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold px-4 py-3 rounded-xl transition items-center gap-2 border border-slate-700 text-sm shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <span class="hidden sm:inline">Recuperar</span>
+                        </button>
                     </div>
-
-                    <div class="w-full sm:w-48 shrink-0 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                        <div class="flex justify-between items-end mb-1.5 ml-1">
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Progresso</span>
-                            <span class="text-xs font-black text-slate-700"><span id="progress-text">0</span>/136</span>
-                        </div>
-                        <div class="w-full bg-slate-200 rounded-full h-2 overflow-hidden shadow-inner">
-                            <div id="progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-300 ease-out w-0"></div>
-                        </div>
+                    <p id="mode-hint" class="text-xs text-slate-400 mt-2 ml-1">✨ <b class="text-emerald-400">Dica:</b> Como é novo, uma aba será criada automaticamente!</p>
+                </div>
+                
+                <div class="w-full sm:w-48 shrink-0 bg-slate-900/50 p-4 rounded-2xl border border-slate-700/50 shadow-inner">
+                    <div class="flex justify-between items-end mb-2 ml-1">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Progresso</span>
+                        <span class="text-xs font-black text-white"><span id="progress-text">0</span>/136</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-full rounded-full transition-all duration-300 ease-out w-0 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Já Entraram em Campo -->
-            <div id="participants-container" class="hidden">
+            <div id="participants-container" class="hidden animate-fade-in">
                 <div class="flex flex-wrap gap-2 items-center pl-2">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">Confirmados (<span id="participants-count">0</span>):</span>
-                    <div id="participants-list" class="flex flex-wrap gap-1.5"></div>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-2">Confirmados (<span id="participants-count">0</span>):</span>
+                    <div id="participants-list" class="flex flex-wrap gap-2"></div>
                 </div>
             </div>
 
@@ -275,19 +349,19 @@
                 <div id="knockout-container"></div>
             </section>
 
-            <div id="error-message" class="hidden bg-red-50 text-red-600 p-4 rounded-xl flex items-center gap-3 text-sm font-bold border border-red-100">
+            <div id="error-message" class="hidden bg-red-500/10 text-red-400 p-4 rounded-xl flex items-center gap-3 text-sm font-bold border border-red-500/20 backdrop-blur-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                 <p id="error-text">Erro ao enviar.</p>
             </div>
 
             <!-- Botão Enviar Flutuante -->
-            <button type="submit" id="submit-btn" class="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-base py-4 px-8 rounded-2xl transition-all active:scale-95 disabled:opacity-50 disabled:pointer-events-none soft-shadow group">
+            <button type="submit" id="submit-btn" class="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-3 btn-primary font-bold text-base py-4 px-10 rounded-2xl group mt-6 disabled:opacity-50">
                 <span id="submit-text" class="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                     Salvar Todos os Palpites
                 </span>
                 <span id="loading-text" class="hidden flex items-center gap-2">
-                    <svg class="animate-spin -ml-1 h-5 w-5 text-white/70" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    <svg class="animate-spin -ml-1 h-5 w-5 text-white/90" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     Processando...
                 </span>
             </button>
@@ -298,50 +372,51 @@
     <!-- SEÇÃO 2: RANKING GERAL                     -->
     <!-- ========================================== -->
     <section id="sec-ranking" class="max-w-3xl mx-auto px-4 hidden">
-        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-20">
-            <svg class="animate-spin h-8 w-8 text-blue-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-24 glass rounded-3xl">
+            <svg class="animate-spin h-10 w-10 text-emerald-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
             <p class="text-slate-400 font-bold text-sm animate-pulse uppercase tracking-widest">Atualizando ao vivo</p>
         </div>
 
-        <div id="ranking-error-state" class="hidden glass-panel text-red-600 p-6 rounded-2xl flex flex-col items-center text-center mt-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <p id="ranking-error-message" class="text-sm font-medium mb-4">Falha de conexão.</p>
-            <button onclick="fetchRanking()" class="text-xs font-bold uppercase tracking-wider border border-red-200 bg-red-50 hover:bg-red-100 py-2 px-4 rounded-lg transition">Tentar Novamente</button>
+        <div id="ranking-error-state" class="hidden glass text-red-400 p-8 rounded-3xl flex flex-col items-center text-center mt-4 border border-red-500/20">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4 text-red-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <h3 class="font-display font-bold text-xl text-white mb-2">Falha de conexão</h3>
+            <p id="ranking-error-message" class="text-sm font-medium mb-6 text-slate-400">Não foi possível carregar os dados.</p>
+            <button onclick="fetchRanking()" class="text-sm font-bold bg-slate-800 hover:bg-slate-700 text-white py-3 px-6 rounded-xl transition shadow">Tentar Novamente</button>
         </div>
 
         <div id="ranking-content" class="hidden opacity-0 animate-fade-in">
-            <div class="flex justify-end mb-2">
-                <button onclick="fetchRanking()" class="text-xs font-bold text-slate-500 hover:text-blue-600 uppercase tracking-widest flex items-center gap-1.5 transition-colors">
+            <div class="flex justify-end mb-4">
+                <button onclick="fetchRanking()" class="text-xs font-bold text-slate-300 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors bg-slate-800/50 hover:bg-slate-800 px-4 py-2 rounded-lg border border-slate-700">
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
                     Atualizar
                 </button>
             </div>
             
-            <div id="podium" class="flex items-end justify-center gap-3 sm:gap-6 mb-10 mt-4"></div>
+            <div id="podium" class="flex items-end justify-center gap-2 sm:gap-6 mb-12 mt-4 drop-shadow-2xl"></div>
             
-            <div class="glass-panel rounded-3xl soft-shadow overflow-hidden mb-8 border-t-0">
-                <div class="bg-slate-50/50 px-6 py-4 flex text-slate-400 font-black text-[10px] sm:text-xs uppercase tracking-widest border-b border-slate-200/60">
-                    <span class="w-8 sm:w-12 text-center">Pos</span>
-                    <span class="flex-1 ml-4 sm:ml-5">Participante / Pontos</span>
+            <div class="glass rounded-3xl overflow-hidden mb-8 shadow-2xl">
+                <div class="bg-slate-900/80 px-6 py-5 flex text-slate-300 font-bold text-[10px] sm:text-xs uppercase tracking-widest border-b border-slate-800">
+                    <span class="w-10 sm:w-16 text-center">Pos</span>
+                    <span class="flex-1 ml-3 sm:ml-5">Participante / Pontos</span>
                 </div>
-                <div id="ranking-list" class="divide-y divide-slate-100/80"></div>
+                <div id="ranking-list" class="divide-y divide-slate-800/50 bg-slate-900/20"></div>
             </div>
         </div>
     </section>
 
-    <!-- Modal de Confirmação Minimalista -->
-    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full soft-shadow transform transition-all animate-fade-in">
-            <div class="flex items-center gap-3 mb-4 text-amber-500">
+    <!-- Modal de Confirmação -->
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div class="glass rounded-3xl p-6 sm:p-8 max-w-sm w-full transform transition-all animate-fade-in shadow-2xl border border-slate-700">
+            <div class="flex items-center gap-3 mb-4 text-amber-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                <h3 class="text-xl font-black text-slate-800">Atenção</h3>
+                <h3 class="text-xl font-display font-bold text-white">Atenção</h3>
             </div>
-            <p class="text-slate-500 mb-8 font-medium text-sm sm:text-base">
-                Você preencheu apenas <span id="filled-count" class="font-bold text-slate-800">0</span> de <span id="total-count" class="font-bold text-slate-800">136</span> palpites. Deseja enviar de forma incompleta?
+            <p class="text-slate-300 mb-8 font-medium text-sm sm:text-base leading-relaxed">
+                Você preencheu apenas <span id="filled-count" class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded text-lg">0</span> de <span id="total-count" class="font-bold text-white text-lg">136</span> palpites. Deseja enviar incompleto?
             </p>
-            <div class="flex gap-2">
-                <button type="button" onclick="closeModal()" class="flex-1 py-3 text-slate-500 font-bold bg-slate-100 hover:bg-slate-200 rounded-xl transition text-sm">Completar</button>
-                <button type="button" onclick="executeSubmit()" class="flex-1 py-3 bg-blue-600 text-white font-bold hover:bg-blue-700 rounded-xl transition text-sm">Sim, enviar</button>
+            <div class="flex gap-3">
+                <button type="button" onclick="closeModal()" class="flex-1 py-3 text-slate-300 font-bold bg-slate-800 hover:bg-slate-700 rounded-xl transition text-sm border border-slate-700">Completar</button>
+                <button type="button" onclick="executeSubmit()" class="flex-1 py-3 btn-primary font-bold rounded-xl transition text-sm">Sim, enviar</button>
             </div>
         </div>
     </div>
@@ -414,7 +489,7 @@
             'IRAQUE': { iso: 'iq', emoji: '🇮🇶' }, 'NORUEGA': { iso: 'no', emoji: '🇳🇴' },
             'ARGENTINA': { iso: 'ar', emoji: '🇦🇷' }, 'ÁUSTRIA': { iso: 'at', emoji: '🇦🇹' },
             'JORDÂNIA': { iso: 'jo', emoji: '🇯🇴' }, 'ARGÉLIA': { iso: 'dz', emoji: '🇩🇿' },
-            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'R.D. CONGO': { iso: 'cd', emoji: '🇨🇩' },
+            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'R.D. CONGO': { iso: 'cd', emoji: '🇨🇩' }, // Corrigido para República Democrática do Congo (cd)
             'UZBEQUISTÃO': { iso: 'uz', emoji: '🇺🇿' }, 'COLÔMBIA': { iso: 'co', emoji: '🇨🇴' },
             'INGLATERRA': { iso: 'gb-eng', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' }, 'CROÁCIA': { iso: 'hr', emoji: '🇭🇷' },
             'GANA': { iso: 'gh', emoji: '🇬🇭' }, 'PANAMÁ': { iso: 'pa', emoji: '🇵🇦' }
@@ -430,7 +505,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('total-count').textContent = 136;
-            
             const agora = new Date();
             if (agora > DATA_LIMITE) {
                 bolaoEncerrado = true;
@@ -445,7 +519,6 @@
             }
         });
 
-        // Toggle Modo Novo/Recuperar
         function setMode(mode) {
             const btnNew = document.getElementById('btn-mode-new');
             const btnRecover = document.getElementById('btn-mode-recover');
@@ -453,19 +526,19 @@
             const hintText = document.getElementById('mode-hint');
 
             if (mode === 'new') {
-                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-black transition-all bg-white text-blue-700 shadow-sm";
-                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-black transition-all bg-transparent text-slate-500 hover:text-slate-700";
+                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-emerald-500 text-slate-900 shadow-sm";
+                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-transparent text-slate-400 hover:text-slate-200";
                 
                 btnLoad.classList.add('hidden');
                 btnLoad.classList.remove('flex');
-                hintText.innerHTML = '✨ <b class="text-blue-700">Dica:</b> Como é novo, uma aba será criada automaticamente!';
+                hintText.innerHTML = '✨ <b class="text-emerald-400">Dica:</b> Como é novo, uma aba será criada automaticamente!';
             } else {
-                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-black transition-all bg-white text-blue-700 shadow-sm";
-                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-black transition-all bg-transparent text-slate-500 hover:text-slate-700";
+                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-emerald-500 text-slate-900 shadow-sm";
+                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-transparent text-slate-400 hover:text-slate-200";
                 
                 btnLoad.classList.remove('hidden');
                 btnLoad.classList.add('flex');
-                hintText.innerHTML = '🔄 <b class="text-blue-700">Atenção:</b> Digite o seu nome exato e clique em Recuperar.';
+                hintText.innerHTML = '🔄 <b class="text-emerald-400">Atenção:</b> Digite o seu nome exato e clique em Recuperar.';
             }
         }
 
@@ -482,8 +555,8 @@
                     let html = '';
                     sortedNames.forEach(p => {
                         html += `
-                        <span class="bg-white/90 text-slate-600 font-bold px-3 py-1.5 rounded-lg border border-slate-200/60 shadow-sm text-[10px] sm:text-xs flex items-center gap-1.5 cursor-default">
-                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="bg-slate-800/80 text-slate-300 font-bold px-3 py-1.5 rounded-lg border border-slate-700 shadow-sm text-[10px] sm:text-xs flex items-center gap-2 cursor-default">
+                            <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_5px_rgba(16,185,129,0.8)]"></div>
                             ${p.name}
                         </span>`;
                     });
@@ -510,12 +583,6 @@
             const bar = document.getElementById('progress-bar');
             document.getElementById('progress-text').textContent = filledCount;
             bar.style.width = percent + '%';
-            
-            if(filledCount === 136) {
-                bar.classList.add('bg-green-500'); bar.classList.remove('bg-blue-600');
-            } else {
-                bar.classList.add('bg-blue-600'); bar.classList.remove('bg-green-500');
-            }
         }
 
         function bloquearPalpites() {
@@ -523,7 +590,7 @@
             document.getElementById('tab-btn-knockout').classList.add('hidden');
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
-            document.getElementById('header-subtitle').textContent = "Acompanhe o ranking oficial atualizado";
+            document.getElementById('header-subtitle').textContent = "Ranking oficial do torneio atualizado";
             switchTab('ranking');
         }
 
@@ -532,11 +599,14 @@
 
             ['grupos', 'knockout', 'ranking', 'regras'].forEach(id => {
                 const btn = document.getElementById('tab-btn-' + id);
-                if (btn) btn.className = "flex-1 sm:flex-none py-2 px-4 sm:px-6 rounded-xl font-bold text-sm transition-all duration-300 tab-inactive whitespace-nowrap flex items-center justify-center gap-1.5";
+                if (btn) btn.className = "flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white";
             });
             
             const activeBtn = document.getElementById('tab-btn-' + tabId);
-            if (activeBtn) activeBtn.classList.replace('tab-inactive', 'tab-active');
+            if (activeBtn) {
+                activeBtn.classList.add('tab-active');
+                activeBtn.classList.remove('tab-modern', 'hover:text-white');
+            }
 
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('sec-ranking').classList.add('hidden');
@@ -560,7 +630,7 @@
         }
 
         // =====================================================================
-        // RENDERIZAÇÃO ESTILO "BETTING APP" COM GRELHA CORRIGIDA
+        // RENDERIZAÇÃO ESTILO "BETTING APP" COM GRID CORRIGIDA (SEM QUEBRA DE TEXTO)
         // =====================================================================
         function renderMatches() {
             const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
@@ -571,12 +641,12 @@
             let html = '';
             for (const group in groupedMatches) {
                 html += `
-                <div class="mb-10">
-                    <div class="flex items-center gap-3 mb-4 pl-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100/80 text-blue-700 flex items-center justify-center font-black text-sm border border-blue-200 shadow-sm">${group}</div>
-                        <h3 class="font-bold text-slate-700 text-lg sm:text-xl uppercase tracking-widest">Grupo ${group}</h3>
+                <div class="mb-10 animate-slide-up">
+                    <div class="flex items-center gap-3 mb-5 pl-2">
+                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm border border-emerald-500/30 shadow-sm">${group}</div>
+                        <h3 class="font-display font-bold text-white text-xl uppercase tracking-widest">Grupo ${group}</h3>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 `;
                 
                 groupedMatches[group].forEach(match => {
@@ -584,31 +654,31 @@
                     const t2 = TEAM_INFO[match.team2] || { iso: 'xx' };
                     
                     html += `
-                        <div class="glass-panel rounded-2xl p-3 sm:p-4 soft-shadow hover:shadow-md transition-shadow duration-300">
-                            <div class="text-[10px] font-bold text-slate-400 mb-3 uppercase tracking-widest border-b border-slate-100 pb-1.5 ml-1">
-                                Jogo #${match.id}
+                        <div class="glass glass-hover rounded-2xl p-4 sm:p-5">
+                            <div class="text-[10px] font-bold text-slate-500 mb-4 uppercase tracking-widest flex justify-between items-center border-b border-slate-700/50 pb-2">
+                                <span>Jogo #${match.id}</span>
                             </div>
                             
-                            <!-- Estrutura Horizontal Simples e Robusta -->
-                            <div class="flex items-center justify-between gap-1 sm:gap-2 w-full">
+                            <!-- Estrutura robusta sem quebra forçada (grid 3 colunas) -->
+                            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 w-full">
                                 
-                                <!-- Equipa 1 -->
-                                <div class="flex-1 flex items-center justify-end gap-1.5 sm:gap-2">
-                                    <span class="font-bold text-slate-700 text-[10px] sm:text-xs md:text-sm text-right leading-tight">${match.team1}</span>
-                                    <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-5 h-3.5 sm:w-7 sm:h-5 object-cover rounded-[2px] shadow-sm border border-slate-200 shrink-0" alt="${match.team1}">
+                                <!-- Equipa 1 (Esquerda) -->
+                                <div class="flex flex-col items-end gap-1.5 sm:gap-2 text-right">
+                                    <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-6 h-4 sm:w-8 sm:h-5.5 object-cover rounded-[3px] shadow-sm border border-slate-700" alt="${match.team1}">
+                                    <span class="font-bold text-slate-200 text-xs sm:text-sm leading-tight uppercase">${match.team1}</span>
                                 </div>
 
                                 <!-- Inputs Centrais -->
-                                <div class="flex items-center justify-center gap-1 sm:gap-1.5 shrink-0 bg-slate-50 p-1 sm:p-1.5 rounded-xl border border-slate-100 shadow-inner">
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-9 h-9 sm:w-12 sm:h-12 text-center text-base sm:text-xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
-                                    <span class="text-slate-300 font-black text-xs">X</span>
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-9 h-9 sm:w-12 sm:h-12 text-center text-base sm:text-xl font-black rounded-lg border-none shadow-sm focus:ring-2 focus:ring-blue-500 bg-white text-blue-900 transition outline-none" />
+                                <div class="flex items-center justify-center gap-1 sm:gap-2 shrink-0 bg-slate-900/50 p-1.5 rounded-xl border border-slate-700 shadow-inner">
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="input-modern w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg transition" />
+                                    <span class="text-slate-500 font-black text-xs">X</span>
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="input-modern w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg transition" />
                                 </div>
 
-                                <!-- Equipa 2 -->
-                                <div class="flex-1 flex items-center justify-start gap-1.5 sm:gap-2">
-                                    <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-5 h-3.5 sm:w-7 sm:h-5 object-cover rounded-[2px] shadow-sm border border-slate-200 shrink-0" alt="${match.team2}">
-                                    <span class="font-bold text-slate-700 text-[10px] sm:text-xs md:text-sm text-left leading-tight">${match.team2}</span>
+                                <!-- Equipa 2 (Direita) -->
+                                <div class="flex flex-col items-start gap-1.5 sm:gap-2 text-left">
+                                    <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-6 h-4 sm:w-8 sm:h-5.5 object-cover rounded-[3px] shadow-sm border border-slate-700" alt="${match.team2}">
+                                    <span class="font-bold text-slate-200 text-xs sm:text-sm leading-tight uppercase">${match.team2}</span>
                                 </div>
                                 
                             </div>
@@ -618,7 +688,7 @@
             }
             document.getElementById('matches-container').innerHTML = html;
 
-            document.querySelectorAll('.score-input').forEach(input => {
+            document.querySelectorAll('.score-input, .input-modern').forEach(input => {
                 input.addEventListener('input', function() {
                     this.value = this.value.replace(/[^0-9]/g, '');
                     const matchId = this.getAttribute('data-match-id');
@@ -631,7 +701,7 @@
         }
 
         // =====================================================================
-        // RENDERIZAÇÃO DO MATA-MATA
+        // RENDERIZAÇÃO DO MATA-MATA (DARK MODE)
         // =====================================================================
         function renderKnockout() {
             const teamsByGroup = {};
@@ -650,73 +720,77 @@
             // --- 16 AVOS ---
             html += `
             <div class="mb-12">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 pl-2">
-                    <h3 class="font-black text-xl sm:text-2xl text-slate-800 tracking-tight">16 Avos de Final</h3>
-                    <span class="text-[10px] font-bold text-slate-400 bg-white border border-slate-200 px-3 py-1 rounded-full uppercase tracking-widest w-max">32 Seleções</span>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8 pl-2">
+                    <h3 class="font-display font-bold text-xl sm:text-2xl text-white tracking-tight flex items-center gap-3">
+                        <div class="w-1.5 h-6 bg-emerald-500 rounded-full"></div> 16 Avos de Final
+                    </h3>
+                    <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full uppercase tracking-widest w-max">32 Seleções</span>
                 </div>
                 
-                <h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">1º e 2º Colocados</h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">`;
+                <h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">1º e 2º Colocados por Grupo</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-10">`;
             
             let r32Idx = 0;
             Object.keys(teamsByGroup).sort().forEach(group => {
                 html += `
-                <div class="glass-panel p-4 rounded-2xl soft-shadow border-t-2 border-t-indigo-400">
-                    <div class="font-bold text-xs text-slate-400 mb-3 uppercase tracking-widest">Grupo ${group}</div>
-                    <select class="w-full mb-3 p-2.5 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 bg-slate-50/50 hover:bg-white transition" data-phase="round32" data-index="${r32Idx++}">
-                        <option value="">1º Colocado...</option>
-                        ${teamsByGroup[group].map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
+                <div class="glass p-4 rounded-2xl border-t-2 border-t-emerald-500">
+                    <div class="font-bold text-xs text-slate-400 mb-3 uppercase tracking-widest flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-emerald-500/50"></div>Grupo ${group}
+                    </div>
+                    <select class="w-full mb-3 p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
+                        <option value="" class="bg-slate-800">1º Colocado...</option>
+                        ${teamsByGroup[group].map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
-                    <select class="w-full p-2.5 rounded-xl border border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 bg-slate-50/50 hover:bg-white transition" data-phase="round32" data-index="${r32Idx++}">
-                        <option value="">2º Colocado...</option>
-                        ${teamsByGroup[group].map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
+                    <select class="w-full p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
+                        <option value="" class="bg-slate-800">2º Colocado...</option>
+                        ${teamsByGroup[group].map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>`;
             });
             html += `</div>`;
 
-            html += `<h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">Melhores 3º Colocados</h4>`;
-            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">`;
+            html += `<h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">Melhores 3º Colocados <span class="lowercase normal-case font-medium">(8 Seleções)</span></h4>`;
+            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10 p-5 glass rounded-2xl">`;
             for(let i=0; i<8; i++) {
-                html += `<select class="glass-panel p-3 rounded-xl border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-indigo-500 bg-white/50 hover:bg-white transition soft-shadow" data-phase="round32" data-index="${r32Idx++}">
-                    <option value="">Selecionar...</option>
-                    ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
+                html += `<select class="w-full p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
+                    <option value="" class="bg-slate-800">Selecione...</option>
+                    ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
                 </select>`;
             }
             html += `</div></div>`;
 
             // --- OUTRAS FASES ---
-            const generatePhase = (title, count, phaseKey) => {
-                let pHTML = `<div class="mb-10"><h3 class="font-black text-xl text-slate-800 tracking-tight mb-5 pl-2">${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-3">`;
+            const generatePhase = (title, count, phaseKey, colorHex) => {
+                let pHTML = `<div class="mb-12 border-t border-slate-700/50 pt-8"><h3 class="font-display font-bold text-xl sm:text-2xl text-white tracking-tight mb-6 pl-2 flex items-center gap-3"><div class="w-1.5 h-6 rounded-full" style="background-color: ${colorHex};"></div> ${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-3">`;
                 for(let i=0; i<count; i++) {
-                    pHTML += `<select class="glass-panel p-3 rounded-xl border-slate-200 text-sm font-bold text-slate-700 outline-none focus:border-blue-500 bg-white/50 hover:bg-white transition soft-shadow" data-phase="${phaseKey}" data-index="${i}">
-                        <option value="">Selecionar...</option>
-                        ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
+                    pHTML += `<select class="glass w-full p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="${phaseKey}" data-index="${i}">
+                        <option value="" class="bg-slate-800">Selecione...</option>
+                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
                     </select>`;
                 }
                 pHTML += `</div></div>`;
                 return pHTML;
             }
 
-            html += generatePhase('Oitavas de Final', 16, 'round16');
-            html += generatePhase('Quartas de Final', 8, 'quarters');
-            html += generatePhase('Semifinais', 4, 'semis');
-            html += generatePhase('A Grande Final', 2, 'final');
+            html += generatePhase('Oitavas de Final', 16, 'round16', '#3b82f6'); // blue
+            html += generatePhase('Quartas de Final', 8, 'quarters', '#0ea5e9'); // cyan
+            html += generatePhase('Semifinais', 4, 'semis', '#8b5cf6'); // violet
+            html += generatePhase('A Grande Final', 2, 'final', '#d946ef'); // fuchsia
 
             html += `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
-                <div class="glass-panel p-6 rounded-[2rem] border-l-4 border-l-amber-400 soft-shadow">
-                    <h3 class="font-black text-lg mb-4 text-slate-700 flex items-center gap-2">🥉 Terceiro Lugar</h3>
-                    <select class="w-full p-3.5 rounded-xl border border-slate-200 text-base font-bold text-slate-700 bg-white outline-none focus:border-amber-400" data-phase="thirdPlace" data-index="0">
-                        <option value="">Quem fica em 3º?</option>
-                        ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12 pt-8 border-t border-slate-700/50">
+                <div class="glass p-6 sm:p-8 rounded-[2rem] border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.05)]">
+                    <h3 class="font-display font-bold text-xl mb-5 text-amber-400 flex items-center gap-2">🥉 Terceiro Lugar</h3>
+                    <select class="w-full p-4 rounded-xl input-modern border border-amber-500/50 text-base font-bold text-white focus:border-amber-400 focus:ring-1 focus:ring-amber-400 bg-slate-900/50 cursor-pointer" data-phase="thirdPlace" data-index="0">
+                        <option value="" class="bg-slate-800">Quem fica em 3º?</option>
+                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>
-                <div class="bg-gradient-to-br from-white to-blue-50/50 p-6 rounded-[2rem] border border-blue-200/50 shadow-lg ring-1 ring-white">
-                    <h3 class="font-black text-xl mb-4 text-blue-900 flex items-center gap-2">🏆 Campeão do Mundo</h3>
-                    <select class="w-full p-4 rounded-xl border-2 border-blue-300 text-lg font-black text-blue-900 bg-white outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 shadow-inner" data-phase="champion" data-index="0">
-                        <option value="">Quem levanta a Taça?</option>
-                        ${allTeams.map(t => `<option value="${t}">${getEmoji(t)}${t}</option>`).join('')}
+                <div class="glass p-6 sm:p-8 rounded-[2rem] border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.1)] ring-1 ring-emerald-500/20">
+                    <h3 class="font-display font-bold text-2xl mb-5 text-emerald-400 flex items-center gap-2">🏆 Campeão do Mundo</h3>
+                    <select class="w-full p-4.5 rounded-xl input-modern border-2 border-emerald-500/60 text-lg font-black text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 bg-slate-900/80 shadow-inner cursor-pointer" data-phase="champion" data-index="0">
+                        <option value="" class="bg-slate-800">Quem leva a Taça?</option>
+                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>
             </div>`;
@@ -751,7 +825,7 @@
 
             document.getElementById('error-message').classList.add('hidden');
             btnLoad.disabled = true;
-            btnLoad.innerHTML = `<svg class="animate-spin h-4 w-4 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+            btnLoad.innerHTML = `<svg class="animate-spin h-5 w-5 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
 
             try {
                 const url = `${SCRIPT_URL}?action=load_predictions&name=${encodeURIComponent(name)}`;
@@ -762,7 +836,7 @@
                     predictions = json.predictions || {};
                     if (json.knockout) knockoutPredictions = json.knockout;
 
-                    document.querySelectorAll('.score-input').forEach(input => {
+                    document.querySelectorAll('.input-modern[data-team]').forEach(input => {
                         const matchId = input.getAttribute('data-match-id');
                         const team = input.getAttribute('data-team');
                         if (predictions[matchId] && predictions[matchId][team] !== undefined) {
@@ -782,14 +856,14 @@
                     });
 
                     updateProgress();
-                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
                     setTimeout(() => {
                         btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
                         btnLoad.disabled = false;
                     }, 2000);
 
                 } else {
-                    document.getElementById('error-text').textContent = 'Nome não encontrado. Verifique se digitou corretamente.';
+                    document.getElementById('error-text').textContent = 'Nome não encontrado. Verifique a escrita.';
                     document.getElementById('error-message').classList.remove('hidden');
                     resetBtnLoad(btnLoad);
                 }
@@ -877,7 +951,7 @@
         function resetForm() {
             predictions = {};
             knockoutPredictions = { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: '' };
-            document.querySelectorAll('.score-input').forEach(i => i.value = '');
+            document.querySelectorAll('.input-modern[data-team]').forEach(i => i.value = '');
             document.querySelectorAll('#knockout-container select').forEach(s => s.value = '');
             document.getElementById('participant-name').value = '';
             
@@ -925,9 +999,9 @@
             }
 
             if (data.length >= 1) {
-                let p2 = data[1] ? buildPodium(data[1].name, data[1].score, 2, 'bg-slate-200/80', 'text-slate-500', 'podium-2') : '<div class="w-20 sm:w-28"></div>';
-                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-gradient-to-t from-yellow-400 to-yellow-200', 'text-yellow-800', 'podium-1 scale-105 z-10 shadow-xl') : '<div class="w-20 sm:w-28"></div>';
-                let p3 = data[2] ? buildPodium(data[2].name, data[2].score, 3, 'bg-amber-700/80', 'text-amber-100', 'podium-3') : '<div class="w-20 sm:w-28"></div>';
+                let p2 = data[1] ? buildPodium(data[1].name, data[1].score, 2, 'bg-slate-300', 'text-slate-800', 'podium-2') : '<div class="w-20 sm:w-28"></div>';
+                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-gradient-to-t from-yellow-400 to-yellow-200', 'text-yellow-900', 'podium-1 scale-105 z-10 shadow-[0_0_40px_rgba(250,204,21,0.2)]') : '<div class="w-20 sm:w-28"></div>';
+                let p3 = data[2] ? buildPodium(data[2].name, data[2].score, 3, 'bg-amber-700', 'text-amber-100', 'podium-3') : '<div class="w-20 sm:w-28"></div>';
                 podiumContainer.innerHTML = p2 + p1 + p3;
             }
 
@@ -936,23 +1010,24 @@
             
             for (let i = 0; i < data.length; i++) {
                 const percent = Math.round((data[i].score / maxScore) * 100);
-                let rankColor = 'text-slate-300';
-                let barColor = 'bg-slate-300';
                 
-                if (i === 0) { rankColor = 'text-yellow-400'; barColor = 'bg-yellow-400'; }
-                else if (i === 1) { rankColor = 'text-slate-400'; barColor = 'bg-slate-400'; }
-                else if (i === 2) { rankColor = 'text-amber-600'; barColor = 'bg-amber-500'; }
+                let rankColor = 'text-slate-400';
+                let barColor = 'from-blue-500 to-emerald-500';
+                
+                if (i === 0) { rankColor = 'text-yellow-400'; barColor = 'from-yellow-400 to-amber-500'; }
+                else if (i === 1) { rankColor = 'text-slate-300'; barColor = 'from-slate-400 to-slate-300'; }
+                else if (i === 2) { rankColor = 'text-amber-500'; barColor = 'from-amber-600 to-orange-500'; }
 
                 listHtml += `
-                    <div class="flex items-center px-4 sm:px-6 py-4 hover:bg-slate-50/50 transition group gap-3 sm:gap-4">
-                        <div class="w-8 sm:w-12 text-center font-black ${rankColor} text-lg sm:text-2xl group-hover:scale-110 transition-transform">${i + 1}</div>
+                    <div class="glass flex items-center px-4 sm:px-6 py-4 hover:bg-slate-800/80 transition group gap-3 sm:gap-5 rounded-2xl mb-2">
+                        <div class="w-10 sm:w-12 text-center font-black ${rankColor} text-xl sm:text-2xl group-hover:scale-110 transition-transform">#${i + 1}</div>
                         <div class="flex-1 flex flex-col justify-center">
                             <div class="flex justify-between items-baseline mb-1">
-                                <span class="font-black text-slate-700 truncate text-sm sm:text-base">${data[i].name}</span>
-                                <span class="font-black text-slate-800 text-base sm:text-lg">${data[i].score}</span>
+                                <span class="font-bold text-white truncate text-base sm:text-lg tracking-wide">${data[i].name}</span>
+                                <span class="font-black text-emerald-400 text-lg sm:text-xl">${data[i].score} <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest ml-0.5">pts</span></span>
                             </div>
-                            <div class="w-full bg-slate-200/50 rounded-full h-1.5 overflow-hidden">
-                                <div class="${barColor} h-full rounded-full transition-all duration-1000 ease-out" style="width: ${percent}%;"></div>
+                            <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-gradient-to-r ${barColor} h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_currentColor]" style="width: ${percent}%;"></div>
                             </div>
                         </div>
                     </div>
@@ -966,11 +1041,11 @@
         function buildPodium(name, score, pos, color, textColor, height) {
             let emoji = pos === 1 ? '🥇' : pos === 2 ? '🥈' : '🥉';
             return `
-                <div class="flex flex-col items-center w-20 sm:w-28 relative">
-                    <div class="font-black text-slate-700 text-center text-[10px] sm:text-xs truncate w-full mb-1 uppercase tracking-wider">${name}</div>
-                    <div class="font-black text-slate-800 text-sm sm:text-base mb-1.5">${score}</div>
-                    <div class="${color} w-full rounded-t-2xl sm:rounded-t-[2rem] ${height} flex flex-col justify-start pt-3 sm:pt-4 border-x border-t border-white/40 relative overflow-hidden backdrop-blur-sm">
-                        <span class="text-2xl sm:text-4xl relative z-10 text-center drop-shadow-md filter hover:scale-110 transition-transform">${emoji}</span>
+                <div class="flex flex-col items-center w-24 sm:w-28 relative">
+                    <div class="font-bold text-slate-300 text-center text-xs sm:text-sm truncate w-full mb-1 uppercase tracking-widest bg-slate-900/60 rounded px-1">${name}</div>
+                    <div class="font-black text-white text-base sm:text-lg mb-2 bg-slate-800/80 px-2 py-0.5 rounded-lg border border-slate-700 shadow-sm">${score} <span class="text-[10px] font-normal text-slate-400">pts</span></div>
+                    <div class="${color} w-full rounded-t-[2rem] ${height} flex flex-col justify-start pt-3 sm:pt-4 border-x border-t border-white/20 relative overflow-hidden backdrop-blur-sm shadow-2xl">
+                        <span class="text-3xl sm:text-5xl relative z-10 text-center drop-shadow-lg filter hover:scale-110 transition-transform">${emoji}</span>
                     </div>
                 </div>
             `;
