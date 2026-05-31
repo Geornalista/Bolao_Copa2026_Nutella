@@ -7,163 +7,182 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Inter (leitura), Poppins (títulos), Rajdhani (números e placares estilo broadcast) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --secondary: #f59e0b;
-            --bg-main: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.7);
-            --bg-card-solid: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --border: rgba(148, 163, 184, 0.15);
+            /* Paleta Dourada / Cobre */
+            --gold-light: #fde047;
+            --gold-main: #fbbf24;
+            --gold-dark: #d97706;
+            --copper: #b45309;
+            
+            /* Fundo Premium */
+            --bg-deep: #050505;
+            --bg-surface: rgba(15, 15, 17, 0.75);
+            --bg-surface-solid: #0f0f11;
+            
+            /* Efeitos */
+            --border-glow: rgba(251, 191, 36, 0.2);
+            --shadow-gold: 0 0 20px rgba(251, 191, 36, 0.15);
         }
         
-        * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+        * { font-family: 'Inter', sans-serif; }
         h1, h2, h3, .font-display { font-family: 'Poppins', sans-serif; }
+        .font-sports { font-family: 'Rajdhani', sans-serif; }
         
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            background-attachment: fixed;
-            color: var(--text-primary);
+            background-color: var(--bg-deep);
+            color: #f8fafc;
         }
-        
-        body::before {
-            content: '';
+
+        /* Overlay texturizado escuro sobre a imagem de fundo */
+        .bg-overlay {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(30,30,35,0.8) 0%, rgba(5,5,5,0.95) 80%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1;
+        }
+
+        /* Vidro Escuro Premium */
+        .glass-dark {
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(25,25,30,0.6) 0%, rgba(10,10,12,0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(251, 191, 36, 0.2); /* Linha dourada no topo */
+            transition: all 0.3s ease;
         }
         
-        /* Ocultar as setinhas dos inputs numéricos */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
-
-        .podium-1 { height: 160px; }
-        .podium-2 { height: 120px; }
-        .podium-3 { height: 90px; }
-
-        /* Vidro Refinado (Glassmorphism) */
-        .glass {
-            background: var(--bg-card);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border);
-        }
-        
-        .glass-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .glass-hover:hover {
-            background: rgba(30, 41, 59, 0.85);
-            border-color: rgba(16, 185, 129, 0.3);
+        .glass-card:hover {
+            border-top-color: var(--gold-main);
+            box-shadow: var(--shadow-gold);
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(16, 185, 129, 0.1);
         }
 
-        .input-modern {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1.5px solid var(--border);
-            color: white;
+        /* Inputs Estilo Transmissão */
+        .input-sports {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gold-light);
+            font-family: 'Rajdhani', sans-serif;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
             transition: all 0.2s;
         }
-        .input-modern:focus {
-            background: rgba(15, 23, 42, 0.9);
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        .input-sports:focus {
+            background: rgba(0, 0, 0, 0.9);
+            border-color: var(--gold-main);
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
             outline: none;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        /* Botão Dourado Premium */
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-main) 0%, var(--gold-dark) 100%);
+            color: #000;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.4), inset 0 1px 0 rgba(255,255,255,0.4);
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-            color: #fff;
         }
-        .btn-primary:hover:not(:disabled) {
+        .btn-gold:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.6), inset 0 1px 0 rgba(255,255,255,0.5);
+            filter: brightness(1.1);
         }
-        .btn-primary:active:not(:disabled) { transform: translateY(0); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(50%); box-shadow: none; }
+        .btn-gold:disabled { opacity: 0.5; cursor: not-allowed; filter: grayscale(80%); }
 
+        /* Tabs Futuristas */
         .tab-modern {
-            background: rgba(15, 23, 42, 0.4);
-            border: 1px solid var(--border);
+            background: transparent;
+            color: #64748b;
+            border-bottom: 2px solid transparent;
             transition: all 0.3s;
-            color: var(--text-secondary);
         }
         .tab-active {
-            background: var(--primary);
-            color: #0f172a !important;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-            border-color: transparent;
+            color: var(--gold-main);
+            border-bottom: 2px solid var(--gold-main);
+            text-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #10b981 0%, #f59e0b 100%);
+        /* Texto Gradiente Ouro */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #fde047, #d97706);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        /* Oculta scrollbar da navegação mas mantém scroll */
+        /* Scrollbar Stealth */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(251, 191, 36, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(251, 191, 36, 0.6); }
 
-        /* Custom Scrollbar geral */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
-        ::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.4); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.7); }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type=number] { -moz-appearance: textfield; }
 
-        .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Dimensões do Pódio Refinadas */
+        .podium-1 { height: 160px; }
+        .podium-2 { height: 110px; }
+        .podium-3 { height: 80px; }
     </style>
 </head>
-<body class="relative antialiased min-h-screen pb-24">
+<body class="relative antialiased min-h-screen pb-24 bg-fixed bg-center bg-cover" style="background-image: url('./imagem_copa.jpg');">
     
-    <!-- Header Compacto -->
-    <header class="pt-8 pb-6 px-4 relative z-10">
-        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4 sm:gap-5 text-center sm:text-left">
-                <img src="./Logo_copa_2026.png" alt="Logo Copa 2026" class="h-14 sm:h-16 object-contain drop-shadow-md">
+    <div class="bg-overlay"></div>
+
+    <!-- Header Estilo Transmissão Esportiva -->
+    <header class="pt-10 pb-8 px-4 relative z-10 border-b border-white/5 bg-black/40">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-6">
+            <div class="flex items-center gap-5 text-center sm:text-left">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-yellow-500/20 blur-2xl rounded-full"></div>
+                    <img src="./Logo_copa_2026.png" alt="Logo Copa" class="h-20 sm:h-24 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:scale-105 transition-transform duration-500">
+                </div>
                 <div>
-                    <h1 class="text-2xl sm:text-3xl font-display font-bold tracking-tighter text-white uppercase">Bolão Nutella</h1>
-                    <p id="header-subtitle" class="text-emerald-400 font-medium text-xs sm:text-sm tracking-wide uppercase mt-0.5">Copa do Mundo FIFA 2026™</p>
+                    <h1 class="text-3xl sm:text-4xl font-display font-black tracking-tighter uppercase text-gradient-gold drop-shadow-lg">
+                        Bolão Nutella
+                    </h1>
+                    <p id="header-subtitle" class="font-sports text-yellow-500/80 font-bold text-sm sm:text-base tracking-[0.2em] uppercase mt-1">
+                        Fifa World Cup 2026™
+                    </p>
                 </div>
             </div>
             
-            <div id="closed-warning" class="hidden bg-amber-500/20 text-amber-300 px-4 py-2 rounded-xl border border-amber-500/30 text-sm font-bold shadow-sm flex items-center gap-2 backdrop-blur-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                Inscrições Encerradas
+            <div id="closed-warning" class="hidden glass-dark text-red-400 px-5 py-3 rounded-xl border-l-4 border-l-red-500 text-sm font-bold shadow-lg flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                INSCRIÇÕES ENCERRADAS
             </div>
         </div>
     </header>
 
-    <!-- Navegação / Tabs -->
-    <div id="tabs-container" class="max-w-4xl mx-auto px-4 relative z-20 mb-8 flex justify-center sm:justify-start">
-        <div class="glass p-1.5 rounded-[1.25rem] inline-flex w-full sm:w-auto overflow-x-auto no-scrollbar">
-            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-active whitespace-nowrap flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 Z"/></svg>
-                Grupos
+    <div id="tabs-container" class="max-w-5xl mx-auto px-4 relative z-20 mt-8 mb-10 flex justify-center sm:justify-start">
+        <div class="flex w-full sm:w-auto border-b border-white/10 overflow-x-auto no-scrollbar">
+            <button onclick="switchTab('grupos')" id="tab-btn-grupos" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-active whitespace-nowrap flex items-center justify-center gap-2">
+                Fase de Grupos
             </button>
-            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <button onclick="switchTab('knockout')" id="tab-btn-knockout" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
                 Mata-Mata
             </button>
-            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-                Ranking
+            <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
+                Ranking Oficial
             </button>
-            <button onclick="switchTab('regras')" id="tab-btn-regras" class="flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <button onclick="switchTab('regras')" id="tab-btn-regras" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white">
                 Regras
             </button>
         </div>
@@ -172,110 +191,93 @@
     <!-- ========================================== -->
     <!-- REGRAS E PONTUAÇÕES                        -->
     <!-- ========================================== -->
-    <section id="sec-regras" class="max-w-4xl mx-auto px-4 hidden animate-fade-in pb-8">
-        <div class="glass p-6 sm:p-10 rounded-[2rem]">
-            <h2 class="text-2xl sm:text-3xl font-display font-bold text-white mb-8 flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-                Regras e Pontuações
+    <section id="sec-regras" class="max-w-5xl mx-auto px-4 hidden animate-fade-in pb-8">
+        <div class="glass-dark p-6 sm:p-10 rounded-2xl border-t-2 border-t-yellow-500/50">
+            <h2 class="text-2xl sm:text-3xl font-display font-black text-white mb-8 flex items-center gap-3 tracking-tight uppercase">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                Manual de Pontuação
             </h2>
 
             <div class="space-y-12">
-                <!-- Regra 1: Fase de Grupos -->
+                <!-- Regra 1 -->
                 <div>
-                    <h3 class="text-lg sm:text-xl font-bold text-emerald-400 mb-4 flex items-center gap-3">
-                        <span class="bg-emerald-500/20 text-emerald-400 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-emerald-500/30">1</span>
+                    <h3 class="text-lg sm:text-xl font-bold text-yellow-500 mb-4 flex items-center gap-3">
+                        <span class="bg-yellow-500/10 text-yellow-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-yellow-500/30 shadow-[0_0_10px_rgba(251,191,36,0.2)]">1</span>
                         Placares da Fase de Grupos
                     </h3>
-                    <p class="text-slate-300 mb-4 text-sm sm:text-base leading-relaxed">Durante os 72 jogos da fase de grupos, a pontuação é calculada de acordo com o grau de exatidão do seu palpite em relação ao resultado oficial.</p>
-                    
                     <ul class="list-none space-y-4">
-                        <li class="flex items-start gap-3 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        <li class="glass-card p-5 rounded-xl flex items-start gap-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-green-400 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
                             <div>
-                                <strong class="text-white text-base">Acerto em cheio (Placar Exato): <span class="text-emerald-400">6 pts + número de gols</span></strong><br>
-                                <span class="text-sm text-slate-400 block mt-1.5 leading-relaxed">
-                                    Ex: O jogo foi 2x1 e o placar apostado foi 2x1 = <strong class="text-white">9 pts</strong> (6 pts pelo acerto + 3 pts pelo número de gols).<br>
-                                    <div class="mt-3 bg-amber-500/10 text-amber-200 px-4 py-3 rounded-xl border border-amber-500/20 text-xs sm:text-sm font-medium">
-                                        💡 <strong>Dica do "Zero":</strong> O zero gols conta com 1 pt também!<br>
-                                        • Exemplo de 3x0 exato = <strong>10 pts</strong> (6 pts acerto + 4 pts gols: 3 + 1 pelo zero).<br>
-                                        • Exemplo de 0x0 exato = <strong>8 pts</strong> (6 pts acerto + 2 pts pelos dois zeros).
+                                <strong class="text-white font-display tracking-wide text-base">ACERTO EM CHEIO (PLACAR EXATO): <span class="text-green-400">6 PTS + Nº DE GOLS</span></strong><br>
+                                <span class="text-sm text-slate-400 block mt-2 leading-relaxed">
+                                    Ex: O jogo foi 2x1 e o palpite foi 2x1 = <strong class="text-yellow-400">9 pts</strong> (6 pts pelo acerto + 3 pts pelo nº de gols da partida).<br>
+                                    <div class="mt-3 bg-white/5 p-3 rounded-lg border border-white/10 text-xs sm:text-sm text-slate-300">
+                                        <span class="text-yellow-500 font-bold">Dica do Zero:</span> O zero gols conta com 1 pt.<br>
+                                        • Ex. 3x0 exato = <strong>10 pts</strong> (6 acerto + 4 gols: 3+1).<br>
+                                        • Ex. 0x0 exato = <strong>8 pts</strong> (6 acerto + 2 pelos zeros).
                                     </div>
                                 </span>
                             </div>
                         </li>
-                        <li class="flex items-start gap-3 bg-slate-800/40 p-4 rounded-2xl border border-slate-700/50">
+                        <li class="glass-card p-5 rounded-xl flex items-start gap-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
                             <div>
-                                <strong class="text-white text-base">Acerto do Vencedor ou Empate: <span class="text-blue-400">3 pts + gols acertados</span></strong><br>
-                                <span class="text-sm text-slate-400 block mt-1.5 leading-relaxed">
-                                    Sem acertar o placar exato, você ganha 3 pts pelo resultado mais os gols acertados de alguma equipe (o zero vale 1 pt).<br><br>
-                                    • <strong>Exemplo 1:</strong> Jogo 2x1, palpite 2x0 = <strong class="text-white">5 pts</strong> (3 pts vencedor + 2 pts gols do primeiro time).<br>
-                                    • <strong>Exemplo 2:</strong> Jogo 2x0, palpite 3x1 = <strong class="text-white">3 pts</strong> (3 pts resultado, sem acertar gols exatos).
+                                <strong class="text-white font-display tracking-wide text-base">ACERTO DO VENCEDOR/EMPATE: <span class="text-blue-400">3 PTS + GOLS DE UMA EQUIPE</span></strong><br>
+                                <span class="text-sm text-slate-400 block mt-2 leading-relaxed">
+                                    Sem acertar o placar exato, ganha 3 pts pelo resultado mais os gols acertados de alguma equipe.<br><br>
+                                    • Ex. 1: Jogo 2x1, palpite 2x0 = <strong class="text-yellow-400">5 pts</strong> (3 pts vencedor + 2 pts gols do primeiro time).<br>
+                                    • Ex. 2: Jogo 2x0, palpite 3x1 = <strong class="text-yellow-400">3 pts</strong> (3 pts resultado, sem acertar gols exatos).
                                 </span>
                             </div>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Regra 2: Mata Mata e Pesos -->
-                <div class="pt-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-indigo-400 mb-4 flex items-center gap-3">
-                        <span class="bg-indigo-500/20 text-indigo-400 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-indigo-500/30">2</span>
-                        Mata-Mata: A Regra das Zebras (Pesos)
+                <!-- Regra 2 -->
+                <div class="pt-4 border-t border-white/10">
+                    <h3 class="text-lg sm:text-xl font-bold text-copper mb-4 flex items-center gap-3">
+                        <span class="bg-orange-500/10 text-orange-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-orange-500/30">2</span>
+                        Mata-Mata: A Regra das Zebras
                     </h3>
-                    <p class="text-slate-300 mb-5 text-sm sm:text-base leading-relaxed">
-                        No mata-mata, a divisão das seleções por pesos respeita a seguinte regra para valorizar apostas mais ousadas:
-                    </p>
+                    <p class="text-slate-400 mb-6 text-sm sm:text-base leading-relaxed">No mata-mata, a divisão das seleções por pesos valoriza apostas ousadas:</p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 text-white flex flex-col justify-center">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Peso 1</span>
-                            <span class="text-sm font-semibold leading-tight text-white">Seleções cabeças-de-chave</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-black/40 p-4 rounded-xl border border-yellow-500/20 text-center">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-yellow-500/70 block mb-1">Peso 1</span>
+                            <span class="text-sm font-bold text-white">Cabeças-de-chave</span>
                         </div>
-                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 text-white flex flex-col justify-center">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Peso 2</span>
-                            <span class="text-sm font-semibold leading-tight text-white">América do Sul, Europa e África <br><span class="font-normal text-xs text-slate-400">(Não cabeças-de-chave)</span></span>
+                        <div class="bg-black/40 p-4 rounded-xl border border-slate-400/20 text-center">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400/70 block mb-1">Peso 2</span>
+                            <span class="text-sm font-bold text-white">América do Sul, Europa, África <br><span class="text-xs font-normal text-slate-500">(Não cabeças)</span></span>
                         </div>
-                        <div class="bg-slate-800/80 p-4 rounded-xl border border-slate-700/80 text-white flex flex-col justify-center">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Peso 3</span>
-                            <span class="text-sm font-semibold leading-tight text-white">América do Norte/Central, Ásia e Oceania</span>
+                        <div class="bg-black/40 p-4 rounded-xl border border-orange-500/20 text-center">
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-orange-500/70 block mb-1">Peso 3</span>
+                            <span class="text-sm font-bold text-white">América Norte/Central, Ásia, Oceania</span>
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto rounded-xl border border-slate-700 bg-slate-800/50">
+                    <div class="overflow-x-auto rounded-xl border border-white/10 bg-black/50">
                         <table class="w-full text-sm text-left whitespace-nowrap">
-                            <thead class="bg-slate-900/80 text-slate-300 font-semibold uppercase tracking-wider text-xs border-b border-slate-700">
+                            <thead class="bg-black/80 text-slate-400 font-sports uppercase tracking-widest text-xs border-b border-white/10">
                                 <tr>
-                                    <th class="px-4 py-4">Fase do Torneio</th>
-                                    <th class="px-4 py-4 text-center">Peso 1</th>
-                                    <th class="px-4 py-4 text-center">Peso 2</th>
-                                    <th class="px-4 py-4 text-center text-indigo-400">Peso 3</th>
+                                    <th class="px-4 py-3">Fase do Torneio</th>
+                                    <th class="px-4 py-3 text-center text-yellow-500">Peso 1</th>
+                                    <th class="px-4 py-3 text-center text-slate-300">Peso 2</th>
+                                    <th class="px-4 py-3 text-center text-orange-500">Peso 3</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-700 text-slate-300 font-medium">
-                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">16 Avos de Final</td><td class="px-4 py-3 text-center">2 pts</td><td class="px-4 py-3 text-center">3 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">5 pts</td></tr>
-                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Oitavas de Final</td><td class="px-4 py-3 text-center">4 pts</td><td class="px-4 py-3 text-center">6 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">10 pts</td></tr>
-                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Quartas de Final</td><td class="px-4 py-3 text-center">4 pts</td><td class="px-4 py-3 text-center">6 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">10 pts</td></tr>
-                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Semifinais</td><td class="px-4 py-3 text-center">8 pts</td><td class="px-4 py-3 text-center">12 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">20 pts</td></tr>
-                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">A Grande Final</td><td class="px-4 py-3 text-center">12 pts</td><td class="px-4 py-3 text-center">24 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">30 pts</td></tr>
-                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-white">Acertar 3º Colocado</td><td class="px-4 py-3 text-center">18 pts</td><td class="px-4 py-3 text-center">30 pts</td><td class="px-4 py-3 text-center text-indigo-400 font-bold">45 pts</td></tr>
-                                <tr class="hover:bg-slate-800/80 transition"><td class="px-4 py-3 text-emerald-400 font-bold uppercase">Acertar Campeão</td><td class="px-4 py-3 text-center font-bold text-white">24 pts</td><td class="px-4 py-3 text-center font-bold text-white">36 pts</td><td class="px-4 py-3 text-center text-emerald-400 font-bold">60 pts</td></tr>
+                            <tbody class="divide-y divide-white/5 text-slate-300 font-medium">
+                                <tr class="hover:bg-white/5 transition"><td class="px-4 py-3">16 Avos de Final</td><td class="px-4 py-3 text-center text-yellow-400 font-sports text-lg">2</td><td class="px-4 py-3 text-center font-sports text-lg">3</td><td class="px-4 py-3 text-center text-orange-400 font-sports text-lg">5</td></tr>
+                                <tr class="hover:bg-white/5 transition"><td class="px-4 py-3">Oitavas de Final</td><td class="px-4 py-3 text-center text-yellow-400 font-sports text-lg">4</td><td class="px-4 py-3 text-center font-sports text-lg">6</td><td class="px-4 py-3 text-center text-orange-400 font-sports text-lg">10</td></tr>
+                                <tr class="hover:bg-white/5 transition"><td class="px-4 py-3">Quartas de Final</td><td class="px-4 py-3 text-center text-yellow-400 font-sports text-lg">4</td><td class="px-4 py-3 text-center font-sports text-lg">6</td><td class="px-4 py-3 text-center text-orange-400 font-sports text-lg">10</td></tr>
+                                <tr class="hover:bg-white/5 transition"><td class="px-4 py-3">Semifinais</td><td class="px-4 py-3 text-center text-yellow-400 font-sports text-lg">8</td><td class="px-4 py-3 text-center font-sports text-lg">12</td><td class="px-4 py-3 text-center text-orange-400 font-sports text-lg">20</td></tr>
+                                <tr class="hover:bg-white/5 transition"><td class="px-4 py-3">A Grande Final</td><td class="px-4 py-3 text-center text-yellow-400 font-sports text-lg">12</td><td class="px-4 py-3 text-center font-sports text-lg">24</td><td class="px-4 py-3 text-center text-orange-400 font-sports text-lg">30</td></tr>
+                                <tr class="hover:bg-white/5 transition"><td class="px-4 py-3">Acertar 3º Colocado</td><td class="px-4 py-3 text-center text-yellow-400 font-sports text-lg">18</td><td class="px-4 py-3 text-center font-sports text-lg">30</td><td class="px-4 py-3 text-center text-orange-400 font-sports text-lg">45</td></tr>
+                                <tr class="hover:bg-white/5 transition bg-white/5"><td class="px-4 py-3 text-gold-main font-bold uppercase">Acertar Campeão</td><td class="px-4 py-3 text-center text-yellow-400 font-sports text-xl font-bold">24</td><td class="px-4 py-3 text-center text-white font-sports text-xl font-bold">36</td><td class="px-4 py-3 text-center text-orange-400 font-sports text-xl font-bold">60</td></tr>
                             </tbody>
                         </table>
                     </div>
-                </div>
-
-                <!-- Lembretes -->
-                <div class="bg-amber-500/10 p-6 rounded-2xl border border-amber-500/20">
-                    <h3 class="text-lg font-bold text-amber-400 mb-3 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                        Lembretes Importantes
-                    </h3>
-                    <ul class="list-none text-slate-300 text-sm sm:text-base space-y-2 font-medium">
-                        <li class="flex gap-2 items-start"><span class="text-amber-500 mt-0.5">▶</span> <div>Preencha todos os <strong class="text-white">136 campos</strong> (Grupos e Mata-Mata) para maximizar as chances.</div></li>
-                        <li class="flex gap-2 items-start"><span class="text-amber-500 mt-0.5">▶</span> <div>O botão "Salvar" envia tudo de uma vez.</div></li>
-                        <li class="flex gap-2 items-start"><span class="text-amber-500 mt-0.5">▶</span> <div>Inscrições encerram a <strong class="text-amber-400 border-b border-amber-400/50">11 de Junho de 2026</strong>.</div></li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -284,148 +286,153 @@
     <!-- ========================================== -->
     <!-- CONTAINER PRINCIPAL: FORMULÁRIO DE PALPITES-->
     <!-- ========================================== -->
-    <section id="main-palpites-container" class="max-w-4xl mx-auto px-4 animate-fade-in block">
+    <section id="main-palpites-container" class="max-w-5xl mx-auto px-4 animate-fade-in block">
         
         <!-- Tela de Sucesso -->
-        <div id="success-view" class="hidden glass p-8 sm:p-12 rounded-[2rem] text-center space-y-4 animate-fade-in mb-8">
-            <div class="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-2 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div id="success-view" class="hidden glass-dark p-10 rounded-2xl text-center space-y-5 animate-fade-in mb-8 border-t-2 border-t-green-500">
+            <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto border border-green-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
-            <h2 class="text-3xl sm:text-4xl font-display font-bold text-white">Golaço!</h2>
-            <p class="text-slate-300 font-medium">Os seus palpites foram guardados na aba <b id="success-name" class="text-emerald-400"></b>.</p>
-            <button onclick="resetForm()" class="mt-8 btn-primary font-bold py-3.5 px-8 rounded-xl w-full sm:w-auto mx-auto">Preencher outra aba</button>
+            <h2 class="text-3xl font-display font-black text-white uppercase tracking-wide">Transmissão Concluída!</h2>
+            <p class="text-slate-400 text-lg">Palpites enviados para a base de dados sob o nome <b id="success-name" class="text-gold-main"></b>.</p>
+            <button onclick="resetForm()" class="mt-6 border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold py-3 px-8 rounded-lg transition uppercase tracking-widest text-xs">Nova Inscrição</button>
         </div>
 
-        <form id="predictions-form" class="space-y-8">
+        <form id="predictions-form" class="space-y-6">
             
             <!-- Controle: Novo Participante / Já Tenho Palpites -->
-            <div class="flex p-1 bg-slate-800/80 rounded-xl w-full sm:w-max mx-auto sm:mx-0 mb-4 border border-slate-700 shadow-inner">
-                <button type="button" id="btn-mode-new" onclick="setMode('new')" class="flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-emerald-500 text-slate-900 shadow-sm">Novo Participante</button>
-                <button type="button" id="btn-mode-recover" onclick="setMode('recover')" class="flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-transparent text-slate-400 hover:text-slate-200">Já Tenho Palpites</button>
+            <div class="flex p-1 bg-black/60 rounded-xl w-full sm:w-max mx-auto sm:mx-0 mb-4 border border-white/10 backdrop-blur-md">
+                <button type="button" id="btn-mode-new" onclick="setMode('new')" class="flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-white/10 text-white shadow-sm">Novo Participante</button>
+                <button type="button" id="btn-mode-recover" onclick="setMode('recover')" class="flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-transparent text-slate-500 hover:text-slate-300">Recuperar Palpites</button>
             </div>
 
-            <!-- Nome e Progresso -->
-            <div id="name-container" class="glass rounded-3xl p-5 sm:p-6 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between shadow-2xl">
+            <!-- Nome e Progresso (Painel High-Tech) -->
+            <div id="name-container" class="glass-dark rounded-2xl p-5 sm:p-8 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between border-t border-white/10">
                 <div class="w-full sm:flex-1 relative">
-                    <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Nome na Planilha</label>
+                    <label class="block text-[10px] font-bold text-yellow-500/70 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+                        <div class="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"></div> Identificação do Jogador
+                    </label>
                     <div class="flex gap-2">
-                        <input type="text" id="participant-name" placeholder="Digite seu nome..." class="w-full text-lg sm:text-xl px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-xl focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition uppercase font-bold text-white placeholder-slate-600 shadow-inner" required />
+                        <input type="text" id="participant-name" placeholder="DIGITE O SEU NOME..." class="w-full text-xl sm:text-2xl p-3 bg-black/50 border border-white/10 rounded-xl focus:border-yellow-500 focus:bg-black outline-none transition uppercase font-display font-black text-white placeholder-slate-700 shadow-inner" required />
                         
-                        <!-- BOTÃO DE BUSCA (Apenas no Modo Recuperar) -->
-                        <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="hidden shrink-0 bg-slate-800 hover:bg-slate-700 text-emerald-400 font-bold px-4 py-3 rounded-xl transition items-center gap-2 border border-slate-700 text-sm shadow-md">
+                        <!-- BOTÃO DE BUSCA -->
+                        <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="hidden shrink-0 bg-black/80 hover:bg-black text-yellow-500 font-bold px-4 rounded-xl transition items-center justify-center gap-2 border border-yellow-500/30 text-sm shadow-[0_0_15px_rgba(251,191,36,0.1)]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span class="hidden sm:inline">Recuperar</span>
                         </button>
                     </div>
-                    <p id="mode-hint" class="text-xs text-slate-400 mt-2 ml-1">✨ <b class="text-emerald-400">Dica:</b> Como é novo, uma aba será criada automaticamente!</p>
+                    <p id="mode-hint" class="text-xs text-slate-500 mt-3 font-medium">✨ Se for a sua primeira vez, uma nova aba será gerada automaticamente.</p>
                 </div>
                 
-                <div class="w-full sm:w-48 shrink-0 bg-slate-900/50 p-4 rounded-2xl border border-slate-700/50 shadow-inner">
-                    <div class="flex justify-between items-end mb-2 ml-1">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Progresso</span>
-                        <span class="text-xs font-black text-white"><span id="progress-text">0</span>/136</span>
+                <!-- Monitor de Progresso -->
+                <div class="w-full sm:w-56 bg-black/80 p-4 rounded-xl border border-white/5 shadow-inner">
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.1em]">Progresso</span>
+                        <span class="font-sports text-lg font-bold text-yellow-500 leading-none"><span id="progress-text">0</span><span class="text-sm text-slate-600">/136</span></span>
                     </div>
-                    <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                        <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-full rounded-full transition-all duration-300 ease-out w-0 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                    <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-gradient-to-r from-orange-600 to-yellow-400 h-full rounded-full transition-all duration-300 ease-out w-0 shadow-[0_0_10px_rgba(251,191,36,0.8)]"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Já Entraram em Campo -->
-            <div id="participants-container" class="hidden animate-fade-in">
+            <div id="participants-container" class="hidden">
                 <div class="flex flex-wrap gap-2 items-center pl-2">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-2">Confirmados (<span id="participants-count">0</span>):</span>
-                    <div id="participants-list" class="flex flex-wrap gap-2"></div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mr-2">Conectados (<span id="participants-count">0</span>):</span>
+                    <div id="participants-list" class="flex flex-wrap gap-1.5"></div>
                 </div>
             </div>
 
             <!-- SEÇÃO A: JOGOS DOS GRUPOS -->
-            <section id="sec-grupos" class="animate-fade-in block">
+            <section id="sec-grupos" class="animate-fade-in block space-y-6 pt-4">
                 <div id="matches-container"></div>
             </section>
 
             <!-- SEÇÃO B: SELEÇÕES DO MATA-MATA -->
-            <section id="sec-knockout" class="hidden animate-fade-in">
+            <section id="sec-knockout" class="hidden animate-fade-in space-y-6 pt-4">
                 <div id="knockout-container"></div>
             </section>
 
-            <div id="error-message" class="hidden bg-red-500/10 text-red-400 p-4 rounded-xl flex items-center gap-3 text-sm font-bold border border-red-500/20 backdrop-blur-sm">
+            <div id="error-message" class="hidden bg-red-950/50 text-red-400 p-4 rounded-xl flex items-center gap-3 text-sm font-bold border border-red-500/30 backdrop-blur-md">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <p id="error-text">Erro ao enviar.</p>
+                <p id="error-text">Erro ao conectar à base de dados.</p>
             </div>
 
             <!-- Botão Enviar Flutuante -->
-            <button type="submit" id="submit-btn" class="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-3 btn-primary font-bold text-base py-4 px-10 rounded-2xl group mt-6 disabled:opacity-50">
-                <span id="submit-text" class="flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                    Salvar Todos os Palpites
-                </span>
-                <span id="loading-text" class="hidden flex items-center gap-2">
-                    <svg class="animate-spin -ml-1 h-5 w-5 text-white/90" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    Processando...
-                </span>
-            </button>
+            <div class="pt-8">
+                <button type="submit" id="submit-btn" class="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-3 btn-gold font-display font-black text-lg py-5 px-10 rounded-xl transition-all group tracking-wide">
+                    <span id="submit-text" class="flex items-center gap-2">
+                        TRANSMITIR PALPITES
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </span>
+                    <span id="loading-text" class="hidden flex items-center gap-3">
+                        <svg class="animate-spin h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        ENVIANDO DADOS...
+                    </span>
+                </button>
+            </div>
         </form>
     </section>
 
     <!-- ========================================== -->
     <!-- SEÇÃO 2: RANKING GERAL                     -->
     <!-- ========================================== -->
-    <section id="sec-ranking" class="max-w-3xl mx-auto px-4 hidden">
-        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-24 glass rounded-3xl">
-            <svg class="animate-spin h-10 w-10 text-emerald-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-            <p class="text-slate-400 font-bold text-sm animate-pulse uppercase tracking-widest">Atualizando ao vivo</p>
+    <section id="sec-ranking" class="max-w-4xl mx-auto px-4 hidden">
+        <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-32 glass-dark rounded-2xl">
+            <div class="relative w-16 h-16 mb-6">
+                <div class="absolute inset-0 border-4 border-yellow-500/20 rounded-full"></div>
+                <div class="absolute inset-0 border-4 border-yellow-500 rounded-full border-t-transparent animate-spin"></div>
+            </div>
+            <p class="text-yellow-500/70 font-sports font-bold text-xl tracking-[0.2em] uppercase animate-pulse">Sincronizando Dados</p>
         </div>
 
-        <div id="ranking-error-state" class="hidden glass text-red-400 p-8 rounded-3xl flex flex-col items-center text-center mt-4 border border-red-500/20">
+        <div id="ranking-error-state" class="hidden glass-dark text-red-400 p-8 rounded-2xl flex flex-col items-center text-center border-t-2 border-t-red-500 mt-8">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-4 text-red-500"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <h3 class="font-display font-bold text-xl text-white mb-2">Falha de conexão</h3>
-            <p id="ranking-error-message" class="text-sm font-medium mb-6 text-slate-400">Não foi possível carregar os dados.</p>
-            <button onclick="fetchRanking()" class="text-sm font-bold bg-slate-800 hover:bg-slate-700 text-white py-3 px-6 rounded-xl transition shadow">Tentar Novamente</button>
+            <h3 class="font-display font-black text-2xl mb-2 text-white uppercase tracking-wider">Falha de Conexão</h3>
+            <p id="ranking-error-message" class="text-slate-400 mb-6">O servidor não respondeu a tempo.</p>
+            <button onclick="fetchRanking()" class="border border-white/20 bg-white/5 hover:bg-white/10 text-white font-bold py-3 px-8 rounded-lg transition uppercase tracking-widest text-xs">Reconectar</button>
         </div>
 
         <div id="ranking-content" class="hidden opacity-0 animate-fade-in">
             <div class="flex justify-end mb-4">
-                <button onclick="fetchRanking()" class="text-xs font-bold text-slate-300 hover:text-white uppercase tracking-widest flex items-center gap-2 transition-colors bg-slate-800/50 hover:bg-slate-800 px-4 py-2 rounded-lg border border-slate-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
-                    Atualizar
+                <button onclick="fetchRanking()" class="text-[10px] font-bold text-slate-400 hover:text-yellow-400 uppercase tracking-widest flex items-center gap-1.5 transition-colors bg-black/40 px-3 py-2 rounded border border-white/5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                    Live Update
                 </button>
             </div>
             
-            <div id="podium" class="flex items-end justify-center gap-2 sm:gap-6 mb-12 mt-4 drop-shadow-2xl"></div>
+            <div id="podium" class="flex items-end justify-center gap-2 sm:gap-4 mb-12 mt-6 drop-shadow-2xl"></div>
             
-            <div class="glass rounded-3xl overflow-hidden mb-8 shadow-2xl">
-                <div class="bg-slate-900/80 px-6 py-5 flex text-slate-300 font-bold text-[10px] sm:text-xs uppercase tracking-widest border-b border-slate-800">
+            <div class="glass-dark rounded-2xl overflow-hidden mb-8 border-t border-white/10">
+                <div class="bg-black/60 px-6 py-4 flex text-slate-500 font-bold text-[10px] uppercase tracking-widest border-b border-white/5">
                     <span class="w-10 sm:w-16 text-center">Pos</span>
-                    <span class="flex-1 ml-3 sm:ml-5">Participante / Pontos</span>
+                    <span class="flex-1 ml-4 sm:ml-6">Jogador</span>
+                    <span class="w-20 text-right">Pts</span>
                 </div>
-                <div id="ranking-list" class="divide-y divide-slate-800/50 bg-slate-900/20"></div>
+                <div id="ranking-list" class="divide-y divide-white/5"></div>
             </div>
         </div>
     </section>
 
-    <!-- Modal de Confirmação -->
-    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
-        <div class="glass rounded-3xl p-6 sm:p-8 max-w-sm w-full transform transition-all animate-fade-in shadow-2xl border border-slate-700">
-            <div class="flex items-center gap-3 mb-4 text-amber-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
-                <h3 class="text-xl font-display font-bold text-white">Atenção</h3>
+    <!-- Modal de Confirmação Minimalista -->
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
+        <div class="glass-dark rounded-2xl p-8 max-w-sm w-full transform transition-all animate-fade-in border border-yellow-500/20 text-center">
+            <div class="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-yellow-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-500"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </div>
-            <p class="text-slate-300 mb-8 font-medium text-sm sm:text-base leading-relaxed">
-                Você preencheu apenas <span id="filled-count" class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded text-lg">0</span> de <span id="total-count" class="font-bold text-white text-lg">136</span> palpites. Deseja enviar incompleto?
+            <h3 class="text-xl font-display font-black text-white mb-2 uppercase tracking-wide">Transmissão Incompleta</h3>
+            <p class="text-slate-400 mb-8 font-medium text-sm leading-relaxed">
+                Dados preenchidos: <span id="filled-count" class="font-sports font-bold text-yellow-400 text-lg">0</span> de <span id="total-count" class="font-sports font-bold text-white text-lg">136</span>.<br>Confirmar envio parcial?
             </p>
             <div class="flex gap-3">
-                <button type="button" onclick="closeModal()" class="flex-1 py-3 text-slate-300 font-bold bg-slate-800 hover:bg-slate-700 rounded-xl transition text-sm border border-slate-700">Completar</button>
-                <button type="button" onclick="executeSubmit()" class="flex-1 py-3 btn-primary font-bold rounded-xl transition text-sm">Sim, enviar</button>
+                <button type="button" onclick="closeModal()" class="flex-1 py-3 text-slate-300 font-bold bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition text-xs uppercase tracking-widest">Abortar</button>
+                <button type="button" onclick="executeSubmit()" class="flex-1 py-3 btn-gold rounded-lg transition text-xs font-black uppercase tracking-widest">Confirmar</button>
             </div>
         </div>
     </div>
 
     <!-- JAVASCRIPT -->
     <script>
-        // =====================================================================
-        // CONFIGURAÇÕES GERAIS
-        // =====================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuQMtBuKdvdk_uhGDa45je9pVVLqb3w9g-5BFIKX-U_wr46LviWfAO1kSY7eROiN1O/exec';
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
 
@@ -489,7 +496,7 @@
             'IRAQUE': { iso: 'iq', emoji: '🇮🇶' }, 'NORUEGA': { iso: 'no', emoji: '🇳🇴' },
             'ARGENTINA': { iso: 'ar', emoji: '🇦🇷' }, 'ÁUSTRIA': { iso: 'at', emoji: '🇦🇹' },
             'JORDÂNIA': { iso: 'jo', emoji: '🇯🇴' }, 'ARGÉLIA': { iso: 'dz', emoji: '🇩🇿' },
-            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'R.D. CONGO': { iso: 'cd', emoji: '🇨🇩' }, // Corrigido para República Democrática do Congo (cd)
+            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'R.D. CONGO': { iso: 'cd', emoji: '🇨🇩' },
             'UZBEQUISTÃO': { iso: 'uz', emoji: '🇺🇿' }, 'COLÔMBIA': { iso: 'co', emoji: '🇨🇴' },
             'INGLATERRA': { iso: 'gb-eng', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' }, 'CROÁCIA': { iso: 'hr', emoji: '🇭🇷' },
             'GANA': { iso: 'gh', emoji: '🇬🇭' }, 'PANAMÁ': { iso: 'pa', emoji: '🇵🇦' }
@@ -505,6 +512,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('total-count').textContent = 136;
+            
             const agora = new Date();
             if (agora > DATA_LIMITE) {
                 bolaoEncerrado = true;
@@ -526,19 +534,19 @@
             const hintText = document.getElementById('mode-hint');
 
             if (mode === 'new') {
-                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-emerald-500 text-slate-900 shadow-sm";
-                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-transparent text-slate-400 hover:text-slate-200";
+                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-white/10 text-white shadow-sm";
+                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-transparent text-slate-500 hover:text-slate-300";
                 
                 btnLoad.classList.add('hidden');
                 btnLoad.classList.remove('flex');
-                hintText.innerHTML = '✨ <b class="text-emerald-400">Dica:</b> Como é novo, uma aba será criada automaticamente!';
+                hintText.innerHTML = '✨ Se for a sua primeira vez, uma nova aba será gerada automaticamente.';
             } else {
-                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-emerald-500 text-slate-900 shadow-sm";
-                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2 rounded-lg text-sm font-semibold transition-all bg-transparent text-slate-400 hover:text-slate-200";
+                btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-white/10 text-white shadow-sm";
+                btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-transparent text-slate-500 hover:text-slate-300";
                 
                 btnLoad.classList.remove('hidden');
                 btnLoad.classList.add('flex');
-                hintText.innerHTML = '🔄 <b class="text-emerald-400">Atenção:</b> Digite o seu nome exato e clique em Recuperar.';
+                hintText.innerHTML = '🔄 <span class="text-yellow-500">Atenção:</span> Digite seu nome exato e clique na lupa ao lado para carregar seus dados.';
             }
         }
 
@@ -555,8 +563,8 @@
                     let html = '';
                     sortedNames.forEach(p => {
                         html += `
-                        <span class="bg-slate-800/80 text-slate-300 font-bold px-3 py-1.5 rounded-lg border border-slate-700 shadow-sm text-[10px] sm:text-xs flex items-center gap-2 cursor-default">
-                            <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full shadow-[0_0_5px_rgba(16,185,129,0.8)]"></div>
+                        <span class="bg-black/50 text-slate-300 font-bold px-3 py-1 rounded border border-white/5 shadow-sm text-[10px] sm:text-xs flex items-center gap-1.5 cursor-default">
+                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
                             ${p.name}
                         </span>`;
                     });
@@ -583,14 +591,24 @@
             const bar = document.getElementById('progress-bar');
             document.getElementById('progress-text').textContent = filledCount;
             bar.style.width = percent + '%';
+            
+            if(filledCount === 136) {
+                bar.classList.replace('from-orange-600', 'from-green-500');
+                bar.classList.replace('to-yellow-400', 'to-green-400');
+            } else {
+                bar.classList.replace('from-green-500', 'from-orange-600');
+                bar.classList.replace('to-green-400', 'to-yellow-400');
+            }
         }
 
         function bloquearPalpites() {
             document.getElementById('tab-btn-grupos').classList.add('hidden');
             document.getElementById('tab-btn-knockout').classList.add('hidden');
+            
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
-            document.getElementById('header-subtitle').textContent = "Ranking oficial do torneio atualizado";
+            document.getElementById('header-subtitle').textContent = "Ranking de Transmissão Oficial";
+            
             switchTab('ranking');
         }
 
@@ -599,14 +617,11 @@
 
             ['grupos', 'knockout', 'ranking', 'regras'].forEach(id => {
                 const btn = document.getElementById('tab-btn-' + id);
-                if (btn) btn.className = "flex-1 sm:flex-none py-2.5 px-4 sm:px-6 rounded-xl text-sm transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white";
+                if (btn) btn.className = "flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2 hover:text-white";
             });
             
             const activeBtn = document.getElementById('tab-btn-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('tab-active');
-                activeBtn.classList.remove('tab-modern', 'hover:text-white');
-            }
+            if (activeBtn) activeBtn.classList.add('tab-active');
 
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('sec-ranking').classList.add('hidden');
@@ -619,6 +634,7 @@
                 document.getElementById('sec-regras').classList.remove('hidden');
             } else {
                 document.getElementById('main-palpites-container').classList.remove('hidden');
+                
                 if (tabId === 'grupos') {
                     document.getElementById('sec-grupos').classList.remove('hidden');
                     document.getElementById('sec-knockout').classList.add('hidden');
@@ -630,7 +646,7 @@
         }
 
         // =====================================================================
-        // RENDERIZAÇÃO ESTILO "BETTING APP" COM GRID CORRIGIDA (SEM QUEBRA DE TEXTO)
+        // RENDERIZAÇÃO ESTILO "BETTING APP" - Estrutura robusta (Grid colunas)
         // =====================================================================
         function renderMatches() {
             const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
@@ -641,10 +657,10 @@
             let html = '';
             for (const group in groupedMatches) {
                 html += `
-                <div class="mb-10 animate-slide-up">
+                <div class="mb-10">
                     <div class="flex items-center gap-3 mb-5 pl-2">
-                        <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm border border-emerald-500/30 shadow-sm">${group}</div>
-                        <h3 class="font-display font-bold text-white text-xl uppercase tracking-widest">Grupo ${group}</h3>
+                        <div class="w-8 h-8 rounded-full bg-yellow-500/10 text-yellow-500 flex items-center justify-center font-display font-black text-sm border border-yellow-500/20 shadow-[0_0_10px_rgba(251,191,36,0.1)]">${group}</div>
+                        <h3 class="font-display font-black text-white text-xl uppercase tracking-widest">Grupo ${group}</h3>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 `;
@@ -654,30 +670,33 @@
                     const t2 = TEAM_INFO[match.team2] || { iso: 'xx' };
                     
                     html += `
-                        <div class="glass glass-hover rounded-2xl p-4 sm:p-5">
-                            <div class="text-[10px] font-bold text-slate-500 mb-4 uppercase tracking-widest flex justify-between items-center border-b border-slate-700/50 pb-2">
+                        <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden">
+                            <!-- Fundo sutil numerico -->
+                            <div class="absolute -right-4 -bottom-4 font-sports text-6xl font-black text-white/[0.02] z-0">#${match.id}</div>
+                            
+                            <div class="text-[10px] font-bold text-slate-500 mb-4 uppercase tracking-widest flex justify-between items-center border-b border-white/5 pb-2 relative z-10">
                                 <span>Jogo #${match.id}</span>
                             </div>
                             
                             <!-- Estrutura robusta sem quebra forçada (grid 3 colunas) -->
-                            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 w-full">
+                            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 w-full relative z-10">
                                 
                                 <!-- Equipa 1 (Esquerda) -->
                                 <div class="flex flex-col items-end gap-1.5 sm:gap-2 text-right">
-                                    <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-6 h-4 sm:w-8 sm:h-5.5 object-cover rounded-[3px] shadow-sm border border-slate-700" alt="${match.team1}">
+                                    <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-6 h-4 sm:w-8 sm:h-5.5 object-cover rounded-[3px] shadow-sm border border-white/10" alt="${match.team1}">
                                     <span class="font-bold text-slate-200 text-xs sm:text-sm leading-tight uppercase">${match.team1}</span>
                                 </div>
 
                                 <!-- Inputs Centrais -->
-                                <div class="flex items-center justify-center gap-1 sm:gap-2 shrink-0 bg-slate-900/50 p-1.5 rounded-xl border border-slate-700 shadow-inner">
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="input-modern w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg transition" />
-                                    <span class="text-slate-500 font-black text-xs">X</span>
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="input-modern w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg transition" />
+                                <div class="flex items-center justify-center gap-1 sm:gap-2 shrink-0 bg-black/40 p-1.5 rounded-xl border border-white/5 shadow-inner">
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
+                                    <span class="text-slate-600 font-black text-xs">X</span>
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
                                 </div>
 
                                 <!-- Equipa 2 (Direita) -->
                                 <div class="flex flex-col items-start gap-1.5 sm:gap-2 text-left">
-                                    <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-6 h-4 sm:w-8 sm:h-5.5 object-cover rounded-[3px] shadow-sm border border-slate-700" alt="${match.team2}">
+                                    <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-6 h-4 sm:w-8 sm:h-5.5 object-cover rounded-[3px] shadow-sm border border-white/10" alt="${match.team2}">
                                     <span class="font-bold text-slate-200 text-xs sm:text-sm leading-tight uppercase">${match.team2}</span>
                                 </div>
                                 
@@ -688,7 +707,7 @@
             }
             document.getElementById('matches-container').innerHTML = html;
 
-            document.querySelectorAll('.score-input, .input-modern').forEach(input => {
+            document.querySelectorAll('.score-input, .input-sports').forEach(input => {
                 input.addEventListener('input', function() {
                     this.value = this.value.replace(/[^0-9]/g, '');
                     const matchId = this.getAttribute('data-match-id');
@@ -701,7 +720,7 @@
         }
 
         // =====================================================================
-        // RENDERIZAÇÃO DO MATA-MATA (DARK MODE)
+        // RENDERIZAÇÃO DO MATA-MATA
         // =====================================================================
         function renderKnockout() {
             const teamsByGroup = {};
@@ -721,10 +740,10 @@
             html += `
             <div class="mb-12">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-8 pl-2">
-                    <h3 class="font-display font-bold text-xl sm:text-2xl text-white tracking-tight flex items-center gap-3">
-                        <div class="w-1.5 h-6 bg-emerald-500 rounded-full"></div> 16 Avos de Final
+                    <h3 class="font-display font-black text-xl sm:text-2xl text-white tracking-tight flex items-center gap-3">
+                        <div class="w-1.5 h-6 bg-yellow-500 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.5)]"></div> 16 Avos de Final
                     </h3>
-                    <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full uppercase tracking-widest w-max">32 Seleções</span>
+                    <span class="text-[10px] font-bold text-yellow-500 bg-yellow-500/10 border border-yellow-500/20 px-3 py-1.5 rounded-full uppercase tracking-widest w-max">32 Seleções</span>
                 </div>
                 
                 <h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">1º e 2º Colocados por Grupo</h4>
@@ -733,64 +752,64 @@
             let r32Idx = 0;
             Object.keys(teamsByGroup).sort().forEach(group => {
                 html += `
-                <div class="glass p-4 rounded-2xl border-t-2 border-t-emerald-500">
+                <div class="glass-card p-4 rounded-2xl">
                     <div class="font-bold text-xs text-slate-400 mb-3 uppercase tracking-widest flex items-center gap-2">
-                        <div class="w-2 h-2 rounded-full bg-emerald-500/50"></div>Grupo ${group}
+                        <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>Grupo ${group}
                     </div>
-                    <select class="w-full mb-3 p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
-                        <option value="" class="bg-slate-800">1º Colocado...</option>
-                        ${teamsByGroup[group].map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
+                    <select class="w-full mb-3 p-3 rounded-xl input-sports text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
+                        <option value="" class="bg-slate-900">1º Colocado...</option>
+                        ${teamsByGroup[group].map(t => `<option value="${t}" class="bg-slate-900">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
-                    <select class="w-full p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
-                        <option value="" class="bg-slate-800">2º Colocado...</option>
-                        ${teamsByGroup[group].map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
+                    <select class="w-full p-3 rounded-xl input-sports text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
+                        <option value="" class="bg-slate-900">2º Colocado...</option>
+                        ${teamsByGroup[group].map(t => `<option value="${t}" class="bg-slate-900">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>`;
             });
             html += `</div>`;
 
             html += `<h4 class="font-bold text-slate-400 mb-4 text-xs uppercase tracking-widest pl-2">Melhores 3º Colocados <span class="lowercase normal-case font-medium">(8 Seleções)</span></h4>`;
-            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10 p-5 glass rounded-2xl">`;
+            html += `<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10 p-5 bg-black/30 rounded-2xl border border-white/5">`;
             for(let i=0; i<8; i++) {
-                html += `<select class="w-full p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
-                    <option value="" class="bg-slate-800">Selecione...</option>
-                    ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
+                html += `<select class="w-full p-3 rounded-xl input-sports text-sm font-bold text-white outline-none cursor-pointer" data-phase="round32" data-index="${r32Idx++}">
+                    <option value="" class="bg-slate-900">Selecione...</option>
+                    ${allTeams.map(t => `<option value="${t}" class="bg-slate-900">${getEmoji(t)}${t}</option>`).join('')}
                 </select>`;
             }
             html += `</div></div>`;
 
             // --- OUTRAS FASES ---
             const generatePhase = (title, count, phaseKey, colorHex) => {
-                let pHTML = `<div class="mb-12 border-t border-slate-700/50 pt-8"><h3 class="font-display font-bold text-xl sm:text-2xl text-white tracking-tight mb-6 pl-2 flex items-center gap-3"><div class="w-1.5 h-6 rounded-full" style="background-color: ${colorHex};"></div> ${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-3">`;
+                let pHTML = `<div class="mb-12 border-t border-white/10 pt-8"><h3 class="font-display font-black text-xl sm:text-2xl text-white tracking-tight mb-6 pl-2 flex items-center gap-3"><div class="w-1.5 h-6 rounded-full shadow-[0_0_10px_currentColor]" style="background-color: ${colorHex}; color: ${colorHex};"></div> ${title}</h3><div class="grid grid-cols-2 sm:grid-cols-4 gap-3">`;
                 for(let i=0; i<count; i++) {
-                    pHTML += `<select class="glass w-full p-3 rounded-xl input-modern text-sm font-bold text-white outline-none cursor-pointer" data-phase="${phaseKey}" data-index="${i}">
-                        <option value="" class="bg-slate-800">Selecione...</option>
-                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
+                    pHTML += `<select class="w-full p-3 rounded-xl input-sports text-sm font-bold text-white outline-none cursor-pointer" data-phase="${phaseKey}" data-index="${i}">
+                        <option value="" class="bg-slate-900">Selecione...</option>
+                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-900">${getEmoji(t)}${t}</option>`).join('')}
                     </select>`;
                 }
                 pHTML += `</div></div>`;
                 return pHTML;
             }
 
-            html += generatePhase('Oitavas de Final', 16, 'round16', '#3b82f6'); // blue
-            html += generatePhase('Quartas de Final', 8, 'quarters', '#0ea5e9'); // cyan
-            html += generatePhase('Semifinais', 4, 'semis', '#8b5cf6'); // violet
-            html += generatePhase('A Grande Final', 2, 'final', '#d946ef'); // fuchsia
+            html += generatePhase('Oitavas de Final (16)', 16, 'round16', '#fbbf24'); // gold
+            html += generatePhase('Quartas de Final (8)', 8, 'quarters', '#d97706'); // dark gold
+            html += generatePhase('Semifinais (4)', 4, 'semis', '#b45309'); // copper
+            html += generatePhase('A Grande Final (2)', 2, 'final', '#f8fafc'); // white
 
             html += `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12 pt-8 border-t border-slate-700/50">
-                <div class="glass p-6 sm:p-8 rounded-[2rem] border border-amber-500/30 shadow-[0_0_30px_rgba(245,158,11,0.05)]">
-                    <h3 class="font-display font-bold text-xl mb-5 text-amber-400 flex items-center gap-2">🥉 Terceiro Lugar</h3>
-                    <select class="w-full p-4 rounded-xl input-modern border border-amber-500/50 text-base font-bold text-white focus:border-amber-400 focus:ring-1 focus:ring-amber-400 bg-slate-900/50 cursor-pointer" data-phase="thirdPlace" data-index="0">
-                        <option value="" class="bg-slate-800">Quem fica em 3º?</option>
-                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12 pt-8 border-t border-white/10">
+                <div class="glass-card p-6 sm:p-8 rounded-[2rem] border-l-4 border-l-slate-400">
+                    <h3 class="font-display font-black text-xl mb-5 text-slate-300 flex items-center gap-2">🥉 Terceiro Lugar</h3>
+                    <select class="w-full p-4 rounded-xl input-sports border border-slate-500/50 text-base font-bold text-white focus:border-slate-400 cursor-pointer" data-phase="thirdPlace" data-index="0">
+                        <option value="" class="bg-slate-900">Quem fica em 3º?</option>
+                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-900">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>
-                <div class="glass p-6 sm:p-8 rounded-[2rem] border border-emerald-500/40 shadow-[0_0_40px_rgba(16,185,129,0.1)] ring-1 ring-emerald-500/20">
-                    <h3 class="font-display font-bold text-2xl mb-5 text-emerald-400 flex items-center gap-2">🏆 Campeão do Mundo</h3>
-                    <select class="w-full p-4.5 rounded-xl input-modern border-2 border-emerald-500/60 text-lg font-black text-white focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 bg-slate-900/80 shadow-inner cursor-pointer" data-phase="champion" data-index="0">
-                        <option value="" class="bg-slate-800">Quem leva a Taça?</option>
-                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-800">${getEmoji(t)}${t}</option>`).join('')}
+                <div class="glass-card p-6 sm:p-8 rounded-[2rem] border-l-4 border-l-yellow-500 shadow-[0_0_30px_rgba(251,191,36,0.1)]">
+                    <h3 class="font-display font-black text-2xl mb-5 text-yellow-500 flex items-center gap-2 drop-shadow-md">🏆 Campeão do Mundo</h3>
+                    <select class="w-full p-4.5 rounded-xl input-sports border-2 border-yellow-500/60 text-lg font-black text-white focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 cursor-pointer shadow-inner" data-phase="champion" data-index="0">
+                        <option value="" class="bg-slate-900">Quem leva a Taça?</option>
+                        ${allTeams.map(t => `<option value="${t}" class="bg-slate-900">${getEmoji(t)}${t}</option>`).join('')}
                     </select>
                 </div>
             </div>`;
@@ -825,18 +844,21 @@
 
             document.getElementById('error-message').classList.add('hidden');
             btnLoad.disabled = true;
-            btnLoad.innerHTML = `<svg class="animate-spin h-5 w-5 text-emerald-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+            btnLoad.innerHTML = `<svg class="animate-spin h-5 w-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
 
             try {
+                // Ao contrário de salvar (POST no-cors), ler dados permite um GET normal
                 const url = `${SCRIPT_URL}?action=load_predictions&name=${encodeURIComponent(name)}`;
                 const response = await fetch(url);
                 const json = await response.json();
 
                 if (json.result === 'success') {
+                    // Atualizar variaveis locais
                     predictions = json.predictions || {};
                     if (json.knockout) knockoutPredictions = json.knockout;
 
-                    document.querySelectorAll('.input-modern[data-team]').forEach(input => {
+                    // Preencher inputs Fase de Grupos
+                    document.querySelectorAll('.input-sports[data-team]').forEach(input => {
                         const matchId = input.getAttribute('data-match-id');
                         const team = input.getAttribute('data-team');
                         if (predictions[matchId] && predictions[matchId][team] !== undefined) {
@@ -846,19 +868,25 @@
                         }
                     });
 
+                    // Preencher selects Mata-Mata
                     document.querySelectorAll('#knockout-container select').forEach(select => {
                         const phase = select.getAttribute('data-phase');
                         const index = select.getAttribute('data-index');
                         let savedVal = '';
-                        if (phase === 'thirdPlace' || phase === 'champion') savedVal = knockoutPredictions[phase];
-                        else if (knockoutPredictions[phase] && knockoutPredictions[phase][index]) savedVal = knockoutPredictions[phase][index];
+                        if (phase === 'thirdPlace' || phase === 'champion') {
+                            savedVal = knockoutPredictions[phase];
+                        } else if (knockoutPredictions[phase] && knockoutPredictions[phase][index]) {
+                            savedVal = knockoutPredictions[phase][index];
+                        }
                         select.value = savedVal || '';
                     });
 
                     updateProgress();
-                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+                    
+                    // Feedback visual de sucesso
+                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
                     setTimeout(() => {
-                        btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
+                        btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
                         btnLoad.disabled = false;
                     }, 2000);
 
@@ -876,11 +904,11 @@
 
         function resetBtnLoad(btnLoad) {
             btnLoad.disabled = false;
-            btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
+            btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
         }
 
         // =====================================================================
-        // SUBMIT LOGIC
+        // SUBMIT & RANKING LOGIC
         // =====================================================================
         document.getElementById('predictions-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -951,7 +979,7 @@
         function resetForm() {
             predictions = {};
             knockoutPredictions = { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: '' };
-            document.querySelectorAll('.input-modern[data-team]').forEach(i => i.value = '');
+            document.querySelectorAll('.input-sports').forEach(i => i.value = '');
             document.querySelectorAll('#knockout-container select').forEach(s => s.value = '');
             document.getElementById('participant-name').value = '';
             
@@ -992,7 +1020,7 @@
             podiumContainer.innerHTML = ''; listContainer.innerHTML = '';
 
             if (data.length === 0) {
-                listContainer.innerHTML = '<div class="p-8 text-center text-slate-400 font-bold text-sm uppercase tracking-widest">Nenhum participante.</div>';
+                listContainer.innerHTML = '<div class="p-8 text-center text-slate-500 font-bold text-sm uppercase tracking-widest">Nenhum participante.</div>';
                 document.getElementById('ranking-loading-state').classList.add('hidden');
                 document.getElementById('ranking-content').classList.remove('hidden');
                 return;
@@ -1010,23 +1038,22 @@
             
             for (let i = 0; i < data.length; i++) {
                 const percent = Math.round((data[i].score / maxScore) * 100);
-                
-                let rankColor = 'text-slate-400';
-                let barColor = 'from-blue-500 to-emerald-500';
+                let rankColor = 'text-slate-500';
+                let barColor = 'from-blue-600 to-indigo-600';
                 
                 if (i === 0) { rankColor = 'text-yellow-400'; barColor = 'from-yellow-400 to-amber-500'; }
                 else if (i === 1) { rankColor = 'text-slate-300'; barColor = 'from-slate-400 to-slate-300'; }
                 else if (i === 2) { rankColor = 'text-amber-500'; barColor = 'from-amber-600 to-orange-500'; }
 
                 listHtml += `
-                    <div class="glass flex items-center px-4 sm:px-6 py-4 hover:bg-slate-800/80 transition group gap-3 sm:gap-5 rounded-2xl mb-2">
-                        <div class="w-10 sm:w-12 text-center font-black ${rankColor} text-xl sm:text-2xl group-hover:scale-110 transition-transform">#${i + 1}</div>
+                    <div class="flex items-center px-4 sm:px-6 py-4 hover:bg-white/5 transition group gap-3 sm:gap-5">
+                        <div class="w-10 sm:w-12 text-center font-sports font-black ${rankColor} text-xl sm:text-3xl group-hover:scale-110 transition-transform">#${i + 1}</div>
                         <div class="flex-1 flex flex-col justify-center">
                             <div class="flex justify-between items-baseline mb-1">
                                 <span class="font-bold text-white truncate text-base sm:text-lg tracking-wide">${data[i].name}</span>
-                                <span class="font-black text-emerald-400 text-lg sm:text-xl">${data[i].score} <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest ml-0.5">pts</span></span>
+                                <span class="font-sports font-black text-yellow-500 text-xl sm:text-2xl">${data[i].score} <span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest ml-0.5">pts</span></span>
                             </div>
-                            <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden">
+                            <div class="w-full bg-black/60 rounded-full h-1.5 overflow-hidden border border-white/5">
                                 <div class="bg-gradient-to-r ${barColor} h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_currentColor]" style="width: ${percent}%;"></div>
                             </div>
                         </div>
@@ -1042,8 +1069,8 @@
             let emoji = pos === 1 ? '🥇' : pos === 2 ? '🥈' : '🥉';
             return `
                 <div class="flex flex-col items-center w-24 sm:w-28 relative">
-                    <div class="font-bold text-slate-300 text-center text-xs sm:text-sm truncate w-full mb-1 uppercase tracking-widest bg-slate-900/60 rounded px-1">${name}</div>
-                    <div class="font-black text-white text-base sm:text-lg mb-2 bg-slate-800/80 px-2 py-0.5 rounded-lg border border-slate-700 shadow-sm">${score} <span class="text-[10px] font-normal text-slate-400">pts</span></div>
+                    <div class="font-bold text-slate-300 text-center text-xs sm:text-sm truncate w-full mb-1 uppercase tracking-widest bg-black/60 rounded px-1">${name}</div>
+                    <div class="font-sports font-black text-white text-lg sm:text-xl mb-2 bg-black/80 px-2 py-0.5 rounded-lg border border-white/10 shadow-sm">${score} <span class="text-[10px] font-normal text-slate-400">pts</span></div>
                     <div class="${color} w-full rounded-t-[2rem] ${height} flex flex-col justify-start pt-3 sm:pt-4 border-x border-t border-white/20 relative overflow-hidden backdrop-blur-sm shadow-2xl">
                         <span class="text-3xl sm:text-5xl relative z-10 text-center drop-shadow-lg filter hover:scale-110 transition-transform">${emoji}</span>
                     </div>
