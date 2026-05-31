@@ -224,9 +224,16 @@
             
             <!-- Nome e Progresso (Cartão Minimalista) -->
             <div id="name-container" class="glass-panel rounded-3xl soft-shadow p-5 sm:p-6 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between border-b border-white/50">
-                <div class="w-full sm:flex-1">
+                <div class="w-full sm:flex-1 relative">
                     <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-1 ml-1">Nome na Planilha</label>
-                    <input type="text" id="participant-name" placeholder="Digite seu nome..." class="w-full text-lg sm:text-xl p-0 bg-transparent border-0 border-b-2 border-slate-200 focus:border-blue-600 focus:ring-0 outline-none transition uppercase font-bold text-slate-800 placeholder-slate-300" required />
+                    <div class="flex gap-2">
+                        <input type="text" id="participant-name" placeholder="Digite seu nome..." class="w-full text-lg sm:text-xl p-2 bg-transparent border-0 border-b-2 border-slate-200 focus:border-blue-600 focus:ring-0 outline-none transition uppercase font-bold text-slate-800 placeholder-slate-300" required />
+                        <!-- NOVO BOTÃO DE BUSCA -->
+                        <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="shrink-0 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-2 rounded-xl transition flex items-center gap-2 border border-slate-200 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <span class="hidden sm:inline">Recuperar</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="w-full sm:w-48 shrink-0">
                     <div class="flex justify-between items-end mb-1.5 ml-1">
@@ -333,13 +340,13 @@
         // =====================================================================
         // CONFIGURAÇÕES GERAIS
         // =====================================================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxERr-Gwl3-nSac-cG2A7v--wwgt9ANUZ-GZDn5Xy4RAOJ9ynWjawBBywfaBi8I3tfu/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuQMtBuKdvdk_uhGDa45je9pVVLqb3w9g-5BFIKX-U_wr46LviWfAO1kSY7eROiN1O/exec';
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
 
         const INITIAL_MATCHES = [
-            { id: 1, team1: 'MÉXICO', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 2, team1: 'CORÉIA DO SUL', team2: 'REPÚB. TCHECA', group: 'A' },
-            { id: 25, team1: 'REPÚB. TCHECA', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 28, team1: 'MÉXICO', team2: 'CORÉIA DO SUL', group: 'A' },
-            { id: 53, team1: 'REPÚB. TCHECA', team2: 'MÉXICO', group: 'A' }, { id: 54, team1: 'ÁFRICA DO SUL', team2: 'CORÉIA DO SUL', group: 'A' },
+            { id: 1, team1: 'MÉXICO', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 2, team1: 'CORÉIA DO SUL', team2: 'REPÚB. CHECA', group: 'A' },
+            { id: 25, team1: 'REPÚB. CHECA', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 28, team1: 'MÉXICO', team2: 'CORÉIA DO SUL', group: 'A' },
+            { id: 53, team1: 'REPÚB. CHECA', team2: 'MÉXICO', group: 'A' }, { id: 54, team1: 'ÁFRICA DO SUL', team2: 'CORÉIA DO SUL', group: 'A' },
             { id: 3, team1: 'CANADÁ', team2: 'BÓSNIA', group: 'B' }, { id: 8, team1: 'CATAR', team2: 'SUÍÇA', group: 'B' },
             { id: 26, team1: 'SUÍÇA', team2: 'BÓSNIA', group: 'B' }, { id: 27, team1: 'CANADÁ', team2: 'CATAR', group: 'B' },
             { id: 51, team1: 'SUÍÇA', team2: 'CANADÁ', group: 'B' }, { id: 52, team1: 'BÓSNIA', team2: 'CATAR', group: 'B' },
@@ -367,9 +374,9 @@
             { id: 19, team1: 'ARGENTINA', team2: 'ARGÉLIA', group: 'J' }, { id: 20, team1: 'ÁUSTRIA', team2: 'JORDÂNIA', group: 'J' },
             { id: 43, team1: 'ARGENTINA', team2: 'ÁUSTRIA', group: 'J' }, { id: 44, team1: 'JORDÂNIA', team2: 'ARGÉLIA', group: 'J' },
             { id: 69, team1: 'ARGÉLIA', team2: 'ÁUSTRIA', group: 'J' }, { id: 70, team1: 'JORDÂNIA', team2: 'ARGENTINA', group: 'J' },
-            { id: 23, team1: 'PORTUGAL', team2: 'R.D.CONGO', group: 'K' }, { id: 24, team1: 'UZBEQUISTÃO', team2: 'COLÔMBIA', group: 'K' },
-            { id: 47, team1: 'PORTUGAL', team2: 'UZBEQUISTÃO', group: 'K' }, { id: 48, team1: 'COLÔMBIA', team2: 'R.D.CONGO', group: 'K' },
-            { id: 71, team1: 'COLÔMBIA', team2: 'PORTUGAL', group: 'K' }, { id: 72, team1: 'R.D.CONGO', team2: 'UZBEQUISTÃO', group: 'K' },
+            { id: 23, team1: 'PORTUGAL', team2: 'CONGO', group: 'K' }, { id: 24, team1: 'UZBEQUISTÃO', team2: 'COLÔMBIA', group: 'K' },
+            { id: 47, team1: 'PORTUGAL', team2: 'UZBEQUISTÃO', group: 'K' }, { id: 48, team1: 'COLÔMBIA', team2: 'CONGO', group: 'K' },
+            { id: 71, team1: 'COLÔMBIA', team2: 'PORTUGAL', group: 'K' }, { id: 72, team1: 'CONGO', team2: 'UZBEQUISTÃO', group: 'K' },
             { id: 22, team1: 'INGLATERRA', team2: 'CROÁCIA', group: 'L' }, { id: 21, team1: 'GANA', team2: 'PANAMÁ', group: 'L' },
             { id: 45, team1: 'INGLATERRA', team2: 'GANA', group: 'L' }, { id: 46, team1: 'PANAMÁ', team2: 'CROÁCIA', group: 'L' },
             { id: 67, team1: 'PANAMÁ', team2: 'INGLATERRA', group: 'L' }, { id: 68, team1: 'CROÁCIA', team2: 'GANA', group: 'L' }
@@ -377,7 +384,7 @@
 
         const TEAM_INFO = {
             'MÉXICO': { iso: 'mx', emoji: '🇲🇽' }, 'ÁFRICA DO SUL': { iso: 'za', emoji: '🇿🇦' },
-            'CORÉIA DO SUL': { iso: 'kr', emoji: '🇰🇷' }, 'REPÚB. TCHECA': { iso: 'cz', emoji: '🇨🇿' },
+            'CORÉIA DO SUL': { iso: 'kr', emoji: '🇰🇷' }, 'REPÚB. CHECA': { iso: 'cz', emoji: '🇨🇿' },
             'CANADÁ': { iso: 'ca', emoji: '🇨🇦' }, 'BÓSNIA': { iso: 'ba', emoji: '🇧🇦' },
             'CATAR': { iso: 'qa', emoji: '🇶🇦' }, 'SUÍÇA': { iso: 'ch', emoji: '🇨🇭' },
             'BRASIL': { iso: 'br', emoji: '🇧🇷' }, 'MARROCOS': { iso: 'ma', emoji: '🇲🇦' },
@@ -396,7 +403,7 @@
             'IRAQUE': { iso: 'iq', emoji: '🇮🇶' }, 'NORUEGA': { iso: 'no', emoji: '🇳🇴' },
             'ARGENTINA': { iso: 'ar', emoji: '🇦🇷' }, 'ÁUSTRIA': { iso: 'at', emoji: '🇦🇹' },
             'JORDÂNIA': { iso: 'jo', emoji: '🇯🇴' }, 'ARGÉLIA': { iso: 'dz', emoji: '🇩🇿' },
-            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'R.D.CONGO': { iso: 'cd', emoji: '🇨🇩' },
+            'PORTUGAL': { iso: 'pt', emoji: '🇵🇹' }, 'CONGO': { iso: 'cd', emoji: '🇨🇩' },
             'UZBEQUISTÃO': { iso: 'uz', emoji: '🇺🇿' }, 'COLÔMBIA': { iso: 'co', emoji: '🇨🇴' },
             'INGLATERRA': { iso: 'gb-eng', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' }, 'CROÁCIA': { iso: 'hr', emoji: '🇭🇷' },
             'GANA': { iso: 'gh', emoji: '🇬🇭' }, 'PANAMÁ': { iso: 'pa', emoji: '🇵🇦' }
@@ -426,7 +433,7 @@
                 });
             }
         });
-
+        // Função para carregar a lista de inscritos
         async function loadParticipants() {
             try {
                 const response = await fetch(SCRIPT_URL);
@@ -527,56 +534,87 @@
         }
 
         // =====================================================================
-        // RENDERIZAÇÃO ESTILO "BETTING APP" (O GRANDE UPGRADE MOBILE-FIRST)
+        // NOVA FUNÇÃO: RECUPERAR PALPITES
         // =====================================================================
-        function renderMatches() {
-            const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
-                (acc[match.group] = acc[match.group] || []).push(match);
-                return acc;
-            }, {});
+        async function loadUserPredictions() {
+            const nameInput = document.getElementById('participant-name');
+            const name = nameInput.value.trim();
+            const btnLoad = document.getElementById('btn-load-predictions');
 
-            let html = '';
-            for (const group in groupedMatches) {
-                html += `
-                <div class="mb-10">
-                    <div class="flex items-center gap-3 mb-4 pl-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-100/80 text-blue-700 flex items-center justify-center font-black text-sm border border-blue-200 shadow-sm">${group}</div>
-                        <h3 class="font-bold text-slate-700 text-lg sm:text-xl uppercase tracking-widest">Grupo ${group}</h3>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                `;
-                
-                groupedMatches[group].forEach(match => {
-                    const t1 = TEAM_INFO[match.team1] || { iso: 'xx' };
-                    const t2 = TEAM_INFO[match.team2] || { iso: 'xx' };
-                    
-                    html += `
-                        <div class="glass-panel rounded-2xl p-4 soft-shadow hover:shadow-md transition-shadow duration-300">
-                            <div class="text-[10px] font-bold text-slate-400 mb-3 uppercase tracking-widest flex justify-between items-center border-b border-slate-100 pb-2">
-                                <span>Jogo #${match.id}</span>
-                            </div>
-                            <div class="space-y-3">
-                                <!-- Equipa 1 -->
-                                <div class="flex items-center justify-between group">
-                                    <div class="flex items-center gap-3 w-[70%]">
-                                        <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-7 h-5 sm:w-8 sm:h-6 object-cover rounded shadow-sm border border-slate-200" alt="${match.team1}">
-                                        <span class="font-bold text-slate-700 text-sm sm:text-base truncate group-hover:text-blue-600 transition-colors">${match.team1}</span>
-                                    </div>
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input w-12 h-10 sm:w-14 sm:h-12 bg-slate-100/80 border border-slate-200 rounded-xl text-center font-black text-lg text-slate-800 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
-                                </div>
-                                <!-- Equipa 2 -->
-                                <div class="flex items-center justify-between group">
-                                    <div class="flex items-center gap-3 w-[70%]">
-                                        <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-7 h-5 sm:w-8 sm:h-6 object-cover rounded shadow-sm border border-slate-200" alt="${match.team2}">
-                                        <span class="font-bold text-slate-700 text-sm sm:text-base truncate group-hover:text-blue-600 transition-colors">${match.team2}</span>
-                                    </div>
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input w-12 h-10 sm:w-14 sm:h-12 bg-slate-100/80 border border-slate-200 rounded-xl text-center font-black text-lg text-slate-800 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" />
-                                </div>
-                            </div>
-                        </div>`;
-                });
-                html += `</div></div>`;
+            if (!name) {
+                alert("Digite o nome da sua aba primeiro para recuperar os palpites!");
+                nameInput.focus();
+                return;
             }
+
+            // UI Feedback
+            btnLoad.disabled = true;
+            btnLoad.innerHTML = `<svg class="animate-spin h-4 w-4 text-slate-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+
+            try {
+                // O Fetch para o GET com o parâmetro 'action' e 'name'
+                const url = `${SCRIPT_URL}?action=load_predictions&name=${encodeURIComponent(name)}`;
+                const response = await fetch(url);
+                const json = await response.json();
+
+                if (json.result === 'success') {
+                    // Preencher a variável global
+                    predictions = json.predictions || {};
+                    
+                    // Se houver dados do mata-mata, preenche; senão, mantém vazio
+                    if (json.knockout) {
+                        knockoutPredictions = json.knockout;
+                    }
+
+                    // Forçar atualização visual dos inputs dos placares
+                    document.querySelectorAll('.score-input').forEach(input => {
+                        const matchId = input.getAttribute('data-match-id');
+                        const team = input.getAttribute('data-team');
+                        if (predictions[matchId] && predictions[matchId][team] !== undefined) {
+                            input.value = predictions[matchId][team];
+                        } else {
+                            input.value = ''; // Limpa se não houver
+                        }
+                    });
+
+                    // Forçar atualização visual dos Selects do Mata-Mata
+                    document.querySelectorAll('#knockout-container select').forEach(select => {
+                        const phase = select.getAttribute('data-phase');
+                        const index = select.getAttribute('data-index');
+                        
+                        let savedVal = '';
+                        if (phase === 'thirdPlace' || phase === 'champion') {
+                            savedVal = knockoutPredictions[phase];
+                        } else if (knockoutPredictions[phase] && knockoutPredictions[phase][index]) {
+                            savedVal = knockoutPredictions[phase][index];
+                        }
+                        
+                        select.value = savedVal || '';
+                    });
+
+                    updateProgress();
+                    
+                    // Aviso discreto de sucesso temporário no botão
+                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+                    setTimeout(() => {
+                        btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
+                        btnLoad.disabled = false;
+                    }, 2000);
+
+                } else {
+                    alert("Não encontrámos palpites com esse nome. Verifique se digitou corretamente.");
+                    resetBtnLoad(btnLoad);
+                }
+            } catch (error) {
+                alert("Erro de conexão ao recuperar os palpites.");
+                resetBtnLoad(btnLoad);
+            }
+        }
+
+        function resetBtnLoad(btnLoad) {
+            btnLoad.disabled = false;
+            btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span class="hidden sm:inline">Recuperar</span>`;
+        }
             document.getElementById('matches-container').innerHTML = html;
 
             document.querySelectorAll('.score-input').forEach(input => {
