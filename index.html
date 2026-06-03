@@ -21,7 +21,7 @@
         }
     </script>
 
-    <!-- Previne o "piscar" da tela (FOUC) carregando o tema imediatamente -->
+    <!-- Previne o "piscar" da tela carregando o tema imediatamente -->
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) || !('theme' in localStorage)) {
             document.documentElement.classList.add('dark');
@@ -157,7 +157,6 @@
     
     <div class="bg-overlay"></div>
 
-    <!-- Header Estilo Transmissão Esportiva -->
     <header class="pt-8 pb-6 px-4 relative z-10 border-b border-slate-200 dark:border-white/5 bg-white/80 dark:bg-black/40 backdrop-blur-md transition-colors duration-500">
         <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             
@@ -210,9 +209,6 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- REGRAS E PONTUAÇÕES                        -->
-    <!-- ========================================== -->
     <section id="sec-regras" class="max-w-5xl mx-auto px-4 hidden animate-fade-in pb-8">
         <div class="glass-dark p-6 sm:p-10 rounded-2xl border-t-2 border-t-amber-500 dark:border-t-yellow-500/50">
             <h2 class="text-2xl sm:text-3xl font-display font-black text-slate-900 dark:text-white mb-8 flex items-center gap-3 tracking-tight uppercase">
@@ -221,7 +217,6 @@
             </h2>
 
             <div class="space-y-12">
-                <!-- Regra 1 -->
                 <div>
                     <h3 class="text-lg sm:text-xl font-bold text-amber-700 dark:text-yellow-500 mb-4 flex items-center gap-3">
                         <span class="bg-amber-100 dark:bg-yellow-500/10 text-amber-700 dark:text-yellow-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-amber-300 dark:border-yellow-500/30">1</span>
@@ -256,7 +251,6 @@
                     </ul>
                 </div>
 
-                <!-- Regra 2 -->
                 <div class="pt-4 border-t border-slate-200 dark:border-white/10">
                     <h3 class="text-lg sm:text-xl font-bold text-copper mb-4 flex items-center gap-3">
                         <span class="bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-orange-300 dark:border-orange-500/30">2</span>
@@ -305,9 +299,6 @@
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- CONTAINER PRINCIPAL: FORMULÁRIO DE PALPITES-->
-    <!-- ========================================== -->
     <section id="main-palpites-container" class="max-w-5xl mx-auto px-4 animate-fade-in block">
         
         <!-- Tela de Sucesso -->
@@ -328,7 +319,7 @@
                 <button type="button" id="btn-mode-recover" onclick="setMode('recover')" class="flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Recuperar Palpites</button>
             </div>
 
-            <!-- Nome e Progresso (Painel High-Tech) -->
+            <!-- Nome e Progresso -->
             <div id="name-container" class="glass-dark rounded-2xl p-5 sm:p-8 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between border-t border-slate-200 dark:border-white/10">
                 <div class="w-full sm:flex-1 relative">
                     <label class="block text-[10px] font-bold text-amber-700 dark:text-yellow-500/70 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
@@ -337,15 +328,13 @@
                     <div class="flex gap-2">
                         <input type="text" id="participant-name" placeholder="DIGITE O SEU NOME..." class="w-full text-xl sm:text-2xl p-3 bg-white dark:bg-black/50 border border-slate-300 dark:border-white/10 rounded-xl focus:border-amber-500 dark:focus:border-yellow-500 outline-none transition uppercase font-display font-black text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-700 shadow-inner" required />
                         
-                        <!-- BOTÃO DE BUSCA -->
                         <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="hidden shrink-0 bg-slate-800 hover:bg-slate-900 dark:bg-black/80 dark:hover:bg-black text-white dark:text-yellow-500 font-bold px-4 rounded-xl transition items-center justify-center gap-2 border border-slate-700 dark:border-yellow-500/30 text-sm shadow-sm dark:shadow-[0_0_15px_rgba(251,191,36,0.1)]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         </button>
                     </div>
-                    <p id="mode-hint" class="text-xs text-slate-500 dark:text-slate-500 mt-3 font-medium">✨ Se for a sua primeira vez, uma nova aba será gerada automaticamente.</p>
+                    <p id="mode-hint" class="text-xs text-slate-500 mt-3 font-medium">✨ Se for a sua primeira vez, uma nova aba será gerada automaticamente.</p>
                 </div>
                 
-                <!-- Monitor de Progresso -->
                 <div class="w-full sm:w-56 bg-slate-100 dark:bg-black/80 p-4 rounded-xl border border-slate-200 dark:border-white/5 shadow-inner">
                     <div class="flex justify-between items-end mb-2">
                         <span class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.1em]">Progresso</span>
@@ -370,8 +359,19 @@
                 <div id="matches-container"></div>
             </section>
 
-            <!-- SEÇÃO B: SELEÇÕES DO MATA-MATA -->
+            <!-- SEÇÃO B: SELEÇÕES DO MATA-MATA (Com Varinha Mágica) -->
             <section id="sec-knockout" class="hidden animate-fade-in space-y-6 pt-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-200/50 dark:bg-black/40 p-4 rounded-2xl border border-slate-300 dark:border-white/10">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white drop-shadow-sm flex items-center gap-2">
+                            Fases Eliminatórias
+                        </h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Preencha os classificados ou use a varinha mágica.</p>
+                    </div>
+                    <button type="button" id="btn-autofill" onclick="autoFillRound32()" class="w-full sm:w-auto bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/50 dark:hover:bg-indigo-800/80 text-indigo-700 dark:text-indigo-300 font-bold py-2.5 px-5 rounded-xl transition flex items-center justify-center gap-2 border border-indigo-200 dark:border-indigo-500/30 shadow-sm text-sm">
+                        🪄 Calcular 16-Avos
+                    </button>
+                </div>
                 <div id="knockout-container"></div>
             </section>
 
@@ -396,9 +396,6 @@
         </form>
     </section>
 
-    <!-- ========================================== -->
-    <!-- SEÇÃO 2: RANKING GERAL                     -->
-    <!-- ========================================== -->
     <section id="sec-ranking" class="max-w-4xl mx-auto px-4 hidden">
         <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-32 glass-dark rounded-2xl">
             <div class="relative w-16 h-16 mb-6">
@@ -453,7 +450,6 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
     <script>
         // =====================================================================
         // TEMA (LIGHT/DARK) LOGIC
@@ -470,16 +466,16 @@
             const iconContainer = document.getElementById('theme-icon');
             if (!iconContainer) return;
             if (isDark) {
-                // Sol (Mudar para Light)
+                // Sol
                 iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
             } else {
-                // Lua (Mudar para Dark)
+                // Lua
                 iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
             }
         }
 
         // =====================================================================
-        // CONFIGURAÇÕES GERAIS
+        // CONFIGURAÇÕES GERAIS E DADOS
         // =====================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuQMtBuKdvdk_uhGDa45je9pVVLqb3w9g-5BFIKX-U_wr46LviWfAO1kSY7eROiN1O/exec';
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
@@ -559,9 +555,7 @@
         let bolaoEncerrado = false;
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('total-count').textContent = 136;
             updateThemeIcon(document.documentElement.classList.contains('dark'));
-            
             const agora = new Date();
             if (agora > DATA_LIMITE) {
                 bolaoEncerrado = true;
@@ -624,6 +618,53 @@
             } catch (error) {}
         }
 
+        async function loadUserPredictions() {
+            const name = document.getElementById('participant-name').value.trim();
+            if (!name) return;
+
+            const btn = document.getElementById('btn-load-predictions');
+            btn.innerHTML = '<svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(SCRIPT_URL + `?action=load_predictions&name=${encodeURIComponent(name)}`);
+                const json = await response.json();
+
+                if (json.result === 'success') {
+                    predictions = json.predictions || {};
+                    knockoutPredictions = json.knockout || { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: '' };
+                    
+                    // Atualiza Inputs de Grupos
+                    document.querySelectorAll('.score-input').forEach(input => {
+                        const mId = input.getAttribute('data-match-id');
+                        const team = input.getAttribute('data-team');
+                        input.value = predictions[mId] && predictions[mId][team] !== undefined ? predictions[mId][team] : '';
+                    });
+
+                    // Atualiza Selects de Mata-Mata
+                    document.querySelectorAll('#knockout-container select').forEach(select => {
+                        const phase = select.getAttribute('data-phase');
+                        const idx = select.getAttribute('data-index');
+                        if (phase === 'thirdPlace' || phase === 'champion') {
+                            select.value = knockoutPredictions[phase] || '';
+                        } else {
+                            select.value = knockoutPredictions[phase] && knockoutPredictions[phase][idx] !== undefined ? knockoutPredictions[phase][idx] : '';
+                        }
+                    });
+
+                    updateProgress();
+                    document.getElementById('mode-hint').innerHTML = `<span class="text-emerald-600 dark:text-green-400 font-bold">✅ Dados carregados com sucesso!</span> Atualize o que desejar.`;
+                } else {
+                    document.getElementById('mode-hint').innerHTML = `<span class="text-red-500 font-bold">❌ Aba não encontrada.</span> Verifique se digitou o nome corretamente.`;
+                }
+            } catch (error) {
+                document.getElementById('mode-hint').innerHTML = `<span class="text-red-500 font-bold">❌ Erro de conexão.</span>`;
+            } finally {
+                btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+                btn.disabled = false;
+            }
+        }
+
         function updateProgress() {
             let filledCount = 0;
             for (const id in predictions) {
@@ -653,11 +694,9 @@
         function bloquearPalpites() {
             document.getElementById('tab-btn-grupos').classList.add('hidden');
             document.getElementById('tab-btn-knockout').classList.add('hidden');
-            
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
             document.getElementById('header-subtitle').textContent = "Ranking de Transmissão Oficial";
-            
             switchTab('ranking');
         }
 
@@ -683,7 +722,6 @@
                 document.getElementById('sec-regras').classList.remove('hidden');
             } else {
                 document.getElementById('main-palpites-container').classList.remove('hidden');
-                
                 if (tabId === 'grupos') {
                     document.getElementById('sec-grupos').classList.remove('hidden');
                     document.getElementById('sec-knockout').classList.add('hidden');
@@ -694,7 +732,6 @@
             }
         }
 
-        /* RENDERIZAÇÃO ESTILO "BETTING APP" */
         function renderMatches() {
             const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
                 (acc[match.group] = acc[match.group] || []).push(match);
@@ -732,9 +769,9 @@
                                 </div>
 
                                 <div class="flex items-center justify-center gap-1 sm:gap-2 shrink-0 bg-slate-100 dark:bg-black/40 p-1.5 rounded-xl border border-slate-200 dark:border-white/5 shadow-inner">
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
                                     <span class="text-slate-400 dark:text-slate-600 font-black text-xs">X</span>
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
                                 </div>
 
                                 <div class="flex flex-col items-start gap-1.5 text-left">
@@ -749,7 +786,7 @@
             }
             document.getElementById('matches-container').innerHTML = html;
 
-            document.querySelectorAll('.score-input, .input-sports').forEach(input => {
+            document.querySelectorAll('.score-input').forEach(input => {
                 input.addEventListener('input', function() {
                     this.value = this.value.replace(/[^0-9]/g, '');
                     const matchId = this.getAttribute('data-match-id');
@@ -759,6 +796,93 @@
                     updateProgress();
                 });
             });
+        }
+
+        function autoFillRound32() {
+            let stats = {};
+            
+            // Inicializar todas as seleções zeradas
+            INITIAL_MATCHES.forEach(m => {
+                if(!stats[m.team1]) stats[m.team1] = { name: m.team1, group: m.group, pts: 0, sg: 0, gp: 0 };
+                if(!stats[m.team2]) stats[m.team2] = { name: m.team2, group: m.group, pts: 0, sg: 0, gp: 0 };
+            });
+
+            // Calcular pontos baseados nos palpites
+            INITIAL_MATCHES.forEach(m => {
+                let p = predictions[m.id];
+                if (p && p.team1 !== undefined && p.team2 !== undefined && p.team1 !== '' && p.team2 !== '') {
+                    let s1 = parseInt(p.team1);
+                    let s2 = parseInt(p.team2);
+                    
+                    stats[m.team1].gp += s1;
+                    stats[m.team2].gp += s2;
+                    stats[m.team1].sg += (s1 - s2);
+                    stats[m.team2].sg += (s2 - s1);
+                    
+                    if (s1 > s2) stats[m.team1].pts += 3;
+                    else if (s2 > s1) stats[m.team2].pts += 3;
+                    else { stats[m.team1].pts += 1; stats[m.team2].pts += 1; }
+                }
+            });
+
+            let groups = {};
+            Object.values(stats).forEach(t => {
+                if(!groups[t.group]) groups[t.group] = [];
+                groups[t.group].push(t);
+            });
+
+            let firsts = {};
+            let seconds = {};
+            let thirds = [];
+
+            const tieBreaker = (a, b) => {
+                if(b.pts !== a.pts) return b.pts - a.pts;
+                if(b.sg !== a.sg) return b.sg - a.sg;
+                if(b.gp !== a.gp) return b.gp - a.gp;
+                return a.name.localeCompare(b.name);
+            };
+
+            for(let g in groups) {
+                groups[g].sort(tieBreaker);
+                firsts[g] = groups[g][0].name;
+                seconds[g] = groups[g][1].name;
+                thirds.push(groups[g][2]);
+            }
+
+            thirds.sort(tieBreaker);
+            let bestThirds = thirds.slice(0, 8).map(t => t.name);
+
+            let r32Idx = 0;
+            Object.keys(groups).sort().forEach(group => {
+                let select1 = document.querySelector(`select[data-phase="round32"][data-index="${r32Idx}"]`);
+                let select2 = document.querySelector(`select[data-phase="round32"][data-index="${r32Idx+1}"]`);
+                if(select1) { select1.value = firsts[group]; knockoutPredictions.round32[r32Idx] = firsts[group]; }
+                if(select2) { select2.value = seconds[group]; knockoutPredictions.round32[r32Idx+1] = seconds[group]; }
+                r32Idx += 2;
+            });
+
+            for(let i=0; i<8; i++) {
+                let selectT = document.querySelector(`select[data-phase="round32"][data-index="${r32Idx}"]`);
+                if(selectT) {
+                    selectT.value = bestThirds[i] || "";
+                    knockoutPredictions.round32[r32Idx] = bestThirds[i] || "";
+                }
+                r32Idx++;
+            }
+
+            updateProgress();
+
+            const btn = document.getElementById('btn-autofill');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '✅ Calculado com sucesso!';
+            btn.classList.add('bg-green-500', 'text-white', 'border-green-600');
+            btn.classList.remove('bg-indigo-100', 'text-indigo-700', 'border-indigo-200', 'dark:bg-indigo-900/50', 'dark:text-indigo-300', 'dark:border-indigo-500/30');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('bg-green-500', 'text-white', 'border-green-600');
+                btn.classList.add('bg-indigo-100', 'text-indigo-700', 'border-indigo-200', 'dark:bg-indigo-900/50', 'dark:text-indigo-300', 'dark:border-indigo-500/30');
+            }, 3000);
         }
 
         function renderKnockout() {
@@ -864,78 +988,6 @@
             });
         }
 
-        async function loadUserPredictions() {
-            const nameInput = document.getElementById('participant-name');
-            const name = nameInput.value.trim();
-            const btnLoad = document.getElementById('btn-load-predictions');
-
-            if (!name) {
-                document.getElementById('error-text').textContent = 'Digite o nome primeiro para recuperar!';
-                document.getElementById('error-message').classList.remove('hidden');
-                nameInput.focus();
-                return;
-            }
-
-            document.getElementById('error-message').classList.add('hidden');
-            btnLoad.disabled = true;
-            btnLoad.innerHTML = `<svg class="animate-spin h-5 w-5 text-amber-500 dark:text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
-
-            try {
-                const url = `${SCRIPT_URL}?action=load_predictions&name=${encodeURIComponent(name)}`;
-                const response = await fetch(url);
-                const json = await response.json();
-
-                if (json.result === 'success') {
-                    predictions = json.predictions || {};
-                    if (json.knockout) knockoutPredictions = json.knockout;
-
-                    document.querySelectorAll('.input-sports[data-team]').forEach(input => {
-                        const matchId = input.getAttribute('data-match-id');
-                        const team = input.getAttribute('data-team');
-                        if (predictions[matchId] && predictions[matchId][team] !== undefined) {
-                            input.value = predictions[matchId][team];
-                        } else {
-                            input.value = '';
-                        }
-                    });
-
-                    document.querySelectorAll('#knockout-container select').forEach(select => {
-                        const phase = select.getAttribute('data-phase');
-                        const index = select.getAttribute('data-index');
-                        let savedVal = '';
-                        if (phase === 'thirdPlace' || phase === 'champion') {
-                            savedVal = knockoutPredictions[phase];
-                        } else if (knockoutPredictions[phase] && knockoutPredictions[phase][index]) {
-                            savedVal = knockoutPredictions[phase][index];
-                        }
-                        select.value = savedVal || '';
-                    });
-
-                    updateProgress();
-                    
-                    btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-                    setTimeout(() => {
-                        btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
-                        btnLoad.disabled = false;
-                    }, 2000);
-
-                } else {
-                    document.getElementById('error-text').textContent = 'Nome não encontrado. Verifique a escrita.';
-                    document.getElementById('error-message').classList.remove('hidden');
-                    resetBtnLoad(btnLoad);
-                }
-            } catch (error) {
-                document.getElementById('error-text').textContent = 'Erro de conexão ao recuperar os palpites.';
-                document.getElementById('error-message').classList.remove('hidden');
-                resetBtnLoad(btnLoad);
-            }
-        }
-
-        function resetBtnLoad(btnLoad) {
-            btnLoad.disabled = false;
-            btnLoad.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
-        }
-
         document.getElementById('predictions-form').addEventListener('submit', (e) => {
             e.preventDefault();
             if (bolaoEncerrado) return;
@@ -1015,7 +1067,6 @@
             switchTab('grupos');
         }
 
-        // --- RANKING ---
         async function fetchRanking() {
             isRankingLoaded = true;
             document.getElementById('ranking-loading-state').classList.remove('hidden');
