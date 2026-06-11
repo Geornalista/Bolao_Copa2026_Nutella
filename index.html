@@ -217,11 +217,34 @@
             </h2>
 
             <div class="space-y-12">
+                <!-- Regra das Duas Etapas -->
                 <div>
                     <h3 class="text-lg sm:text-xl font-bold text-amber-700 dark:text-yellow-500 mb-4 flex items-center gap-3">
                         <span class="bg-amber-100 dark:bg-yellow-500/10 text-amber-700 dark:text-yellow-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-amber-300 dark:border-yellow-500/30">1</span>
-                        Placares da Fase de Grupos
+                        As Duas Etapas do Bolão
                     </h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm sm:text-base leading-relaxed">O bolão foi desenhado para ser jogado em duas etapas distintas, garantindo diversão até ao último jogo da Copa:</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+                        <div class="glass-card p-6 rounded-2xl border-t-4 border-t-amber-500">
+                            <h4 class="font-display font-black text-slate-800 dark:text-white uppercase mb-2">Etapa 1: O Chaveamento</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Antes da Copa começar, você deve prever os <strong>placares da Fase de Grupos</strong> e montar a sua <strong>Árvore do Torneio</strong> (escolhendo as seleções que avançam até a Final). <br><br><span class="text-amber-600 dark:text-yellow-500 font-bold">Dica:</span> Use a Varinha Mágica no Mata-Mata para preencher os 32 classificados iniciais com base nos seus placares!</p>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl border-t-4 border-t-blue-500">
+                            <h4 class="font-display font-black text-slate-800 dark:text-white uppercase mb-2">Etapa 2: Placares Oficiais</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Durante o torneio, conforme os confrontos do Mata-Mata forem sendo oficialmente definidos na vida real, volte à página e preencha os <strong>placares exatos dos jogos 73 ao 104</strong>.<br><br>Você pontua por estes placares de forma totalmente independente das seleções que previu na Etapa 1!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regra de Placares -->
+                <div class="pt-4 border-t border-slate-200 dark:border-white/10">
+                    <h3 class="text-lg sm:text-xl font-bold text-copper mb-4 flex items-center gap-3">
+                        <span class="bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-orange-300 dark:border-orange-500/30">2</span>
+                        Pontuação dos Placares (Grupos e Mata-Mata)
+                    </h3>
+                    <p class="text-slate-600 dark:text-slate-400 mb-4 font-medium leading-relaxed">Em <strong>todos os 104 jogos do torneio</strong>, a pontuação é calculada de acordo com o grau de exatidão do seu palpite em relação ao resultado oficial da partida.</p>
+                    
                     <ul class="list-none space-y-4">
                         <li class="glass-card p-5 rounded-xl flex items-start gap-4">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500 dark:text-green-400 shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -251,12 +274,13 @@
                     </ul>
                 </div>
 
+                <!-- Regra de Zebras -->
                 <div class="pt-4 border-t border-slate-200 dark:border-white/10">
                     <h3 class="text-lg sm:text-xl font-bold text-copper mb-4 flex items-center gap-3">
-                        <span class="bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-orange-300 dark:border-orange-500/30">2</span>
-                        Mata-Mata: A Regra das Zebras
+                        <span class="bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-orange-300 dark:border-orange-500/30">3</span>
+                        Seleções nas Fases (A Regra das Zebras)
                     </h3>
-                    <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm sm:text-base leading-relaxed">No mata-mata, a divisão das seleções por pesos valoriza apostas ousadas:</p>
+                    <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm sm:text-base leading-relaxed">Acertar no Chaveamento da <strong>Etapa 1</strong> quais seleções avançam no torneio rende pontos absurdos. A divisão das seleções por pesos valoriza apostas ousadas:</p>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                         <div class="bg-slate-100 dark:bg-black/40 p-4 rounded-xl border border-amber-300 dark:border-yellow-500/20 text-center">
@@ -326,21 +350,21 @@
                         <div class="w-1.5 h-1.5 bg-amber-500 dark:bg-yellow-500 rounded-full animate-pulse"></div> Identificação do Jogador
                     </label>
                     <div class="relative w-full">
-                        <input type="text" id="participant-name" placeholder="NOME NA PLANILHA" class="w-full text-xl sm:text-2xl p-3 pr-40 bg-white dark:bg-black/50 border border-slate-300 dark:border-white/10 rounded-xl focus:border-amber-500 dark:focus:border-yellow-500 outline-none transition uppercase font-display font-black text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-700 shadow-inner" required />
+                        <input type="text" id="participant-name" placeholder="NOME NA PLANILHA" class="w-full text-xl sm:text-2xl p-3 pr-32 sm:pr-40 bg-white dark:bg-black/50 border border-slate-300 dark:border-white/10 rounded-xl focus:border-amber-500 dark:focus:border-yellow-500 outline-none transition uppercase font-display font-black text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-700 shadow-inner" required />
                         
                         <!-- Lupa de Recuperar (Aninhada no Input) -->
-                        <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="hidden absolute right-1.5 top-1.5 bottom-1.5 bg-slate-800 hover:bg-slate-900 dark:bg-black/80 dark:hover:bg-black text-white dark:text-yellow-500 font-bold px-4 rounded-lg transition items-center justify-center border border-slate-700 dark:border-yellow-500/30 text-xs shadow-sm z-10">
+                        <button type="button" onclick="loadUserPredictions()" id="btn-load-predictions" class="hidden absolute right-1.5 top-1.5 bottom-1.5 bg-slate-800 hover:bg-slate-900 dark:bg-black/80 dark:hover:bg-black text-white dark:text-yellow-500 font-bold px-4 rounded-lg transition items-center justify-center border border-slate-700 dark:border-yellow-500/30 text-[10px] sm:text-xs shadow-sm z-10">
                             BUSCAR
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         </button>
                     </div>
-                    <p id="mode-hint" class="text-xs text-slate-500 mt-3 font-medium">✨ Digite o nome da sua aba na folha de cálculo.</p>
+                    <p id="mode-hint" class="text-xs text-slate-500 mt-3 font-medium">✨ Digite o <b class="text-amber-600 dark:text-yellow-500">nome</b> que deseja usar na planilha.</p>
                 </div>
                 
                 <div class="w-full sm:w-56 bg-slate-100 dark:bg-black/80 p-4 rounded-xl border border-slate-200 dark:border-white/5 shadow-inner shrink-0">
                     <div class="flex justify-between items-end mb-2">
-                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.1em]">Progresso</span>
-                        <span class="font-sports text-lg font-bold text-amber-700 dark:text-yellow-500 leading-none"><span id="progress-text">0</span><span class="text-sm text-slate-400 dark:text-slate-600">/136</span></span>
+                        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.1em]">Progresso Geral</span>
+                        <span class="font-sports text-lg font-bold text-amber-700 dark:text-yellow-500 leading-none"><span id="progress-text">0</span><span class="text-sm text-slate-400 dark:text-slate-600">/170</span></span>
                     </div>
                     <div class="w-full bg-slate-300 dark:bg-slate-900 rounded-full h-1.5 overflow-hidden">
                         <div id="progress-bar" class="bg-gradient-to-r from-amber-500 to-orange-500 dark:from-orange-600 dark:to-yellow-400 h-full rounded-full transition-all duration-300 ease-out w-0 shadow-sm dark:shadow-[0_0_10px_rgba(251,191,36,0.8)]"></div>
@@ -361,20 +385,26 @@
                 <div id="matches-container"></div>
             </section>
 
-            <!-- SEÇÃO B: SELEÇÕES DO MATA-MATA (Com Varinha Mágica) -->
+            <!-- SEÇÃO B: MATA-MATA (Dividida em 2 Etapas) -->
             <section id="sec-knockout" class="hidden animate-fade-in space-y-6 pt-4">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-200/50 dark:bg-black/40 p-4 rounded-2xl border border-slate-300 dark:border-white/10">
+                
+                <!-- CABEÇALHO ETAPA 1 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-200/50 dark:bg-black/40 p-4 rounded-2xl border border-slate-300 dark:border-white/10 mt-4">
                     <div>
-                        <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white drop-shadow-sm flex items-center gap-2">
-                            Fases Eliminatórias
+                        <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white drop-shadow-sm flex items-center gap-3">
+                            <span class="bg-amber-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-sports shadow-[0_0_10px_rgba(245,158,11,0.5)] text-sm">1</span>
+                            Etapa 1: Chaveamento
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">O seu caminho até a glória na Copa do Mundo.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Preveja quem avança na Copa (independente dos placares reais).</p>
                     </div>
                     <button type="button" id="btn-autofill" onclick="autoFillRound32()" class="w-full sm:w-auto bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/50 dark:hover:bg-indigo-800/80 text-indigo-700 dark:text-indigo-300 font-bold py-2.5 px-5 rounded-xl transition flex items-center justify-center gap-2 border border-indigo-200 dark:border-indigo-500/30 shadow-sm text-sm">
                         🪄 Calcular 16-Avos
                     </button>
                 </div>
-                <div id="knockout-container"></div>
+                
+                <div id="knockout-container">
+                    <!-- Gerado via JS (Bloco Etapa 1 e Bloco Etapa 2) -->
+                </div>
             </section>
 
             <div id="error-message" class="hidden bg-red-100 dark:bg-red-950/50 text-red-700 dark:text-red-400 p-4 rounded-xl flex items-center gap-3 text-sm font-bold border border-red-300 dark:border-red-500/30 backdrop-blur-md">
@@ -443,7 +473,7 @@
             </div>
             <h3 class="text-xl font-display font-black text-slate-900 dark:text-white mb-2 uppercase tracking-wide">Transmissão Incompleta</h3>
             <p class="text-slate-600 dark:text-slate-400 mb-8 font-medium text-sm leading-relaxed">
-                Dados preenchidos: <span id="filled-count" class="font-sports font-bold text-amber-600 dark:text-yellow-400 text-lg">0</span> de <span id="total-count" class="font-sports font-bold text-slate-800 dark:text-white text-lg">136</span>.<br>Confirmar envio parcial?
+                Dados preenchidos: <span id="filled-count" class="font-sports font-bold text-amber-600 dark:text-yellow-400 text-lg">0</span> de <span id="total-count" class="font-sports font-bold text-slate-800 dark:text-white text-lg">170</span>.<br>Confirmar envio parcial?
             </p>
             <div class="flex gap-3">
                 <button type="button" onclick="closeModal()" class="flex-1 py-3 text-slate-700 dark:text-slate-300 font-bold bg-slate-200 hover:bg-slate-300 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 rounded-lg transition text-xs uppercase tracking-widest">Abortar</button>
@@ -468,10 +498,8 @@
             const iconContainer = document.getElementById('theme-icon');
             if (!iconContainer) return;
             if (isDark) {
-                // Sol
                 iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
             } else {
-                // Lua
                 iconContainer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
             }
         }
@@ -479,8 +507,9 @@
         // =====================================================================
         // CONFIGURAÇÕES GERAIS E DADOS
         // =====================================================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuQMtBuKdvdk_uhGDa45je9pVVLqb3w9g-5BFIKX-U_wr46LviWfAO1kSY7eROiN1O/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_njnmIiNIJ90DQmRQMQZlZv3YRxx7b7sbp3tAWsQumptcE8ZhVlKcFGt5oC5x89A3/exec';
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
+        const TOTAL_FIELDS = 170; // 104 Partidas (Grupos + Placares Mata-Mata) + 66 Seleções (Chaveamento)
 
         const INITIAL_MATCHES = [
             { id: 1, team1: 'MÉXICO', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 2, team1: 'CORÉIA DO SUL', team2: 'REPÚB. TCHECA', group: 'A' },
@@ -550,15 +579,21 @@
 
         let predictions = {};
         let knockoutPredictions = {
-            round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''),
-            semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: ''
+            round32: Array(32).fill(''), 
+            round16: Array(16).fill(''), 
+            quarters: Array(8).fill(''),
+            semis: Array(4).fill(''), 
+            thirdPlaceMatch: Array(2).fill(''), 
+            finalMatch: Array(2).fill(''), 
+            thirdPlace: '', 
+            champion: ''
         };
         let isRankingLoaded = false;
         let bolaoEncerrado = false;
 
         document.addEventListener('DOMContentLoaded', () => {
             updateThemeIcon(document.documentElement.classList.contains('dark'));
-            document.getElementById('total-count').textContent = 136;
+            document.getElementById('total-count').textContent = TOTAL_FIELDS;
             
             const agora = new Date();
             if (agora > DATA_LIMITE) {
@@ -635,13 +670,22 @@
             btn.disabled = true;
 
             try {
-                // Modificado para NÃO enviar a senha na URL
                 const response = await fetch(SCRIPT_URL + `?action=load_predictions&name=${encodeURIComponent(name)}`);
                 const json = await response.json();
 
                 if (json.result === 'success') {
                     predictions = json.predictions || {};
-                    knockoutPredictions = json.knockout || { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: '' };
+                    
+                    // Suporte a arrays antigos
+                    knockoutPredictions = json.knockout || {};
+                    knockoutPredictions.round32 = knockoutPredictions.round32 || Array(32).fill('');
+                    knockoutPredictions.round16 = knockoutPredictions.round16 || Array(16).fill('');
+                    knockoutPredictions.quarters = knockoutPredictions.quarters || Array(8).fill('');
+                    knockoutPredictions.semis = knockoutPredictions.semis || Array(4).fill('');
+                    knockoutPredictions.thirdPlaceMatch = knockoutPredictions.thirdPlaceMatch || Array(2).fill('');
+                    knockoutPredictions.finalMatch = knockoutPredictions.finalMatch || Array(2).fill('');
+                    knockoutPredictions.thirdPlace = knockoutPredictions.thirdPlace || '';
+                    knockoutPredictions.champion = knockoutPredictions.champion || '';
                     
                     document.querySelectorAll('.score-input').forEach(input => {
                         const mId = input.getAttribute('data-match-id');
@@ -667,35 +711,55 @@
             } catch (error) {
                 document.getElementById('mode-hint').innerHTML = `<span class="text-red-500 font-bold">❌ Erro de conexão.</span>`;
             } finally {
-                btn.innerHTML = `RECUPERAR <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+                btn.innerHTML = `BUSCAR <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ml-1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
                 btn.disabled = false;
             }
         }
 
+        // Nova contagem de progresso: 104 placares (fase de grupos + mata-mata) e 66 escolhas de equipas/vencedores
         function updateProgress() {
             let filledCount = 0;
-            for (const id in predictions) {
-                if (predictions[id].team1 !== undefined && predictions[id].team1 !== '' &&
-                    predictions[id].team2 !== undefined && predictions[id].team2 !== '') filledCount++;
+            
+            // Loop genérico por todos os jogos possíveis (1 a 104) para verificar se ambos os scores estão preenchidos
+            for (let i = 1; i <= 104; i++) {
+                if (predictions[i] && predictions[i].team1 !== undefined && predictions[i].team1 !== '' &&
+                    predictions[i].team2 !== undefined && predictions[i].team2 !== '') {
+                    filledCount++;
+                }
             }
-            ['round32', 'round16', 'quarters', 'semis', 'final'].forEach(phase => {
+            
+            // Verifica os selects das fases eliminatórias
+            ['round32', 'round16', 'quarters', 'semis', 'thirdPlaceMatch', 'finalMatch'].forEach(phase => {
                 knockoutPredictions[phase].forEach(val => { if (val !== '') filledCount++; });
             });
             if (knockoutPredictions.thirdPlace !== '') filledCount++;
             if (knockoutPredictions.champion !== '') filledCount++;
 
-            const percent = Math.round((filledCount / 136) * 100);
+            const percent = Math.round((filledCount / TOTAL_FIELDS) * 100);
             const bar = document.getElementById('progress-bar');
             document.getElementById('progress-text').textContent = filledCount;
             bar.style.width = percent + '%';
             
-            if(filledCount === 136) {
+            if(filledCount === TOTAL_FIELDS) {
                 bar.classList.replace('from-amber-500', 'from-emerald-500'); bar.classList.replace('to-orange-500', 'to-green-500');
                 bar.classList.replace('dark:from-orange-600', 'dark:from-green-500'); bar.classList.replace('dark:to-yellow-400', 'dark:to-green-400');
             } else {
                 bar.classList.replace('from-emerald-500', 'from-amber-500'); bar.classList.replace('to-green-500', 'to-orange-500');
                 bar.classList.replace('dark:from-green-500', 'dark:from-orange-600'); bar.classList.replace('dark:to-green-400', 'dark:to-yellow-400');
             }
+        }
+
+        function attachScoreInputsListeners(containerElement) {
+            containerElement.querySelectorAll('.score-input').forEach(input => {
+                input.addEventListener('input', function() {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                    const matchId = this.getAttribute('data-match-id');
+                    const team = this.getAttribute('data-team');
+                    if (!predictions[matchId]) predictions[matchId] = {};
+                    predictions[matchId][team] = this.value;
+                    updateProgress();
+                });
+            });
         }
 
         function bloquearPalpites() {
@@ -776,9 +840,9 @@
                                 </div>
 
                                 <div class="flex items-center justify-center gap-1 sm:gap-2 shrink-0 bg-slate-100 dark:bg-black/40 p-1.5 rounded-xl border border-slate-200 dark:border-white/5 shadow-inner">
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" placeholder="-" />
                                     <span class="text-slate-400 dark:text-slate-600 font-black text-xs">X</span>
-                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" />
+                                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" placeholder="-" />
                                 </div>
 
                                 <div class="flex flex-col items-start gap-1.5 text-left">
@@ -791,18 +855,9 @@
                 });
                 html += `</div></div>`;
             }
-            document.getElementById('matches-container').innerHTML = html;
-
-            document.querySelectorAll('.score-input').forEach(input => {
-                input.addEventListener('input', function() {
-                    this.value = this.value.replace(/[^0-9]/g, '');
-                    const matchId = this.getAttribute('data-match-id');
-                    const team = this.getAttribute('data-team');
-                    if (!predictions[matchId]) predictions[matchId] = {};
-                    predictions[matchId][team] = this.value;
-                    updateProgress();
-                });
-            });
+            const container = document.getElementById('matches-container');
+            container.innerHTML = html;
+            attachScoreInputsListeners(container);
         }
 
         function autoFillRound32() {
@@ -908,48 +963,35 @@
             let html = '';
 
             const round32Matches = [
-                { id: 73, l1: '2º A', l2: '2º B' },
-                { id: 74, l1: '1º E', l2: '3º A/B/C/D/F' },
-                { id: 75, l1: '1º F', l2: '2º C' },
-                { id: 76, l1: '1º C', l2: '2º F' },
-                { id: 77, l1: '1º I', l2: '3º C/D/F/G/H' },
-                { id: 78, l1: '2º E', l2: '2º I' },
-                { id: 79, l1: '1º A', l2: '3º C/E/F/H/I' },
-                { id: 80, l1: '1º L', l2: '3º E/H/I/J/K' },
-                { id: 81, l1: '1º D', l2: '3º B/E/F/I/J' },
-                { id: 82, l1: '1º G', l2: '3º A/E/H/I/J' },
-                { id: 83, l1: '2º K', l2: '2º L' },
-                { id: 84, l1: '1º H', l2: '2º J' },
-                { id: 85, l1: '1º B', l2: '3º E/F/G/I/J' },
-                { id: 86, l1: '1º J', l2: '2º H' },
-                { id: 87, l1: '1º K', l2: '3º D/E/I/J/L' },
-                { id: 88, l1: '2º D', l2: '2º G' }
+                { id: 73, l1: '2º A', l2: '2º B' }, { id: 74, l1: '1º E', l2: '3º A/B/C/D/F' },
+                { id: 75, l1: '1º F', l2: '2º C' }, { id: 76, l1: '1º C', l2: '2º F' },
+                { id: 77, l1: '1º I', l2: '3º C/D/F/G/H' }, { id: 78, l1: '2º E', l2: '2º I' },
+                { id: 79, l1: '1º A', l2: '3º C/E/F/H/I' }, { id: 80, l1: '1º L', l2: '3º E/H/I/J/K' },
+                { id: 81, l1: '1º D', l2: '3º B/E/F/I/J' }, { id: 82, l1: '1º G', l2: '3º A/E/H/I/J' },
+                { id: 83, l1: '2º K', l2: '2º L' }, { id: 84, l1: '1º H', l2: '2º J' },
+                { id: 85, l1: '1º B', l2: '3º E/F/G/I/J' }, { id: 86, l1: '1º J', l2: '2º H' },
+                { id: 87, l1: '1º K', l2: '3º D/E/I/J/L' }, { id: 88, l1: '2º D', l2: '2º G' }
             ];
 
             const round16Matches = [
-                { id: 90, l1: 'V73', l2: 'V76' },
-                { id: 89, l1: 'V74', l2: 'V75' },
-                { id: 91, l1: 'V78', l2: 'V77' },
-                { id: 92, l1: 'V79', l2: 'V80' },
-                { id: 93, l1: 'V82', l2: 'V81' },
-                { id: 94, l1: 'V84', l2: 'V83' },
-                { id: 95, l1: 'V85', l2: 'V88' },
-                { id: 96, l1: 'V86', l2: 'V87' }
+                { id: 90, l1: 'V73', l2: 'V76' }, { id: 89, l1: 'V74', l2: 'V75' },
+                { id: 91, l1: 'V78', l2: 'V77' }, { id: 92, l1: 'V79', l2: 'V80' },
+                { id: 93, l1: 'V82', l2: 'V81' }, { id: 94, l1: 'V84', l2: 'V83' },
+                { id: 95, l1: 'V85', l2: 'V88' }, { id: 96, l1: 'V86', l2: 'V87' }
             ];
 
             const quarterMatches = [
-                { id: 97, l1: 'V90', l2: 'V89' },
-                { id: 98, l1: 'V91', l2: 'V92' },
-                { id: 99, l1: 'V93', l2: 'V94' },
-                { id: 100, l1: 'V95', l2: 'V96' }
+                { id: 97, l1: 'V90', l2: 'V89' }, { id: 98, l1: 'V91', l2: 'V92' },
+                { id: 99, l1: 'V93', l2: 'V94' }, { id: 100, l1: 'V95', l2: 'V96' }
             ];
 
             const semiMatches = [
-                { id: 101, l1: 'V97', l2: 'V98' },
-                { id: 102, l1: 'V99', l2: 'V100' }
+                { id: 101, l1: 'V97', l2: 'V98' }, { id: 102, l1: 'V99', l2: 'V100' }
             ];
 
-            // --- OUTRAS FASES (Árvore de Confrontos) ---
+            // -------------------------------------------------------------
+            // BLOCO 1: ETAPA 1 (CHAVEAMENTO APENAS COM OS SELECTS)
+            // -------------------------------------------------------------
             const generatePhasePairs = (title, matches, phaseKey, colorHex) => {
                 let pHTML = `<div class="mb-12 border-t border-slate-200 dark:border-white/10 pt-8">
                     <h3 class="font-display font-black text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight mb-6 pl-2 flex items-center gap-3">
@@ -962,9 +1004,9 @@
                     let idx1 = i * 2;
                     let idx2 = i * 2 + 1;
                     pHTML += `
-                    <div class="glass-card p-4 rounded-2xl flex flex-col gap-2 relative overflow-hidden">
+                    <div class="glass-card p-4 rounded-2xl flex flex-col relative overflow-hidden">
                         <div class="absolute -right-2 -bottom-4 font-sports text-5xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#${m.id}</div>
-                        <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 mb-2 uppercase tracking-widest text-center border-b border-slate-100 dark:border-white/5 pb-1 relative z-10">Partida ${m.id}</div>
+                        <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest text-center border-b border-slate-100 dark:border-white/5 pb-2 mb-3 relative z-10">Partida ${m.id}</div>
                         
                         <div class="relative z-10">
                             <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase z-10 shadow-sm leading-none" style="color: ${colorHex};">${m.l1}</span>
@@ -973,8 +1015,10 @@
                                 ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
                             </select>
                         </div>
-                        <div class="text-center font-black text-slate-300 dark:text-slate-600 text-xs relative z-10">X</div>
-                        <div class="relative z-10">
+                        
+                        <div class="text-center font-black text-slate-300 dark:text-slate-600 text-xs my-2 relative z-10">X</div>
+
+                        <div class="relative z-10 mb-1">
                             <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase z-10 shadow-sm leading-none" style="color: ${colorHex};">${m.l2}</span>
                             <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="${phaseKey}" data-index="${idx2}">
                                 <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>
@@ -992,6 +1036,7 @@
             html += generatePhasePairs('Quartas de Final', quarterMatches, 'quarters', '#d97706'); 
             html += generatePhasePairs('Semifinais', semiMatches, 'semis', '#b45309'); 
 
+            // Partidas 103 (3º Lugar) e 104 (Final) - ETAPA 1
             html += `
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12 pt-8 border-t border-slate-200 dark:border-white/10">
                 <div class="glass-card p-6 sm:p-8 rounded-[2rem] border-l-4 border-l-slate-400 relative overflow-hidden">
@@ -999,34 +1044,117 @@
                     <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 mb-3 uppercase tracking-widest flex items-center justify-between relative z-10 border-b border-slate-100 dark:border-white/5 pb-2">
                         <span>Partida 103</span>
                     </div>
-                    <h3 class="font-display font-black text-xl mb-5 text-slate-700 dark:text-slate-300 flex items-center gap-2 relative z-10">🥉 Terceiro Lugar</h3>
-                    <div class="relative z-10">
-                        <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-500 z-10 shadow-sm leading-none">P101 x P102</span>
-                        <select class="w-full p-4 pt-4.5 rounded-xl input-sports border border-slate-300 dark:border-slate-500/50 text-base font-bold outline-none cursor-pointer" data-phase="thirdPlace" data-index="0">
-                            <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem fica em 3º?</option>
+                    <h3 class="font-display font-black text-xl mb-5 text-slate-700 dark:text-slate-300 flex items-center gap-2 relative z-10">🥉 Disputa 3º Lugar</h3>
+                    
+                    <div class="relative z-10 flex flex-col gap-4 mb-6">
+                        <div class="relative">
+                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-500 z-10 shadow-sm leading-none">P101</span>
+                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="thirdPlaceMatch" data-index="0">
+                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>
+                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="text-center font-black text-slate-300 dark:text-slate-600 text-sm">X</div>
+                        <div class="relative">
+                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-500 z-10 shadow-sm leading-none">P102</span>
+                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="thirdPlaceMatch" data-index="1">
+                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>
+                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="relative z-10 border-t border-slate-200 dark:border-white/10 pt-4">
+                        <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-600 dark:text-slate-300 z-10 shadow-sm leading-none">Vencedor / 3º Colocado</span>
+                        <select class="w-full p-4 rounded-xl input-sports border border-slate-300 dark:border-slate-500/50 text-base font-bold outline-none cursor-pointer" data-phase="thirdPlace" data-index="0">
+                            <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem leva o 3º Lugar?</option>
                             ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
                         </select>
                     </div>
                 </div>
+
                 <div class="glass-card p-6 sm:p-8 rounded-[2rem] border-l-4 border-l-amber-500 dark:border-l-yellow-500 shadow-md dark:shadow-[0_0_30px_rgba(251,191,36,0.1)] relative overflow-hidden">
                     <div class="absolute -right-2 -bottom-4 font-sports text-6xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#104</div>
                     <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 mb-3 uppercase tracking-widest flex items-center justify-between relative z-10 border-b border-slate-100 dark:border-white/5 pb-2">
                         <span>Partida 104</span>
                     </div>
-                    <h3 class="font-display font-black text-2xl mb-5 text-amber-600 dark:text-yellow-500 flex items-center gap-2 drop-shadow-sm relative z-10">🏆 Campeão do Mundo</h3>
-                    <div class="relative z-10">
-                        <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-600 dark:text-yellow-500 z-10 shadow-sm leading-none">V101 x V102</span>
+                    <h3 class="font-display font-black text-2xl mb-5 text-amber-600 dark:text-yellow-500 flex items-center gap-2 drop-shadow-sm relative z-10">🏆 Grande Final</h3>
+                    
+                    <div class="relative z-10 flex flex-col gap-4 mb-6">
+                        <div class="relative">
+                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-600 dark:text-yellow-500 z-10 shadow-sm leading-none">V101</span>
+                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="finalMatch" data-index="0">
+                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Finalista 1...</option>
+                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="text-center font-black text-amber-500 dark:text-yellow-500 text-sm">X</div>
+                        <div class="relative">
+                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-600 dark:text-yellow-500 z-10 shadow-sm leading-none">V102</span>
+                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="finalMatch" data-index="1">
+                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Finalista 2...</option>
+                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="relative z-10 border-t border-amber-200 dark:border-yellow-500/20 pt-4">
+                        <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-amber-200 dark:border-yellow-500/30 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-700 dark:text-yellow-500 z-10 shadow-sm leading-none">A Taça é do...</span>
                         <select class="w-full p-4.5 pt-5 rounded-xl input-sports border-2 border-amber-400 dark:border-yellow-500/60 text-lg font-black focus:ring-1 focus:ring-amber-500 dark:focus:ring-yellow-400 cursor-pointer shadow-inner" data-phase="champion" data-index="0">
-                            <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem leva a Taça?</option>
+                            <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem é o Campeão?</option>
                             ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
                         </select>
                     </div>
                 </div>
             </div>`;
 
-            document.getElementById('knockout-container').innerHTML = html;
+            // -------------------------------------------------------------
+            // BLOCO 2: ETAPA 2 (PONTUAÇÃO INDEPENDENTE DE PLACARES)
+            // -------------------------------------------------------------
+            html += `
+            <div class="mt-20 mb-8 border-t border-slate-300 dark:border-white/10 pt-12">
+                <h2 class="text-3xl font-display font-black text-slate-900 dark:text-white uppercase tracking-wide flex items-center gap-3">
+                    <span class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-sports shadow-[0_0_15px_rgba(37,99,235,0.5)]">2</span>
+                    Etapa 2: Placares Oficiais
+                </h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-3 font-medium text-lg leading-relaxed">Conforme os confrontos da Copa forem sendo definidos, volte aqui para preencher os <strong class="text-blue-600 dark:text-blue-400">placares exatos</strong> de cada partida e garantir pontos valiosos.</p>
+            </div>`;
 
-            document.getElementById('knockout-container').addEventListener('change', function(e) {
+            const generateScoreGrid = (title, matches, colorHex) => {
+                let sortedMatches = [...matches].sort((a,b) => a.id - b.id);
+                let gHTML = `<div class="mb-10">
+                    <h4 class="font-display font-black text-lg text-slate-800 dark:text-slate-200 mb-4 pl-2" style="color: ${colorHex};">${title}</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">`;
+                
+                sortedMatches.forEach(m => {
+                    gHTML += `
+                    <div class="glass-card p-3 flex justify-between items-center rounded-xl border-l-4" style="border-left-color: ${colorHex};">
+                        <div class="flex flex-col">
+                            <span class="font-sports font-black text-2xl text-slate-800 dark:text-white leading-none">#${m.id}</span>
+                            <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wide mt-1">${m.l1} <span class="text-slate-300 dark:text-slate-600 mx-0.5">x</span> ${m.l2}</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${m.id}" data-team="team1" class="score-input input-sports w-11 h-10 text-center text-lg font-bold rounded-lg border border-slate-200 dark:border-white/10" placeholder="-" />
+                            <span class="font-black text-slate-300 dark:text-slate-600 text-[10px]">X</span>
+                            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${m.id}" data-team="team2" class="score-input input-sports w-11 h-10 text-center text-lg font-bold rounded-lg border border-slate-200 dark:border-white/10" placeholder="-" />
+                        </div>
+                    </div>`;
+                });
+                gHTML += `</div></div>`;
+                return gHTML;
+            }
+
+            html += generateScoreGrid('16 Avos de Final', round32Matches, '#fbbf24');
+            html += generateScoreGrid('Oitavas de Final', round16Matches, '#f59e0b');
+            html += generateScoreGrid('Quartas de Final', quarterMatches, '#d97706');
+            html += generateScoreGrid('Semifinais', semiMatches, '#b45309');
+            html += generateScoreGrid('Finais', [{id: 103, l1: 'P101', l2: 'P102'}, {id: 104, l1: 'V101', l2: 'V102'}], '#94a3b8');
+
+            const container = document.getElementById('knockout-container');
+            container.innerHTML = html;
+            
+            // Garantir a vinculação do placar nos inputs do mata-mata
+            attachScoreInputsListeners(container);
+
+            container.addEventListener('change', function(e) {
                 if(e.target.tagName === 'SELECT') {
                     const phase = e.target.getAttribute('data-phase');
                     const index = e.target.getAttribute('data-index');
@@ -1052,7 +1180,7 @@
             }
 
             const filledCount = parseInt(document.getElementById('progress-text').textContent);
-            if (filledCount < 136) {
+            if (filledCount < TOTAL_FIELDS) {
                 document.getElementById('filled-count').textContent = filledCount;
                 document.getElementById('confirm-modal').classList.remove('hidden');
             } else {
@@ -1085,7 +1213,6 @@
             };
 
             try {
-                // Modo no-cors ativado novamente, pois sem a senha podemos confiar apenas no envio simples
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -1109,7 +1236,16 @@
 
         function resetForm() {
             predictions = {};
-            knockoutPredictions = { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), final: Array(2).fill(''), thirdPlace: '', champion: '' };
+            knockoutPredictions = { 
+                round32: Array(32).fill(''), 
+                round16: Array(16).fill(''), 
+                quarters: Array(8).fill(''), 
+                semis: Array(4).fill(''), 
+                thirdPlaceMatch: Array(2).fill(''), 
+                finalMatch: Array(2).fill(''), 
+                thirdPlace: '', 
+                champion: '' 
+            };
             document.querySelectorAll('.score-input').forEach(i => i.value = '');
             document.querySelectorAll('#knockout-container select').forEach(s => s.value = '');
             document.getElementById('participant-name').value = '';
