@@ -203,6 +203,10 @@
             <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2">
                 Ranking Oficial
             </button>
+            <!-- ABA PALPITES DA GALERA -->
+            <button onclick="switchTab('view_others')" id="tab-btn-view_others" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2">
+                Palpites da Galera
+            </button>
             <button onclick="switchTab('regras')" id="tab-btn-regras" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2">
                 Regras
             </button>
@@ -217,7 +221,6 @@
             </h2>
 
             <div class="space-y-12">
-                <!-- Regra das Duas Etapas -->
                 <div>
                     <h3 class="text-lg sm:text-xl font-bold text-amber-700 dark:text-yellow-500 mb-4 flex items-center gap-3">
                         <span class="bg-amber-100 dark:bg-yellow-500/10 text-amber-700 dark:text-yellow-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-amber-300 dark:border-yellow-500/30">1</span>
@@ -237,7 +240,6 @@
                     </div>
                 </div>
 
-                <!-- Regra de Placares -->
                 <div class="pt-4 border-t border-slate-200 dark:border-white/10">
                     <h3 class="text-lg sm:text-xl font-bold text-copper mb-4 flex items-center gap-3">
                         <span class="bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-orange-300 dark:border-orange-500/30">2</span>
@@ -274,7 +276,6 @@
                     </ul>
                 </div>
 
-                <!-- Regra de Zebras -->
                 <div class="pt-4 border-t border-slate-200 dark:border-white/10">
                     <h3 class="text-lg sm:text-xl font-bold text-copper mb-4 flex items-center gap-3">
                         <span class="bg-orange-100 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 w-8 h-8 rounded-full flex items-center justify-center font-sports text-lg border border-orange-300 dark:border-orange-500/30">3</span>
@@ -323,6 +324,42 @@
         </div>
     </section>
 
+    <!-- NOVA SEÇÃO: PALPITES DA GALERA -->
+    <section id="sec-view-others" class="max-w-5xl mx-auto px-4 hidden animate-fade-in pb-8">
+        <div class="glass-dark p-6 sm:p-10 rounded-2xl border-t-2 border-t-blue-500 dark:border-t-blue-400">
+            <h2 class="text-2xl sm:text-3xl font-display font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight uppercase">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                Palpites da Galera
+            </h2>
+            
+            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm sm:text-base leading-relaxed">
+                Selecione um participante abaixo para espiar as previsões enviadas por ele. (Somente visualização).
+            </p>
+
+            <div class="relative w-full max-w-md mb-8">
+                <select id="select-view-participant" onchange="loadReadOnlyPredictions(this.value)" class="w-full text-lg p-4 bg-white dark:bg-black/50 border border-slate-300 dark:border-white/10 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 outline-none transition uppercase font-display font-bold text-slate-900 dark:text-white shadow-inner cursor-pointer appearance-none">
+                    <option value="" disabled selected>👉 Selecione um Participante</option>
+                    <!-- Opções inseridas via JS -->
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+            </div>
+
+            <div id="read-only-loading" class="hidden flex items-center gap-3 text-blue-600 dark:text-blue-400 font-bold mb-8">
+                <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                Carregando dados...
+            </div>
+
+            <div id="read-only-error" class="hidden text-red-500 font-bold mb-8"></div>
+
+            <div id="read-only-content" class="hidden space-y-10 animate-fade-in mt-6 border-t border-slate-200 dark:border-white/10 pt-8">
+                <!-- Conteúdo gerado pelo JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTAINER PRINCIPAL DOS PALPITES (EDITÁVEL) -->
     <section id="main-palpites-container" class="max-w-5xl mx-auto px-4 animate-fade-in block">
         
         <!-- Tela de Sucesso -->
@@ -428,6 +465,7 @@
         </form>
     </section>
 
+    <!-- SEÇÃO DO RANKING -->
     <section id="sec-ranking" class="max-w-4xl mx-auto px-4 hidden">
         <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-32 glass-dark rounded-2xl">
             <div class="relative w-16 h-16 mb-6">
@@ -507,9 +545,9 @@
         // =====================================================================
         // CONFIGURAÇÕES GERAIS E DADOS
         // =====================================================================
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwS1Umabt_uOk8JNR2DTqD2xNoIOou3OJ1ClX3GZwI-pxvDYk5xTQn4Bml19YVQhQGh/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFkwTPaarOccYV07zuTn1cRBD4sE_fDYho95-94ob88b43wt1TLSVrw4kIIPkiEl1o/exec';
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
-        const TOTAL_FIELDS = 170; // 104 Partidas (Grupos + Placares Mata-Mata) + 66 Seleções (Chaveamento)
+        const TOTAL_FIELDS = 170; 
 
         const INITIAL_MATCHES = [
             { id: 1, team1: 'MÉXICO', team2: 'ÁFRICA DO SUL', group: 'A' }, { id: 2, team1: 'CORÉIA DO SUL', team2: 'REPÚB. TCHECA', group: 'A' },
@@ -639,20 +677,28 @@
                 
                 if (json.result === 'success' && json.data.length > 0) {
                     const listContainer = document.getElementById('participants-list');
+                    const selectView = document.getElementById('select-view-participant');
+                    
                     document.getElementById('participants-count').textContent = json.data.length;
                     const sortedNames = [...json.data].sort((a, b) => a.name.localeCompare(b.name));
                     
                     let html = '';
+                    let selectHtml = '<option value="" disabled selected>👉 Selecione um Participante</option>';
+                    
                     sortedNames.forEach(p => {
                         html += `
                         <span class="bg-white/80 dark:bg-black/50 text-slate-700 dark:text-slate-300 font-bold px-3 py-1 rounded border border-slate-200 dark:border-white/5 shadow-sm text-[10px] sm:text-xs flex items-center gap-1.5 cursor-default">
                             <div class="w-1.5 h-1.5 bg-green-500 rounded-full shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
                             ${p.name}
                         </span>`;
+                        selectHtml += `<option value="${p.name}">${p.name}</option>`;
                     });
                     
                     listContainer.innerHTML = html;
                     document.getElementById('participants-container').classList.remove('hidden');
+                    
+                    // Preenche o Select da aba Palpites da Galera
+                    selectView.innerHTML = selectHtml;
                 }
             } catch (error) {}
         }
@@ -716,11 +762,9 @@
             }
         }
 
-        // Nova contagem de progresso: 104 placares (fase de grupos + mata-mata) e 66 escolhas de equipas/vencedores
         function updateProgress() {
             let filledCount = 0;
             
-            // Loop genérico por todos os jogos possíveis (1 a 104) para verificar se ambos os scores estão preenchidos
             for (let i = 1; i <= 104; i++) {
                 if (predictions[i] && predictions[i].team1 !== undefined && predictions[i].team1 !== '' &&
                     predictions[i].team2 !== undefined && predictions[i].team2 !== '') {
@@ -728,7 +772,6 @@
                 }
             }
             
-            // Verifica os selects das fases eliminatórias
             ['round32', 'round16', 'quarters', 'semis', 'thirdPlaceMatch', 'finalMatch'].forEach(phase => {
                 knockoutPredictions[phase].forEach(val => { if (val !== '') filledCount++; });
             });
@@ -763,34 +806,47 @@
         }
 
         function bloquearPalpites() {
+            // Esconde apenas os painéis de edição do usuário logado
             document.getElementById('tab-btn-grupos').classList.add('hidden');
             document.getElementById('tab-btn-knockout').classList.add('hidden');
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
             document.getElementById('header-subtitle').textContent = "Ranking de Transmissão Oficial";
+            
+            // Força a aba de Palpites da Galera ou Ranking
+            loadParticipants(); // Precisa carregar para a aba Palpites da Galera
             switchTab('ranking');
         }
 
         function switchTab(tabId) {
+            // Se encerrado, não deixa clicar em grupos e knockout
             if (bolaoEncerrado && (tabId === 'grupos' || tabId === 'knockout')) return;
 
-            ['grupos', 'knockout', 'ranking', 'regras'].forEach(id => {
+            // Restaura estilo das abas
+            ['grupos', 'knockout', 'ranking', 'view_others', 'regras'].forEach(id => {
                 const btn = document.getElementById('tab-btn-' + id);
-                if (btn) btn.className = "flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2";
+                if (btn && !btn.classList.contains('hidden')) {
+                    btn.className = "flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2";
+                }
             });
             
             const activeBtn = document.getElementById('tab-btn-' + tabId);
             if (activeBtn) activeBtn.classList.add('tab-active');
 
+            // Esconde tudo
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('sec-ranking').classList.add('hidden');
             document.getElementById('sec-regras').classList.add('hidden');
+            document.getElementById('sec-view-others').classList.add('hidden');
 
+            // Mostra o que foi pedido
             if (tabId === 'ranking') {
                 document.getElementById('sec-ranking').classList.remove('hidden');
                 if (!isRankingLoaded) fetchRanking();
             } else if (tabId === 'regras') {
                 document.getElementById('sec-regras').classList.remove('hidden');
+            } else if (tabId === 'view_others') {
+                document.getElementById('sec-view-others').classList.remove('hidden');
             } else {
                 document.getElementById('main-palpites-container').classList.remove('hidden');
                 if (tabId === 'grupos') {
@@ -905,7 +961,6 @@
             thirds.sort(tieBreaker);
             let bestThirds = thirds.slice(0, 8).map(t => t.name);
 
-            // Pre-fill fixed slots based on user's exact R32 structure
             const setSlot = (index, team) => {
                 let sel = document.querySelector(`select[data-phase="round32"][data-index="${index}"]`);
                 if (sel) { sel.value = team; knockoutPredictions.round32[index] = team; }
@@ -989,9 +1044,6 @@
                 { id: 101, l1: 'V97', l2: 'V98' }, { id: 102, l1: 'V99', l2: 'V100' }
             ];
 
-            // -------------------------------------------------------------
-            // BLOCO 1: ETAPA 1 (CHAVEAMENTO APENAS COM OS SELECTS)
-            // -------------------------------------------------------------
             const generatePhasePairs = (title, matches, phaseKey, colorHex) => {
                 let pHTML = `<div class="mb-12 border-t border-slate-200 dark:border-white/10 pt-8">
                     <h3 class="font-display font-black text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight mb-6 pl-2 flex items-center gap-3">
@@ -1036,7 +1088,6 @@
             html += generatePhasePairs('Quartas de Final', quarterMatches, 'quarters', '#d97706'); 
             html += generatePhasePairs('Semifinais', semiMatches, 'semis', '#b45309'); 
 
-            // Partidas 103 (3º Lugar) e 104 (Final) - ETAPA 1
             html += `
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12 pt-8 border-t border-slate-200 dark:border-white/10">
                 <div class="glass-card p-6 sm:p-8 rounded-[2rem] border-l-4 border-l-slate-400 relative overflow-hidden">
@@ -1106,9 +1157,6 @@
                 </div>
             </div>`;
 
-            // -------------------------------------------------------------
-            // BLOCO 2: ETAPA 2 (PONTUAÇÃO INDEPENDENTE DE PLACARES)
-            // -------------------------------------------------------------
             html += `
             <div class="mt-20 mb-8 border-t border-slate-300 dark:border-white/10 pt-12">
                 <h2 class="text-3xl font-display font-black text-slate-900 dark:text-white uppercase tracking-wide flex items-center gap-3">
@@ -1151,7 +1199,6 @@
             const container = document.getElementById('knockout-container');
             container.innerHTML = html;
             
-            // Garantir a vinculação do placar nos inputs do mata-mata
             attachScoreInputsListeners(container);
 
             container.addEventListener('change', function(e) {
@@ -1163,6 +1210,201 @@
                     updateProgress();
                 }
             });
+        }
+
+        // =====================================================================
+        // NOVA LÓGICA: CARREGAR E EXIBIR PALPITES DA GALERA (READ-ONLY)
+        // =====================================================================
+        async function loadReadOnlyPredictions(name) {
+            if (!name) return;
+            
+            const loading = document.getElementById('read-only-loading');
+            const errorDiv = document.getElementById('read-only-error');
+            const content = document.getElementById('read-only-content');
+            
+            loading.classList.remove('hidden');
+            errorDiv.classList.add('hidden');
+            content.classList.add('hidden');
+            content.innerHTML = '';
+
+            try {
+                const response = await fetch(SCRIPT_URL + `?action=load_predictions&name=${encodeURIComponent(name)}`);
+                const json = await response.json();
+
+                if (json.result === 'success') {
+                    renderReadOnlyView(name, json.predictions || {}, json.knockout || {});
+                    content.classList.remove('hidden');
+                } else {
+                    errorDiv.textContent = `❌ Erro: ${json.message || 'Dados não encontrados.'}`;
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                errorDiv.textContent = `❌ Erro de conexão ao buscar os dados de ${name}.`;
+                errorDiv.classList.remove('hidden');
+            } finally {
+                loading.classList.add('hidden');
+            }
+        }
+
+        function renderReadOnlyView(name, preds, knockout) {
+            const content = document.getElementById('read-only-content');
+            
+            let html = `<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-100 dark:bg-white/5 p-5 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm mb-8">
+                <div>
+                    <h3 class="font-display font-black text-2xl text-slate-800 dark:text-white uppercase tracking-tight">Palpites de: <span class="text-blue-600 dark:text-blue-400">${name}</span></h3>
+                </div>
+                <span class="text-xs font-bold text-slate-500 bg-white dark:bg-black/50 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 shadow-inner flex items-center gap-2 uppercase tracking-widest w-fit">
+                    <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div> Modo Leitura
+                </span>
+            </div>`;
+
+            // --- FASE DE GRUPOS ---
+            html += `<div class="mb-12">
+                <h4 class="font-display font-black text-2xl text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-3 flex items-center gap-3">
+                    <span class="text-3xl">📋</span> Fase de Grupos
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">`;
+            
+            INITIAL_MATCHES.forEach(m => {
+                let s1 = preds[m.id] && preds[m.id].team1 !== undefined && preds[m.id].team1 !== "" ? preds[m.id].team1 : "-";
+                let s2 = preds[m.id] && preds[m.id].team2 !== undefined && preds[m.id].team2 !== "" ? preds[m.id].team2 : "-";
+                
+                let isFilled = s1 !== "-" && s2 !== "-";
+                let bgClass = isFilled ? "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-white/10" : "bg-slate-50 dark:bg-slate-900/40 border-slate-100 dark:border-white/5 opacity-80";
+                
+                const t1 = TEAM_INFO[m.team1] || { iso: 'xx' };
+                const t2 = TEAM_INFO[m.team2] || { iso: 'xx' };
+
+                html += `
+                <div class="${bgClass} p-4 rounded-xl border flex flex-col relative shadow-sm hover:shadow-md transition-shadow">
+                    <div class="absolute -right-2 -bottom-3 font-sports text-5xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#${m.id}</div>
+                    
+                    <div class="flex justify-between items-center mb-3 relative z-10 border-b border-slate-100 dark:border-white/5 pb-2">
+                        <span class="text-[10px] font-bold text-slate-500 tracking-widest uppercase">Jogo #${m.id}</span>
+                        <span class="text-[10px] font-black text-amber-600 dark:text-yellow-500 bg-amber-50 dark:bg-yellow-500/10 px-2 py-0.5 rounded tracking-widest">GR. ${m.group}</span>
+                    </div>
+
+                    <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3 relative z-10">
+                        <div class="flex flex-col items-end gap-1 text-right">
+                            <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-6 h-4 object-cover rounded-sm shadow-sm border border-slate-200 dark:border-white/10" alt="${m.team1}">
+                            <span class="font-bold text-slate-800 dark:text-slate-200 text-xs sm:text-sm uppercase leading-tight">${m.team1}</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-center font-sports font-black text-xl text-slate-800 dark:text-white bg-slate-100 dark:bg-black/50 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/5 min-w-[4rem]">
+                            ${s1} <span class="text-xs text-slate-400 dark:text-slate-500 mx-1.5 font-sans">x</span> ${s2}
+                        </div>
+
+                        <div class="flex flex-col items-start gap-1 text-left">
+                            <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-6 h-4 object-cover rounded-sm shadow-sm border border-slate-200 dark:border-white/10" alt="${m.team2}">
+                            <span class="font-bold text-slate-800 dark:text-slate-200 text-xs sm:text-sm uppercase leading-tight">${m.team2}</span>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            html += `</div></div>`;
+
+            // --- MATA-MATA (CHAVEAMENTO) ---
+            html += `<div class="mb-12">
+                <h4 class="font-display font-black text-2xl text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-3 flex items-center gap-3">
+                    <span class="text-3xl">🏆</span> Chaveamento (Mata-Mata)
+                </h4>`;
+            
+            const renderKnockoutPhase = (title, phaseData) => {
+                if (!phaseData || phaseData.length === 0) return '';
+                let cols = phaseData.length > 8 ? 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-8' : 
+                           phaseData.length === 8 ? 'grid-cols-2 sm:grid-cols-4' : 
+                           'grid-cols-2 sm:grid-cols-4';
+
+                let pHTML = `<div class="mb-6"><h5 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-3 border-l-4 border-blue-500 pl-2">${title}</h5><div class="grid ${cols} gap-2">`;
+                phaseData.forEach(team => {
+                    let tName = team || "?";
+                    let isFilled = team !== "";
+                    let tInfo = TEAM_INFO[team] || { iso: 'xx' };
+                    let style = isFilled ? "bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-600 shadow-sm" : "bg-slate-100 text-slate-400 border-slate-200 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-600";
+                    
+                    let flagHtml = isFilled && tInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w20/${tInfo.iso}.png" class="w-5 h-3.5 object-cover rounded-[2px]" alt="${tName}">` : '';
+
+                    pHTML += `<div class="px-3 py-2 text-xs font-bold rounded-lg border ${style} flex items-center gap-2 truncate" title="${tName}">${flagHtml}<span class="truncate">${tName}</span></div>`;
+                });
+                pHTML += `</div></div>`;
+                return pHTML;
+            };
+
+            html += renderKnockoutPhase('16 Avos de Final', knockout.round32 || []);
+            html += renderKnockoutPhase('Oitavas de Final', knockout.round16 || []);
+            html += renderKnockoutPhase('Quartas de Final', knockout.quarters || []);
+            html += renderKnockoutPhase('Semifinais', knockout.semis || []);
+            
+            // Finais / Campeões
+            html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">`;
+            
+            let third = knockout.thirdPlace || "?";
+            let thirdInfo = TEAM_INFO[third] || { iso: 'xx' };
+            let thirdFlag = thirdInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w40/${thirdInfo.iso}.png" class="w-10 h-7 object-cover rounded shadow-sm border border-slate-200 dark:border-white/10">` : '';
+
+            let champ = knockout.champion || "?";
+            let champInfo = TEAM_INFO[champ] || { iso: 'xx' };
+            let champFlag = champInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w40/${champInfo.iso}.png" class="w-10 h-7 object-cover rounded shadow-sm border border-amber-300 dark:border-yellow-500/30">` : '';
+            
+            html += `<div class="bg-slate-100 dark:bg-slate-800 p-5 rounded-2xl border border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center shadow-inner relative overflow-hidden">
+                <span class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 border-b border-slate-300 dark:border-slate-600 pb-1 w-full text-center relative z-10">🥉 3º Lugar</span>
+                <div class="flex items-center gap-4 relative z-10">
+                    ${thirdFlag}
+                    <span class="text-xl sm:text-2xl font-black text-slate-800 dark:text-slate-200 uppercase">${third}</span>
+                </div>
+            </div>`;
+            
+            html += `<div class="bg-gradient-to-br from-amber-100 to-amber-50 dark:from-yellow-900/40 dark:to-yellow-800/10 p-5 rounded-2xl border border-amber-300 dark:border-yellow-600/50 flex flex-col items-center justify-center shadow-md relative overflow-hidden">
+                <span class="text-xs font-bold text-amber-700 dark:text-yellow-500 uppercase tracking-widest mb-4 border-b border-amber-300 dark:border-yellow-600/50 pb-1 w-full text-center relative z-10">🏆 O Grande Campeão</span>
+                <div class="flex items-center gap-4 relative z-10">
+                    ${champFlag}
+                    <span class="text-2xl sm:text-3xl font-black text-amber-700 dark:text-yellow-500 uppercase drop-shadow-sm">${champ}</span>
+                </div>
+            </div>`;
+            
+            html += `</div></div>`;
+
+            // --- PLACARES EXATOS MATA-MATA ---
+            html += `<div class="mb-4">
+                <h4 class="font-display font-black text-2xl text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-3 flex items-center gap-3">
+                    <span class="text-3xl">🎯</span> Placares (Mata-Mata)
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">`;
+            
+            const knockoutLabels = {
+                73: '2º A x 2º B', 74: '1º E x 3º A/B/C/D/F', 75: '1º F x 2º C', 76: '1º C x 2º F',
+                77: '1º I x 3º C/D/F/G/H', 78: '2º E x 2º I', 79: '1º A x 3º C/E/F/H/I', 80: '1º L x 3º E/H/I/J/K',
+                81: '1º D x 3º B/E/F/I/J', 82: '1º G x 3º A/E/H/I/J', 83: '2º K x 2º L', 84: '1º H x 2º J',
+                85: '1º B x 3º E/F/G/I/J', 86: '1º J x 2º H', 87: '1º K x 3º D/E/I/J/L', 88: '2º D x 2º G',
+                90: 'V73 x V76', 89: 'V74 x V75', 91: 'V78 x V77', 92: 'V79 x V80',
+                93: 'V82 x V81', 94: 'V84 x V83', 95: 'V85 x V88', 96: 'V86 x V87',
+                97: 'V90 x V89', 98: 'V91 x V92', 99: 'V93 x V94', 100: 'V95 x V96',
+                101: 'V97 x V98', 102: 'V99 x V100',
+                103: 'P101 x P102', 104: 'V101 x V102'
+            };
+
+            for (let i = 73; i <= 104; i++) {
+                let s1 = preds[i] && preds[i].team1 !== undefined && preds[i].team1 !== "" ? preds[i].team1 : "-";
+                let s2 = preds[i] && preds[i].team2 !== undefined && preds[i].team2 !== "" ? preds[i].team2 : "-";
+                let isFilled = s1 !== "-" && s2 !== "-";
+                let bgClass = isFilled ? "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-white/10" : "bg-slate-50 dark:bg-slate-900/40 border-slate-100 dark:border-white/5 opacity-80";
+                
+                let label = knockoutLabels[i] || 'Partida';
+
+                html += `
+                <div class="${bgClass} p-3 rounded-xl border flex items-center justify-between shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex flex-col">
+                        <span class="font-sports font-black text-xl text-slate-800 dark:text-slate-200">#${i}</span>
+                        <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wide mt-0.5">${label}</span>
+                    </div>
+                    <div class="flex items-center justify-center font-sports font-black text-lg text-slate-800 dark:text-white bg-slate-100 dark:bg-black/50 px-3 py-1 rounded-lg border border-slate-200 dark:border-white/5 min-w-[3.5rem]">
+                        ${s1} <span class="text-[10px] text-slate-400 dark:text-slate-500 mx-1.5 font-sans">X</span> ${s2}
+                    </div>
+                </div>`;
+            }
+            html += `</div></div>`;
+
+            content.innerHTML = html;
         }
 
         document.getElementById('predictions-form').addEventListener('submit', (e) => {
