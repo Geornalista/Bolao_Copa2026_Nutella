@@ -163,7 +163,7 @@
             <div class="flex items-center gap-4 sm:gap-5 text-center sm:text-left">
                 <div class="relative">
                     <div class="absolute inset-0 bg-yellow-500/20 blur-2xl rounded-full"></div>
-                    <img src="./Logo_copa_2026.png" alt="Logo Copa" class="h-16 sm:h-20 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:scale-105 transition-transform duration-500">
+                    <img src="./Logo_copa_2026.png" alt="Logo Copa" class="h-16 sm:h-20 object-contain relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] hover:scale-105 transition-transform duration-500" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/FIFA_World_Cup_2026_Logo.svg/1200px-FIFA_World_Cup_2026_Logo.svg.png'">
                 </div>
                 <div>
                     <h1 class="text-2xl sm:text-3xl font-display font-black tracking-tighter uppercase text-gradient-gold drop-shadow-sm">
@@ -176,11 +176,8 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <!-- Theme Toggle Button -->
                 <button onclick="toggleTheme()" class="p-2.5 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-yellow-500 hover:bg-slate-300 dark:hover:bg-white/20 transition shadow-inner border border-slate-300 dark:border-white/10" aria-label="Alternar Tema">
-                    <span id="theme-icon">
-                        <!-- Ícone inserido via JS -->
-                    </span>
+                    <span id="theme-icon"></span>
                 </button>
 
                 <div id="closed-warning" class="hidden glass-dark text-amber-600 dark:text-amber-500 px-4 py-2 rounded-xl border-l-4 border-l-amber-500 text-sm font-bold shadow-sm flex items-center gap-2">
@@ -203,7 +200,6 @@
             <button onclick="switchTab('ranking')" id="tab-btn-ranking" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2">
                 Ranking Oficial
             </button>
-            <!-- ABA PALPITES DA GALERA -->
             <button onclick="switchTab('view_others')" id="tab-btn-view_others" class="flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2">
                 Palpites da Galera
             </button>
@@ -324,42 +320,45 @@
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: PALPITES DA GALERA -->
     <section id="sec-view-others" class="max-w-5xl mx-auto px-4 hidden animate-fade-in pb-8">
-        <div class="glass-dark p-6 sm:p-10 rounded-2xl border-t-2 border-t-blue-500 dark:border-t-blue-400">
+        <div class="glass-dark p-6 sm:p-10 rounded-2xl border-t-2 border-t-blue-500 dark:border-t-blue-400 shadow-xl">
             <h2 class="text-2xl sm:text-3xl font-display font-black text-slate-900 dark:text-white mb-6 flex items-center gap-3 tracking-tight uppercase">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue-600 dark:text-blue-400"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
                 Palpites da Galera
             </h2>
             
-            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm sm:text-base leading-relaxed">
-                Selecione um participante abaixo para espiar as previsões enviadas por ele. (Somente visualização).
+            <p class="text-slate-600 dark:text-slate-400 mb-8 text-sm sm:text-base leading-relaxed">
+                Selecione um participante da comunidade abaixo para investigar suas previsões e táticas no bolão.
             </p>
 
-            <div class="relative w-full max-w-md mb-8">
-                <select id="select-view-participant" onchange="loadReadOnlyPredictions(this.value)" class="w-full text-lg p-4 bg-white dark:bg-black/50 border border-slate-300 dark:border-white/10 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 outline-none transition uppercase font-display font-bold text-slate-900 dark:text-white shadow-inner cursor-pointer appearance-none">
-                    <option value="" disabled selected>👉 Selecione um Participante</option>
+            <div class="relative w-full max-w-md mb-10 group">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 group-hover:text-blue-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <select id="select-view-participant" onchange="loadReadOnlyPredictions(this.value)" class="w-full text-lg pl-12 pr-10 py-4 bg-white dark:bg-black/50 border-2 border-slate-200 dark:border-white/10 rounded-xl focus:border-blue-500 dark:focus:border-blue-400 outline-none transition uppercase font-display font-bold text-slate-900 dark:text-white shadow-sm cursor-pointer appearance-none hover:border-slate-300 dark:hover:border-white/20">
+                    <option value="" disabled selected>Escolha um Perfil</option>
                     <!-- Opções inseridas via JS -->
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                 </div>
             </div>
 
-            <div id="read-only-loading" class="hidden flex items-center gap-3 text-blue-600 dark:text-blue-400 font-bold mb-8">
+            <div id="read-only-loading" class="hidden flex items-center gap-3 text-blue-600 dark:text-blue-400 font-bold mb-8 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl w-fit border border-blue-100 dark:border-blue-800">
                 <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                Carregando dados...
+                Acessando base de dados...
             </div>
 
-            <div id="read-only-error" class="hidden text-red-500 font-bold mb-8"></div>
+            <div id="read-only-error" class="hidden bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 p-4 rounded-xl border border-red-200 dark:border-red-800 font-bold mb-8 flex items-center gap-2"></div>
 
-            <div id="read-only-content" class="hidden space-y-10 animate-fade-in mt-6 border-t border-slate-200 dark:border-white/10 pt-8">
-                <!-- Conteúdo gerado pelo JS -->
+            <div id="read-only-content" class="hidden animate-fade-in mt-6">
+                <!-- Conteúdo limpo e remodelado gerado pelo JS -->
             </div>
         </div>
     </section>
 
-    <!-- CONTAINER PRINCIPAL DOS PALPITES (EDITÁVEL) -->
     <section id="main-palpites-container" class="max-w-5xl mx-auto px-4 animate-fade-in block">
         
         <!-- Tela de Sucesso -->
@@ -374,14 +373,13 @@
 
         <form id="predictions-form" class="space-y-6">
             
-            <!-- Controle: Novo Participante / Já Tenho Palpites -->
             <div class="flex p-1 bg-slate-200 dark:bg-black/60 rounded-xl w-full sm:w-max mx-auto sm:mx-0 mb-4 border border-slate-300 dark:border-white/10 backdrop-blur-md">
                 <button type="button" id="btn-mode-new" onclick="setMode('new')" class="flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-white text-slate-800 dark:bg-white/10 dark:text-white shadow-sm">Novo Participante</button>
                 <button type="button" id="btn-mode-recover" onclick="setMode('recover')" class="flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Recuperar Palpites</button>
             </div>
 
             <!-- Nome e Progresso -->
-            <div id="name-container" class="glass-dark rounded-2xl p-5 sm:p-8 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between border-t border-slate-200 dark:border-white/10">
+            <div id="name-container" class="glass-dark rounded-2xl p-5 sm:p-8 sticky top-4 z-30 flex flex-col sm:flex-row gap-6 items-start sm:items-center justify-between border-t border-slate-200 dark:border-white/10 shadow-lg">
                 <div class="w-full sm:flex-1 relative">
                     <label class="block text-[10px] font-bold text-amber-700 dark:text-yellow-500/70 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
                         <div class="w-1.5 h-1.5 bg-amber-500 dark:bg-yellow-500 rounded-full animate-pulse"></div> Identificação do Jogador
@@ -417,15 +415,11 @@
                 </div>
             </div>
 
-            <!-- SEÇÃO A: JOGOS DOS GRUPOS -->
             <section id="sec-grupos" class="animate-fade-in block space-y-6 pt-4">
                 <div id="matches-container"></div>
             </section>
 
-            <!-- SEÇÃO B: MATA-MATA (Dividida em 2 Etapas) -->
             <section id="sec-knockout" class="hidden animate-fade-in space-y-6 pt-4">
-                
-                <!-- CABEÇALHO ETAPA 1 -->
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-slate-200/50 dark:bg-black/40 p-4 rounded-2xl border border-slate-300 dark:border-white/10 mt-4">
                     <div>
                         <h2 class="text-xl sm:text-2xl font-black text-slate-800 dark:text-white drop-shadow-sm flex items-center gap-3">
@@ -439,9 +433,7 @@
                     </button>
                 </div>
                 
-                <div id="knockout-container">
-                    <!-- Gerado via JS (Bloco Etapa 1 e Bloco Etapa 2) -->
-                </div>
+                <div id="knockout-container"></div>
             </section>
 
             <div id="error-message" class="hidden bg-red-100 dark:bg-red-950/50 text-red-700 dark:text-red-400 p-4 rounded-xl flex items-center gap-3 text-sm font-bold border border-red-300 dark:border-red-500/30 backdrop-blur-md">
@@ -449,7 +441,7 @@
                 <p id="error-text">Erro ao conectar à base de dados.</p>
             </div>
 
-            <!-- Botão Enviar Flutuante -->
+            <!-- Botão Enviar -->
             <div class="pt-8">
                 <button type="submit" id="submit-btn" class="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-3 btn-gold font-display font-black text-lg py-5 px-10 rounded-xl transition-all group tracking-wide">
                     <span id="submit-text" class="flex items-center gap-2">
@@ -465,7 +457,6 @@
         </form>
     </section>
 
-    <!-- SEÇÃO DO RANKING -->
     <section id="sec-ranking" class="max-w-4xl mx-auto px-4 hidden">
         <div id="ranking-loading-state" class="flex flex-col items-center justify-center py-32 glass-dark rounded-2xl">
             <div class="relative w-16 h-16 mb-6">
@@ -484,7 +475,7 @@
 
         <div id="ranking-content" class="hidden opacity-0 animate-fade-in">
             <div class="flex justify-end mb-4">
-                <button onclick="fetchRanking()" class="text-[10px] font-bold text-slate-500 hover:text-amber-600 dark:hover:text-yellow-400 uppercase tracking-widest flex items-center gap-1.5 transition-colors bg-white/80 dark:bg-black/40 px-3 py-2 rounded border border-slate-200 dark:border-white/5">
+                <button onclick="fetchRanking()" class="text-[10px] font-bold text-slate-500 hover:text-amber-600 dark:hover:text-yellow-400 uppercase tracking-widest flex items-center gap-1.5 transition-colors bg-white/80 dark:bg-black/40 px-3 py-2 rounded border border-slate-200 dark:border-white/5 shadow-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
                     Live Update
                 </button>
@@ -492,7 +483,7 @@
             
             <div id="podium" class="flex items-end justify-center gap-2 sm:gap-4 mb-12 mt-6 drop-shadow-2xl"></div>
             
-            <div class="glass-dark rounded-2xl overflow-hidden mb-8 border-t border-slate-200 dark:border-white/10">
+            <div class="glass-dark rounded-2xl overflow-hidden mb-8 border-t border-slate-200 dark:border-white/10 shadow-lg">
                 <div class="bg-slate-100 dark:bg-black/60 px-6 py-4 flex text-slate-500 font-bold text-[10px] uppercase tracking-widest border-b border-slate-200 dark:border-white/5">
                     <span class="w-10 sm:w-16 text-center">Pos</span>
                     <span class="flex-1 ml-4 sm:ml-6">Jogador</span>
@@ -503,7 +494,7 @@
         </div>
     </section>
 
-    <!-- Modal de Confirmação Minimalista -->
+    <!-- Modal de Confirmação -->
     <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4">
         <div class="glass-dark rounded-2xl p-8 max-w-sm w-full transform transition-all animate-fade-in border border-amber-200 dark:border-yellow-500/20 text-center">
             <div class="w-16 h-16 bg-amber-100 dark:bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-amber-200 dark:border-yellow-500/30">
@@ -521,9 +512,6 @@
     </div>
 
     <script>
-        // =====================================================================
-        // TEMA (LIGHT/DARK) LOGIC
-        // =====================================================================
         function toggleTheme() {
             const html = document.documentElement;
             html.classList.toggle('dark');
@@ -542,9 +530,6 @@
             }
         }
 
-        // =====================================================================
-        // CONFIGURAÇÕES GERAIS E DADOS
-        // =====================================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFkwTPaarOccYV07zuTn1cRBD4sE_fDYho95-94ob88b43wt1TLSVrw4kIIPkiEl1o/exec';
         const DATA_LIMITE = new Date('2026-06-11T16:00:00-03:00');
         const TOTAL_FIELDS = 170; 
@@ -617,14 +602,10 @@
 
         let predictions = {};
         let knockoutPredictions = {
-            round32: Array(32).fill(''), 
-            round16: Array(16).fill(''), 
-            quarters: Array(8).fill(''),
-            semis: Array(4).fill(''), 
-            thirdPlaceMatch: Array(2).fill(''), 
-            finalMatch: Array(2).fill(''), 
-            thirdPlace: '', 
-            champion: ''
+            round32: Array(32).fill(''), round16: Array(16).fill(''), 
+            quarters: Array(8).fill(''), semis: Array(4).fill(''), 
+            thirdPlaceMatch: Array(2).fill(''), finalMatch: Array(2).fill(''), 
+            thirdPlace: '', champion: ''
         };
         let isRankingLoaded = false;
         let bolaoEncerrado = false;
@@ -633,8 +614,7 @@
             updateThemeIcon(document.documentElement.classList.contains('dark'));
             document.getElementById('total-count').textContent = TOTAL_FIELDS;
             
-            const agora = new Date();
-            if (agora > DATA_LIMITE) {
+            if (new Date() > DATA_LIMITE) {
                 bolaoEncerrado = true;
                 bloquearPalpites();
             } else {
@@ -656,16 +636,12 @@
             if (mode === 'new') {
                 btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-white text-slate-800 dark:bg-white/10 dark:text-white shadow-sm";
                 btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300";
-                
-                btnLoad.classList.add('hidden');
-                btnLoad.classList.remove('flex');
+                btnLoad.classList.add('hidden'); btnLoad.classList.remove('flex');
                 hintText.innerHTML = '✨ Digite o <b class="text-amber-600 dark:text-yellow-500">nome</b> que deseja usar na planilha.';
             } else {
                 btnRecover.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-white text-slate-800 dark:bg-white/10 dark:text-white shadow-sm";
                 btnNew.className = "flex-1 sm:flex-none sm:px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300";
-                
-                btnLoad.classList.remove('hidden');
-                btnLoad.classList.add('flex');
+                btnLoad.classList.remove('hidden'); btnLoad.classList.add('flex');
                 hintText.innerHTML = '🔄 <span class="text-amber-600 dark:text-yellow-500">Atenção:</span> Digite seu nome exato para recuperar as informações.';
             }
         }
@@ -674,30 +650,20 @@
             try {
                 const response = await fetch(SCRIPT_URL);
                 const json = await response.json();
-                
                 if (json.result === 'success' && json.data.length > 0) {
                     const listContainer = document.getElementById('participants-list');
                     const selectView = document.getElementById('select-view-participant');
-                    
                     document.getElementById('participants-count').textContent = json.data.length;
                     const sortedNames = [...json.data].sort((a, b) => a.name.localeCompare(b.name));
                     
                     let html = '';
-                    let selectHtml = '<option value="" disabled selected>👉 Selecione um Participante</option>';
-                    
+                    let selectHtml = '<option value="" disabled selected>Escolha um Perfil</option>';
                     sortedNames.forEach(p => {
-                        html += `
-                        <span class="bg-white/80 dark:bg-black/50 text-slate-700 dark:text-slate-300 font-bold px-3 py-1 rounded border border-slate-200 dark:border-white/5 shadow-sm text-[10px] sm:text-xs flex items-center gap-1.5 cursor-default">
-                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
-                            ${p.name}
-                        </span>`;
+                        html += `<span class="bg-white/80 dark:bg-black/50 text-slate-700 dark:text-slate-300 font-bold px-3 py-1 rounded border border-slate-200 dark:border-white/5 shadow-sm text-[10px] sm:text-xs flex items-center gap-1.5 cursor-default"><div class="w-1.5 h-1.5 bg-green-500 rounded-full shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>${p.name}</span>`;
                         selectHtml += `<option value="${p.name}">${p.name}</option>`;
                     });
-                    
                     listContainer.innerHTML = html;
                     document.getElementById('participants-container').classList.remove('hidden');
-                    
-                    // Preenche o Select da aba Palpites da Galera
                     selectView.innerHTML = selectHtml;
                 }
             } catch (error) {}
@@ -705,12 +671,7 @@
 
         async function loadUserPredictions() {
             const name = document.getElementById('participant-name').value.trim();
-            
-            if (!name) {
-                document.getElementById('mode-hint').innerHTML = `<span class="text-red-500 font-bold">❌ Preencha o Nome para recuperar.</span>`;
-                return;
-            }
-
+            if (!name) { document.getElementById('mode-hint').innerHTML = `<span class="text-red-500 font-bold">❌ Preencha o Nome.</span>`; return; }
             const btn = document.getElementById('btn-load-predictions');
             btn.innerHTML = '<svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
             btn.disabled = true;
@@ -721,8 +682,6 @@
 
                 if (json.result === 'success') {
                     predictions = json.predictions || {};
-                    
-                    // Suporte a arrays antigos
                     knockoutPredictions = json.knockout || {};
                     knockoutPredictions.round32 = knockoutPredictions.round32 || Array(32).fill('');
                     knockoutPredictions.round16 = knockoutPredictions.round16 || Array(16).fill('');
@@ -738,17 +697,12 @@
                         const team = input.getAttribute('data-team');
                         input.value = predictions[mId] && predictions[mId][team] !== undefined ? predictions[mId][team] : '';
                     });
-
                     document.querySelectorAll('#knockout-container select').forEach(select => {
                         const phase = select.getAttribute('data-phase');
                         const idx = select.getAttribute('data-index');
-                        if (phase === 'thirdPlace' || phase === 'champion') {
-                            select.value = knockoutPredictions[phase] || '';
-                        } else {
-                            select.value = knockoutPredictions[phase] && knockoutPredictions[phase][idx] !== undefined ? knockoutPredictions[phase][idx] : '';
-                        }
+                        if (phase === 'thirdPlace' || phase === 'champion') select.value = knockoutPredictions[phase] || '';
+                        else select.value = knockoutPredictions[phase] && knockoutPredictions[phase][idx] !== undefined ? knockoutPredictions[phase][idx] : '';
                     });
-
                     updateProgress();
                     document.getElementById('mode-hint').innerHTML = `<span class="text-emerald-600 dark:text-green-400 font-bold">✅ Dados carregados com sucesso!</span> Atualize o que desejar.`;
                 } else {
@@ -764,14 +718,9 @@
 
         function updateProgress() {
             let filledCount = 0;
-            
             for (let i = 1; i <= 104; i++) {
-                if (predictions[i] && predictions[i].team1 !== undefined && predictions[i].team1 !== '' &&
-                    predictions[i].team2 !== undefined && predictions[i].team2 !== '') {
-                    filledCount++;
-                }
+                if (predictions[i] && predictions[i].team1 !== undefined && predictions[i].team1 !== '' && predictions[i].team2 !== undefined && predictions[i].team2 !== '') filledCount++;
             }
-            
             ['round32', 'round16', 'quarters', 'semis', 'thirdPlaceMatch', 'finalMatch'].forEach(phase => {
                 knockoutPredictions[phase].forEach(val => { if (val !== '') filledCount++; });
             });
@@ -806,40 +755,32 @@
         }
 
         function bloquearPalpites() {
-            // Esconde apenas os painéis de edição do usuário logado
             document.getElementById('tab-btn-grupos').classList.add('hidden');
             document.getElementById('tab-btn-knockout').classList.add('hidden');
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('closed-warning').classList.remove('hidden');
             document.getElementById('header-subtitle').textContent = "Ranking de Transmissão Oficial";
-            
-            // Força a aba de Palpites da Galera ou Ranking
-            loadParticipants(); // Precisa carregar para a aba Palpites da Galera
+            loadParticipants(); 
             switchTab('ranking');
         }
 
         function switchTab(tabId) {
-            // Se encerrado, não deixa clicar em grupos e knockout
             if (bolaoEncerrado && (tabId === 'grupos' || tabId === 'knockout')) return;
 
-            // Restaura estilo das abas
             ['grupos', 'knockout', 'ranking', 'view_others', 'regras'].forEach(id => {
                 const btn = document.getElementById('tab-btn-' + id);
                 if (btn && !btn.classList.contains('hidden')) {
                     btn.className = "flex-1 sm:flex-none py-3 px-6 font-display text-sm tracking-wider uppercase transition-all duration-300 tab-modern whitespace-nowrap flex items-center justify-center gap-2";
                 }
             });
-            
             const activeBtn = document.getElementById('tab-btn-' + tabId);
             if (activeBtn) activeBtn.classList.add('tab-active');
 
-            // Esconde tudo
             document.getElementById('main-palpites-container').classList.add('hidden');
             document.getElementById('sec-ranking').classList.add('hidden');
             document.getElementById('sec-regras').classList.add('hidden');
             document.getElementById('sec-view-others').classList.add('hidden');
 
-            // Mostra o que foi pedido
             if (tabId === 'ranking') {
                 document.getElementById('sec-ranking').classList.remove('hidden');
                 if (!isRankingLoaded) fetchRanking();
@@ -861,8 +802,7 @@
 
         function renderMatches() {
             const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
-                (acc[match.group] = acc[match.group] || []).push(match);
-                return acc;
+                (acc[match.group] = acc[match.group] || []).push(match); return acc;
             }, {});
 
             let html = '';
@@ -873,39 +813,31 @@
                         <div class="w-8 h-8 rounded-full bg-amber-100 dark:bg-yellow-500/10 text-amber-700 dark:text-yellow-500 flex items-center justify-center font-display font-black text-sm border border-amber-200 dark:border-yellow-500/20 shadow-sm dark:shadow-[0_0_10px_rgba(251,191,36,0.1)]">${group}</div>
                         <h3 class="font-display font-black text-slate-900 dark:text-white text-xl uppercase tracking-widest">Grupo ${group}</h3>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                `;
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">`;
                 
                 groupedMatches[group].forEach(match => {
                     const t1 = TEAM_INFO[match.team1] || { iso: 'xx' };
                     const t2 = TEAM_INFO[match.team2] || { iso: 'xx' };
-                    
                     html += `
                         <div class="glass-card rounded-2xl p-4 sm:p-5 relative overflow-hidden group/card">
                             <div class="absolute -right-4 -bottom-4 font-sports text-6xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#${match.id}</div>
-                            
                             <div class="text-[10px] font-bold text-slate-500 dark:text-slate-500 mb-4 uppercase tracking-widest flex justify-between items-center border-b border-slate-200 dark:border-white/5 pb-2 relative z-10">
                                 <span>Jogo #${match.id}</span>
                             </div>
-                            
                             <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 w-full relative z-10">
-                                
                                 <div class="flex flex-col items-end gap-1.5 text-right">
                                     <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-7 h-5 object-cover rounded-[3px] shadow-sm border border-slate-200 dark:border-white/10" alt="${match.team1}">
                                     <span class="font-bold text-slate-800 dark:text-slate-200 text-xs sm:text-sm leading-tight uppercase group-hover/card:text-amber-600 dark:group-hover/card:text-yellow-400 transition-colors">${match.team1}</span>
                                 </div>
-
                                 <div class="flex items-center justify-center gap-1 sm:gap-2 shrink-0 bg-slate-100 dark:bg-black/40 p-1.5 rounded-xl border border-slate-200 dark:border-white/5 shadow-inner">
                                     <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team1" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" placeholder="-" />
                                     <span class="text-slate-400 dark:text-slate-600 font-black text-xs">X</span>
                                     <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${match.id}" data-team="team2" class="score-input input-sports w-10 h-10 sm:w-12 sm:h-12 text-center text-lg sm:text-xl font-bold rounded-lg" placeholder="-" />
                                 </div>
-
                                 <div class="flex flex-col items-start gap-1.5 text-left">
                                     <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-7 h-5 object-cover rounded-[3px] shadow-sm border border-slate-200 dark:border-white/10" alt="${match.team2}">
                                     <span class="font-bold text-slate-800 dark:text-slate-200 text-xs sm:text-sm leading-tight uppercase group-hover/card:text-amber-600 dark:group-hover/card:text-yellow-400 transition-colors">${match.team2}</span>
                                 </div>
-                                
                             </div>
                         </div>`;
                 });
@@ -926,8 +858,7 @@
             INITIAL_MATCHES.forEach(m => {
                 let p = predictions[m.id];
                 if (p && p.team1 !== undefined && p.team2 !== undefined && p.team1 !== '' && p.team2 !== '') {
-                    let s1 = parseInt(p.team1);
-                    let s2 = parseInt(p.team2);
+                    let s1 = parseInt(p.team1); let s2 = parseInt(p.team2);
                     stats[m.team1].gp += s1; stats[m.team2].gp += s2;
                     stats[m.team1].sg += (s1 - s2); stats[m.team2].sg += (s2 - s1);
                     if (s1 > s2) stats[m.team1].pts += 3;
@@ -937,13 +868,9 @@
             });
 
             let groups = {};
-            Object.values(stats).forEach(t => {
-                if(!groups[t.group]) groups[t.group] = [];
-                groups[t.group].push(t);
-            });
+            Object.values(stats).forEach(t => { if(!groups[t.group]) groups[t.group] = []; groups[t.group].push(t); });
 
             let firsts = {}, seconds = {}, thirds = [];
-
             const tieBreaker = (a, b) => {
                 if(b.pts !== a.pts) return b.pts - a.pts;
                 if(b.sg !== a.sg) return b.sg - a.sg;
@@ -953,8 +880,7 @@
 
             for(let g in groups) {
                 groups[g].sort(tieBreaker);
-                firsts[g] = groups[g][0]?.name || '';
-                seconds[g] = groups[g][1]?.name || '';
+                firsts[g] = groups[g][0]?.name || ''; seconds[g] = groups[g][1]?.name || '';
                 if(groups[g][2]) thirds.push(groups[g][2]);
             }
 
@@ -966,27 +892,14 @@
                 if (sel) { sel.value = team; knockoutPredictions.round32[index] = team; }
             };
 
-            setSlot(0, seconds['A']); setSlot(1, seconds['B']); // P73
-            setSlot(2, firsts['E']);  // P74
-            setSlot(4, firsts['F']);  setSlot(5, seconds['C']); // P75
-            setSlot(6, firsts['C']);  setSlot(7, seconds['F']); // P76
-            setSlot(8, firsts['I']);  // P77
-            setSlot(10, seconds['E']); setSlot(11, seconds['I']); // P78
-            setSlot(12, firsts['A']); // P79
-            setSlot(14, firsts['L']); // P80
-            setSlot(16, firsts['D']); // P81
-            setSlot(18, firsts['G']); // P82
-            setSlot(20, seconds['K']); setSlot(21, seconds['L']); // P83
-            setSlot(22, firsts['H']); setSlot(23, seconds['J']); // P84
-            setSlot(24, firsts['B']); // P85
-            setSlot(26, firsts['J']); setSlot(27, seconds['H']); // P86
-            setSlot(28, firsts['K']); // P87
-            setSlot(30, seconds['D']); setSlot(31, seconds['G']); // P88
+            setSlot(0, seconds['A']); setSlot(1, seconds['B']); setSlot(2, firsts['E']); setSlot(4, firsts['F']); setSlot(5, seconds['C']); 
+            setSlot(6, firsts['C']); setSlot(7, seconds['F']); setSlot(8, firsts['I']); setSlot(10, seconds['E']); setSlot(11, seconds['I']); 
+            setSlot(12, firsts['A']); setSlot(14, firsts['L']); setSlot(16, firsts['D']); setSlot(18, firsts['G']); setSlot(20, seconds['K']); 
+            setSlot(21, seconds['L']); setSlot(22, firsts['H']); setSlot(23, seconds['J']); setSlot(24, firsts['B']); setSlot(26, firsts['J']); 
+            setSlot(27, seconds['H']); setSlot(28, firsts['K']); setSlot(30, seconds['D']); setSlot(31, seconds['G']);
 
             const thirdSlots = [3, 9, 13, 15, 17, 19, 25, 29];
-            bestThirds.forEach((team, i) => {
-                if(thirdSlots[i] !== undefined) setSlot(thirdSlots[i], team);
-            });
+            bestThirds.forEach((team, i) => { if(thirdSlots[i] !== undefined) setSlot(thirdSlots[i], team); });
 
             updateProgress();
 
@@ -995,7 +908,6 @@
             btn.innerHTML = '✅ Mágica Concluída!';
             btn.classList.add('bg-green-500', 'text-white', 'border-green-600');
             btn.classList.remove('bg-indigo-100', 'text-indigo-700', 'border-indigo-200', 'dark:bg-indigo-900/50', 'dark:text-indigo-300', 'dark:border-indigo-500/30');
-            
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.classList.remove('bg-green-500', 'text-white', 'border-green-600');
@@ -1004,83 +916,29 @@
         }
 
         function renderKnockout() {
-            const teamsByGroup = {};
             const allTeamsSet = new Set();
-            INITIAL_MATCHES.forEach(m => {
-                if (!teamsByGroup[m.group]) teamsByGroup[m.group] = new Set();
-                teamsByGroup[m.group].add(m.team1); teamsByGroup[m.group].add(m.team2);
-                allTeamsSet.add(m.team1); allTeamsSet.add(m.team2);
-            });
+            INITIAL_MATCHES.forEach(m => { allTeamsSet.add(m.team1); allTeamsSet.add(m.team2); });
             const allTeams = Array.from(allTeamsSet).sort();
-            for(let g in teamsByGroup) teamsByGroup[g] = Array.from(teamsByGroup[g]).sort();
-
             const getEmoji = (team) => TEAM_INFO[team] ? TEAM_INFO[team].emoji + ' ' : '';
+            
             let html = '';
-
-            const round32Matches = [
-                { id: 73, l1: '2º A', l2: '2º B' }, { id: 74, l1: '1º E', l2: '3º A/B/C/D/F' },
-                { id: 75, l1: '1º F', l2: '2º C' }, { id: 76, l1: '1º C', l2: '2º F' },
-                { id: 77, l1: '1º I', l2: '3º C/D/F/G/H' }, { id: 78, l1: '2º E', l2: '2º I' },
-                { id: 79, l1: '1º A', l2: '3º C/E/F/H/I' }, { id: 80, l1: '1º L', l2: '3º E/H/I/J/K' },
-                { id: 81, l1: '1º D', l2: '3º B/E/F/I/J' }, { id: 82, l1: '1º G', l2: '3º A/E/H/I/J' },
-                { id: 83, l1: '2º K', l2: '2º L' }, { id: 84, l1: '1º H', l2: '2º J' },
-                { id: 85, l1: '1º B', l2: '3º E/F/G/I/J' }, { id: 86, l1: '1º J', l2: '2º H' },
-                { id: 87, l1: '1º K', l2: '3º D/E/I/J/L' }, { id: 88, l1: '2º D', l2: '2º G' }
-            ];
-
-            const round16Matches = [
-                { id: 90, l1: 'V73', l2: 'V76' }, { id: 89, l1: 'V74', l2: 'V75' },
-                { id: 91, l1: 'V78', l2: 'V77' }, { id: 92, l1: 'V79', l2: 'V80' },
-                { id: 93, l1: 'V82', l2: 'V81' }, { id: 94, l1: 'V84', l2: 'V83' },
-                { id: 95, l1: 'V85', l2: 'V88' }, { id: 96, l1: 'V86', l2: 'V87' }
-            ];
-
-            const quarterMatches = [
-                { id: 97, l1: 'V90', l2: 'V89' }, { id: 98, l1: 'V91', l2: 'V92' },
-                { id: 99, l1: 'V93', l2: 'V94' }, { id: 100, l1: 'V95', l2: 'V96' }
-            ];
-
-            const semiMatches = [
-                { id: 101, l1: 'V97', l2: 'V98' }, { id: 102, l1: 'V99', l2: 'V100' }
-            ];
+            const round32Matches = [{id:73, l1:'2º A', l2:'2º B'},{id:74, l1:'1º E', l2:'3º A/B/C/D/F'},{id:75, l1:'1º F', l2:'2º C'},{id:76, l1:'1º C', l2:'2º F'},{id:77, l1:'1º I', l2:'3º C/D/F/G/H'},{id:78, l1:'2º E', l2:'2º I'},{id:79, l1:'1º A', l2:'3º C/E/F/H/I'},{id:80, l1:'1º L', l2:'3º E/H/I/J/K'},{id:81, l1:'1º D', l2:'3º B/E/F/I/J'},{id:82, l1:'1º G', l2:'3º A/E/H/I/J'},{id:83, l1:'2º K', l2:'2º L'},{id:84, l1:'1º H', l2:'2º J'},{id:85, l1:'1º B', l2:'3º E/F/G/I/J'},{id:86, l1:'1º J', l2:'2º H'},{id:87, l1:'1º K', l2:'3º D/E/I/J/L'},{id:88, l1:'2º D', l2:'2º G'}];
+            const round16Matches = [{id:90, l1:'V73', l2:'V76'},{id:89, l1:'V74', l2:'V75'},{id:91, l1:'V78', l2:'V77'},{id:92, l1:'V79', l2:'V80'},{id:93, l1:'V82', l2:'V81'},{id:94, l1:'V84', l2:'V83'},{id:95, l1:'V85', l2:'V88'},{id:96, l1:'V86', l2:'V87'}];
+            const quarterMatches = [{id:97, l1:'V90', l2:'V89'},{id:98, l1:'V91', l2:'V92'},{id:99, l1:'V93', l2:'V94'},{id:100, l1:'V95', l2:'V96'}];
+            const semiMatches = [{id:101, l1:'V97', l2:'V98'},{id:102, l1:'V99', l2:'V100'}];
 
             const generatePhasePairs = (title, matches, phaseKey, colorHex) => {
                 let pHTML = `<div class="mb-12 border-t border-slate-200 dark:border-white/10 pt-8">
-                    <h3 class="font-display font-black text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight mb-6 pl-2 flex items-center gap-3">
-                        <div class="w-1.5 h-6 rounded-full shadow-[0_0_10px_currentColor]" style="background-color: ${colorHex}; color: ${colorHex};"></div> 
-                        ${title} <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-1 rounded-full uppercase tracking-widest ml-2">${matches.length} Partidas</span>
-                    </h3>
+                    <h3 class="font-display font-black text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight mb-6 pl-2 flex items-center gap-3"><div class="w-1.5 h-6 rounded-full shadow-[0_0_10px_currentColor]" style="background-color: ${colorHex}; color: ${colorHex};"></div> ${title} <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-1 rounded-full uppercase tracking-widest ml-2">${matches.length} Partidas</span></h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">`;
-                
                 matches.forEach((m, i) => {
-                    let idx1 = i * 2;
-                    let idx2 = i * 2 + 1;
-                    pHTML += `
-                    <div class="glass-card p-4 rounded-2xl flex flex-col relative overflow-hidden">
-                        <div class="absolute -right-2 -bottom-4 font-sports text-5xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#${m.id}</div>
-                        <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest text-center border-b border-slate-100 dark:border-white/5 pb-2 mb-3 relative z-10">Partida ${m.id}</div>
-                        
-                        <div class="relative z-10">
-                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase z-10 shadow-sm leading-none" style="color: ${colorHex};">${m.l1}</span>
-                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="${phaseKey}" data-index="${idx1}">
-                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>
-                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                            </select>
-                        </div>
-                        
+                    let idx1 = i * 2, idx2 = i * 2 + 1;
+                    pHTML += `<div class="glass-card p-4 rounded-2xl flex flex-col relative overflow-hidden"><div class="absolute -right-2 -bottom-4 font-sports text-5xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#${m.id}</div><div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest text-center border-b border-slate-100 dark:border-white/5 pb-2 mb-3 relative z-10">Partida ${m.id}</div>
+                        <div class="relative z-10"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase z-10 shadow-sm leading-none" style="color: ${colorHex};">${m.l1}</span><select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="${phaseKey}" data-index="${idx1}"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div>
                         <div class="text-center font-black text-slate-300 dark:text-slate-600 text-xs my-2 relative z-10">X</div>
-
-                        <div class="relative z-10 mb-1">
-                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase z-10 shadow-sm leading-none" style="color: ${colorHex};">${m.l2}</span>
-                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="${phaseKey}" data-index="${idx2}">
-                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>
-                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                            </select>
-                        </div>
-                    </div>`;
+                        <div class="relative z-10 mb-1"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase z-10 shadow-sm leading-none" style="color: ${colorHex};">${m.l2}</span><select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="${phaseKey}" data-index="${idx2}"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div></div>`;
                 });
-                pHTML += `</div></div>`;
-                return pHTML;
+                return pHTML + `</div></div>`;
             }
 
             html += generatePhasePairs('16 Avos de Final', round32Matches, 'round32', '#fbbf24');
@@ -1092,102 +950,37 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12 pt-8 border-t border-slate-200 dark:border-white/10">
                 <div class="glass-card p-6 sm:p-8 rounded-[2rem] border-l-4 border-l-slate-400 relative overflow-hidden">
                     <div class="absolute -right-2 -bottom-4 font-sports text-6xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#103</div>
-                    <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 mb-3 uppercase tracking-widest flex items-center justify-between relative z-10 border-b border-slate-100 dark:border-white/5 pb-2">
-                        <span>Partida 103</span>
-                    </div>
+                    <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 mb-3 uppercase tracking-widest flex items-center justify-between relative z-10 border-b border-slate-100 dark:border-white/5 pb-2"><span>Partida 103</span></div>
                     <h3 class="font-display font-black text-xl mb-5 text-slate-700 dark:text-slate-300 flex items-center gap-2 relative z-10">🥉 Disputa 3º Lugar</h3>
-                    
                     <div class="relative z-10 flex flex-col gap-4 mb-6">
-                        <div class="relative">
-                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-500 z-10 shadow-sm leading-none">P101</span>
-                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="thirdPlaceMatch" data-index="0">
-                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>
-                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                            </select>
-                        </div>
+                        <div class="relative"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-500 z-10 shadow-sm leading-none">P101</span><select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="thirdPlaceMatch" data-index="0"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div>
                         <div class="text-center font-black text-slate-300 dark:text-slate-600 text-sm">X</div>
-                        <div class="relative">
-                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-500 z-10 shadow-sm leading-none">P102</span>
-                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="thirdPlaceMatch" data-index="1">
-                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>
-                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                            </select>
-                        </div>
+                        <div class="relative"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-500 z-10 shadow-sm leading-none">P102</span><select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="thirdPlaceMatch" data-index="1"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Selecionar...</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div>
                     </div>
-                    <div class="relative z-10 border-t border-slate-200 dark:border-white/10 pt-4">
-                        <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-600 dark:text-slate-300 z-10 shadow-sm leading-none">Vencedor / 3º Colocado</span>
-                        <select class="w-full p-4 rounded-xl input-sports border border-slate-300 dark:border-slate-500/50 text-base font-bold outline-none cursor-pointer" data-phase="thirdPlace" data-index="0">
-                            <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem leva o 3º Lugar?</option>
-                            ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                        </select>
-                    </div>
+                    <div class="relative z-10 border-t border-slate-200 dark:border-white/10 pt-4"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-slate-600 dark:text-slate-300 z-10 shadow-sm leading-none">Vencedor / 3º Colocado</span><select class="w-full p-4 rounded-xl input-sports border border-slate-300 dark:border-slate-500/50 text-base font-bold outline-none cursor-pointer" data-phase="thirdPlace" data-index="0"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem leva o 3º Lugar?</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div>
                 </div>
-
                 <div class="glass-card p-6 sm:p-8 rounded-[2rem] border-l-4 border-l-amber-500 dark:border-l-yellow-500 shadow-md dark:shadow-[0_0_30px_rgba(251,191,36,0.1)] relative overflow-hidden">
                     <div class="absolute -right-2 -bottom-4 font-sports text-6xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#104</div>
-                    <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 mb-3 uppercase tracking-widest flex items-center justify-between relative z-10 border-b border-slate-100 dark:border-white/5 pb-2">
-                        <span>Partida 104</span>
-                    </div>
+                    <div class="font-bold text-[10px] text-slate-400 dark:text-slate-500 mb-3 uppercase tracking-widest flex items-center justify-between relative z-10 border-b border-slate-100 dark:border-white/5 pb-2"><span>Partida 104</span></div>
                     <h3 class="font-display font-black text-2xl mb-5 text-amber-600 dark:text-yellow-500 flex items-center gap-2 drop-shadow-sm relative z-10">🏆 Grande Final</h3>
-                    
                     <div class="relative z-10 flex flex-col gap-4 mb-6">
-                        <div class="relative">
-                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-600 dark:text-yellow-500 z-10 shadow-sm leading-none">V101</span>
-                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="finalMatch" data-index="0">
-                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Finalista 1...</option>
-                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                            </select>
-                        </div>
+                        <div class="relative"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-600 dark:text-yellow-500 z-10 shadow-sm leading-none">V101</span><select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="finalMatch" data-index="0"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Finalista 1...</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div>
                         <div class="text-center font-black text-amber-500 dark:text-yellow-500 text-sm">X</div>
-                        <div class="relative">
-                            <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-600 dark:text-yellow-500 z-10 shadow-sm leading-none">V102</span>
-                            <select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="finalMatch" data-index="1">
-                                <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Finalista 2...</option>
-                                ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                            </select>
-                        </div>
+                        <div class="relative"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-600 dark:text-yellow-500 z-10 shadow-sm leading-none">V102</span><select class="w-full p-2.5 pt-3 rounded-xl input-sports text-sm font-bold outline-none cursor-pointer relative" data-phase="finalMatch" data-index="1"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Finalista 2...</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div>
                     </div>
-                    <div class="relative z-10 border-t border-amber-200 dark:border-yellow-500/20 pt-4">
-                        <span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-amber-200 dark:border-yellow-500/30 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-700 dark:text-yellow-500 z-10 shadow-sm leading-none">A Taça é do...</span>
-                        <select class="w-full p-4.5 pt-5 rounded-xl input-sports border-2 border-amber-400 dark:border-yellow-500/60 text-lg font-black focus:ring-1 focus:ring-amber-500 dark:focus:ring-yellow-400 cursor-pointer shadow-inner" data-phase="champion" data-index="0">
-                            <option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem é o Campeão?</option>
-                            ${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}
-                        </select>
-                    </div>
+                    <div class="relative z-10 border-t border-amber-200 dark:border-yellow-500/20 pt-4"><span class="absolute -top-2.5 left-3 bg-slate-100 dark:bg-slate-800 border border-amber-200 dark:border-yellow-500/30 px-1.5 py-0.5 rounded text-[8px] font-black uppercase text-amber-700 dark:text-yellow-500 z-10 shadow-sm leading-none">A Taça é do...</span><select class="w-full p-4.5 pt-5 rounded-xl input-sports border-2 border-amber-400 dark:border-yellow-500/60 text-lg font-black focus:ring-1 focus:ring-amber-500 dark:focus:ring-yellow-400 cursor-pointer shadow-inner" data-phase="champion" data-index="0"><option value="" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Quem é o Campeão?</option>${allTeams.map(t => `<option value="${t}" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">${getEmoji(t)}${t}</option>`).join('')}</select></div>
                 </div>
             </div>`;
 
-            html += `
-            <div class="mt-20 mb-8 border-t border-slate-300 dark:border-white/10 pt-12">
-                <h2 class="text-3xl font-display font-black text-slate-900 dark:text-white uppercase tracking-wide flex items-center gap-3">
-                    <span class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-sports shadow-[0_0_15px_rgba(37,99,235,0.5)]">2</span>
-                    Etapa 2: Placares Oficiais
-                </h2>
-                <p class="text-slate-600 dark:text-slate-400 mt-3 font-medium text-lg leading-relaxed">Conforme os confrontos da Copa forem sendo definidos, volte aqui para preencher os <strong class="text-blue-600 dark:text-blue-400">placares exatos</strong> de cada partida e garantir pontos valiosos.</p>
-            </div>`;
+            html += `<div class="mt-20 mb-8 border-t border-slate-300 dark:border-white/10 pt-12"><h2 class="text-3xl font-display font-black text-slate-900 dark:text-white uppercase tracking-wide flex items-center gap-3"><span class="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-sports shadow-[0_0_15px_rgba(37,99,235,0.5)]">2</span> Etapa 2: Placares Oficiais</h2><p class="text-slate-600 dark:text-slate-400 mt-3 font-medium text-lg leading-relaxed">Conforme os confrontos da Copa forem sendo definidos, volte aqui para preencher os <strong class="text-blue-600 dark:text-blue-400">placares exatos</strong> de cada partida e garantir pontos valiosos.</p></div>`;
 
             const generateScoreGrid = (title, matches, colorHex) => {
                 let sortedMatches = [...matches].sort((a,b) => a.id - b.id);
-                let gHTML = `<div class="mb-10">
-                    <h4 class="font-display font-black text-lg text-slate-800 dark:text-slate-200 mb-4 pl-2" style="color: ${colorHex};">${title}</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">`;
-                
+                let gHTML = `<div class="mb-10"><h4 class="font-display font-black text-lg text-slate-800 dark:text-slate-200 mb-4 pl-2" style="color: ${colorHex};">${title}</h4><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">`;
                 sortedMatches.forEach(m => {
-                    gHTML += `
-                    <div class="glass-card p-3 flex justify-between items-center rounded-xl border-l-4" style="border-left-color: ${colorHex};">
-                        <div class="flex flex-col">
-                            <span class="font-sports font-black text-2xl text-slate-800 dark:text-white leading-none">#${m.id}</span>
-                            <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wide mt-1">${m.l1} <span class="text-slate-300 dark:text-slate-600 mx-0.5">x</span> ${m.l2}</span>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${m.id}" data-team="team1" class="score-input input-sports w-11 h-10 text-center text-lg font-bold rounded-lg border border-slate-200 dark:border-white/10" placeholder="-" />
-                            <span class="font-black text-slate-300 dark:text-slate-600 text-[10px]">X</span>
-                            <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${m.id}" data-team="team2" class="score-input input-sports w-11 h-10 text-center text-lg font-bold rounded-lg border border-slate-200 dark:border-white/10" placeholder="-" />
-                        </div>
-                    </div>`;
+                    gHTML += `<div class="glass-card p-3 flex justify-between items-center rounded-xl border-l-4" style="border-left-color: ${colorHex};"><div class="flex flex-col"><span class="font-sports font-black text-2xl text-slate-800 dark:text-white leading-none">#${m.id}</span><span class="text-[10px] font-bold uppercase text-slate-500 tracking-wide mt-1">${m.l1} <span class="text-slate-300 dark:text-slate-600 mx-0.5">x</span> ${m.l2}</span></div><div class="flex items-center gap-1.5"><input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${m.id}" data-team="team1" class="score-input input-sports w-11 h-10 text-center text-lg font-bold rounded-lg border border-slate-200 dark:border-white/10" placeholder="-" /><span class="font-black text-slate-300 dark:text-slate-600 text-[10px]">X</span><input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" data-match-id="${m.id}" data-team="team2" class="score-input input-sports w-11 h-10 text-center text-lg font-bold rounded-lg border border-slate-200 dark:border-white/10" placeholder="-" /></div></div>`;
                 });
-                gHTML += `</div></div>`;
-                return gHTML;
+                return gHTML + `</div></div>`;
             }
 
             html += generateScoreGrid('16 Avos de Final', round32Matches, '#fbbf24');
@@ -1198,7 +991,6 @@
 
             const container = document.getElementById('knockout-container');
             container.innerHTML = html;
-            
             attachScoreInputsListeners(container);
 
             container.addEventListener('change', function(e) {
@@ -1212,34 +1004,27 @@
             });
         }
 
-        // =====================================================================
-        // NOVA LÓGICA: CARREGAR E EXIBIR PALPITES DA GALERA (READ-ONLY)
-        // =====================================================================
         async function loadReadOnlyPredictions(name) {
             if (!name) return;
-            
             const loading = document.getElementById('read-only-loading');
             const errorDiv = document.getElementById('read-only-error');
             const content = document.getElementById('read-only-content');
             
-            loading.classList.remove('hidden');
-            errorDiv.classList.add('hidden');
-            content.classList.add('hidden');
-            content.innerHTML = '';
+            loading.classList.remove('hidden'); errorDiv.classList.add('hidden');
+            content.classList.add('hidden'); content.innerHTML = '';
 
             try {
                 const response = await fetch(SCRIPT_URL + `?action=load_predictions&name=${encodeURIComponent(name)}`);
                 const json = await response.json();
-
                 if (json.result === 'success') {
                     renderReadOnlyView(name, json.predictions || {}, json.knockout || {});
                     content.classList.remove('hidden');
                 } else {
-                    errorDiv.textContent = `❌ Erro: ${json.message || 'Dados não encontrados.'}`;
+                    errorDiv.innerHTML = `❌ Erro: ${json.message || 'Dados não encontrados.'}`;
                     errorDiv.classList.remove('hidden');
                 }
             } catch (error) {
-                errorDiv.textContent = `❌ Erro de conexão ao buscar os dados de ${name}.`;
+                errorDiv.innerHTML = `❌ Falha de conexão ao buscar os dados de ${name}.`;
                 errorDiv.classList.remove('hidden');
             } finally {
                 loading.classList.add('hidden');
@@ -1249,127 +1034,132 @@
         function renderReadOnlyView(name, preds, knockout) {
             const content = document.getElementById('read-only-content');
             
-            let html = `<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-100 dark:bg-white/5 p-5 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm mb-8">
-                <div>
-                    <h3 class="font-display font-black text-2xl text-slate-800 dark:text-white uppercase tracking-tight">Palpites de: <span class="text-blue-600 dark:text-blue-400">${name}</span></h3>
+            let html = `
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-900/60 dark:to-indigo-900/60 p-6 sm:p-8 rounded-[2rem] shadow-lg mb-12 text-white border border-blue-500/30">
+                <div class="flex items-center gap-5">
+                    <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center font-display font-black text-3xl shadow-inner border border-white/30 shrink-0">${name.charAt(0).toUpperCase()}</div>
+                    <div><span class="text-blue-100 text-xs font-bold uppercase tracking-widest block mb-1 opacity-90">Visualizando Previsões de</span><h3 class="font-display font-black text-2xl sm:text-3xl tracking-tight leading-none drop-shadow-sm">${name}</h3></div>
                 </div>
-                <span class="text-xs font-bold text-slate-500 bg-white dark:bg-black/50 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-700 shadow-inner flex items-center gap-2 uppercase tracking-widest w-fit">
-                    <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div> Modo Leitura
-                </span>
+                <span class="text-xs font-bold text-blue-900 dark:text-blue-200 bg-white dark:bg-black/40 px-4 py-2 rounded-full shadow-md flex items-center gap-2 uppercase tracking-widest w-fit border border-blue-200 dark:border-blue-500/30"><div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div> Somente Leitura</span>
             </div>`;
 
-            // --- FASE DE GRUPOS ---
-            html += `<div class="mb-12">
-                <h4 class="font-display font-black text-2xl text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-3 flex items-center gap-3">
-                    <span class="text-3xl">📋</span> Fase de Grupos
-                </h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">`;
-            
-            INITIAL_MATCHES.forEach(m => {
-                let s1 = preds[m.id] && preds[m.id].team1 !== undefined && preds[m.id].team1 !== "" ? preds[m.id].team1 : "-";
-                let s2 = preds[m.id] && preds[m.id].team2 !== undefined && preds[m.id].team2 !== "" ? preds[m.id].team2 : "-";
-                
-                let isFilled = s1 !== "-" && s2 !== "-";
-                let bgClass = isFilled ? "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-white/10" : "bg-slate-50 dark:bg-slate-900/40 border-slate-100 dark:border-white/5 opacity-80";
-                
-                const t1 = TEAM_INFO[m.team1] || { iso: 'xx' };
-                const t2 = TEAM_INFO[m.team2] || { iso: 'xx' };
+            // FASE DE GRUPOS - AQUI GARANTIMOS 2 COLUNAS (lg:grid-cols-2) E NOMES COM QUEBRA DE LINHA
+            html += `
+            <div class="mb-16">
+                <div class="flex items-center gap-4 mb-8 border-b border-slate-200 dark:border-white/10 pb-4">
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-2xl shadow-inner border border-slate-200 dark:border-white/10">📋</div>
+                    <h4 class="font-display font-black text-2xl sm:text-3xl text-slate-800 dark:text-white uppercase tracking-tight">Fase de Grupos</h4>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">`;
 
+            const groupedMatches = INITIAL_MATCHES.reduce((acc, match) => {
+                (acc[match.group] = acc[match.group] || []).push(match); return acc;
+            }, {});
+
+            for (const group in groupedMatches) {
                 html += `
-                <div class="${bgClass} p-4 rounded-xl border flex flex-col relative shadow-sm hover:shadow-md transition-shadow">
-                    <div class="absolute -right-2 -bottom-3 font-sports text-5xl font-black text-slate-900/[0.03] dark:text-white/[0.02] z-0">#${m.id}</div>
-                    
-                    <div class="flex justify-between items-center mb-3 relative z-10 border-b border-slate-100 dark:border-white/5 pb-2">
-                        <span class="text-[10px] font-bold text-slate-500 tracking-widest uppercase">Jogo #${m.id}</span>
-                        <span class="text-[10px] font-black text-amber-600 dark:text-yellow-500 bg-amber-50 dark:bg-yellow-500/10 px-2 py-0.5 rounded tracking-widest">GR. ${m.group}</span>
-                    </div>
+                <div class="bg-white dark:bg-slate-900/50 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-white/10 shadow-sm relative overflow-hidden group">
+                    <div class="absolute -right-6 -top-6 text-9xl font-sports font-black text-slate-100 dark:text-white/[0.02] z-0 pointer-events-none transition-transform group-hover:scale-110">${group}</div>
+                    <h5 class="font-display font-black text-lg text-amber-600 dark:text-yellow-500 mb-5 flex items-center gap-2 relative z-10 uppercase tracking-widest">Grupo ${group}</h5>
+                    <div class="space-y-3 relative z-10">`;
 
-                    <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3 relative z-10">
-                        <div class="flex flex-col items-end gap-1 text-right">
-                            <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-6 h-4 object-cover rounded-sm shadow-sm border border-slate-200 dark:border-white/10" alt="${m.team1}">
-                            <span class="font-bold text-slate-800 dark:text-slate-200 text-xs sm:text-sm uppercase leading-tight">${m.team1}</span>
-                        </div>
-                        
-                        <div class="flex items-center justify-center font-sports font-black text-xl text-slate-800 dark:text-white bg-slate-100 dark:bg-black/50 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-white/5 min-w-[4rem]">
-                            ${s1} <span class="text-xs text-slate-400 dark:text-slate-500 mx-1.5 font-sans">x</span> ${s2}
-                        </div>
+                groupedMatches[group].forEach(m => {
+                    let s1 = preds[m.id] && preds[m.id].team1 !== undefined && preds[m.id].team1 !== "" ? preds[m.id].team1 : "-";
+                    let s2 = preds[m.id] && preds[m.id].team2 !== undefined && preds[m.id].team2 !== "" ? preds[m.id].team2 : "-";
+                    let isFilled = s1 !== "-" && s2 !== "-";
+                    const t1 = TEAM_INFO[m.team1] || { iso: 'xx' }; const t2 = TEAM_INFO[m.team2] || { iso: 'xx' };
+                    let scoreClass = isFilled ? "bg-slate-100 dark:bg-black/60 text-slate-900 dark:text-white border-slate-300 dark:border-white/10 shadow-inner font-sports font-bold text-lg" : "bg-slate-50 dark:bg-white/5 text-slate-400 dark:text-slate-600 border-dashed border-slate-200 dark:border-white/10 text-sm";
 
-                        <div class="flex flex-col items-start gap-1 text-left">
-                            <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-6 h-4 object-cover rounded-sm shadow-sm border border-slate-200 dark:border-white/10" alt="${m.team2}">
-                            <span class="font-bold text-slate-800 dark:text-slate-200 text-xs sm:text-sm uppercase leading-tight">${m.team2}</span>
-                        </div>
-                    </div>
-                </div>`;
-            });
+                    html += `
+                        <div class="flex items-center justify-between gap-1 sm:gap-2 p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group/match border border-transparent hover:border-slate-100 dark:hover:border-white/5">
+                            <span class="text-[9px] sm:text-[10px] font-bold text-slate-400 dark:text-slate-500 w-5 sm:w-6 shrink-0">#${m.id}</span>
+                            <div class="flex-1 flex justify-end items-center gap-2">
+                                <span class="font-bold text-[10px] sm:text-xs text-slate-700 dark:text-slate-300 uppercase text-right leading-tight whitespace-normal break-words">${m.team1}</span>
+                                <img src="https://flagcdn.com/w40/${t1.iso}.png" class="w-4 h-3 sm:w-5 sm:h-3.5 object-cover rounded-sm shadow-sm border border-slate-200 dark:border-white/10 shrink-0" alt="${m.team1}">
+                            </div>
+                            <div class="flex items-center justify-center px-2 py-1 rounded-md border ${scoreClass} min-w-[3.5rem] sm:min-w-[4rem] tracking-widest shrink-0 mx-1">
+                                ${s1}<span class="text-slate-300 dark:text-slate-600 mx-1 font-sans text-[10px]">X</span>${s2}
+                            </div>
+                            <div class="flex-1 flex justify-start items-center gap-2">
+                                <img src="https://flagcdn.com/w40/${t2.iso}.png" class="w-4 h-3 sm:w-5 sm:h-3.5 object-cover rounded-sm shadow-sm border border-slate-200 dark:border-white/10 shrink-0" alt="${m.team2}">
+                                <span class="font-bold text-[10px] sm:text-xs text-slate-700 dark:text-slate-300 uppercase text-left leading-tight whitespace-normal break-words">${m.team2}</span>
+                            </div>
+                        </div>`;
+                });
+                html += `</div></div>`;
+            }
             html += `</div></div>`;
 
-            // --- MATA-MATA (CHAVEAMENTO) ---
-            html += `<div class="mb-12">
-                <h4 class="font-display font-black text-2xl text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-3 flex items-center gap-3">
-                    <span class="text-3xl">🏆</span> Chaveamento (Mata-Mata)
-                </h4>`;
+            // CHAVEAMENTO DA GALERA - GARANTINDO QUE OS NOMES CAIBAM E NUNCA CORTEM
+            html += `
+            <div class="mb-16">
+                <div class="flex items-center gap-4 mb-8 border-b border-slate-200 dark:border-white/10 pb-4">
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-2xl shadow-inner border border-slate-200 dark:border-white/10">🌳</div>
+                    <h4 class="font-display font-black text-2xl sm:text-3xl text-slate-800 dark:text-white uppercase tracking-tight">Árvore do Torneio</h4>
+                </div>`;
             
-            const renderKnockoutPhase = (title, phaseData) => {
+            const renderKnockoutPhase = (title, phaseData, colorMarker) => {
                 if (!phaseData || phaseData.length === 0) return '';
-                let cols = phaseData.length > 8 ? 'grid-cols-2 sm:grid-cols-4 lg:grid-cols-8' : 
-                           phaseData.length === 8 ? 'grid-cols-2 sm:grid-cols-4' : 
-                           'grid-cols-2 sm:grid-cols-4';
-
-                let pHTML = `<div class="mb-6"><h5 class="text-sm font-bold text-slate-500 uppercase tracking-widest mb-3 border-l-4 border-blue-500 pl-2">${title}</h5><div class="grid ${cols} gap-2">`;
+                let pHTML = `
+                <div class="mb-8">
+                    <h5 class="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-3">
+                        <div class="w-1.5 h-4 rounded-full" style="background-color: ${colorMarker};"></div> ${title}
+                    </h5>
+                    <div class="flex flex-wrap gap-2.5">`;
+                
                 phaseData.forEach(team => {
-                    let tName = team || "?";
-                    let isFilled = team !== "";
+                    let isFilled = team && team !== "";
                     let tInfo = TEAM_INFO[team] || { iso: 'xx' };
-                    let style = isFilled ? "bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-slate-600 shadow-sm" : "bg-slate-100 text-slate-400 border-slate-200 dark:bg-slate-900 dark:border-slate-800 dark:text-slate-600";
-                    
-                    let flagHtml = isFilled && tInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w20/${tInfo.iso}.png" class="w-5 h-3.5 object-cover rounded-[2px]" alt="${tName}">` : '';
+                    let style = isFilled ? "bg-white dark:bg-slate-800 text-slate-800 dark:text-white border-slate-300 dark:border-white/20 shadow-sm" : "bg-slate-100 dark:bg-slate-900/50 text-slate-400 dark:text-slate-600 border-dashed border-slate-300 dark:border-white/10";
+                    let flagHtml = isFilled && tInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w40/${tInfo.iso}.png" class="w-5 h-3.5 object-cover rounded-sm shadow-sm border border-slate-200 dark:border-white/10 shrink-0">` : '';
+                    let tName = isFilled ? team : "A Definir";
 
-                    pHTML += `<div class="px-3 py-2 text-xs font-bold rounded-lg border ${style} flex items-center gap-2 truncate" title="${tName}">${flagHtml}<span class="truncate">${tName}</span></div>`;
+                    pHTML += `
+                    <div class="px-3 py-2.5 text-[10px] sm:text-xs font-bold rounded-xl border ${style} flex items-center justify-center gap-2 hover:scale-105 transition-transform cursor-default text-center min-w-[7rem]">
+                        ${flagHtml}<span class="uppercase tracking-wide leading-tight whitespace-normal break-words">${tName}</span>
+                    </div>`;
                 });
                 pHTML += `</div></div>`;
                 return pHTML;
             };
 
-            html += renderKnockoutPhase('16 Avos de Final', knockout.round32 || []);
-            html += renderKnockoutPhase('Oitavas de Final', knockout.round16 || []);
-            html += renderKnockoutPhase('Quartas de Final', knockout.quarters || []);
-            html += renderKnockoutPhase('Semifinais', knockout.semis || []);
+            html += renderKnockoutPhase('16 Avos de Final', knockout.round32 || [], '#fbbf24');
+            html += renderKnockoutPhase('Oitavas de Final', knockout.round16 || [], '#f59e0b');
+            html += renderKnockoutPhase('Quartas de Final', knockout.quarters || [], '#d97706');
+            html += renderKnockoutPhase('Semifinais', knockout.semis || [], '#b45309');
             
-            // Finais / Campeões
-            html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8">`;
-            
-            let third = knockout.thirdPlace || "?";
-            let thirdInfo = TEAM_INFO[third] || { iso: 'xx' };
-            let thirdFlag = thirdInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w40/${thirdInfo.iso}.png" class="w-10 h-7 object-cover rounded shadow-sm border border-slate-200 dark:border-white/10">` : '';
+            // FINAIS DA GALERA
+            let third = knockout.thirdPlace || "Pendente"; let thirdInfo = TEAM_INFO[third] || { iso: 'xx' };
+            let champ = knockout.champion || "Pendente"; let champInfo = TEAM_INFO[champ] || { iso: 'xx' };
 
-            let champ = knockout.champion || "?";
-            let champInfo = TEAM_INFO[champ] || { iso: 'xx' };
-            let champFlag = champInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w40/${champInfo.iso}.png" class="w-10 h-7 object-cover rounded shadow-sm border border-amber-300 dark:border-yellow-500/30">` : '';
-            
-            html += `<div class="bg-slate-100 dark:bg-slate-800 p-5 rounded-2xl border border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center shadow-inner relative overflow-hidden">
-                <span class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4 border-b border-slate-300 dark:border-slate-600 pb-1 w-full text-center relative z-10">🥉 3º Lugar</span>
-                <div class="flex items-center gap-4 relative z-10">
-                    ${thirdFlag}
-                    <span class="text-xl sm:text-2xl font-black text-slate-800 dark:text-slate-200 uppercase">${third}</span>
+            html += `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                <div class="bg-slate-100 dark:bg-slate-800/80 p-6 sm:p-8 rounded-[2rem] border border-slate-300 dark:border-white/10 flex flex-col items-center justify-center shadow-inner relative overflow-hidden group text-center">
+                    <div class="absolute -right-4 -bottom-6 text-8xl font-sports font-black text-slate-200 dark:text-white/[0.03] z-0 transition-transform group-hover:scale-110">3º</div>
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6 border-b border-slate-300 dark:border-white/10 pb-2 w-full text-center relative z-10">🥉 Medalha de Bronze</span>
+                    <div class="flex items-center gap-4 sm:gap-5 relative z-10">
+                        ${thirdInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w80/${thirdInfo.iso}.png" class="w-12 h-8 sm:w-16 sm:h-11 object-cover rounded-md shadow-md border border-slate-300 dark:border-white/20 shrink-0">` : ''}
+                        <span class="text-xl sm:text-3xl font-black text-slate-800 dark:text-white uppercase tracking-tight whitespace-normal break-words">${third}</span>
+                    </div>
                 </div>
-            </div>`;
-            
-            html += `<div class="bg-gradient-to-br from-amber-100 to-amber-50 dark:from-yellow-900/40 dark:to-yellow-800/10 p-5 rounded-2xl border border-amber-300 dark:border-yellow-600/50 flex flex-col items-center justify-center shadow-md relative overflow-hidden">
-                <span class="text-xs font-bold text-amber-700 dark:text-yellow-500 uppercase tracking-widest mb-4 border-b border-amber-300 dark:border-yellow-600/50 pb-1 w-full text-center relative z-10">🏆 O Grande Campeão</span>
-                <div class="flex items-center gap-4 relative z-10">
-                    ${champFlag}
-                    <span class="text-2xl sm:text-3xl font-black text-amber-700 dark:text-yellow-500 uppercase drop-shadow-sm">${champ}</span>
+                
+                <div class="bg-gradient-to-br from-amber-100 to-amber-50 dark:from-yellow-900/40 dark:to-orange-900/20 p-6 sm:p-8 rounded-[2rem] border-2 border-amber-300 dark:border-yellow-600/50 flex flex-col items-center justify-center shadow-md relative overflow-hidden group text-center">
+                    <div class="absolute -left-4 -bottom-6 text-8xl font-sports font-black text-amber-200 dark:text-yellow-500/10 z-0 transition-transform group-hover:scale-110">1º</div>
+                    <span class="text-[10px] font-bold text-amber-700 dark:text-yellow-500 uppercase tracking-widest mb-6 border-b border-amber-300 dark:border-yellow-600/50 pb-2 w-full text-center relative z-10">🏆 O Grande Campeão</span>
+                    <div class="flex items-center gap-4 sm:gap-5 relative z-10">
+                        ${champInfo.iso !== 'xx' ? `<img src="https://flagcdn.com/w80/${champInfo.iso}.png" class="w-14 h-10 sm:w-20 sm:h-14 object-cover rounded-lg shadow-[0_4px_15px_rgba(217,119,6,0.3)] border-2 border-amber-400 dark:border-yellow-400 shrink-0">` : ''}
+                        <span class="text-2xl sm:text-4xl font-black text-amber-700 dark:text-yellow-500 uppercase drop-shadow-sm tracking-tight whitespace-normal break-words">${champ}</span>
+                    </div>
                 </div>
-            </div>`;
-            
-            html += `</div></div>`;
+            </div></div>`;
 
-            // --- PLACARES EXATOS MATA-MATA ---
-            html += `<div class="mb-4">
-                <h4 class="font-display font-black text-2xl text-slate-800 dark:text-white mb-6 border-b border-slate-200 dark:border-white/10 pb-3 flex items-center gap-3">
-                    <span class="text-3xl">🎯</span> Placares (Mata-Mata)
-                </h4>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">`;
+            // PLACARES EXATOS MATA-MATA (Visualização)
+            html += `
+            <div class="mb-8">
+                <div class="flex items-center gap-4 mb-8 border-b border-slate-200 dark:border-white/10 pb-4">
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-white/5 flex items-center justify-center text-2xl shadow-inner border border-slate-200 dark:border-white/10">🎯</div>
+                    <h4 class="font-display font-black text-2xl sm:text-3xl text-slate-800 dark:text-white uppercase tracking-tight">Placares (Mata-Mata)</h4>
+                </div>`;
             
             const knockoutLabels = {
                 73: '2º A x 2º B', 74: '1º E x 3º A/B/C/D/F', 75: '1º F x 2º C', 76: '1º C x 2º F',
@@ -1379,62 +1169,76 @@
                 90: 'V73 x V76', 89: 'V74 x V75', 91: 'V78 x V77', 92: 'V79 x V80',
                 93: 'V82 x V81', 94: 'V84 x V83', 95: 'V85 x V88', 96: 'V86 x V87',
                 97: 'V90 x V89', 98: 'V91 x V92', 99: 'V93 x V94', 100: 'V95 x V96',
-                101: 'V97 x V98', 102: 'V99 x V100',
-                103: 'P101 x P102', 104: 'V101 x V102'
+                101: 'V97 x V98', 102: 'V99 x V100', 103: 'Disputa 3º', 104: 'Final'
             };
 
-            for (let i = 73; i <= 104; i++) {
-                let s1 = preds[i] && preds[i].team1 !== undefined && preds[i].team1 !== "" ? preds[i].team1 : "-";
-                let s2 = preds[i] && preds[i].team2 !== undefined && preds[i].team2 !== "" ? preds[i].team2 : "-";
-                let isFilled = s1 !== "-" && s2 !== "-";
-                let bgClass = isFilled ? "bg-white dark:bg-slate-800/80 border-slate-200 dark:border-white/10" : "bg-slate-50 dark:bg-slate-900/40 border-slate-100 dark:border-white/5 opacity-80";
+            const renderKnockoutScoreGrid = (title, matchIds, color) => {
+                let pHTML = `
+                <div class="mb-10">
+                    <h5 class="text-sm font-bold text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-3">
+                        <div class="w-1.5 h-4 rounded-full" style="background-color: ${color};"></div> ${title}
+                    </h5>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">`;
                 
-                let label = knockoutLabels[i] || 'Partida';
+                matchIds.forEach(id => {
+                    let s1 = preds[id] && preds[id].team1 !== undefined && preds[id].team1 !== "" ? preds[id].team1 : "-";
+                    let s2 = preds[id] && preds[id].team2 !== undefined && preds[id].team2 !== "" ? preds[id].team2 : "-";
+                    let isFilled = s1 !== "-" && s2 !== "-";
+                    let bgClass = isFilled ? "bg-white dark:bg-slate-800 border-slate-300 dark:border-white/10" : "bg-slate-50 dark:bg-slate-900/50 border-dashed border-slate-200 dark:border-white/5 opacity-80";
+                    let scoreClass = isFilled ? "bg-slate-100 dark:bg-black/60 text-slate-900 dark:text-white" : "bg-transparent text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-white/10";
+                    let label = knockoutLabels[id] || 'Partida';
 
-                html += `
-                <div class="${bgClass} p-3 rounded-xl border flex items-center justify-between shadow-sm hover:shadow-md transition-shadow">
-                    <div class="flex flex-col">
-                        <span class="font-sports font-black text-xl text-slate-800 dark:text-slate-200">#${i}</span>
-                        <span class="text-[10px] font-bold uppercase text-slate-500 tracking-wide mt-0.5">${label}</span>
-                    </div>
-                    <div class="flex items-center justify-center font-sports font-black text-lg text-slate-800 dark:text-white bg-slate-100 dark:bg-black/50 px-3 py-1 rounded-lg border border-slate-200 dark:border-white/5 min-w-[3.5rem]">
-                        ${s1} <span class="text-[10px] text-slate-400 dark:text-slate-500 mx-1.5 font-sans">X</span> ${s2}
-                    </div>
-                </div>`;
-            }
-            html += `</div></div>`;
+                    pHTML += `
+                    <div class="${bgClass} p-4 rounded-xl border flex flex-col items-center justify-center shadow-sm transition-shadow hover:shadow-md text-center gap-3">
+                        <div class="flex flex-col items-center w-full">
+                            <span class="font-sports font-black text-2xl text-slate-800 dark:text-slate-200 leading-none">#${id}</span>
+                            <span class="text-[9px] font-bold uppercase text-slate-500 tracking-wider mt-1.5 whitespace-normal break-words">${label}</span>
+                        </div>
+                        <div class="flex items-center justify-center font-sports font-bold text-xl px-4 py-1.5 rounded-lg ${scoreClass} min-w-[4rem] tracking-widest border border-transparent w-full">
+                            ${s1} <span class="text-[10px] text-slate-400 dark:text-slate-500 mx-2 font-sans">X</span> ${s2}
+                        </div>
+                    </div>`;
+                });
+                pHTML += `</div></div>`;
+                return pHTML;
+            };
 
+            let r32 = [], r16 = [], qf = [], sf = [], finals = [];
+            for(let i=73; i<=88; i++) r32.push(i);
+            for(let i=89; i<=96; i++) r16.push(i);
+            for(let i=97; i<=100; i++) qf.push(i);
+            for(let i=101; i<=102; i++) sf.push(i); finals.push(103, 104);
+
+            html += renderKnockoutScoreGrid('16 Avos de Final', r32, '#fbbf24');
+            html += renderKnockoutScoreGrid('Oitavas de Final', r16, '#f59e0b');
+            html += renderKnockoutScoreGrid('Quartas de Final', qf, '#d97706');
+            html += renderKnockoutScoreGrid('Semifinais', sf, '#b45309');
+            html += renderKnockoutScoreGrid('Finais', finals, '#94a3b8');
+            html += `</div>`;
             content.innerHTML = html;
         }
 
         document.getElementById('predictions-form').addEventListener('submit', (e) => {
             e.preventDefault();
             if (bolaoEncerrado) return;
-
             document.getElementById('error-message').classList.add('hidden');
             const name = document.getElementById('participant-name').value.trim();
-
             if (!name) {
                 document.getElementById('error-text').textContent = 'Preencha o Nome na Planilha!';
                 document.getElementById('error-message').classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
+                window.scrollTo({ top: 0, behavior: 'smooth' }); return;
             }
-
             const filledCount = parseInt(document.getElementById('progress-text').textContent);
             if (filledCount < TOTAL_FIELDS) {
                 document.getElementById('filled-count').textContent = filledCount;
                 document.getElementById('confirm-modal').classList.remove('hidden');
-            } else {
-                executeSubmit();
-            }
+            } else { executeSubmit(); }
         });
 
         function closeModal() { document.getElementById('confirm-modal').classList.add('hidden'); }
         
         function setLoading(isLoading) {
-            const btn = document.getElementById('submit-btn');
-            btn.disabled = isLoading;
+            const btn = document.getElementById('submit-btn'); btn.disabled = isLoading;
             if (isLoading) {
                 document.getElementById('submit-text').classList.add('hidden');
                 document.getElementById('loading-text').classList.remove('hidden');
@@ -1445,69 +1249,35 @@
         }
 
         async function executeSubmit() {
-            closeModal();
-            setLoading(true);
-            document.getElementById('error-message').classList.add('hidden');
-
-            const payload = {
-                name: document.getElementById('participant-name').value.trim(),
-                predictions: predictions, knockout: knockoutPredictions
-            };
+            closeModal(); setLoading(true); document.getElementById('error-message').classList.add('hidden');
+            const payload = { name: document.getElementById('participant-name').value.trim(), predictions: predictions, knockout: knockoutPredictions };
 
             try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(payload)
-                });
-                
+                const response = await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
                 document.getElementById('success-name').textContent = payload.name;
                 document.getElementById('predictions-form').classList.add('hidden');
                 document.getElementById('success-view').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 loadParticipants();
-
             } catch (error) {
                 document.getElementById('error-text').textContent = 'Falha na ligação. Tente novamente.';
                 document.getElementById('error-message').classList.remove('hidden');
-            } finally {
-                setLoading(false);
-            }
+            } finally { setLoading(false); }
         }
 
         function resetForm() {
             predictions = {};
-            knockoutPredictions = { 
-                round32: Array(32).fill(''), 
-                round16: Array(16).fill(''), 
-                quarters: Array(8).fill(''), 
-                semis: Array(4).fill(''), 
-                thirdPlaceMatch: Array(2).fill(''), 
-                finalMatch: Array(2).fill(''), 
-                thirdPlace: '', 
-                champion: '' 
-            };
-            document.querySelectorAll('.score-input').forEach(i => i.value = '');
-            document.querySelectorAll('#knockout-container select').forEach(s => s.value = '');
-            document.getElementById('participant-name').value = '';
-            
-            updateProgress();
-            document.getElementById('success-view').classList.add('hidden');
-            document.getElementById('predictions-form').classList.remove('hidden');
-            switchTab('grupos');
+            knockoutPredictions = { round32: Array(32).fill(''), round16: Array(16).fill(''), quarters: Array(8).fill(''), semis: Array(4).fill(''), thirdPlaceMatch: Array(2).fill(''), finalMatch: Array(2).fill(''), thirdPlace: '', champion: '' };
+            document.querySelectorAll('.score-input').forEach(i => i.value = ''); document.querySelectorAll('#knockout-container select').forEach(s => s.value = ''); document.getElementById('participant-name').value = '';
+            updateProgress(); document.getElementById('success-view').classList.add('hidden'); document.getElementById('predictions-form').classList.remove('hidden'); switchTab('grupos');
         }
 
         async function fetchRanking() {
             isRankingLoaded = true;
-            document.getElementById('ranking-loading-state').classList.remove('hidden');
-            document.getElementById('ranking-error-state').classList.add('hidden');
-            document.getElementById('ranking-content').classList.add('hidden');
-
+            document.getElementById('ranking-loading-state').classList.remove('hidden'); document.getElementById('ranking-error-state').classList.add('hidden'); document.getElementById('ranking-content').classList.add('hidden');
             try {
                 const response = await fetch(SCRIPT_URL);
                 const json = await response.json();
-
                 if (json.result === 'success') renderRankingData(json.data);
                 else {
                     document.getElementById('ranking-error-message').textContent = json.message;
@@ -1529,40 +1299,41 @@
 
             if (data.length === 0) {
                 listContainer.innerHTML = '<div class="p-8 text-center text-slate-400 font-bold text-sm uppercase tracking-widest">Nenhum participante.</div>';
-                document.getElementById('ranking-loading-state').classList.add('hidden');
-                document.getElementById('ranking-content').classList.remove('hidden');
+                document.getElementById('ranking-loading-state').classList.add('hidden'); document.getElementById('ranking-content').classList.remove('hidden');
                 return;
             }
 
+            // Construção do Pódio com as cores e legibilidade adaptáveis solicitadas
             if (data.length >= 1) {
-                let p2 = data[1] ? buildPodium(data[1].name, data[1].score, 2, 'bg-slate-200 dark:bg-slate-300', 'text-slate-600 dark:text-slate-800', 'podium-2') : '<div class="w-20 sm:w-28"></div>';
-                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-gradient-to-t from-amber-400 to-yellow-200 dark:from-yellow-400 dark:to-yellow-200', 'text-amber-900 dark:text-yellow-900', 'podium-1 scale-105 z-10 shadow-[0_0_40px_rgba(250,204,21,0.2)]') : '<div class="w-20 sm:w-28"></div>';
-                let p3 = data[2] ? buildPodium(data[2].name, data[2].score, 3, 'bg-amber-700/80 dark:bg-amber-700', 'text-amber-100', 'podium-3') : '<div class="w-20 sm:w-28"></div>';
+                let p2 = data[1] ? buildPodium(data[1].name, data[1].score, 2, 'bg-gradient-to-t from-slate-300 to-slate-200 dark:from-slate-700 dark:to-slate-600', 'podium-2') : '<div class="w-24 sm:w-32"></div>';
+                let p1 = data[0] ? buildPodium(data[0].name, data[0].score, 1, 'bg-gradient-to-t from-amber-400 to-yellow-200 dark:from-yellow-600 dark:to-yellow-400', 'podium-1 scale-105 z-10 shadow-[0_0_30px_rgba(250,204,21,0.2)]') : '<div class="w-24 sm:w-32"></div>';
+                let p3 = data[2] ? buildPodium(data[2].name, data[2].score, 3, 'bg-gradient-to-t from-orange-600 to-orange-400 dark:from-orange-800 dark:to-orange-700', 'podium-3') : '<div class="w-24 sm:w-32"></div>';
                 podiumContainer.innerHTML = p2 + p1 + p3;
             }
 
             const maxScore = data.length > 0 && data[0].score > 0 ? data[0].score : 1;
             let listHtml = '';
             
+            // Renderização da lista com a Linha de Proporção (Barra de Progresso)
             for (let i = 0; i < data.length; i++) {
                 const percent = Math.round((data[i].score / maxScore) * 100);
                 let rankColor = 'text-slate-400 dark:text-slate-500';
-                let barColor = 'from-blue-500 to-indigo-600';
+                let barColor = 'bg-blue-500 dark:bg-blue-500'; // Azul para posições normais
                 
-                if (i === 0) { rankColor = 'text-amber-500 dark:text-yellow-400'; barColor = 'from-amber-400 to-amber-500 dark:from-yellow-400 dark:to-amber-500'; }
-                else if (i === 1) { rankColor = 'text-slate-400 dark:text-slate-300'; barColor = 'from-slate-300 to-slate-400 dark:from-slate-400 dark:to-slate-300'; }
-                else if (i === 2) { rankColor = 'text-amber-700 dark:text-amber-500'; barColor = 'from-amber-600 to-orange-600 dark:from-amber-600 dark:to-orange-500'; }
+                if (i === 0) { rankColor = 'text-amber-500 dark:text-yellow-400'; barColor = 'bg-amber-400 dark:bg-yellow-400'; } // Ouro
+                else if (i === 1) { rankColor = 'text-slate-400 dark:text-slate-300'; barColor = 'bg-slate-400 dark:bg-slate-400'; } // Prata
+                else if (i === 2) { rankColor = 'text-orange-600 dark:text-orange-500'; barColor = 'bg-orange-600 dark:bg-orange-500'; } // Bronze
 
                 listHtml += `
-                    <div class="flex items-center px-4 sm:px-6 py-4 hover:bg-slate-100/50 dark:hover:bg-white/5 transition group gap-3 sm:gap-4">
-                        <div class="w-8 sm:w-12 text-center font-sports font-black ${rankColor} text-lg sm:text-2xl group-hover:scale-110 transition-transform">${i + 1}</div>
+                    <div class="flex items-center px-4 sm:px-6 py-5 hover:bg-slate-50 dark:hover:bg-white/5 transition group gap-3 sm:gap-5">
+                        <div class="w-8 sm:w-12 text-center font-sports font-black ${rankColor} text-xl sm:text-3xl group-hover:scale-110 transition-transform">#${i + 1}</div>
                         <div class="flex-1 flex flex-col justify-center">
-                            <div class="flex justify-between items-baseline mb-1">
-                                <span class="font-bold text-slate-800 dark:text-white truncate text-base sm:text-lg tracking-wide">${data[i].name}</span>
-                                <span class="font-sports font-black text-amber-600 dark:text-yellow-500 text-xl sm:text-2xl">${data[i].score} <span class="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest ml-0.5">pts</span></span>
+                            <div class="flex justify-between items-baseline mb-2">
+                                <span class="font-display font-black text-slate-800 dark:text-slate-100 truncate text-base sm:text-lg tracking-wider uppercase">${data[i].name}</span>
+                                <span class="font-sports font-black text-amber-600 dark:text-yellow-500 text-2xl sm:text-3xl leading-none">${data[i].score} <span class="text-[10px] sm:text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest ml-0.5">pts</span></span>
                             </div>
-                            <div class="w-full bg-slate-200/80 dark:bg-black/60 rounded-full h-1.5 overflow-hidden border border-slate-300 dark:border-white/5">
-                                <div class="${barColor} h-full rounded-full transition-all duration-1000 ease-out shadow-[0_0_10px_currentColor]" style="width: ${percent}%;"></div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-800/80 rounded-full h-1.5 overflow-hidden shadow-inner">
+                                <div class="${barColor} h-full rounded-full transition-all duration-1000 ease-out shadow-sm" style="width: ${percent}%;"></div>
                             </div>
                         </div>
                     </div>
@@ -1573,14 +1344,18 @@
             document.getElementById('ranking-content').classList.remove('hidden');
         }
 
-        function buildPodium(name, score, pos, color, textColor, height) {
+        function buildPodium(name, score, pos, color, height) {
             let emoji = pos === 1 ? '🥇' : pos === 2 ? '🥈' : '🥉';
+            let nameColor = pos === 1 ? 'text-amber-600 dark:text-yellow-400' : 'text-slate-600 dark:text-slate-400';
+            let scoreColor = pos === 1 ? 'text-amber-700 dark:text-yellow-500' : 'text-slate-800 dark:text-slate-200';
+            
             return `
-                <div class="flex flex-col items-center w-20 sm:w-28 relative">
-                    <div class="font-black text-slate-700 text-center text-[10px] sm:text-xs truncate w-full mb-1 uppercase tracking-wider">${name}</div>
-                    <div class="font-black text-slate-800 text-sm sm:text-base mb-1.5">${score}</div>
-                    <div class="${color} w-full rounded-t-2xl sm:rounded-t-[2rem] ${height} flex flex-col justify-start pt-3 sm:pt-4 border-x border-t border-white/40 relative overflow-hidden backdrop-blur-sm">
-                        <span class="text-2xl sm:text-4xl relative z-10 text-center drop-shadow-md filter hover:scale-110 transition-transform">${emoji}</span>
+                <div class="flex flex-col items-center w-24 sm:w-32 relative">
+                    <div class="font-display font-black ${nameColor} text-center text-[10px] sm:text-xs truncate w-full mb-1 uppercase tracking-widest">${name}</div>
+                    <div class="font-sports font-black ${scoreColor} text-xl sm:text-2xl mb-2 leading-none">${score}</div>
+                    <div class="${color} w-full rounded-t-[1.5rem] sm:rounded-t-[2rem] ${height} flex flex-col justify-start pt-4 sm:pt-6 border-x border-t border-white/40 dark:border-white/10 relative overflow-hidden backdrop-blur-md shadow-lg">
+                        <span class="text-3xl sm:text-5xl relative z-10 text-center drop-shadow-md filter hover:scale-110 transition-transform">${emoji}</span>
+                        <div class="absolute inset-0 bg-gradient-to-b from-white/30 to-transparent dark:from-white/10 pointer-events-none"></div>
                     </div>
                 </div>
             `;
